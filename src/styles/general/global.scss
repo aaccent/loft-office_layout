@@ -8,8 +8,8 @@ html {
 
 .container {
     margin: 0 auto;
-    padding: 0 15px;
-    max-width: 1230px;
+    padding: 0 40px;
+    max-width: 1920px;
 }
 
 .main-wrapper {
@@ -30,10 +30,10 @@ html {
 
 body {
     overflow-x: clip;
+    color: var(--accent);
     font-family: var(--involve);
     font-size: 1.8rem;
     line-height: 150%;
-    color: var(--accent);
 }
 
 html.disable-scroll {
