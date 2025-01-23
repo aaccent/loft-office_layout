@@ -9,6 +9,9 @@
 
 // Ui
 @use 'ui/buttons/close-btn';
+@use 'ui/buttons/button';
+@use 'ui/text';
+@use 'ui/popups/authorization/authorization';
 
 // Page
 @use 'layout/header/header';

@@ -2,7 +2,7 @@ const forms = document.querySelectorAll<HTMLFormElement>('form[data-handler]')
 forms.forEach((form) => {
     form.addEventListener('submit', submitHandler)
 })
-
+console.log(forms)
 const formSent = new CustomEvent('form-sent')
 
 /**

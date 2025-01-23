@@ -1,0 +1,9 @@
+include layout/utils
+include features/popup/popup
+
++popup('authorization','authorization')
+    .authorization-title.section-title Вход / регистрация
+    .authorization-text Мы отправим на номер СМС-сообщение с кодом подтверждения
+    form.authorization-form(data-handler='some-handler.php', novalidate)
+        input.authorization-form__input(name='tel', type='tel', placeholder='Номер телефона*', required)
+        button.button.button__brown.authorization-form__button(data-action='popup', data-popup='code-popup') Получить код
