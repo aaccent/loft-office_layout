@@ -25,11 +25,15 @@ async function submitHandler(event: SubmitEvent) {
 
     if (!validateForm(form)) return
 
-    // const res = await fetch(handlerPath, {
-    //     method: 'POST',
-    //     body: formData,
-    // })
-    //
+    const res = await fetch(handlerPath, {
+        method: 'POST',
+        body: formData,
+    })
+
+    if (form.id === 'input-code' && !res.ok) {
+        form.querySelectorAll('.authorization-code__input').forEach((input) => input.classList.add('invalid'))
+    }
+
     // if (!res.ok) {
     //     return console.error(
     //         'Error while submitting form\n',

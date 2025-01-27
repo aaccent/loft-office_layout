@@ -11,8 +11,8 @@
     display: flex;
     overflow-x: hidden;
     overflow-y: auto;
-    //    opacity: 0;
-    //    visibility: hidden;
+    opacity: 0;
+    visibility: hidden;
     background-color: hsla(140, 100%, 2%, 0.8);
     transition: opacity, visibility;
     transition-timing-function: ease-in-out;

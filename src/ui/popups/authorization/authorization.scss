@@ -1,6 +1,7 @@
 @use 'styles/utils';
 
 .authorization {
+    color: var(--accent);
     &__inner {
         display: flex;
         flex-direction: column;
@@ -112,6 +113,11 @@
             &._code {
                 opacity: 1;
             }
+
+            &.invalid {
+                color: var(--error);
+                border-color: var(--error);
+            }
         }
 
         &:has(.authorization-code__get-code-button._visible) {
@@ -140,25 +146,58 @@
 
 @media screen and (max-width: utils.$tablet1000) {
     .authorization {
-        &-title {
+        &__title {
             margin-bottom: 24px;
             font-size: 3.4rem;
+            line-height: 105%;
         }
 
-        &-text {
-            margin-bottom: 40px;
-            font-size: 1.2rem;
+        &-tel {
+            &__text {
+                margin-bottom: 40px;
+                width: 100%;
+                max-width: 244px;
+                font-size: 1.2rem;
+            }
         }
 
-        &-form {
-            justify-content: flex-start;
-
+        &-tel {
             &__input {
                 font-size: 1.2rem;
             }
+        }
 
-            &__button {
-                margin-top: 40px;
+        &__submit-button {
+            position: relative;
+            margin-top: 40px;
+        }
+
+        &-code {
+            &__text {
+                margin-bottom: 16px;
+                max-width: 100%;
+                font-size: 1.2rem;
+            }
+
+            &__change-number-button {
+                margin-bottom: 56px;
+            }
+
+            &-form {
+                &__content {
+                    gap: 0;
+                    justify-content: space-between;
+                }
+            }
+
+            &__input {
+                --size: 76px;
+                font-size: 4.8rem;
+            }
+
+            &__timer {
+                margin-top: 24px;
+                font-size: 1.2rem;
             }
         }
     }

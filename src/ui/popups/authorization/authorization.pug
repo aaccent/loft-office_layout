@@ -14,7 +14,7 @@ include features/popup/popup
             .authorization-code__text.authorization__text Код отправлен на номер
                 span.authorization__number +7 (232) 212–32–32
             button.authorization-code__change-number-button.button.button__simple изменить номер
-            form.authorization-code-form(data-handler='some-handler.php', novalidate)
+            form#input-code.authorization-code-form(data-handler='some-handler.php', novalidate)
                 .authorization-code-form__content
                     input.authorization-code__input(name='code', required, maxlength=1, tabindex=1)
                     input.authorization-code__input(name='code', required, maxlength=1, tabindex=2)

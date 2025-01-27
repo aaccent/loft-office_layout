@@ -1,11 +1,12 @@
 extends layout/page
+include features/popup/popup
 
 block append head
     link(href=require('./styles.scss'), rel='stylesheet')
 
 block append main
     section.section
-        include ui/popups/authorization/authorization
+        button.button.button__simple(data-action='popup', data-popup='authorization') Call authorization popup
 
 block append scripts
     script(src=require('./main.ts'))
