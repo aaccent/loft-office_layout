@@ -5,26 +5,64 @@
         display: flex;
         flex-direction: column;
     }
-    &-title {
+    &__title {
         margin-bottom: 40px;
     }
 
-    &-text {
-        margin-bottom: 80px;
+    &__content {
+        position: relative;
+        height: 100%;
+    }
+
+    &:has(.authorization-code._visible) {
+        .authorization-tel {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+
+    &-tel,
+    &-code {
+        inset: 0;
+        position: absolute;
+        transition: visibility 300ms ease-in-out;
+    }
+
+    &__submit-button {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+
+    & form:has(input.invalid) {
+        .error {
+            display: block;
+        }
+    }
+
+    .error {
+        margin-top: 10px;
+        display: none;
+        color: #b41212;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+    }
+
+    &__text {
         width: 100%;
         max-width: 432px;
         font-size: 2rem;
         opacity: 0.5;
     }
 
-    &-form {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+    &-tel {
+        &__text {
+            margin-bottom: 80px;
+        }
 
         &__input {
             padding-bottom: 16px;
+            width: 100%;
             color: var(--accent);
             font-size: 1.6rem;
             text-transform: uppercase;
@@ -35,9 +73,67 @@
                 opacity: 1;
             }
         }
+    }
 
-        &__button {
-            margin-top: auto;
+    &-code {
+        opacity: 0;
+        visibility: hidden;
+
+        &._visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        &__text {
+            margin-bottom: 24px;
+        }
+
+        &__change-number-button {
+            margin-bottom: 92px;
+        }
+
+        &-form {
+            &__content {
+                gap: 18px;
+                display: flex;
+                justify-content: center;
+            }
+        }
+
+        &__input {
+            @include utils.square(154px);
+            font-family: var(--steelfish), sans-serif;
+            font-size: 8rem;
+            text-align: center;
+            opacity: 0.2;
+            border: 1px solid var(--accent);
+
+            &:focus,
+            &._code {
+                opacity: 1;
+            }
+        }
+
+        &:has(.authorization-code__get-code-button._visible) {
+            .authorization-code__timer {
+                display: none;
+            }
+        }
+
+        &__timer,
+        &__get-code-button {
+            margin-top: 40px;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            opacity: 0.5;
+            &._visible {
+                display: block;
+                opacity: 1;
+            }
+        }
+
+        &__get-code-button {
+            display: none;
         }
     }
 }

@@ -56,6 +56,26 @@
             filter: var(--filter-accent);
         }
     }
+
+    &__simple {
+        gap: 10px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        background-color: transparent;
+
+        &:after {
+            content: none;
+        }
+
+        &:before {
+            position: static;
+            translate: 0 0;
+            background-image: url('assets/icons/full-arrow.svg');
+            @include utils.bg-defaults(auto);
+            @include utils.square(26px);
+        }
+    }
 }
 
 @media screen and (max-width: utils.$tablet1000) {
@@ -66,6 +86,10 @@
         &::before,
         &::after {
             @include utils.square(20px);
+        }
+
+        &__simple {
+            padding: 0;
         }
     }
 }

@@ -2,8 +2,7 @@ const forms = document.querySelectorAll<HTMLFormElement>('form[data-handler]')
 forms.forEach((form) => {
     form.addEventListener('submit', submitHandler)
 })
-console.log(forms)
-const formSent = new CustomEvent('form-sent')
+const formSent = new CustomEvent('form-sent', { bubbles: true })
 
 /**
  * После передачи события, происходит:
@@ -26,23 +25,23 @@ async function submitHandler(event: SubmitEvent) {
 
     if (!validateForm(form)) return
 
-    const res = await fetch(handlerPath, {
-        method: 'POST',
-        body: formData,
-    })
-
-    if (!res.ok) {
-        return console.error(
-            'Error while submitting form\n',
-            form,
-            '\n',
-            'FormData:\n',
-            formData,
-            '\n',
-            'Response:\n',
-            res,
-        )
-    }
+    // const res = await fetch(handlerPath, {
+    //     method: 'POST',
+    //     body: formData,
+    // })
+    //
+    // if (!res.ok) {
+    //     return console.error(
+    //         'Error while submitting form\n',
+    //         form,
+    //         '\n',
+    //         'FormData:\n',
+    //         formData,
+    //         '\n',
+    //         'Response:\n',
+    //         res,
+    //     )
+    // }
 
     form.dispatchEvent(formSent)
 }
