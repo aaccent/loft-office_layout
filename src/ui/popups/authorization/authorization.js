@@ -6,8 +6,6 @@ void (function () {
     const changeTelButton = authorizationCode.querySelector('.authorization-code__change-number-button')
     const codeInputs = authorizationCode.querySelectorAll('.authorization-code__input')
 
-    console.log({ authorizationTel, authorizationCode, changeTelButton, codeInputs })
-
     authorizationTel.addEventListener('form-sent', () => {
         authorizationCode.classList.add('_visible')
         setTimeout(() => codeInputs[0].focus(), 100)
