@@ -1,0 +1,17 @@
+extends layout/page
+include layout/utils
+include ui/breadcrumbs/breadcrumbs
+include ui/type-list/type-list
+
+block append main
+    +breadcrumbs([{ name:'отзывы', link: '' }])
+    +section.reviews
+        h1.reviews__title.page-title Отзывы
+        +type-list({ className: 'reviews-type', items: [ { name: 'Текстовые', amount: 23, link: '/reviews.html', id: 'text' }, { name: 'видео', amount: 23, link: '/reviews/video.html', id: 'video' }, { name: 'На внешних ресурсах', amount: 23, link: '/reviews/external.html', id: 'external' }, ] })
+        .reviews-content
+            .reviews-general
+                .reviews-general__amount >169 отзывов
+                .reviews-general__description Дорожим качеством продукции и репутацией. Благодаря вашей обратной связи, мы становимся лучше
+                .reviews-general__button.button.button__brown(data-action='popup') Оставить отзыв
+            include components/reviews-text/reviews-text
+        .reviews__more-button ещё

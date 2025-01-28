@@ -1,0 +1,100 @@
+@use 'styles/utils';
+
+.reviews {
+    &__title {
+        padding-top: 55px;
+        text-align: center;
+    }
+
+    &-type {
+        margin-top: 60px;
+    }
+
+    &-content {
+        margin-top: 100px;
+        padding-top: 40px;
+        display: flex;
+        align-items: start;
+        border-top: 1px solid var(--accent-light);
+    }
+
+    &-general {
+        margin-right: 172px;
+        padding: 60px;
+        width: 100%;
+        max-width: 755px;
+        background-color: white;
+
+        &__amount {
+            margin-bottom: 40px;
+            font-family: var(--steelfish), sans-serif;
+            font-size: 8rem;
+            line-height: 120%;
+            text-transform: uppercase;
+        }
+
+        &__description {
+            margin-bottom: 60px;
+            max-width: 475px;
+            font-size: 2rem;
+            line-height: 140%;
+            opacity: 0.5;
+        }
+    }
+
+    &__more-button {
+        @include utils.square(120px);
+        margin: 100px auto 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: var(--steelfish), sans-serif;
+        font-size: 2.8rem;
+        text-transform: uppercase;
+        border: 1px solid var(--accent);
+    }
+}
+
+@media screen and (max-width: utils.$tablet1000) {
+    .reviews {
+        &__title {
+            padding-top: 32px;
+            font-size: 6rem;
+        }
+
+        &-type {
+            margin-top: 36px;
+        }
+
+        &-content {
+            margin-top: 24px;
+            flex-direction: column;
+        }
+
+        &-general {
+            margin: 0 0 40px 0;
+            padding: 28px;
+            max-width: 100%;
+
+            &__amount {
+                margin-bottom: 20px;
+                font-size: 3.4rem;
+            }
+
+            &__description {
+                margin-bottom: 28px;
+                font-size: 1.2rem;
+            }
+
+            &__button {
+                letter-spacing: 0.01rem;
+            }
+        }
+
+        &__more-button {
+            @include utils.square(90px);
+            margin-top: 40px;
+            font-size: 2rem;
+        }
+    }
+}

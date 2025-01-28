@@ -6,10 +6,21 @@ html {
     font-size: 62.5%;
 }
 
+section {
+    padding-bottom: 180px;
+    @media screen and (max-width: utils.$tablet1000) {
+        padding-bottom: 80px;
+    }
+}
+
 .container {
     margin: 0 auto;
     padding: 0 40px;
     max-width: 1920px;
+    @media screen and (max-width: utils.$tablet1000) {
+        padding: 0 28px;
+        max-width: 390px;
+    }
 }
 
 .main-wrapper {
@@ -34,6 +45,7 @@ body {
     font-family: var(--firs-neue);
     font-size: 1.8rem;
     line-height: 1.5;
+    background-color: var(--main);
 }
 
 html.disable-scroll {

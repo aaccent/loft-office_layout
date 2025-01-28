@@ -9,7 +9,15 @@
 
 // Ui
 @use 'ui/buttons/close-btn';
+@use 'ui/breadcrumbs/breadcrumbs';
+@use 'ui/text';
+@use 'ui/buttons/button';
+@use 'ui/type-list/type-list';
 
 // Page
 @use 'layout/header/header';
 @use 'layout/footer/footer';
+@use 'pages/reviews/reviews';
+
+// Components
+@use 'components/reviews-text/reviews-text';
