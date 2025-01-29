@@ -1,0 +1,16 @@
+include layout/utils
+
+.video-reviews
+    each item in Array(4)
+        .video-reviews__item
+            iframe.popop(
+                src='https://vk.com/video_ext.php?oid=-5458312&id=456249830&hd=2&js_api=1',
+                allow='encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;',
+                frameborder='0',
+                allowfullscreen
+            )
+            //+anchor('https://vkvideo.ru/video-5458312_456250082')(data-fancybox='video-review')
+            .video-reviews__item-person
+                .video-reviews__item-name Мария петрова
+                .video-reviews__item-position исполнительный директор ПАО «Газпром»
+            .video-reviews__item-duration
