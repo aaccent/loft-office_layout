@@ -28,13 +28,6 @@
     &::after {
         transform: rotate(-45deg);
     }
-
-    &:hover {
-        &::before,
-        &::after {
-            background-color: var(--green-light_color);
-        }
-    }
 }
 
 .close-btn_bg {

@@ -1,0 +1,42 @@
+include layout/utils
+
+-
+    var video = [
+        {
+            link: 'https://rutube.ru/video/153352014dbe1c7e20ba8232b3fdeb3f/',
+            photo: 'assets/content/reviews/video_bg/2.png',
+            name: 'Мария петрова',
+            position: 'исполнительный директор ПАО «Газпром»',
+            duration: '1:24'
+        },
+        {
+            link: 'https://vkvideo.ru/video-19342584_456252160',
+            photo: 'assets/content/reviews/video_bg/1.png',
+            name: 'Мария петрова',
+            position: 'исполнительный директор ПАО «Газпром»',
+            duration: '1:24'
+        },
+        {
+            link: 'https://rutube.ru/video/153352014dbe1c7e20ba8232b3fdeb3f/',
+            photo: 'assets/content/reviews/video_bg/5.png',
+            name: 'Мария петрова',
+            position: 'исполнительный директор ПАО «Газпром»',
+            duration: '1:24'
+        },
+        {
+            link: 'https://vkvideo.ru/video-19342584_456252160',
+            photo: 'assets/content/reviews/video_bg/4.png',
+            name: 'Мария петрова',
+            position: 'исполнительный директор ПАО «Газпром»',
+            duration: '1:24'
+        },
+    ]
+
+.video-reviews
+    each item in video
+        .video-reviews__item.review-item(data-link=item.link, data-action='popup', data-popup='review')
+            +img(require(item.photo)).video-reviews__item-bg
+            .video-reviews__item-person
+                .video-reviews__item-person-name= item.name
+                .video-reviews__item-person-position= item.position
+            .video-reviews__item-duration= item.duration

@@ -6,6 +6,7 @@
 
 // Popup
 @use 'features/popup/popup';
+@use 'ui/popups/review/review';
 
 // Ui
 @use 'ui/buttons/close-btn';
@@ -20,5 +21,5 @@
 @use 'pages/reviews/reviews';
 
 // Components
-@use 'components/reviews-text/reviews-text';
-@use 'components/reviews-video/reviews-video';
+@use 'components/reviews/text/text-reviews';
+@use 'components/reviews/video/video-reviews';

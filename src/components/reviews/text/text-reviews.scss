@@ -90,10 +90,10 @@
             }
 
             &.video::before {
-                background-image: url('assets/icons/play.svg');
+                background-image: url('../../../assets/icons/play.svg');
             }
             &.photo::before {
-                background-image: url('assets/icons/clip.svg');
+                background-image: url('../../../assets/icons/clip.svg');
             }
         }
 
@@ -109,7 +109,7 @@
             &::after {
                 content: '';
                 @include utils.bg-defaults(cover);
-                background-image: url('assets/icons/full-arrow.svg');
+                background-image: url('../../../assets/icons/full-arrow.svg');
                 @include utils.square(100%);
             }
         }

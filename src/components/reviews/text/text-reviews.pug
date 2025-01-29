@@ -47,7 +47,7 @@ include layout/utils
 
 .text-reviews
     each item in reviews
-        .text-reviews__item
+        .text-reviews__item.review-item
             .text-reviews__item-header
                 +img(require(item.image)).text-reviews__item-photo
                 .text-reviews__item-person
