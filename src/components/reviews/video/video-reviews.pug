@@ -32,7 +32,7 @@ include layout/utils
         },
     ]
 
-.video-reviews
+#video.video-reviews
     each item in video
         .video-reviews__item.review-item(data-link=item.link, data-action='popup', data-popup='review')
             +img(require(item.photo)).video-reviews__item-bg

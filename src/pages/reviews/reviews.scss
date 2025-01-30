@@ -53,6 +53,25 @@
         text-transform: uppercase;
         border: 1px solid var(--accent);
     }
+
+    &__item {
+        &-button {
+            @include utils.square(26px);
+            margin-left: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-self: start;
+            background-color: var(--accent);
+
+            &::after {
+                content: '';
+                @include utils.bg-defaults(cover);
+                background-image: url('assets/icons/full-arrow.svg');
+                @include utils.square(100%);
+            }
+        }
+    }
 }
 
 @media screen and (max-width: utils.$tablet1000) {
@@ -95,6 +114,12 @@
             @include utils.square(90px);
             margin-top: 40px;
             font-size: 2rem;
+        }
+
+        &__item {
+            &-button {
+                display: none;
+            }
         }
     }
 }

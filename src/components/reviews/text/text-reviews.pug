@@ -6,6 +6,7 @@ include layout/utils
             name: 'Мария петрова',
             image: 'assets/content/reviews/1.jpg',
             position: 'исполнительный директор ПАО «Газпром»',
+            review: '<p>Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась. Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась.</p><p>Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась.</p>',
             media: {
                 photo: 10,
                 video: 2
@@ -45,17 +46,17 @@ include layout/utils
         }
     ]
 
-.text-reviews
+#text.text-reviews
     each item in reviews
-        .text-reviews__item.review-item
+        .text-reviews__item.review-item(data-action='popup', data-popup='review')
             .text-reviews__item-header
                 +img(require(item.image)).text-reviews__item-photo
                 .text-reviews__item-person
                     .text-reviews__item-name= item.name
                     .text-reviews__item-position= item.position
-                button.text-reviews__item-button(data-action='popup', data-popup='review')
+                .reviews__item-button
             .text-reviews__item-description
-                .text-reviews__item-text Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась. Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась…
+                .text-reviews__item-text.content!= item.review
                 if item.media.video || item.media.photo
                     .text-reviews__item-media
                         if item.media.video !== 0

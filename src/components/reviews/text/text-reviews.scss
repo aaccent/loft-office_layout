@@ -96,23 +96,6 @@
                 background-image: url('../../../assets/icons/clip.svg');
             }
         }
-
-        &-button {
-            @include utils.square(26px);
-            margin-left: auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            align-self: start;
-            background-color: var(--accent);
-
-            &::after {
-                content: '';
-                @include utils.bg-defaults(cover);
-                background-image: url('../../../assets/icons/full-arrow.svg');
-                @include utils.square(100%);
-            }
-        }
     }
 }
 
@@ -126,10 +109,6 @@
             &:first-child {
                 padding-top: 24px;
                 border-top: 1px solid var(--accent-light);
-            }
-
-            &-button {
-                display: none;
             }
 
             &-header {
