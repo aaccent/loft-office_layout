@@ -55,6 +55,8 @@
     }
 
     &__item {
+        cursor: pointer;
+
         &-button {
             @include utils.square(26px);
             margin-left: auto;

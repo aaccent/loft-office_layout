@@ -66,34 +66,26 @@
         }
 
         &-media {
-            display: flex;
-        }
-
-        &-amount {
-            gap: 4px;
             padding: 14px;
-            display: flex;
-            align-items: center;
+            display: none;
             font-size: 1.6rem;
             text-transform: uppercase;
-            border: 1px solid var(--accent);
+            border: 0.5px solid var(--accent);
 
-            & + & {
-                border-left: none;
+            span {
+                display: flex;
+
+                &:before {
+                    content: '';
+                    @include utils.square(25px);
+                    @include utils.bg-defaults(cover);
+                    filter: var(--filter-accent);
+                    background-image: url('assets/icons/clip.svg');
+                }
             }
 
-            &:before {
-                content: '';
-                @include utils.square(25px);
-                @include utils.bg-defaults(cover);
-                filter: var(--filter-accent);
-            }
-
-            &.video::before {
-                background-image: url('../../../assets/icons/play.svg');
-            }
-            &.photo::before {
-                background-image: url('../../../assets/icons/clip.svg');
+            &:has(span) {
+                display: block;
             }
         }
     }

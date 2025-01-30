@@ -1,6 +1,6 @@
 @use 'styles/utils';
 
-.review {
+.video-review {
     padding: 0;
     &__inner {
         @include utils.square(100%);
@@ -10,18 +10,25 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        background-color: transparent;
 
         .close-btn {
             position: static;
             align-self: end;
+            border-color: white;
+
+            &:before,
+            &:after {
+                background-color: white;
+            }
 
             &:hover {
             }
         }
     }
+}
 
-    &__player {
-        width: 100%;
-        height: 100%;
-    }
+.video-player {
+    width: 100%;
+    height: 100%;
 }

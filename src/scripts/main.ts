@@ -1,4 +1,5 @@
 import '@/features/popup/popup'
 import 'components/reviews/reviews.js'
-import 'ui/popups/review/review.js'
+import 'ui/popups/video-review/video-review.js'
+import 'ui/popups/text-review/text-review.js'
 import 'ui/type-list/type-list.js'

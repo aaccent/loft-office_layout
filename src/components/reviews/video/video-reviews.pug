@@ -34,7 +34,7 @@ include layout/utils
 
 #video.video-reviews
     each item in video
-        .video-reviews__item.review-item(data-link=item.link, data-action='popup', data-popup='review')
+        .video-reviews__item.reviews__item(data-link=item.link, data-action='popup', data-popup='video-review')
             +img(require(item.photo)).video-reviews__item-bg
             .video-reviews__item-person
                 .video-reviews__item-person-name= item.name

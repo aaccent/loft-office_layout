@@ -15,7 +15,7 @@ function convertVkVideoLink(link) {
     return newUrl.toString()
 }
 
-function createIframe(link, container) {
+function createIframe(link) {
     const iframe = document.createElement('iframe')
     let src
     if (link.includes('rutube')) {
@@ -25,25 +25,24 @@ function createIframe(link, container) {
     }
 
     iframe.src = src
-    iframe.classList.add('review__player', 'review__content')
-    container.append(iframe)
+    iframe.classList.add('video-player')
+    return iframe
 }
 
 void (function () {
     document.addEventListener('review-call', (e) => {
-        const container = document.querySelector('.review__inner')
-        if (e.target.classList.contains('video-reviews__item')) {
-            const link = e.target.dataset.link
-            createIframe(link, container)
-        }
+        if (!e.target.classList.contains('video-reviews__item')) return
+        const container = document.querySelector('.video-review__inner')
+        const link = e.target.dataset.link
+        container.append(createIframe(link))
 
         const removeIframe = (e) => {
-            const iframe = e.target.closest('.review__inner').querySelector('.review__content')
+            const iframe = container.querySelector('.video-player')
             iframe.remove()
             e.target.removeEventListener('click', removeIframe)
         }
 
-        const closeButton = document.querySelector('.close-btn')
+        const closeButton = document.querySelector('.video-review .close-btn')
         closeButton.addEventListener('click', removeIframe)
     })
 })()

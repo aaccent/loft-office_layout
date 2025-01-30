@@ -1,54 +1,45 @@
 include layout/utils
 
 -
+    var textReview = '<p>Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась. Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась.</p><p>Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась.</p>'
+
+    var textReviewWithPhoto ='<p>Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась. Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась.</p><p>Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась.</p><img src="assets/content/reviews/images/1.png"><img src="assets/content/reviews/images/2.png"><img src="assets/content/reviews/images/1.png"><img src="assets/content/reviews/images/2.png"><p>Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась. Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась.</p>'
+
     var reviews = [
         {
             name: 'Мария петрова',
             image: 'assets/content/reviews/1.jpg',
             position: 'исполнительный директор ПАО «Газпром»',
-            review: '<p>Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась. Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась.</p><p>Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась.</p>',
-            media: {
-                photo: 10,
-                video: 2
-            }
+            review: textReview,
         }, {
             name: 'Андрей разумовский',
             image: 'assets/content/reviews/2.jpg',
             position: 'помощник руководителя ПАО «магнит»',
-            media: {
-                photo: 6,
-                video: 0
-            }
+            review: textReviewWithPhoto,
+
         }, {
             name: 'Антонина Коршунова',
             image: 'assets/content/reviews/3.jpg',
             position: 'исполнительный директор ооо «чайка»',
-            media: {
-                photo: 0,
-                video: 0
-            }
+            review: textReview,
+
         }, {
             name: 'Егор иванов',
             image: 'assets/content/reviews/4.jpg',
             position: 'помощник руководителя ПАО «сибур»',
-            media: {
-                photo: 10,
-                video: 0
-            }
+            review: textReviewWithPhoto,
+
         }, {
             name: 'Наталья родина',
             image: 'assets/content/reviews/5.jpg',
             position: 'исполнительный директор ПАО «Газпром»',
-            media: {
-                photo: 10,
-                video: 2
-            }
+            review: textReviewWithPhoto,
         }
     ]
 
 #text.text-reviews
     each item in reviews
-        .text-reviews__item.review-item(data-action='popup', data-popup='review')
+        .text-reviews__item.reviews__item(data-action='popup', data-popup='text-review')
             .text-reviews__item-header
                 +img(require(item.image)).text-reviews__item-photo
                 .text-reviews__item-person
@@ -56,10 +47,5 @@ include layout/utils
                     .text-reviews__item-position= item.position
                 .reviews__item-button
             .text-reviews__item-description
-                .text-reviews__item-text.content!= item.review
-                if item.media.video || item.media.photo
-                    .text-reviews__item-media
-                        if item.media.video !== 0
-                            .text-reviews__item-amount.video!= `${item.media.video} видео`
-                        if item.media.photo !== 0
-                            .text-reviews__item-amount.photo!= `${item.media.photo} фото`
+                .text-reviews__item-text!= item.review
+                .text-reviews__item-media
