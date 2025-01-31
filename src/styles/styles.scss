@@ -8,6 +8,7 @@
 @use 'features/popup/popup';
 @use 'ui/popups/video-review/video-review';
 @use 'ui/popups/text-review/text-review';
+@use 'ui/popups/send-review/send-review';
 
 // Ui
 @use 'ui/buttons/close-btn';
@@ -16,13 +17,14 @@
 @use 'ui/buttons/button';
 @use 'ui/type-list/type-list';
 @use 'ui/content';
+@use 'ui/input';
 
 // Page
 @use 'layout/header/header';
 @use 'layout/footer/footer';
-@use 'pages/reviews/reviews';
+@use 'pages/text-reviews/reviews';
 
 // Components
-@use 'components/reviews/text/text-reviews';
-@use 'components/reviews/video/video-reviews';
-@use 'components/reviews/external/external';
+@use 'components/reviews-list/text/text-reviews';
+@use 'components/reviews-list/video/video-reviews';
+@use 'components/reviews-list/external/external';

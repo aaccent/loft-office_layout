@@ -7,10 +7,10 @@ block append main
     +breadcrumbs([{ name:'отзывы', link: '' }])
     +section.reviews
         h1.reviews__title.page-title Отзывы
-        +type-list({ className: 'reviews-type', items: [ { name: 'Текстовые', amount: 23, link: '/reviews.html', id: 'text' }, { name: 'видео', amount: 23, link: '/video-reviews.html', id: 'video' }, { name: 'На внешних ресурсах', amount: 23, link: '/external-reviews.html', id: 'external' }, ] })
+        +type-list({ className: 'reviews-type', items: [ { name: 'Текстовые', amount: 23, link: '/reviews.html', id: 'text' }, { name: 'видео', amount: 23, link: '/video-reviews.html', id: 'video' }, { name: 'На внешних ресурсах', amount: 23, link: '/external-reviews.html', id: 'external' } ] })
         .reviews-content
             .reviews-general
                 .reviews-general__amount >169 отзывов
                 .reviews-general__description Дорожим качеством продукции и репутацией. Благодаря вашей обратной связи, мы становимся лучше
-                button.reviews-general__button.button.button__brown(data-action='popup') Оставить отзыв
-            include components/reviews/external/external
+                button.reviews-general__button.button.button__brown(data-action='popup', data-popup='send-review') Оставить отзыв
+            include components/reviews-list/external/external
