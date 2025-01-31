@@ -1,6 +1,6 @@
 import { disableScroll, enableScroll } from '@/features/scroll'
 
-const popupBtns = document.querySelectorAll<HTMLButtonElement>('button[data-action="popup"]')
+const popupBtns = document.querySelectorAll<HTMLButtonElement>('[data-action="popup"]')
 const popups = document.querySelectorAll('.popup')
 
 popups.forEach((i) => {

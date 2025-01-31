@@ -1,0 +1,31 @@
+@use 'styles/utils';
+
+.page-title {
+    font-family: var(--steelfish), sans-serif;
+    font-size: 14rem;
+    line-height: 105%;
+    text-transform: uppercase;
+
+    @media screen and (max-width: utils.$tablet1000) {
+        font-size: 4.8rem;
+    }
+
+    &._banner {
+        font-size: 16rem;
+
+        @media screen and (max-width: utils.$tablet1000) {
+            font-size: 6rem;
+        }
+    }
+}
+
+.section-title {
+    font-family: var(--steelfish), sans-serif;
+    font-size: 8rem;
+    line-height: 120%;
+    text-transform: uppercase;
+
+    @media screen and (max-width: utils.$tablet1000) {
+        font-size: 4.8rem;
+    }
+}

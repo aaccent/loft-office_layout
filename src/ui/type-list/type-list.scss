@@ -1,0 +1,54 @@
+@use 'styles/utils';
+
+.type-list {
+    gap: 16px;
+    display: flex;
+    justify-content: center;
+    text-transform: uppercase;
+
+    &__item {
+        display: flex;
+        font-family: var(--steelfish), sans-serif;
+        font-size: 4.6rem;
+        letter-spacing: 0.01rem;
+        opacity: 0.5;
+
+        &.active {
+            opacity: 1;
+        }
+
+        span {
+            margin-left: 5px;
+            font-size: 2.6rem;
+        }
+        &::before {
+            content: '/';
+            margin-right: 16px;
+        }
+
+        &:first-child::before {
+            content: none;
+        }
+    }
+}
+
+@media screen and (max-width: utils.$tablet1000) {
+    .type-list {
+        gap: 8px;
+        justify-content: center;
+
+        &__item {
+            font-size: 2.4rem;
+            letter-spacing: 0;
+
+            &::before {
+                margin-right: 8px;
+            }
+
+            span {
+                margin-left: 3px;
+                font-size: 1.4rem;
+            }
+        }
+    }
+}

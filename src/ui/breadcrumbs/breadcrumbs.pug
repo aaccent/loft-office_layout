@@ -1,0 +1,17 @@
+include layout/utils
+
+mixin breadcrumbs(props)
+    -
+        props = Object.assign([
+            {
+                name: '',
+                link: ''
+            }
+        ], props || [{}])
+    .container.breadcrumbs
+        +anchor('/').breadcrumbs-item Главная
+        each item, index in props
+            if index === props.length -1
+                .breadcrumbs-item= item.name
+            else
+                +anchor(item.link).breadcrumbs-item= item.name

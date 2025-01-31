@@ -1,0 +1,105 @@
+@use 'styles/utils';
+
+.video-reviews {
+    gap: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &__item {
+        position: relative;
+        height: 630px;
+
+        &-bg {
+            inset: 0;
+            object-position: center;
+            object-fit: cover;
+            position: absolute;
+            height: 100%;
+        }
+
+        &-person {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            padding: 24px;
+            width: 366px;
+            text-transform: uppercase;
+            background-color: white;
+            &-name {
+                font-family: var(--steelfish), sans-serif;
+                font-size: 2.8rem;
+            }
+
+            &-position {
+                width: 238px;
+                font-size: 1.2rem;
+                opacity: 0.5;
+            }
+        }
+
+        &-duration {
+            gap: 12px;
+            position: absolute;
+            right: 24px;
+            bottom: 24px;
+            padding: 12px 10px 6px;
+            width: 128px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: end;
+            color: white;
+            font-size: 1.6rem;
+            border: 1px solid white;
+
+            &:before {
+                content: '';
+                @include utils.square(13px);
+                @include utils.bg-defaults(auto);
+                align-self: flex-start;
+                background-image: url('assets/icons/play.svg');
+            }
+        }
+    }
+}
+
+@media screen and (max-width: utils.$tablet1000) {
+    .video-reviews {
+        gap: 24px;
+
+        &__item {
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+
+            &-bg {
+                position: static;
+                height: 240px;
+            }
+
+            &-person {
+                position: static;
+                padding: 16px;
+                width: 100%;
+
+                &-name {
+                    font-size: 2.2rem;
+                }
+
+                &-position {
+                    font-size: 1rem;
+                }
+            }
+
+            &-duration {
+                gap: 11px;
+                top: 174px;
+                right: 16px;
+                bottom: auto;
+                padding: 8px;
+                font-size: 1rem;
+            }
+        }
+    }
+}
