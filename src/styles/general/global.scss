@@ -10,6 +10,10 @@ html {
     margin: 0 auto;
     padding: 0 40px;
     max-width: 1920px;
+
+    @media only screen and (max-width: utils.$tablet1000) {
+        padding: 0 28px;
+    }
 }
 
 .main-wrapper {
