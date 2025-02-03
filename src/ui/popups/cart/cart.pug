@@ -1,0 +1,99 @@
+include layout/utils
+
+-
+    var products = [
+        {
+            id: 1,
+            title: 'Стол для руководителя Brooklyn',
+            img: 'assets/content/products/1.png',
+            size: '120 × 80 × 174 см ',
+            color: 'Канадский Дуб',
+            totalPrice: 18000,
+            discountPrice : 17200,
+            pricePerItem: 4300,
+            stock :8,
+            amount: 1
+        },
+        {
+            id: 2,
+            title: 'Стул для руководителя Brooklyn',
+            img: 'assets/content/products/2.png',
+            size: '120 × 80 × 174 см ',
+            color: 'Ткань',
+            totalPrice: 25000,
+            //discountPrice: 24800,
+            pricePerItem: 3100,
+            stock: 0,
+            amount: 1
+        },
+        {
+            id: 3,
+            title: 'Стол для руководителя Brooklyn',
+            img: 'assets/content/products/3.png',
+            size: '120 × 80 × 174 см ',
+            color: 'Канадский Дуб',
+            totalPrice: 17200,
+            discountPrice: 18000,
+            pricePerItem: 4300,
+            stock: 8,
+            amount: 1
+        }
+    ]
+    var discount = true
+
++popup('cart', 'cart')
+    .cart__header
+        h2.section-title.cart__title корзина
+            span.cart__product-amount 2
+        button.cart__share(data-link)
+        button.cart__clear
+        button.close-btn
+    .cart-list
+        each product in products
+            .cart-list__product
+                +img(product.img).cart-list__product-img
+                .cart-list__product-info
+                    .cart-list__product-title= product.title
+                    .cart-list__product-characteristic
+                        span.cart-list__product-size= product.size
+                        span.cart-list__product-color= product.color
+                    .cart-list__product-amount
+                        button.decrease -
+                        span.number= product.amount
+                        button.increase +
+                    if product.stock
+                        .cart-list__product-stock!= `наличие: ${product.stock} шт`
+                    else
+                        button.cart-list__product-preorder предзаказ
+                .cart-list__product-price
+                    .cart-list__product-remove
+                    .cart-list__product-price__peritem= product.pricePerItem
+                    .cart-list__product-price__total
+                        .total= product.totalPrice
+                        if product.discountPrice
+                            .discount= product.discountPrice
+    form.cart__promo-form(novalidate, data-handler='smth.php')
+        input.cart__promo-input(placeholder='промокод')
+        button.cart__promo-button
+    .cart-info.fixed
+        .cart-info__price итого:
+            if (discount)
+                .discount 42 000 ₽
+            .total 52 200 ₽
+        .cart-info__delivery Доставка:
+            span рассчитывается при оформлении
+        .cart-info__weight вес:
+            .tooltip
+            span 312 кг
+        .cart-info__discount
+            .cart-info__discount-circle
+                svg(viewBox='0 0 60 60')
+                    circle.inner(cx='50%', cy='50%', r='30')
+                svg(viewBox='0 0 60 60')
+                    circle.outer(cx='50%', cy='50%', r='30')
+            .cart-info__discount-text получите скидку 15%
+                .cart-info__discount-action(data-price-for-discount='100000') добавьте в корзину товары ещё на
+                    span 5 700 ₽
+        .cart-info__actions
+            button.button.button__brown(data-action='popup', data-popup='order') Перейти к оформлению
+            button.button.button__transparent(data-action='popup', data-popup='preorder') Купить в 1 клик
