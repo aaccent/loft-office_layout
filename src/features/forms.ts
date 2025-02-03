@@ -56,7 +56,7 @@ async function submitHandler(event: SubmitEvent) {
 function validateForm(form: HTMLFormElement): Boolean {
     let valid = true
 
-    const requiredInputs = form.querySelectorAll<HTMLInputElement>('input[required]')
+    const requiredInputs = form.querySelectorAll<HTMLInputElement>('[required]')
 
     requiredInputs.forEach((input) => {
         if (input.value !== '') return

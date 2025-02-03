@@ -1,0 +1,31 @@
+include layout/utils
+
+-
+    var resources = [
+        {
+            name: 'Яндекс Карты',
+            amount: '213',
+            icon:'assets/icons/yandex_map.svg',
+            link: ''
+        },
+        {
+            name: '2гис',
+            amount: '213',
+            icon: 'assets/icons/2gis.svg',
+            link: ''
+        },
+        {
+            name: 'Google Карты',
+            amount: '213',
+            icon: 'assets/icons/google_map.svg',
+            link: ''
+        }
+    ]
+
+#external.external-reviews
+    each item in resources
+        +anchor(item.link).external-reviews__resource
+            +img(require(item.icon)).external-reviews__resource-icon
+            .external-reviews__resource-name= item.name
+                .external-reviews__resource-amount= `${item.amount} отзывов`
+            .reviews__item-button
