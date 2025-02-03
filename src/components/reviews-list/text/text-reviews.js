@@ -1,14 +1,12 @@
 void (function () {
-    const textReviewsContent = document.querySelectorAll('.text-reviews__item-text')
+    const textReviews = document.querySelectorAll('.text-reviews__item')
 
-    if (!textReviewsContent.length) return
-    textReviewsContent.forEach((content) => {
-        const reviewImages = content.querySelectorAll('img')
-        if (reviewImages.length) {
-            const media = content.closest('.text-reviews__item').querySelector('.text-reviews__item-media')
-            const span = document.createElement('span')
-            span.textContent = `${reviewImages.length} фото`
-            media.append(span)
-        }
+    textReviews.forEach((review) => {
+        const reviewImages = review.querySelectorAll('.text-reviews__item-text img')
+        if (!reviewImages.length) return
+        const media = review.querySelector('.text-reviews__item-media')
+        const span = document.createElement('span')
+        span.textContent = `${reviewImages.length} фото`
+        media.append(span)
     })
 })()

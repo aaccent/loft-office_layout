@@ -7,9 +7,9 @@ html {
 }
 
 section {
-    padding-bottom: 180px;
+    margin-bottom: 180px;
     @media screen and (max-width: utils.$tablet1000) {
-        padding-bottom: 80px;
+        margin-bottom: 80px;
     }
 }
 
