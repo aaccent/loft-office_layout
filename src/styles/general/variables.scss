@@ -9,8 +9,14 @@
 // Colors
 :root {
     --white: #fff;
-    --main: #F6F1EB;
-    --accent: #6E4D31;
-    --accent-dark: #352C25;
+    --main: #f6f1eb;
+    --accent: #6e4d31;
+    --accent-dark: #352c25;
     --green: #048513;
+}
+
+// Filters
+:root {
+    --filter-accent-dark: brightness(0) saturate(100%) invert(28%) sepia(66%) saturate(315%) hue-rotate(346deg)
+        brightness(100%) contrast(96%);
 }

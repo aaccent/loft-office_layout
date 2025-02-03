@@ -1,2 +1,118 @@
+include layout/utils
+
+-
+    var subList = [
+        'Brooklyn',
+        'Moriss Trend',
+        'Ganzivo',
+        'White Hool',
+        'White Hool',
+        'Moriss Trend',
+    ]
+
+    var subItems = [
+        { title: 'Готовые идеи', img: require('assets/content/catalog/image-1.png'), list: subList },
+        { title: 'Столы', img: require('assets/content/catalog/image-2.png'), list: subList },
+        { title: 'Стулья', img: require('assets/content/catalog/image-3.png'), list: subList },
+        { title: 'Кресла', img: require('assets/content/catalog/image-4.png'), list: subList },
+        { title: 'Стеллажи', img: require('assets/content/catalog/image-5.png'), list: subList },
+        { title: 'Диваны', img: require('assets/content/catalog/image-6.png'), list: subList },
+        { title: 'Шкафы', img: require('assets/content/catalog/image-7.png'), list: subList },
+        { title: 'Тумбы', img: require('assets/content/catalog/image-4.png'), list: subList },
+    ]
+
+    var catalog = [
+        { title: 'Кабинет руководителя', list: subItems },
+        { title: 'Бары и рестораны', list: subItems },
+        { title: 'Офисы и конференц-залы', list: subItems },
+        { title: 'Гостиницы и апарт-отели', list: subItems },
+        { title: 'Холлы и общественные зоны', list: subItems },
+        { title: 'Фуд корты', list: subItems },
+        { title: 'Уличная мебель', list: subItems },
+        { title: 'Аксессуары', list: subItems },
+    ]
+
+    var burgerMenu = [
+        { 
+          title: 'Покупателям',
+          list: [
+            'Дизайн-проект',
+            'Замер площади',
+            'Сборка',
+            'Оплата',
+            'Доставка',
+            'Возврат',
+            'Вопрос-ответ',
+          ]
+        },
+        {
+          title: 'Сотрудничество',
+          list: [
+              'Расчёт тендера',
+              'Дилерам',
+              'Дизайнерам',
+          ]
+        }
+    ]
+
 header.header
-    .container
+    .container: .header__inner
+        +anchor('/').header__logo: +img(require('assets/static/logo.svg'))
+        +popupBtn('geo').header__geo-button краснодар
+        nav.header__menu-wrapper
+            ul.header__menu-list
+                li: a(href='#', data-action='catalog-menu')
+                    | Каталог
+                    span 548
+                li: a(href='#') Новинки
+                li: a(href='#') Sale
+                li
+                    a(href='#') О нас
+                    ul
+                        li: a(href='#') О компании
+                        li: a(href='#') Отзывы
+                        li: a(href='#') Блог
+                li: a(href='#') Контакты
+        .header__actions-list.header__mobile-actions-list
+            +btn('menu').header__menu-button
+            +btn('search').header__mobile-search-button.icon.icon-search(title='Поиск')
+        .header__actions-list.header__desktop-actions-list
+            +btn('search').icon.icon-search(title='Поиск')
+            // Если пользователь авторизован, то заменить на ссылку <a class="icon icon-profile"></a>
+            +popupBtn('auth').icon.icon-profile(title='Личный кабинет')
+            +anchor('/favorite').icon.icon-favorite(title='Избранное')
+            +popupBtn('cart').icon.icon-cart(title='Корзина')
+    aside.catalog-menu.container
+        .catalog-menu__title Категории
+        nav.catalog-menu__list-wrapper: ul.catalog-menu__list
+            each category in catalog
+                li
+                    +anchor= category.title
+                    ul
+                        each subCategory in category.list
+                            +img(subCategory.img)
+                            +anchor= subCategory.title
+                            ul
+                                each subItem in subCategory.list
+                                    li: a(href='#')= subItem
+        .catalog-menu__actions
+            // Если пользователь авторизован, то заменить на ссылку <a class="icon icon-profile"></a>
+            +popupBtn('auth').catalog-menu__action-item.icon.icon-profile
+            +popupBtn('geo').catalog-menu__action-item.header__geo-button Краснодар
+        +anchor('mailto:mail@loftoffice.ru').catalog-menu__mail mail@loftoffice.ru
+        ul.catalog-menu__socials
+            li: a.social-button.social-vk(href='#')
+            li: a.social-button.social-tg(href='#')
+            li: a.social-button.social-wa(href='#')
+
+    aside.burger-menu.container
+        nav.burger-menu__list-wrapper: ul.burger-menu__list
+            each item in burgerMenu
+                li
+                    button= item.title
+                    ul
+                        each subItem in item.list
+                            li: a(href='#')= subItem
+        +popupBtn('call').burger-menu__call-button
+            span связаться
+            .burger-menu__plus
