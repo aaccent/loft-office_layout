@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "title": "Стол для руководителя Brooklyn",
+    "img": "assets/content/products/1.png",
+    "size": "120 × 80 × 174 см ",
+    "color": "Канадский Дуб",
+    "totalPrice": 18000,
+    "discountPrice" : 17200,
+    "pricePerItem": 4300,
+    "stock" :8,
+    "amount": 1
+  },
+  {
+    "id": 2,
+    "title": "Стул для руководителя Brooklyn",
+    "img": "assets/content/products/2.png",
+    "size": "120 × 80 × 174 см ",
+    "color": "Ткань",
+    "totalPrice": 25000,
+    "pricePerItem": 3100,
+    "stock": 0,
+    "amount": 1
+  },
+  {
+    "id": 3,
+    "title": "Стол для руководителя Brooklyn",
+    "img": "assets/content/products/3.png",
+    "size": "120 × 80 × 174 см ",
+    "color": "Канадский Дуб",
+    "totalPrice": 17200,
+    "discountPrice": 18000,
+    "pricePerItem": 4300,
+    "stock": 8,
+    "amount": 1
+  }
+]
