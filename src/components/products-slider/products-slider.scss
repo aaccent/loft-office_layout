@@ -1,0 +1,76 @@
+@use 'styles/utils';
+@use 'node_modules/swiper/swiper';
+@use 'node_modules/swiper/modules/navigation';
+
+.products-slider {
+    position: relative;
+    .swiper {
+        position: static;
+    }
+    &__title {
+        margin-bottom: 40px;
+        font-family: var(--steelfish), sans-serif;
+        font-size: 4.6rem;
+        letter-spacing: -0.01rem;
+        line-height: 105%;
+        text-transform: uppercase;
+    }
+
+    &__item {
+        letter-spacing: 0.01rem;
+        text-transform: uppercase;
+
+        &-image {
+            object-fit: cover;
+            object-position: center;
+            margin-bottom: 20px;
+            width: 192px;
+            height: 230px;
+        }
+
+        &-color {
+            margin-bottom: 10px;
+            line-height: 130%;
+            opacity: 0.6;
+        }
+
+        &-title {
+            margin-bottom: 24px;
+            width: 100%;
+            max-width: 192px;
+            font-family: var(--steelfish), sans-serif;
+            font-size: 2.8rem;
+        }
+    }
+
+    &__navigation {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: flex;
+        border: 1px solid var(--accent);
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            translate: -50% 0;
+            width: 1px;
+            background-color: var(--accent);
+        }
+
+        &-prev,
+        &-next {
+            @include utils.bg-defaults(auto);
+            filter: var(--filter-accent);
+            @include utils.square(45px);
+            background-image: url('assets/icons/arrow.svg');
+        }
+
+        &-prev {
+            rotate: 180deg;
+        }
+    }
+}
