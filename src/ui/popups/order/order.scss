@@ -1,0 +1,14 @@
+@use 'styles/utils';
+
+.order {
+    &__inner {
+        padding: 30px 40px;
+        width: 100%;
+        background-color: var(--main);
+    }
+
+    &__header {
+        padding-bottom: 30px;
+        border-bottom: 1px solid var(--accent-light);
+    }
+}
