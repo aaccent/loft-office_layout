@@ -1,57 +1,10 @@
-import { Cart, CartInfo, Product } from '@/types'
+import { CartInfo, Product } from '@/types'
 import { formatPrice } from 'features/formatPrice'
+import { testProducts } from '@/test-products'
 
-const products: Product[] = [
-    {
-        id: 1,
-        title: 'Стол для руководителя Brooklyn',
-        img: 'assets/content/products/1.png',
-        size: '120 × 80 × 174 см ',
-        color: 'Канадский Дуб',
-        totalPrice: 18000,
-        //discountPrice: 17200,
-        pricePerItem: 4300,
-        stock: 8,
-        amount: 1,
-    },
-    {
-        id: 2,
-        title: 'Стул для руководителя Brooklyn',
-        img: 'assets/content/products/2.png',
-        size: '120 × 80 × 174 см ',
-        color: 'Ткань',
-        totalPrice: 25000,
-        discountPrice: 23000,
-        pricePerItem: 3100,
-        stock: 0,
-        amount: 1,
-    },
-    {
-        id: 3,
-        title: 'Стол для руководителя Brooklyn',
-        img: 'assets/content/products/3.png',
-        size: '120 × 80 × 174 см ',
-        color: 'Канадский Дуб',
-        totalPrice: 17200,
-        discountPrice: 18000,
-        pricePerItem: 4300,
-        stock: 5,
-        amount: 3,
-    },
-]
-
-void (function () {
-    document.querySelector('.popup.cart')!.classList.add('opened')
-    document.documentElement.style.overflow = 'clip'
-    document.body.style.overflow = 'clip'
-    const html = document.documentElement
-    document.body.style.paddingRight = `${window.innerWidth - html.offsetWidth}px`
-    html.classList.add('disable-scroll')
-})()
-
-// функционал поделиться
-function share(e: MouseEvent) {
-    if (e.target !== e.currentTarget || !e.target) return
+/** Тултип ССЫЛКА СКОПИРОВАНА */
+function shareLink(e: MouseEvent) {
+    if (e.target !== e.currentTarget) return
     const element = e.target as HTMLElement
 
     const link = element.dataset.link
@@ -59,12 +12,11 @@ function share(e: MouseEvent) {
     window.navigator.clipboard.writeText(link)
 
     const tooltip = element.querySelector('.cart__share-tooltip')
-    if (!tooltip) return
-    tooltip.classList.add('visible')
+    tooltip?.classList.add('visible')
 
-    const timeout = setTimeout(() => tooltip.classList.remove('visible'), 3000)
+    const timeout = setTimeout(() => tooltip?.classList.remove('visible'), 3000)
 
-    tooltip.addEventListener(
+    tooltip?.addEventListener(
         'click',
         () => {
             tooltip.classList.remove('visible')
@@ -73,84 +25,192 @@ function share(e: MouseEvent) {
         true,
     )
 }
-const shareButton = document.querySelector<HTMLButtonElement>('.cart__share')
-shareButton!.addEventListener('click', share)
 
-//функционал при скроле
-function fixInfo() {
-    const productsAmountInCart = document.querySelectorAll('.cart-list__product').length
-    if (productsAmountInCart < 3) return
+/** Создание заполняющегося svg круга */
+function createSVGCircle(container: Element) {
+    const innerSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+    innerSvg.setAttribute('viewBox', '0 0 60 60')
+    innerSvg.classList.add('inner')
 
-    const cartInfo = document.querySelector('.cart-info')
-    const cartInfoFixed = document.querySelector('.cart-info__fixed')
+    const innerCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
+    innerCircle.setAttribute('cx', '30')
+    innerCircle.setAttribute('cy', '30')
+    innerCircle.setAttribute('r', '30')
+    innerSvg.append(innerCircle)
 
-    if (!cartInfo || !cartInfoFixed) return
+    const outerSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+    outerSvg.setAttribute('viewBox', '0 0 60 60')
+    outerSvg.classList.add('outer')
 
-    const observer = new IntersectionObserver(([entries]) => {
-        if (entries.isIntersecting) cartInfoFixed.classList.remove('visible')
-        else {
-            cartInfoFixed.classList.add('visible')
-        }
-    })
-    observer.observe(cartInfo)
+    const outerCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
+    outerCircle.setAttribute('cx', '50%')
+    outerCircle.setAttribute('cy', '50%')
+    outerCircle.setAttribute('r', '50%')
+    outerSvg.append(outerCircle)
+
+    container.append(innerSvg)
+    container.append(outerSvg)
 }
 
-function setTrigger() {
-    const triggerBlock = document.querySelector<HTMLElement>('.cart-info__discount')
-    const priceBlock = document.querySelector<HTMLElement>('.cart-info__price')
-    console.log({ triggerBlock, priceBlock })
-    if (!triggerBlock || !priceBlock) return
+/** Заполнение круга */
+function fillCircle(totalPrice: number, priceForDiscount: number) {
+    const svgEl = document.querySelector<SVGSVGElement>('svg.outer')
+    if (!svgEl) return
+
+    const circleLength = svgEl.viewBox.baseVal.width * 3.14
+    const circle = svgEl?.querySelector('circle') as SVGCircleElement
+    circle.style.strokeDasharray = circleLength.toString()
+    const offset = circleLength - (circleLength * totalPrice) / priceForDiscount
+    circle.style.strokeDashoffset = offset.toString()
+}
+
+/** Расчет суммы для скидки */
+function updateTrigger(totalPrice: number = 0) {
+    const triggerBlock = document.querySelector<HTMLElement>('.cart-info__trigger')
+    if (!triggerBlock) return
 
     const priceForDiscount = Number(triggerBlock.dataset.priceForDiscount)
-    const totalPrice = Number(priceBlock.dataset.totalPrice)
-    const orderForDiscount = priceForDiscount - totalPrice
-    if (orderForDiscount > 0) {
-        triggerBlock.classList.add('trigger')
-        triggerBlock.querySelector('.cart-info__discount-action span')!.textContent =
-            ` ${formatPrice(orderForDiscount)}`
+
+    if (priceForDiscount - totalPrice < 0) return
+
+    triggerBlock.classList.add('trigger')
+    triggerBlock.querySelector('.cart-info__trigger-action span')!.textContent =
+        ` ${formatPrice(priceForDiscount - totalPrice)}`
+
+    fillCircle(totalPrice, priceForDiscount)
+}
+
+/** Липкий блок при скроле */
+function stickyInfo() {
+    const cartPopup = document.querySelector<HTMLElement>('.popup.cart')
+    const cartInfo = document.querySelector<HTMLElement>('.cart-info')
+
+    const setCartInfoBorder = (e: Event) => {
+        const popup = e.target as HTMLElement
+        const popupEnd = popup.scrollTop + popup.offsetHeight === popup.scrollHeight
+        const divider = cartInfo?.querySelector<HTMLElement>('.cart-info__divider')
+        if (popupEnd) {
+            divider!.style.display = 'none'
+        } else {
+            divider!.style.display = 'block'
+        }
     }
+
+    const productsAmountInCart = document.querySelectorAll('.cart-list__product').length
+    if (productsAmountInCart < 3) {
+        cartInfo?.classList.remove('sticky')
+        cartPopup?.removeEventListener('scroll', setCartInfoBorder)
+    } else {
+        cartInfo?.classList.add('sticky')
+        cartPopup?.addEventListener('scroll', setCartInfoBorder)
+    }
+}
+
+/** Обновление общего счетчика товаров в корзине в заголовке*/
+function updateAmount() {
+    const amount = document.querySelectorAll('.cart-list__product').length
+    window.cart.amount = amount
+    document.querySelector<HTMLElement>('.cart__amount')!.textContent = amount.toString()
+}
+
+/** Записывает или обновляет данные о товаре в корзине
+ * @param rewrite - если true, то обновляются только цены, наличие и количество
+ */
+function updateProductData(rawProduct: Product, element: HTMLElement, rewrite: boolean = false) {
+    const product = rewrite
+        ? {
+              totalPrice: rawProduct.totalPrice,
+              discountPrice: rawProduct.discountPrice,
+              pricePerItem: rawProduct.pricePerItem,
+              stock: rawProduct.stock,
+              amount: rawProduct.amount,
+          }
+        : rawProduct
+
+    Object.entries(product).forEach(([key, value]) => {
+        const dataEl = element.querySelector<HTMLElement>(`[data-${key}]`)
+        if (!dataEl) return
+        if (dataEl instanceof HTMLImageElement) {
+            return (dataEl.src = value)
+        }
+        const priceValue = key === 'totalPrice' || key === 'discountPrice' || key === 'pricePerItem'
+        if (priceValue) {
+            return (dataEl.textContent = formatPrice(value))
+        }
+
+        if (key === 'stock' && value) {
+            dataEl.style.display = 'block'
+            dataEl.textContent = `наличие: ${value} шт`
+            element.querySelector<HTMLElement>('.cart-list__product-preorder')!.style.display = 'none'
+            return
+        }
+
+        dataEl.textContent = value.toString()
+    })
+}
+
+/** Создание товара */
+function createProduct(product: Product) {
+    const productLayout = document.querySelector('.product__layout')
+    if (!productLayout) return ''
+
+    const productElement = productLayout.cloneNode(true) as HTMLElement
+    productElement.classList.remove('product__layout')
+    productElement.classList.add('cart-list__product')
+    productElement.dataset.id = product.id.toString()
+    const removeButton = productElement.querySelector('.cart-list__product-remove')
+    removeButton?.addEventListener('click', () => removeItem(product.id))
+    updateProductData(product, productElement)
+
+    return productElement
+}
+
+/** Инициализация */
+function init() {
+    const shareButton = document.querySelector<HTMLButtonElement>('.cart__share')
+    shareButton?.addEventListener('click', shareLink)
+
+    const circleContainer = document.querySelector('.cart-info__trigger-circle')
+    createSVGCircle(circleContainer!)
+
+    const promoInput = document.querySelector<HTMLInputElement>('.cart__promo-input')
+    const promoButton = document.querySelector('.cart__promo-button')
+    promoInput?.addEventListener('input', () => {
+        if (promoInput.value) {
+            promoButton?.removeAttribute('disabled')
+        } else {
+            promoButton?.setAttribute('disabled', 'true')
+        }
+    })
+
+    const clearButton = document.querySelector('.cart__clear')
+    clearButton?.addEventListener('click', () => clear())
 }
 
 function addItems(list: Product[]) {
     const cartList = document.querySelector('.cart-list')
     if (!cartList) return
+
+    const products = cartList.querySelectorAll('.cart-list__product')
+    if (!products.length) {
+        const empty = document.querySelector('.cart__empty')
+        empty?.classList.add('hidden')
+    }
+
     list.forEach((item) => {
-        const productElement = document.createElement('div')
-        productElement.classList.add('cart-list__product')
-        productElement.setAttribute('data-id', `${item.id}`)
-        productElement.innerHTML = `
-                <img class="cart-list__product-img" src=${item.img} alt="">
-                <div class="cart-list__product-info">
-                  <div class="cart-list__product-title">${item.title}</div>
-                  <div class="cart-list__product-characteristic"><span class="cart-list__product-size">${item.size}</span><span class="cart-list__product-color">${item.color}</span></div>
-                  <div class="cart-list__product-amount"><button class="decrease">-</button><span class="number">${item.amount}</span><button class="increase">+</button></div>
-                  <div class="cart-list__product-stock">наличие: ${item.stock} шт</div>
-                </div>
-                <div class="cart-list__product-price">
-                  <div class="cart-list__product-remove"></div>
-                  <div class="cart-list__product-price__peritem">${formatPrice(item.pricePerItem)}/шт</div>
-                  <div class="cart-list__product-price__container">
-                    <div class="cart-list__product-price__total">${formatPrice(item.totalPrice)}</div>
-                  </div>
-                </div>`
-        if (item.discountPrice) {
-            const discountPriceEl = document.createElement('div')
-            discountPriceEl.classList.add('cart-list__product-price__discount')
-            discountPriceEl.textContent = `${formatPrice(item.discountPrice)}`
-            productElement.querySelector('.cart-list__product-price__container')!.append(discountPriceEl)
-        }
-
-        if (item.stock === 0) {
-            productElement.querySelector('.cart-list__product-stock')!.remove()
-            const preorderBtn = document.createElement('button')
-            preorderBtn.classList.add('cart-list__product-preorder')
-            preorderBtn.textContent = 'предзаказ'
-            productElement.querySelector('.cart-list__product-info')!.append(preorderBtn)
-        }
-
-        cartList.append(productElement)
+        const itemInCart = Array.from(cartList.querySelectorAll<HTMLElement>('.cart-list__product')).find(
+            (el) => el.id === item.id,
+        )
+        if (itemInCart) updateProductData(item, itemInCart, true)
+        cartList?.append(createProduct(item))
     })
-    fixInfo()
+    stickyInfo()
+    updateAmount()
+}
+
+function setItems(list: Product[]) {
+    clear()
+    addItems(list)
 }
 
 function setInfo(info: CartInfo) {
@@ -174,54 +234,40 @@ function setInfo(info: CartInfo) {
             case 'weight':
                 const weightEl = document.querySelector('.cart-info__weight span')
                 weightEl!.textContent = value + ' кг'
+                break
         }
     })
-
-    setTrigger()
+    updateTrigger(info.totalPrice)
 }
 
-addItems(products)
-setInfo({
-    totalPrice: 52200,
-    discountPrice: 42000,
-    weight: 312,
-})
+function removeItem(id: Product['id']) {
+    const products = document.querySelectorAll<HTMLElement>('.cart-list__product')
+    products.forEach((product) => {
+        if (id.toString() === product.dataset.id) {
+            product.remove()
+        }
+    })
+    stickyInfo()
+    updateAmount()
+}
 
-export const cart: Cart = {
+function clear() {
+    document.querySelectorAll('.cart-list__product').forEach((product) => product.remove())
+}
+
+window.cart = {
     addItems,
-    removeItem(id: Product['id']) {},
-    clear() {},
+    setItems,
     setInfo,
+    removeItem,
+    clear,
+    amount: 0,
 }
 
-//функционал заполнения кружочка
-function createCircle(container: Element) {
-    const innerSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
-    innerSvg.setAttribute('viewBox', '0 0 60 60')
-    innerSvg.classList.add('inner')
-
-    const innerCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
-    innerCircle.setAttribute('cx', '30')
-    innerCircle.setAttribute('cy', '30')
-    innerCircle.setAttribute('r', '30')
-    innerSvg.append(innerCircle)
-
-    const outerSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
-    outerSvg.setAttribute('viewBox', '0 0 60 60')
-    outerSvg.classList.add('outer')
-
-    const outerCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
-    outerCircle.setAttribute('cx', '30')
-    outerCircle.setAttribute('cy', '30')
-    outerCircle.setAttribute('r', '30')
-    outerSvg.append(outerCircle)
-    animateCircle(outerSvg)
-
-    container.append(innerSvg)
-    container.append(outerSvg)
-}
-
-function animateCircle(svgItem: SVGSVGElement) {}
-
-const circleContainer = document.querySelector('.cart-info__discount-circle')
-createCircle(circleContainer!)
+init()
+addItems(testProducts)
+setInfo({
+    totalPrice: 69872,
+    discountPrice: 45632,
+    weight: 896,
+})

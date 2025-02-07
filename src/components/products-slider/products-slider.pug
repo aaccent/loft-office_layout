@@ -1,0 +1,26 @@
+include layout/utils
+
+mixin products-slider(props)
+    -
+        props = Object.assign({
+            title: '',
+            list: [{
+                title: '',
+                color: '',
+                price: 0,
+                image: ''
+            }]
+        }, props || {})
+    .products-slider
+        .products-slider__title= props.title
+        .swiper
+            .swiper-wrapper
+                each item in props.list
+                    +anchor.swiper-slide.products-slider__item
+                        +img(require(item.image)).products-slider__item-image
+                        .products-slider__item-color= item.color
+                        .products-slider__item-title= item.title
+                        .products-slider__item-price= item.price
+            .products-slider__navigation
+                button.products-slider__navigation-prev
+                button.products-slider__navigation-next
