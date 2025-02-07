@@ -12,8 +12,36 @@ body:has(main.main .main-hero) .header {
     top: 0;
     color: white;
 
+    &:has(:is(.catalog-menu.opened, .burger-menu.opened)) {
+        color: var(--accent);
+        background-color: var(--main);
+
+        .header__logo,
+        .icon,
+        .header__geo-button {
+            filter: var(--filter-accent);
+        }
+
+        .header__menu-button {
+            &::before,
+            &::after {
+                background-color: var(--accent);
+            }
+        }
+
+        .header__inner {
+            border-bottom-color: rgba(110, 77, 49, 0.2);
+        }
+    }
+
+    &:has(.catalog-menu.opened) &__menu-list li > :is(a, button):not([data-action='catalog-menu']) {
+        opacity: 0.5;
+    }
+
     &__inner {
         gap: 30px;
+        position: relative;
+        z-index: 2;
         padding: 30px 0;
         display: flex;
         justify-content: space-between;

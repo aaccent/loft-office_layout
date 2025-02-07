@@ -2,6 +2,7 @@ include layout/utils
 
 -
     var subList = [
+        'Смотреть всё',
         'Brooklyn',
         'Moriss Trend',
         'Ganzivo',
@@ -82,19 +83,20 @@ header.header
             +popupBtn('auth').icon.icon-profile(title='Личный кабинет')
             +anchor('/favorite').icon.icon-favorite(title='Избранное')
             +popupBtn('cart').icon.icon-cart(title='Корзина')
-    aside.catalog-menu.container
+    aside.catalog-menu.container: .catalog-menu__inner
         .catalog-menu__title Категории
         nav.catalog-menu__list-wrapper: ul.catalog-menu__list
-            each category in catalog
+            each category, categoryIndex in catalog
                 li
                     +anchor= category.title
                     ul
                         each subCategory in category.list
-                            +img(subCategory.img)
-                            +anchor= subCategory.title
-                            ul
-                                each subItem in subCategory.list
-                                    li: a(href='#')= subItem
+                            li
+                                +img(subCategory.img)
+                                +anchor= subCategory.title + ` ${categoryIndex + 1}`
+                                ul
+                                    each subItem in subCategory.list
+                                        li: a(href='#')= subItem
         .catalog-menu__actions
             // Если пользователь авторизован, то заменить на ссылку <a class="icon icon-profile"></a>
             +popupBtn('auth').catalog-menu__action-item.icon.icon-profile

@@ -2,8 +2,199 @@
 
 .catalog-menu {
     position: absolute;
-    height: 100vh;
+    top: calc(100% - 1px);
+    left: 0;
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    max-height: 600px;
     overflow: hidden;
+    color: var(--accent);
     opacity: 0;
     visibility: hidden;
+    background-color: var(--main);
+    @include utils.transition((opacity, visibility));
+
+    &.opened {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &__inner {
+        gap: 50px;
+        position: relative;
+        padding-top: 30px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__title {
+        font-size: 1.4rem;
+        letter-spacing: 0.01rem;
+        line-height: 1.3;
+        text-transform: uppercase;
+    }
+
+    // 1 level menu
+    &__list {
+        gap: 16px;
+        display: flex;
+        flex-direction: column;
+
+        & > li {
+            width: fit-content;
+
+            & > :is(span, a, button) {
+                gap: 16px;
+                display: flex;
+                align-items: center;
+
+                &::after {
+                    content: '';
+                    display: block;
+                    @include utils.square(28px);
+                    background-image: url('assets/icons/full-arrow.svg');
+                    @include utils.bg-defaults();
+                    filter: var(--filter-accent);
+                    rotate: 45deg;
+                }
+            }
+        }
+
+        & > li:hover > ul {
+            z-index: 1;
+            opacity: 1;
+            visibility: visible;
+            transition-delay: 0s;
+        }
+
+        &:has(> li:hover) > li:not(:has(:hover)) > :is(a, span, button) {
+            opacity: 0.5;
+        }
+
+        &:has(> li:hover) > li:has(:not(:hover)) > ul {
+            transition-delay: 0s;
+        }
+
+        & > li > :is(a, span, button) {
+            font-family: var(--steelfish);
+            font-size: 2.8rem;
+            letter-spacing: 0.01rem;
+            line-height: 1.05;
+            text-transform: uppercase;
+            @include utils.transition(opacity);
+        }
+    }
+
+    &__actions,
+    &__mail,
+    &__socials {
+        display: none;
+    }
+
+    // 2 level menu
+    &__list > li > ul {
+        grid-template-columns: repeat(4, 1fr);
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        max-width: 1280px;
+        height: 100%;
+        display: grid;
+        overflow-y: auto;
+        opacity: 0;
+        visibility: hidden;
+        background-color: var(--main);
+        border-left: 1px solid rgba(110, 77, 49, 0.2);
+        @include utils.transition((opacity, visibility));
+        transition-delay: 1s;
+
+        & > li {
+            gap: 20px;
+            position: relative;
+            padding: 30px 20px 20px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            font-size: 1.4rem;
+            letter-spacing: 0.01rem;
+            line-height: 1.3;
+            text-transform: uppercase;
+            border-width: 0 1px 1px 0;
+            border-color: rgba(110, 77, 49, 0.2);
+
+            &:nth-child(4n) {
+                border-right: 0;
+            }
+
+            &:hover {
+                & > img {
+                    opacity: 0;
+                    visibility: hidden;
+                }
+
+                & > ul {
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+
+            & > img {
+                object-position: center;
+                object-fit: contain;
+                mix-blend-mode: multiply;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                translate: -50% -50%;
+                max-width: 270px;
+                max-height: 236px;
+                @include utils.transition((opacity, visibility));
+            }
+
+            & > ul {
+                opacity: 0;
+                visibility: hidden;
+                @include utils.transition((opacity, visibility));
+            }
+        }
+    }
+
+    // 3 level menu
+    &__list > li > ul > li > ul {
+        gap: 9px;
+        display: flex;
+        flex-direction: column;
+
+        & > li {
+            &:hover :is(a, button)::after {
+                opacity: 1;
+            }
+
+            & > :is(a, button) {
+                gap: 8px;
+                display: flex;
+                align-items: center;
+
+                &::after {
+                    content: '';
+                    @include utils.square(18px);
+                    opacity: 0;
+                    background-color: var(--accent);
+                    @include utils.transition(opacity);
+                    background-image: url(assets/icons/full-arrow.svg);
+                    @include utils.bg-defaults(80% 80%);
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: utils.$desktop1400) {
+    .catalog-menu {
+        /** @skip-scaling */
+        max-height: 450px;
+    }
 }

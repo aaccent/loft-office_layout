@@ -1,7 +1,12 @@
 const header = document.querySelector('.header')
 
-if (header) header.style.marginBottom = `-${header.offsetHeight}px`
+function setHeaderHeight() {
+    if (!header) return
 
-window.addEventListener('resize', () => {
-    if (header) header.style.marginBottom = `-${header.offsetHeight}px`
-})
+    const height = `${header.offsetHeight}px`
+    header.style.marginBottom = `-${height}`
+    document.documentElement.style.setProperty('--header-height', height)
+}
+setHeaderHeight()
+
+window.addEventListener('resize', setHeaderHeight)
