@@ -3,3 +3,37 @@ include layout/utils
 +popup('order', 'order')
     .order__header
         +img(require('assets/icons/logo.svg'))
+        button.close-btn
+    form.order__body(novalidate, data-handler='handler.php')
+        .order__steps
+            .order__steps-item
+                .order__steps-item__header
+                    .order__steps-item__number 1
+                    .order__steps-item__title Тип покупателя
+                    .order__autorization-btn войти в лк
+                    .order__change-btn изменить
+                ul.order__steps-item__body.user-type__list
+                    li
+                        label Юр. лицо с НДС
+                            input(type='radio', name='user-type', value='commerce-nds')
+                    li
+                        label Юр. лицо без НДС
+                            input(type='radio', name='user-type', value='commerce')
+                    li
+                        label Физическое лицо
+                            input(type='radio', name='user-type', value='private')
+            .order__steps-item
+                .order__steps-item__header
+                    .order__steps-item__number 2
+                    .order__steps-item__title Личные данные
+                    .order__change-btn изменить
+                .order__steps-item__body.user-data
+                    .user-data__prefix Осталось заполнить 5 обязательных полей *
+                    .user-data__inputs
+                        input(type='text', name='name', placeholder='имя')
+                        input(type='text', name='last-name', placeholder='фамилия')
+                        input(type='text', name='middle-name', placeholder='отчество')
+                        input(type='tel', name='tel', placeholder='Телефон')
+                        input(type='email', name='email', placeholder='Email')
+                    button.button.button__brown(type='button') далее
+        .order__items
