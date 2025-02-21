@@ -4,6 +4,7 @@
     /* @skip-scaling */
     @include utils.square(24px);
     @include utils.bg-defaults(contain);
+    @include utils.transition(filter);
 
     &-profile {
         background-image: url('assets/icons/user.svg');

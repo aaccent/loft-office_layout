@@ -11,6 +11,7 @@ body:has(main.main .main-hero) .header {
     z-index: 10;
     top: 0;
     color: white;
+    @include utils.transition((background-color, color));
 
     &:has(:is(.catalog-menu.opened, .burger-menu.opened)) {
         color: var(--accent);
@@ -47,10 +48,12 @@ body:has(main.main .main-hero) .header {
         justify-content: space-between;
         align-items: center;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        @include utils.transition(border-bottom-color);
     }
 
     &__logo {
         height: 37px;
+        @include utils.transition(filter);
 
         img {
             object-fit: contain;
@@ -61,6 +64,7 @@ body:has(main.main .main-hero) .header {
 
     &__geo-button {
         gap: 10px;
+        filter: var(--filter-white);
         display: flex;
         align-items: center;
         font-size: 1.4rem;
@@ -68,6 +72,7 @@ body:has(main.main .main-hero) .header {
         letter-spacing: 0.02rem;
         line-height: 1.3;
         text-transform: uppercase;
+        @include utils.transition(filter);
 
         &::before {
             content: '';
@@ -88,12 +93,12 @@ body:has(main.main .main-hero) .header {
         font-size: 2.8rem;
         letter-spacing: 0.01rem;
         line-height: 1.05;
-        text-transform: uppercase;
 
         li {
             position: relative;
 
             & > :is(a, button) {
+                text-transform: uppercase;
                 @include utils.transition(opacity);
             }
 
@@ -166,6 +171,7 @@ body:has(main.main .main-hero) .header {
             /* @skip-scaling */
             height: 2px;
             background-color: white;
+            @include utils.transition(background-color);
         }
     }
 
