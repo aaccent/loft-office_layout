@@ -1,0 +1,13 @@
+@use 'styles/utils';
+
+.socials {
+    display: flex;
+
+    &__item {
+        @include utils.square(40px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #fff;
+    }
+}
