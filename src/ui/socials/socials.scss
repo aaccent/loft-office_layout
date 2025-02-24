@@ -10,4 +10,15 @@
         align-items: center;
         border: 1px solid #fff;
     }
+
+    &__item + &__item {
+        border-left: 0;
+    }
+}
+
+.socials--dark {
+    .socials__item {
+        filter: var(--filter-accent);
+        border-color: var(--accent);
+    }
 }
