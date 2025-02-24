@@ -75,7 +75,7 @@ header.header
                         li: a(href='#') Блог
                 li: a(href='#') Контакты
         .header__actions-list.header__mobile-actions-list
-            +btn('menu').header__menu-button
+            +btn('mobile-menu').header__menu-button
             +btn('search').header__mobile-search-button.icon.icon-search(title='Поиск')
         .header__actions-list.header__desktop-actions-list
             +btn('search').icon.icon-search(title='Поиск')
@@ -85,6 +85,7 @@ header.header
             +popupBtn('cart').icon.icon-cart(title='Корзина')
     aside.catalog-menu.container: .catalog-menu__inner
         .catalog-menu__title Категории
+        +wrapBreak: +btn("catalog-menu").catalog-menu__mobile-title Каталог
         nav.catalog-menu__list-wrapper: ul.catalog-menu__list
             each category, categoryIndex in catalog
                 li

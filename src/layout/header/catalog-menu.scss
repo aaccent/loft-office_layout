@@ -5,7 +5,7 @@
     top: calc(100% - 1px);
     left: 0;
     width: 100%;
-    height: calc(100vh - var(--header-height));
+    height: calc(100vh - 100%);
     max-height: 600px;
     overflow: hidden;
     color: var(--accent);
@@ -35,6 +35,10 @@
         text-transform: uppercase;
     }
 
+    &__mobile-title {
+        display: none;
+    }
+
     // 1 level menu
     &__list {
         gap: 16px;
@@ -61,7 +65,7 @@
             }
         }
 
-        & > li:hover > ul {
+        & > :is(li:hover, li.opened) > ul {
             z-index: 1;
             opacity: 1;
             visibility: visible;
@@ -88,7 +92,8 @@
 
     &__actions,
     &__mail,
-    &__socials {
+    &__socials,
+    &__list-item-close-button {
         display: none;
     }
 
@@ -196,5 +201,142 @@
     .catalog-menu {
         /** @skip-scaling */
         max-height: 450px;
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .catalog-menu {
+        max-height: unset;
+
+        &__inner {
+            gap: 40px;
+            position: static;
+            padding-top: 22px;
+            overflow-y: auto;
+            @include utils.transparent-scroll;
+        }
+
+        &__title {
+            display: none;
+        }
+
+        &__list > li > ul > li.catalog-menu__list-item-close-button {
+            padding: 0;
+            border: 0;
+
+            button {
+                gap: 0;
+                margin-bottom: 24px;
+                padding-bottom: 0;
+            }
+        }
+
+        &__mobile-title,
+        &__list > li > ul > li.catalog-menu__list-item-close-button button {
+            position: relative;
+            display: block;
+            color: var(--accent);
+            font-family: var(--steelfish);
+            font-size: 2rem;
+            letter-spacing: 0.01rem;
+            line-height: 1.05;
+            text-align: center;
+            text-transform: uppercase;
+            opacity: 0.5;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 0;
+                @include utils.square(21px);
+                filter: var(--filter-accent);
+                @include utils.bg-defaults;
+                rotate: -180deg;
+                translate: 0 -50%;
+                background-image: url('assets/icons/arrow.svg');
+            }
+        }
+
+        // 1 level menu
+        &__list {
+            gap: 16px;
+            padding-bottom: 30px;
+
+            & > li {
+                padding-bottom: 16px;
+                width: 100%;
+                border-bottom: 1px solid hsl(28, 38%, 31%, 0.1);
+
+                & > :is(a, button, span) {
+                    width: 100%;
+                    justify-content: space-between;
+                    font-size: 2rem;
+
+                    &::after {
+                        @include utils.square(19px);
+                        rotate: 0deg;
+                        background-image: url('assets/icons/arrow.svg');
+                    }
+                }
+            }
+        }
+
+        // 2 level menu
+        &__list > li > ul {
+            gap: 16px;
+            padding: 22px 28px 30px;
+            display: flex;
+            flex-direction: column;
+            border: 0;
+            transition-delay: 0s;
+            @include utils.transparent-scroll;
+
+            & > li {
+                gap: 24px;
+                padding: 0 0 16px;
+                font-size: 1.2rem;
+                border: 0;
+                border-bottom: 1px solid hsl(28, 38%, 31%, 0.1);
+
+                &.opened > ul {
+                    display: flex;
+                }
+
+                & > img {
+                    display: none;
+                }
+
+                &.opened > :is(span, a, button)::after {
+                    rotate: -90deg;
+                }
+
+                & > :is(span, a, button) {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    font-family: var(--steelfish);
+                    font-size: 2rem;
+                    line-height: 1.05;
+
+                    &::after {
+                        content: '';
+                        @include utils.square(19px);
+                        background-image: url('assets/icons/arrow.svg');
+                        @include utils.bg-defaults;
+                        filter: var(--filter-accent);
+                        rotate: 90deg;
+                    }
+                }
+            }
+        }
+
+        // 3 level menu
+        &__list > li > ul > li > ul {
+            gap: 12px;
+            display: none;
+            opacity: unset;
+            visibility: unset;
+        }
     }
 }
