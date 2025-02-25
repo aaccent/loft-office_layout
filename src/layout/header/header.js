@@ -1,5 +1,5 @@
 /** Высота и позиционирование шапки и его меню */
-import { isDesktop, isMobile } from 'globals/adaptive'
+import { adaptive } from 'globals/adaptive'
 
 void (function () {
     const header = document.querySelector('.header')
@@ -34,7 +34,7 @@ void (function () {
     }
 
     function openCatalogMenu() {
-        if (isMobile) return
+        if (adaptive.isMobile) return
 
         clearCatalogTimeout()
         if (catalogMenu?.classList.contains('opened')) return
@@ -43,7 +43,7 @@ void (function () {
     }
 
     function deferCloseCatalogMenu() {
-        if (isMobile) return
+        if (adaptive.isMobile) return
         if (!catalogMenu?.classList.contains('opened')) return
 
         timeout = setTimeout(() => {
@@ -55,7 +55,7 @@ void (function () {
         button.addEventListener('mouseenter', openCatalogMenu)
         button.addEventListener('mouseleave', deferCloseCatalogMenu)
         button.addEventListener('click', () => {
-            if (isDesktop) return
+            if (adaptive.isDesktop) return
 
             catalogMenu?.classList.toggle('opened')
         })
