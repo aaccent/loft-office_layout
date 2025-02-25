@@ -60,7 +60,7 @@ header.header
     .container: .header__inner
         +anchor('/').header__logo: +img(require('assets/static/logo.svg'))
         +popupBtn('geo').header__geo-button краснодар
-        nav.header__menu-wrapper
+        .header__menu-wrapper: nav.header__menu
             ul.header__menu-list
                 li: button(type='button', data-action='catalog-menu')
                     | Каталог
@@ -68,14 +68,26 @@ header.header
                 li: a(href='#') Новинки
                 li: a(href='#') Sale
                 li
-                    a(href='#') О нас
+                    +wrapBreak: button О нас
                     ul
                         li: a(href='#') О компании
                         li: a(href='#') Отзывы
                         li: a(href='#') Блог
                 li: a(href='#') Контакты
+            .header__mobile-actions
+                // Если пользователь авторизован, то заменить на ссылку <a class="icon icon-profile"></a>
+                +popupBtn('auth').header__mobile-action-item
+                    span.icon.icon-profile
+                    span.header__mobile-action-item-text Войти в ЛК
+                +popupBtn('geo').header__mobile-action-item.header__mobile-geo-button
+                    span.icon.icon-geo
+                    span.header__mobile-action-item-text Краснодар
+            +anchor('mailto:mail@loftoffice.ru').header__mobile-mail mail@loftoffice.ru
+            include ui/socials/socials
+            +socials.socials--dark
         .header__actions-list.header__mobile-actions-list
             +btn('mobile-menu').header__menu-button
+            +btn('burger-menu').header__menu-button
             +btn('search').header__mobile-search-button.icon.icon-search(title='Поиск')
         .header__actions-list.header__desktop-actions-list
             +btn('search').icon.icon-search(title='Поиск')
@@ -98,15 +110,6 @@ header.header
                                 ul
                                     each subItem in subCategory.list
                                         li: a(href='#')= subItem
-        .catalog-menu__actions
-            // Если пользователь авторизован, то заменить на ссылку <a class="icon icon-profile"></a>
-            +popupBtn('auth').catalog-menu__action-item.icon.icon-profile
-            +popupBtn('geo').catalog-menu__action-item.header__geo-button Краснодар
-        +anchor('mailto:mail@loftoffice.ru').catalog-menu__mail mail@loftoffice.ru
-        ul.catalog-menu__socials
-            li: a.social-button.social-vk(href='#')
-            li: a.social-button.social-tg(href='#')
-            li: a.social-button.social-wa(href='#')
 
     aside.burger-menu.container
         nav.burger-menu__list-wrapper: ul.burger-menu__list

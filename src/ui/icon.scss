@@ -21,6 +21,10 @@
     &-cart {
         background-image: url('assets/icons/cart.svg');
     }
+
+    &-geo {
+        background-image: url('assets/icons/geo.svg');
+    }
 }
 
 @media only screen and (max-width: utils.$tablet1000) {

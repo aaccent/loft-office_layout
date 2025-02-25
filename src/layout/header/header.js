@@ -64,29 +64,14 @@ void (function () {
     catalogMenu.addEventListener('mouseenter', openCatalogMenu)
     catalogMenu.addEventListener('mouseleave', deferCloseCatalogMenu)
 
-    // Открытие и закрытие подпунктов каталога на мобилке
-    document.querySelectorAll('.catalog-menu__list li:has(ul)').forEach((item) => {
-        const link = item.querySelector(':is(a,span,button)')
-        const subcategory = item.querySelector('ul')
-
-        if (!link || !subcategory) return
-
-        link.addEventListener('click', (event) => {
-            if (isDesktop) return
-            event.preventDefault()
-
-            item.classList.toggle('opened')
-        })
-    })
-
     // Добавление кнопок закрытия подпунктов в мобильной версии
-    document.querySelectorAll('.catalog-menu__list > li').forEach((item) => {
+    document.querySelectorAll(':is(.header__menu-list,.catalog-menu__list) > li').forEach((item) => {
         const link = item.querySelector(':is(a,span,button)')
         const ul = item.querySelector('ul')
         if (!ul) return
 
         const li = document.createElement('li')
-        li.className = 'catalog-menu__list-item-close-button'
+        li.className = 'list-item-close-button'
 
         const closeButton = document.createElement('button')
         closeButton.innerText = link.textContent
@@ -96,5 +81,30 @@ void (function () {
 
         li.append(closeButton)
         ul.prepend(li)
+    })
+})()
+
+/** Мобильное меню */
+void (function () {
+    const mobileMenu = document.querySelector('.header__menu-wrapper')
+
+    document.querySelectorAll('[data-action="mobile-menu"]').forEach((button) => {
+        button.addEventListener('click', () => {
+            mobileMenu.classList.toggle('opened')
+        })
+    })
+
+    document.querySelectorAll(':is(.catalog-menu__list,.header__menu-list) li:has(ul)').forEach((item) => {
+        const link = item.querySelector(':is(a,span,button)')
+        const subcategory = item.querySelector('ul')
+
+        if (!link || !subcategory) return
+
+        link.addEventListener('click', (event) => {
+            if (adaptive.isDesktop) return
+            event.preventDefault()
+
+            item.classList.toggle('opened')
+        })
     })
 })()
