@@ -166,6 +166,7 @@ body:has(main.main .main-hero) .header {
 
     &__menu-button {
         gap: 8.5px;
+        padding: 7px 0;
         width: 60px;
         display: flex;
         flex-direction: column;
@@ -182,6 +183,26 @@ body:has(main.main .main-hero) .header {
             height: 2px;
             background-color: white;
             @include utils.transition(background-color);
+        }
+    }
+
+    &:has(:is(.burger-menu.opened, .header__menu-wrapper.opened)) &__menu-button {
+        position: relative;
+        height: calc(17px + 7px * 2);
+        justify-content: center;
+        align-items: center;
+
+        &::before,
+        &::after {
+            position: absolute;
+        }
+
+        &::before {
+            rotate: -15deg;
+        }
+
+        &::after {
+            rotate: 15deg;
         }
     }
 
@@ -225,6 +246,25 @@ body:has(main.main .main-hero) .header {
             }
         }
 
+        &:has(:is(.burger-menu.opened, .header__menu-wrapper.opened)) &__menu-button {
+            height: 20px;
+            align-items: flex-start;
+
+            &::before,
+            &::after {
+                width: 28px;
+                height: 1px;
+            }
+
+            &::before {
+                rotate: -45deg;
+            }
+
+            &::after {
+                rotate: 45deg;
+            }
+        }
+
         &__geo-button {
             display: none;
         }
@@ -235,6 +275,7 @@ body:has(main.main .main-hero) .header {
 
         &__actions-list {
             gap: 20px;
+            width: 83px;
         }
 
         &__mobile-actions-list {

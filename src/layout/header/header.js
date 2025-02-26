@@ -1,6 +1,6 @@
-/** Высота и позиционирование шапки и его меню */
 import { adaptive } from 'globals/adaptive'
 
+/** Высота и позиционирование шапки и его меню */
 void (function () {
     const header = document.querySelector('.header')
 
@@ -105,6 +105,19 @@ void (function () {
             event.preventDefault()
 
             item.classList.toggle('opened')
+        })
+    })
+})()
+
+/** Бургер меню */
+void (function () {
+    const burgerMenu = document.querySelector('.burger-menu')
+
+    if (!burgerMenu) return
+
+    document.querySelectorAll('[data-action="burger-menu"]').forEach((button) => {
+        button.addEventListener('click', () => {
+            burgerMenu.classList.toggle('opened')
         })
     })
 })()
