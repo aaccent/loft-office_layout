@@ -253,7 +253,7 @@ body:has(main.main .main-hero) .header {
 
         &__menu-wrapper {
             position: absolute;
-            top: calc(100% - 1px);
+            top: 100%;
             left: 0;
             width: 100%;
             height: calc(100dvh - 100%);
