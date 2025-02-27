@@ -46,18 +46,6 @@
         text-transform: uppercase;
     }
 
-    &__socials {
-        display: flex;
-    }
-
-    &__social-item {
-        @include utils.square(40px);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid #fff;
-    }
-
     &__menu-block {
         gap: 80px;
         display: flex;
