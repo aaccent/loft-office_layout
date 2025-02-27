@@ -18,6 +18,7 @@
 
             & > :is(a, button, span) {
                 width: 100%;
+                display: block;
                 font-size: 2rem;
             }
         }
@@ -113,8 +114,9 @@
                     rotate: -90deg;
                 }
 
-                & > :is(span, a, button) {
+                & > :is(span, a, button:not(.btn)) {
                     width: 100%;
+                    display: block;
                     font-family: var(--steelfish);
                     font-size: 2rem;
                     line-height: 1.05;

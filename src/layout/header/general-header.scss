@@ -186,6 +186,10 @@ body:has(main.main .main-hero) .header {
         }
     }
 
+    &__menu-item-button {
+        display: none;
+    }
+
     &:has(:is(.burger-menu.opened, .header__menu-wrapper.opened)) &__menu-button {
         position: relative;
         height: calc(17px + 7px * 2);
@@ -315,6 +319,11 @@ body:has(main.main .main-hero) .header {
             height: 100%;
             overflow-y: auto;
             @include utils.transparent-scroll;
+        }
+
+        &__menu-item-button {
+            margin-top: auto;
+            display: block;
         }
 
         &__menu-list {

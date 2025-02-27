@@ -1,4 +1,5 @@
 import { adaptive } from 'globals/adaptive'
+import { openPopup } from 'features/popup/popup'
 
 /** Высота и позиционирование шапки и его меню */
 void (function () {
@@ -63,8 +64,58 @@ void (function () {
 
     catalogMenu.addEventListener('mouseenter', openCatalogMenu)
     catalogMenu.addEventListener('mouseleave', deferCloseCatalogMenu)
+})()
 
-    // Добавление кнопок закрытия подпунктов в мобильной версии
+/** Бургер меню */
+void (function () {
+    const burgerMenu = document.querySelector('.burger-menu')
+
+    if (!burgerMenu) return
+
+    document.querySelectorAll('[data-action="burger-menu"]').forEach((button) => {
+        button.addEventListener('click', () => {
+            burgerMenu.classList.toggle('opened')
+        })
+    })
+})()
+
+/** Мобильное меню */
+void (function () {
+    const mobileMenuWrapper = document.querySelector('.header__menu-wrapper')
+    const mobileMenuList = document.querySelector('.header__menu-list')
+
+    document.querySelectorAll('[data-action="mobile-menu"]').forEach((button) => {
+        button.addEventListener('click', () => {
+            mobileMenuWrapper.classList.toggle('opened')
+        })
+    })
+
+    // Копирование пунктов бургер меню в мобильное меню
+    const headerMenuItems = Array.from(document.querySelectorAll('.header__menu-list > li > :is(button,span,a)'))
+    const headerMenuLastItem = document.querySelector('.header__menu-list > li:last-child')
+
+    const contactsItemText = headerMenuItems.findLast((i) => i.textContent.trim().toLowerCase() === 'контакты')
+    const insertBeforeItem = contactsItemText?.parentElement || headerMenuLastItem
+
+    document.querySelectorAll('.burger-menu__list > li').forEach((item) => {
+        const clone = item.cloneNode(true)
+        const ul = clone.querySelector('ul')
+
+        const liWithButton = document.createElement('li')
+        liWithButton.className = 'header__menu-item-button'
+
+        const callBtn = document.createElement('button')
+        callBtn.innerText = 'Связаться'
+        callBtn.className = 'btn btn--arrow btn--dark'
+        callBtn.addEventListener('click', () => openPopup('call'))
+
+        liWithButton.append(callBtn)
+        ul.append(liWithButton)
+
+        mobileMenuList.insertBefore(clone, insertBeforeItem)
+    })
+
+    // Добавление кнопок закрытия подпунктов в мобильной версии меню
     document.querySelectorAll(':is(.header__menu-list,.catalog-menu__list) > li').forEach((item) => {
         const link = item.querySelector(':is(a,span,button)')
         const ul = item.querySelector('ul')
@@ -82,17 +133,6 @@ void (function () {
         li.append(closeButton)
         ul.prepend(li)
     })
-})()
-
-/** Мобильное меню */
-void (function () {
-    const mobileMenu = document.querySelector('.header__menu-wrapper')
-
-    document.querySelectorAll('[data-action="mobile-menu"]').forEach((button) => {
-        button.addEventListener('click', () => {
-            mobileMenu.classList.toggle('opened')
-        })
-    })
 
     document.querySelectorAll(':is(.catalog-menu__list,.header__menu-list) li:has(ul)').forEach((item) => {
         const link = item.querySelector(':is(a,span,button)')
@@ -105,19 +145,6 @@ void (function () {
             event.preventDefault()
 
             item.classList.toggle('opened')
-        })
-    })
-})()
-
-/** Бургер меню */
-void (function () {
-    const burgerMenu = document.querySelector('.burger-menu')
-
-    if (!burgerMenu) return
-
-    document.querySelectorAll('[data-action="burger-menu"]').forEach((button) => {
-        button.addEventListener('click', () => {
-            burgerMenu.classList.toggle('opened')
         })
     })
 })()
