@@ -83,10 +83,18 @@ void (function () {
 void (function () {
     const mobileMenuWrapper = document.querySelector('.header__menu-wrapper')
     const mobileMenuList = document.querySelector('.header__menu-list')
+    const catalogMenu = document.querySelector('.catalog-menu')
 
     document.querySelectorAll('[data-action="mobile-menu"]').forEach((button) => {
         button.addEventListener('click', () => {
             mobileMenuWrapper.classList.toggle('opened')
+            if (!mobileMenuWrapper.classList.contains('opened')) {
+                catalogMenu.classList.remove('opened')
+            }
+
+            document.querySelectorAll('.header li.opened').forEach((li) => {
+                li.classList.remove('opened')
+            })
         })
     })
 
