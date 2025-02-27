@@ -1,0 +1,69 @@
+@use 'styles/utils';
+
+.btn {
+    --btn-x-padding: 24px;
+    padding: var(--btn-x-padding);
+    width: 100%;
+    color: var(--accent);
+    font-family: var(--steelfish);
+    font-size: 2.8rem;
+    letter-spacing: 0.01rem;
+    line-height: 1.05;
+    text-transform: uppercase;
+    background-color: var(--white);
+
+    &--arrow {
+        --arrow-size: 32px;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &::after {
+            content: '';
+            @include utils.square(var(--arrow-size));
+            background-color: var(--accent);
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            right: calc(var(--arrow-size) / 2 + var(--btn-x-padding));
+            translate: 50%;
+            @include utils.square(20px);
+            background-image: url('assets/icons/full-arrow.svg');
+            @include utils.bg-defaults;
+        }
+    }
+
+    &--dark {
+        color: var(--white);
+        background-color: var(--accent);
+
+        &.btn--arrow {
+            &::after {
+                background-color: var(--white);
+            }
+
+            &::before {
+                filter: var(--filter-accent);
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .btn {
+        --btn-x-padding: 20px;
+        padding: 22px var(--btn-x-padding);
+        font-size: 2rem;
+
+        &--arrow {
+            --arrow-size: 20px;
+
+            &::before {
+                --size: 12px;
+            }
+        }
+    }
+}
