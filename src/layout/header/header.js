@@ -114,7 +114,7 @@ void (function () {
 
         const callBtn = document.createElement('button')
         callBtn.innerText = 'Связаться'
-        callBtn.className = 'btn btn--arrow btn--dark'
+        callBtn.className = 'button button--brown'
         callBtn.addEventListener('click', () => openPopup('call'))
 
         liWithButton.append(callBtn)
