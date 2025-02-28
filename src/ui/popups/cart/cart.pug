@@ -49,7 +49,7 @@ include components/products-slider/products-slider
             button.cart__share(data-link='https://doka.guide/js/window-navigator/')
                 .cart__share-tooltip ссылка скопирована
             button.cart__clear
-            button.close-btn
+            button.close-btn(data-action='close-popup')
     .cart__empty В данный момент в корзине ничего нет!
     +products-slider({ title: 'недавно смотрели', list: recentlySeen })
 
