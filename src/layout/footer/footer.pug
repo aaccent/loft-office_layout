@@ -46,21 +46,28 @@ include layout/utils
     ]
 
 footer.footer
-    +img(require("assets/static/footer-bg.jpg")).footer__bg
+    picture.footer__bg
+        +wrapBreak: source(srcset=require('assets/static/footer/bg-mobile.jpg'), media='(max-width: 1000px)')
+        +wrapBreak: source(srcset=require('assets/static/footer/bg-desktop.jpg'))
+        +img(require("assets/static/footer/bg-desktop.jpg"))
     .container
         .footer__top
             .footer__mail-block
-                +anchor('mailto:mail@loftoffice.ru').footer__mail-link mail@loftoffice.ru
+                .footer__mail-link-wrapper
+                    +anchor('mailto:mail@loftoffice.ru').footer__mail-link mail@loftoffice.ru
+                    +btn('scroll-top').footer__back-button
                 include ui/socials/socials
                 +socials
             nav.footer__menu-block
                 each category in menu
                     .footer__menu-category
-                        +wrapBreak: span.footer__menu-category-title= category.title
+                        +wrapBreak: button.footer__menu-category-title= category.title
                         ul.footer__menu-list
                             each item in category.list
                                 li.footer__menu-item= item
-        .footer__title LOFT ОФИС
+        .footer__title-wrapper
+            .footer__title LOFT ОФИС
+            +btn('scroll-top').footer__back-button
         .footer__bottom
             .footer__copyright © 2024 ООО «Лофт Офис»
             +anchor.footer__policy Политика конфиденциальности
@@ -68,7 +75,3 @@ footer.footer
             +anchor('https://aaccent.ru').footer__creator
                 +img(require('assets/icons/aaccent-logo.svg'))
                 +wrapBreak: span разработка сайта
-    include ui/popups/video-review/video-review
-    include ui/popups/text-review/text-review
-    include ui/popups/send-review/send-review
-    include ui/popups/cart/cart

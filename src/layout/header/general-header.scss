@@ -136,6 +136,7 @@ body:has(main.main .main-hero) .header {
                 position: absolute;
                 top: calc(100% + 20px);
                 padding: 32px;
+                width: max-content;
                 display: flex;
                 flex-direction: column;
                 color: var(--accent);
