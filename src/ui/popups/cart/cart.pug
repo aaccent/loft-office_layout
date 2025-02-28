@@ -77,20 +77,20 @@ include components/products-slider/products-slider
     form.cart__promo-form(novalidate, data-handler='smth.php')
         input.cart__promo-input(placeholder='промокод')
         button.cart__promo-button(disabled)
-    .cart-info
-        .cart-info__divider
-        .cart-info__price итого:
-            .cart-info__price-total
-        .cart-info__delivery Доставка:
+    .cart__info
+        .cart__info-divider
+        .cart__info-price итого:
+            .cart__info-price-total
+        .cart__info-delivery Доставка:
             span уточняется при оформлении
-        .cart-info__weight вес:
+        .cart__info-weight вес:
             .tooltip
             span
-        .cart-info__trigger(data-price-for-discount='80000')
-            .cart-info__trigger-circle
-            .cart-info__trigger-text получите скидку 15%
-                .cart-info__trigger-action добавьте в корзину товары ещё на
+        .cart__info-trigger(data-price-for-discount='80000')
+            .cart__info-trigger-circle
+            .cart__info-trigger-text получите скидку 15%
+                .cart__info-trigger-action добавьте в корзину товары ещё на
                     span 5 700 ₽
-        .cart-info__actions
+        .cart__info-actions
             button.button.button__brown(data-action='popup', data-popup='order') К оформлению
             button.button.button__transparent(data-action='popup', data-popup='preorder') Купить в 1 клик

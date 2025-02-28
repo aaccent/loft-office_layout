@@ -66,7 +66,7 @@ function fillCircle(totalPrice: number, priceForDiscount: number) {
 
 /** Расчет суммы для скидки */
 function updateTrigger(totalPrice: number = 0) {
-    const triggerBlock = document.querySelector<HTMLElement>('.cart-info__trigger')
+    const triggerBlock = document.querySelector<HTMLElement>('.cart__info-trigger')
     if (!triggerBlock) return
 
     const priceForDiscount = Number(triggerBlock.dataset.priceForDiscount)
@@ -74,7 +74,7 @@ function updateTrigger(totalPrice: number = 0) {
     if (priceForDiscount - totalPrice < 0) return
 
     triggerBlock.classList.add('trigger')
-    triggerBlock.querySelector('.cart-info__trigger-action span')!.textContent =
+    triggerBlock.querySelector('.cart__info-trigger-action span')!.textContent =
         ` ${formatPrice(priceForDiscount - totalPrice)}`
 
     fillCircle(totalPrice, priceForDiscount)
@@ -83,12 +83,12 @@ function updateTrigger(totalPrice: number = 0) {
 /** Липкий блок при скроле */
 function stickyInfo() {
     const cartPopup = document.querySelector<HTMLElement>('.popup.cart')
-    const cartInfo = document.querySelector<HTMLElement>('.cart-info')
+    const cartInfo = document.querySelector<HTMLElement>('.cart__info')
 
     const setCartInfoBorder = (e: Event) => {
         const popup = e.target as HTMLElement
         const popupEnd = popup.scrollTop + popup.offsetHeight === popup.scrollHeight
-        const divider = cartInfo?.querySelector<HTMLElement>('.cart-info__divider')
+        const divider = cartInfo?.querySelector<HTMLElement>('.cart__info-divider')
         if (popupEnd) {
             divider!.style.display = 'none'
         } else {
@@ -172,7 +172,7 @@ function init() {
     const shareButton = document.querySelector<HTMLButtonElement>('.cart__share')
     shareButton?.addEventListener('click', shareLink)
 
-    const circleContainer = document.querySelector('.cart-info__trigger-circle')
+    const circleContainer = document.querySelector('.cart__info-trigger-circle')
     createSVGCircle(circleContainer!)
 
     const promoInput = document.querySelector<HTMLInputElement>('.cart__promo-input')
@@ -216,25 +216,25 @@ function setItems(list: Product[]) {
 }
 
 function setInfo(info: CartInfo) {
-    const priceEl = document.querySelector('.cart-info__price')
+    const priceEl = document.querySelector('.cart__info-price')
     Object.entries(info).forEach(([key, value]) => {
         switch (key) {
             case 'totalPrice':
                 priceEl!.setAttribute('data-total-price', `${info.totalPrice}`)
-                priceEl!.querySelector('.cart-info__price-total')!.textContent = formatPrice(value)
+                priceEl!.querySelector('.cart__info-price-total')!.textContent = formatPrice(value)
                 break
             case 'discountPrice':
                 const discountPriceEl = document.createElement('div')
-                discountPriceEl.classList.add('cart-info__price-discount')
+                discountPriceEl.classList.add('cart__info-price-discount')
                 discountPriceEl.textContent = formatPrice(value)
                 priceEl!.append(discountPriceEl)
                 break
             case 'deliveryPrice':
-                const deliveryEl = document.querySelector('.cart-info__delivery span')
+                const deliveryEl = document.querySelector('.cart__info-delivery span')
                 deliveryEl!.textContent = value
                 break
             case 'weight':
-                const weightEl = document.querySelector('.cart-info__weight span')
+                const weightEl = document.querySelector('.cart__info-weight span')
                 weightEl!.textContent = value + ' кг'
                 break
         }
