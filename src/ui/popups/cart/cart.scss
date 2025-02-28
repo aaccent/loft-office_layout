@@ -513,20 +513,6 @@
 
             .button {
                 width: 49%;
-
-                &__transparent {
-                    color: var(--accent);
-                    border-color: var(--accent);
-
-                    &::after {
-                        filter: none;
-                        background-image: url('assets/icons/phone.svg');
-                    }
-
-                    &::before {
-                        background-color: var(--accent);
-                    }
-                }
             }
         }
     }
