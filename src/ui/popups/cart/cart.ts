@@ -1,6 +1,5 @@
 import { CartInfo, Product } from '@/types'
 import { formatPrice } from 'features/formatPrice'
-import { testProducts } from '@/test-products'
 
 /** Тултип ССЫЛКА СКОПИРОВАНА */
 function shareLink(e: MouseEvent) {
@@ -267,9 +266,3 @@ window.cart = {
 }
 
 init()
-addItems(testProducts)
-setInfo({
-    totalPrice: 69872,
-    discountPrice: 45632,
-    weight: 896,
-})
