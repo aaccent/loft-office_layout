@@ -56,7 +56,7 @@ footer.footer
             nav.footer__menu-block
                 each category in menu
                     .footer__menu-category
-                        span.footer__menu-category-title= category.title
+                        +wrapBreak: span.footer__menu-category-title= category.title
                         ul.footer__menu-list
                             each item in category.list
                                 li.footer__menu-item= item
@@ -67,7 +67,8 @@ footer.footer
             +anchor.footer__offer публичная оферта
             +anchor('https://aaccent.ru').footer__creator
                 +img(require('assets/icons/aaccent-logo.svg'))
-                span разработка сайта
+                +wrapBreak: span разработка сайта
     include ui/popups/video-review/video-review
     include ui/popups/text-review/text-review
     include ui/popups/send-review/send-review
+    include ui/popups/cart/cart

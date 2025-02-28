@@ -2,6 +2,8 @@
 @use 'ui/buttons/close-btn';
 
 .popup {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
     position: fixed;
     z-index: 100;
     top: 0;
@@ -18,6 +20,10 @@
     transition: opacity, visibility;
     transition-timing-function: ease-in-out;
     transition-duration: 0.3s;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 
     &.opened {
         opacity: 1;

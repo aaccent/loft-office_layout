@@ -9,6 +9,7 @@
 @use 'ui/popups/video-review/video-review';
 @use 'ui/popups/text-review/text-review';
 @use 'ui/popups/send-review/send-review';
+@use 'ui/popups/cart/cart';
 
 // Ui
 @use 'ui/buttons/button';
@@ -30,3 +31,4 @@
 @use 'components/reviews-list/text/text-reviews';
 @use 'components/reviews-list/video/video-reviews';
 @use 'components/reviews-list/external/external';
+@use 'components/products-slider/products-slider';
