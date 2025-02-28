@@ -16,14 +16,17 @@
     }
 
     &__bg {
-        object-position: center;
-        object-fit: cover;
         position: absolute;
         z-index: -1;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
+
+        img {
+            object-position: top;
+            object-fit: cover;
+        }
     }
 
     &__top {
@@ -36,6 +39,10 @@
         gap: 38px;
         display: flex;
         flex-direction: column;
+    }
+
+    &__mail-link-wrapper &__back-button {
+        display: none;
     }
 
     &__mail-link {
@@ -60,6 +67,8 @@
     &__menu-category-title {
         font-family: var(--steelfish);
         font-size: 2.8rem;
+        letter-spacing: 0.02rem;
+        line-height: 1.05;
         text-transform: uppercase;
     }
 
@@ -75,14 +84,36 @@
         text-transform: uppercase;
     }
 
+    &__title-wrapper {
+        margin: auto 0 40px;
+        display: flex;
+        justify-content: space-between;
+    }
+
     &__title {
-        margin-top: auto;
-        margin-bottom: 40px;
         font-family: var(--steelfish);
         font-size: 27rem;
         letter-spacing: 5px;
-        line-height: 1;
+        line-height: 0.93;
         text-transform: uppercase;
+    }
+
+    &__back-button {
+        align-self: flex-end;
+        background-color: var(--white);
+        @include utils.square(40px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &::after {
+            content: '';
+            rotate: -45deg;
+            @include utils.square(24px);
+            background-image: url('assets/icons/full-arrow.svg');
+            @include utils.bg-defaults;
+            filter: var(--filter-accent);
+        }
     }
 
     &__bottom {
@@ -91,6 +122,7 @@
         display: flex;
         font-size: 1.6rem;
         font-weight: 500;
+        letter-spacing: 0.01rem;
         text-transform: uppercase;
         border-top: 1px solid rgb(100, 100, 100, 0.2);
     }
@@ -110,6 +142,132 @@
             object-fit: contain;
             object-position: center;
             @include utils.square(28px);
+        }
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .footer {
+        padding: 28px 0;
+
+        &__top {
+            gap: 48px;
+            margin-bottom: 50px;
+            flex-direction: column;
+        }
+
+        &__mail-block {
+            gap: 16px;
+        }
+
+        &__mail-link-wrapper {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        &__mail-link-wrapper &__back-button {
+            display: flex;
+        }
+
+        &__back-button {
+            --size: 28px;
+            position: relative;
+            /* @skip-scaling */
+            top: 8px;
+            align-self: flex-start;
+
+            &::after {
+                --size: 15px;
+            }
+        }
+
+        &__mail-link {
+            font-size: 3.4rem;
+            letter-spacing: -0.01rem;
+            line-height: 1.3;
+        }
+
+        &__menu-block {
+            gap: 12px;
+            flex-direction: column;
+        }
+
+        &__menu-category {
+            gap: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid hsl(0, 0%, 100%, 0.2);
+        }
+
+        &__menu-category.opened {
+            .footer__menu-category-title::after {
+                rotate: -90deg;
+            }
+
+            .footer__menu-list {
+                display: flex;
+            }
+        }
+
+        &__menu-category-title {
+            height: fit-content;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 2rem;
+            letter-spacing: 0.01rem;
+
+            &::after {
+                content: '';
+                @include utils.square(24px);
+                rotate: 90deg;
+                background-image: url('assets/icons/arrow.svg');
+                @include utils.bg-defaults;
+            }
+        }
+
+        &__menu-list {
+            gap: 8px;
+            display: none;
+        }
+
+        &__menu-item {
+            font-size: 1.3rem;
+        }
+
+        &__title-wrapper {
+            margin-bottom: 40px;
+        }
+
+        &__title-wrapper &__back-button {
+            display: none;
+        }
+
+        &__title {
+            font-size: 10.9rem;
+        }
+
+        &__bottom {
+            gap: 14px;
+            margin-top: auto;
+            padding-top: 0;
+            flex-direction: column;
+            font-size: 1.2rem;
+            letter-spacing: 0.02rem;
+            line-height: 1.3;
+            border-top: 0;
+        }
+
+        &__policy {
+            margin: 0;
+        }
+
+        &__creator {
+            gap: 8px;
+            margin-left: unset;
+
+            img {
+                --size: 18px;
+            }
         }
     }
 }
