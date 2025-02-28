@@ -69,10 +69,10 @@ include components/products-slider/products-slider
             .cart__list-product-preorder предзаказ
         .cart__list-product-price
             .cart__list-product-remove
-            .cart__list-product-price__peritem(data-pricePerItem)
-            .cart__list-product-price__container
-                .cart__list-product-price__total(data-totalPrice)
-                .cart__list-product-price__discount(data-discountPrice)
+            .cart__list-product-price-peritem(data-pricePerItem)
+            .cart__list-product-price-container
+                .cart__list-product-price--total(data-totalPrice)
+                .cart__list-product-price--discount(data-discountPrice)
     .cart__list
     form.cart__promo-form(novalidate, data-handler='smth.php')
         input.cart__promo-input(placeholder='промокод')
@@ -92,5 +92,5 @@ include components/products-slider/products-slider
                 .cart__info-trigger-action добавьте в корзину товары ещё на
                     span 5 700 ₽
         .cart__info-actions
-            button.button.button__brown(data-action='popup', data-popup='order') К оформлению
-            button.button.button__transparent(data-action='popup', data-popup='preorder') Купить в 1 клик
+            button.button.button--brown(data-action='popup', data-popup='order') К оформлению
+            button.button.button--transparent(data-action='popup', data-popup='preorder') Купить в 1 клик

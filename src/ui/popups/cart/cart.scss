@@ -288,26 +288,26 @@
                 display: flex;
                 flex-direction: column;
 
-                &__peritem {
+                &-peritem {
                     font-size: 1.4rem;
                     text-align: end;
                     opacity: 0.5;
                 }
 
-                &__container {
+                &-container {
                     gap: 8px;
                     display: flex;
                     align-items: center;
                     font-family: var(--steelfish), sans-serif;
                     font-size: 2.8rem;
 
-                    &:has(.cart__list-product-price__discount) {
-                        .cart__list-product-price__total {
+                    &:has(.cart__list-product-price--discount) {
+                        .cart__list-product-price--total {
                             text-decoration: line-through;
                             opacity: 0.5;
                         }
 
-                        .cart__list-product-price__discount {
+                        .cart__list-product-price--discount {
                             order: -1;
                         }
                     }
@@ -596,11 +596,11 @@
                     position: absolute;
                     right: 0;
                     bottom: 24px;
-                    &__peritem {
+                    &-peritem {
                         font-size: 1rem;
                     }
 
-                    &__container {
+                    &-container {
                         font-size: 2rem;
                     }
                 }

@@ -30,7 +30,7 @@
         background-image: url('assets/icons/full-arrow.svg');
     }
 
-    &__brown {
+    &--brown {
         color: white;
         background-color: var(--accent);
 
@@ -43,7 +43,7 @@
         }
     }
 
-    &__transparent {
+    &--transparent {
         color: white;
         background-color: transparent;
         border: 1px solid white;
