@@ -1,7 +1,7 @@
 include layout/utils
 
 -
-    const menu = [
+    var menu = [
         {
           title: 'Каталог',
           list: [
@@ -51,10 +51,8 @@ footer.footer
         .footer__top
             .footer__mail-block
                 +anchor('mailto:mail@loftoffice.ru').footer__mail-link mail@loftoffice.ru
-                .footer__socials
-                    +anchor('').footer__social-item: +img(require('assets/icons/vk.svg'))
-                    +anchor('').footer__social-item: +img(require('assets/icons/tg.svg'))
-                    +anchor('').footer__social-item: +img(require('assets/icons/wa.svg'))
+                include ui/socials/socials
+                +socials
             nav.footer__menu-block
                 each category in menu
                     .footer__menu-category

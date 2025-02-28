@@ -1,0 +1,36 @@
+@use 'styles/utils';
+
+.icon {
+    /* @skip-scaling */
+    @include utils.square(24px);
+    @include utils.bg-defaults(contain);
+    @include utils.transition(filter);
+    flex-shrink: 0;
+
+    &-profile {
+        background-image: url('assets/icons/user.svg');
+    }
+
+    &-search {
+        background-image: url('assets/icons/search.svg');
+    }
+
+    &-favorite {
+        background-image: url('assets/icons/heart.svg');
+    }
+
+    &-cart {
+        background-image: url('assets/icons/cart.svg');
+    }
+
+    &-geo {
+        background-image: url('assets/icons/geo.svg');
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .icon {
+        /* @skip-scaling */
+        @include utils.square(32px);
+    }
+}

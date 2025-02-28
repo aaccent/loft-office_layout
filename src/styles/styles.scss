@@ -12,16 +12,18 @@
 @use 'ui/popups/cart/cart';
 
 // Ui
+@use 'ui/buttons/button';
 @use 'ui/buttons/close-btn';
+@use 'ui/socials/socials';
+@use 'ui/icon';
 @use 'ui/breadcrumbs/breadcrumbs';
 @use 'ui/text';
-@use 'ui/buttons/button';
 @use 'ui/type-list/type-list';
 @use 'ui/content';
 @use 'ui/input';
 
 // Page
-@use 'layout/header/header';
+@use 'layout/header/_header';
 @use 'layout/footer/footer';
 @use 'pages/text-reviews/reviews';
 

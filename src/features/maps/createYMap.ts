@@ -1,7 +1,7 @@
 import { loadScript } from '@/features/loadScript'
 import { IPlacemarkOptions } from 'yandex-maps'
 import { defaultConfig, getMapCenter, getMapContainer, MapConfig } from '@/features/maps/mapGeneral'
-import { isMobile } from 'globals/adaptive'
+import { adaptive } from 'globals/adaptive'
 
 export interface YMapConfig extends MapConfig {
     /**
@@ -32,7 +32,7 @@ export async function loadYMap(apikey: string): Promise<void> {
  * что карту нужно перемещать двумя пальцами.
  * */
 function turnOffDragByOneFinger(map: ymaps.Map) {
-    if (!isMobile) return
+    if (!adaptive.isMobile) return
 
     const eventsPaneEl = map.panes.get('events')?.getElement()
     if (!eventsPaneEl) return

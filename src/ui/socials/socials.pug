@@ -1,0 +1,7 @@
+include layout/utils
+
+mixin socials
+    ul.socials&attributes(attributes)
+        li.socials__item: +anchor(''): +img(require('assets/icons/vk.svg'))
+        li.socials__item: +anchor(''): +img(require('assets/icons/tg.svg'))
+        li.socials__item: +anchor(''): +img(require('assets/icons/wa.svg'))
