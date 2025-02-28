@@ -44,27 +44,27 @@ include components/products-slider/products-slider
 +popup('cart', 'cart')
     .cart__header
         .section-title.cart__title корзина
-            span.cart__amount 0
+            +wrapBreak: span.cart__amount 0
         .cart__header-buttons
-            button.cart__share(data-link='https://doka.guide/js/window-navigator/')
+            +wrapBreak: button.cart__share(data-link='https://doka.guide/js/window-navigator/')
                 .cart__share-tooltip ссылка скопирована
-            button.cart__clear
-            button.close-btn(data-action='close-popup')
+            +wrapBreak: button.cart__clear
+            +wrapBreak: button.close-btn(data-action='close-popup')
     .cart__empty В данный момент в корзине ничего нет!
     +products-slider({ title: 'недавно смотрели', list: recentlySeen })
 
     // Шаблон разметки. Его нельзя удалять и вносить изменения в data атрибуты
     .product__layout(data-id)
-        img.cart__list-product-img(data-img)
+        +wrapBreak: img.cart__list-product-img(data-img)
         .cart__list-product-info
             .cart__list-product-title(data-title)
             .cart__list-product-characteristic
-                span.cart__list-product-size(data-size)
-                span.cart__list-product-color(data-color)
+                +wrapBreak: span.cart__list-product-size(data-size)
+                +wrapBreak: span.cart__list-product-color(data-color)
             .cart__list-product-amount
-                button.decrease -
-                span.number(data-amount)
-                button.increase +
+                +wrapBreak: button.decrease -
+                +wrapBreak: span.number(data-amount)
+                +wrapBreak: button.increase +
             .cart__list-product-stock(data-stock)
             .cart__list-product-preorder предзаказ
         .cart__list-product-price
@@ -75,22 +75,25 @@ include components/products-slider/products-slider
                 .cart__list-product-price--discount(data-discountPrice)
     .cart__list
     form.cart__promo-form(novalidate, data-handler='smth.php')
-        input.cart__promo-input(placeholder='промокод')
-        button.cart__promo-button(disabled)
+        +wrapBreak: input.cart__promo-input(placeholder='промокод')
+        +wrapBreak: button.cart__promo-button(disabled)
     .cart__info
         .cart__info-divider
         .cart__info-price итого:
             .cart__info-price-total
         .cart__info-delivery Доставка:
-            span уточняется при оформлении
+            +wrapBreak: span уточняется при оформлении
         .cart__info-weight вес:
             .tooltip
-            span
+            +wrapBreak: span
         .cart__info-trigger(data-price-for-discount='80000')
             .cart__info-trigger-circle
             .cart__info-trigger-text получите скидку 15%
                 .cart__info-trigger-action добавьте в корзину товары ещё на
                     span 5 700 ₽
         .cart__info-actions
-            button.button.button--dark(data-action='popup', data-popup='order') К оформлению
-            button.button.button--transparent.button--dark(data-action='popup', data-popup='preorder') Купить в 1 клик
+            +wrapBreak: button.button.button--dark(data-action='popup', data-popup='order') К оформлению
+            +wrapBreak: button.button.button--transparent.button--dark(
+                data-action='popup',
+                data-popup='preorder'
+            ) Купить в 1 клик

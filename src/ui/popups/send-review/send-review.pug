@@ -5,18 +5,23 @@ include features/popup/popup
     .send-review__title.section-title оставить отзыв
     form.send-review__form(novalidate, data-handler='some.php')
         .send-review__form-inputs
-            input.send-review__input(placeholder='Имя*', required, name='name', type='text')
-            input.send-review__input(placeholder='фамилия*', required, name='surname', type='text')
-            input.send-review__input(placeholder='телефон*', required, name='tel', type='tel')
-            input.send-review__input(placeholder='почта', name='email', type='email')
-            textarea.send-review__input(required, placeholder='ваш отзыв*', rows=1, wrap='soft')
+            +wrapBreak: input.send-review__input(placeholder='Имя*', required, name='name', type='text')
+            +wrapBreak: input.send-review__input(
+                placeholder='фамилия*',
+                required,
+                name='surname',
+                type='text'
+            )
+            +wrapBreak: input.send-review__input(placeholder='телефон*', required, name='tel', type='tel')
+            +wrapBreak: input.send-review__input(placeholder='почта', name='email', type='email')
+            +wrapBreak: textarea.send-review__input(required, placeholder='ваш отзыв*', rows=1, wrap='soft')
         .send-review__container
-            input(type='file', name='file', accept='image/*', multiple)
+            +wrapBreak: input(type='file', name='file', accept='image/*', multiple)
             .send-review__drop
                 .send-review__drop-container
                 .send-review__drop-info
-                    span Добавьте фото нажав на кнопку или же перетащите в эту область
-                    span до 4 фото в формате PNG, JPEG
+                    +wrapBreak: span Добавьте фото нажав на кнопку или же перетащите в эту область
+                    +wrapBreak: span до 4 фото в формате PNG, JPEG
                 .send-review__drop-files
             .send-review__progress
                 .send-review__progress-amount
@@ -24,4 +29,4 @@ include features/popup/popup
                     span /04
                 .send-review__progress-bar
                     span
-        button.button.button--dark.send-review__button(type='submit') отправить отзыв
+        +wrapBreak: button.button.button--dark.send-review__button(type='submit') отправить отзыв

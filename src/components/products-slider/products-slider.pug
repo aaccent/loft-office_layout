@@ -22,5 +22,5 @@ mixin products-slider(props)
                         .products-slider__item-title= item.title
                         .products-slider__item-price= item.price
             .products-slider__navigation
-                button.products-slider__navigation-prev
-                button.products-slider__navigation-next
+                +wrapBreak: button.products-slider__navigation-prev
+                +wrapBreak: button.products-slider__navigation-next

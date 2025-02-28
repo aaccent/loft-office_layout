@@ -14,4 +14,4 @@ mixin type-list(props)
     .type-list(class=props.className)
         each item in props.items
             +anchor(item.link).type-list__item(class=`${props.className}__item`, data-id=item.id)= item.name
-                span= item.amount
+                +wrapBreak: span= item.amount
