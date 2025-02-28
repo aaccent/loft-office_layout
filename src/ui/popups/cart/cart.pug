@@ -55,25 +55,25 @@ include components/products-slider/products-slider
 
     // Шаблон разметки. Его нельзя удалять и вносить изменения в data атрибуты
     .product__layout(data-id)
-        img.cart-list__product-img(data-img)
-        .cart-list__product-info
-            .cart-list__product-title(data-title)
-            .cart-list__product-characteristic
-                span.cart-list__product-size(data-size)
-                span.cart-list__product-color(data-color)
-            .cart-list__product-amount
+        img.cart__list-product-img(data-img)
+        .cart__list-product-info
+            .cart__list-product-title(data-title)
+            .cart__list-product-characteristic
+                span.cart__list-product-size(data-size)
+                span.cart__list-product-color(data-color)
+            .cart__list-product-amount
                 button.decrease -
                 span.number(data-amount)
                 button.increase +
-            .cart-list__product-stock(data-stock)
-            .cart-list__product-preorder предзаказ
-        .cart-list__product-price
-            .cart-list__product-remove
-            .cart-list__product-price__peritem(data-pricePerItem)
-            .cart-list__product-price__container
-                .cart-list__product-price__total(data-totalPrice)
-                .cart-list__product-price__discount(data-discountPrice)
-    .cart-list
+            .cart__list-product-stock(data-stock)
+            .cart__list-product-preorder предзаказ
+        .cart__list-product-price
+            .cart__list-product-remove
+            .cart__list-product-price__peritem(data-pricePerItem)
+            .cart__list-product-price__container
+                .cart__list-product-price__total(data-totalPrice)
+                .cart__list-product-price__discount(data-discountPrice)
+    .cart__list
     form.cart__promo-form(novalidate, data-handler='smth.php')
         input.cart__promo-input(placeholder='промокод')
         button.cart__promo-button(disabled)

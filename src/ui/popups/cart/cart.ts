@@ -96,7 +96,7 @@ function stickyInfo() {
         }
     }
 
-    const productsAmountInCart = document.querySelectorAll('.cart-list__product').length
+    const productsAmountInCart = document.querySelectorAll('.cart__list-product').length
     if (productsAmountInCart < 3) {
         cartInfo?.classList.remove('sticky')
         cartPopup?.removeEventListener('scroll', setCartInfoBorder)
@@ -108,12 +108,14 @@ function stickyInfo() {
 
 /** Обновление общего счетчика товаров в корзине в заголовке*/
 function updateAmount() {
-    const amount = document.querySelectorAll('.cart-list__product').length
+    const amount = document.querySelectorAll('.cart__list-product').length
     window.cart.amount = amount
     document.querySelector<HTMLElement>('.cart__amount')!.textContent = amount.toString()
 }
 
 /** Записывает или обновляет данные о товаре в корзине
+ * @param rawProduct
+ * @param element
  * @param rewrite - если true, то обновляются только цены, наличие и количество
  */
 function updateProductData(rawProduct: Product, element: HTMLElement, rewrite: boolean = false) {
@@ -141,7 +143,7 @@ function updateProductData(rawProduct: Product, element: HTMLElement, rewrite: b
         if (key === 'stock' && value) {
             dataEl.style.display = 'block'
             dataEl.textContent = `наличие: ${value} шт`
-            element.querySelector<HTMLElement>('.cart-list__product-preorder')!.style.display = 'none'
+            element.querySelector<HTMLElement>('.cart__list-product-preorder')!.style.display = 'none'
             return
         }
 
@@ -156,9 +158,9 @@ function createProduct(product: Product) {
 
     const productElement = productLayout.cloneNode(true) as HTMLElement
     productElement.classList.remove('product__layout')
-    productElement.classList.add('cart-list__product')
+    productElement.classList.add('cart__list-product')
     productElement.dataset.id = product.id.toString()
-    const removeButton = productElement.querySelector('.cart-list__product-remove')
+    const removeButton = productElement.querySelector('.cart__list-product-remove')
     removeButton?.addEventListener('click', () => removeItem(product.id))
     updateProductData(product, productElement)
 
@@ -188,17 +190,17 @@ function init() {
 }
 
 function addItems(list: Product[]) {
-    const cartList = document.querySelector('.cart-list')
+    const cartList = document.querySelector('.cart__list')
     if (!cartList) return
 
-    const products = cartList.querySelectorAll('.cart-list__product')
+    const products = cartList.querySelectorAll('.cart__list-product')
     if (!products.length) {
         const empty = document.querySelector('.cart__empty')
         empty?.classList.add('hidden')
     }
 
     list.forEach((item) => {
-        const itemInCart = Array.from(cartList.querySelectorAll<HTMLElement>('.cart-list__product')).find(
+        const itemInCart = Array.from(cartList.querySelectorAll<HTMLElement>('.cart__list-product')).find(
             (el) => el.id === item.id,
         )
         if (itemInCart) updateProductData(item, itemInCart, true)
@@ -241,7 +243,7 @@ function setInfo(info: CartInfo) {
 }
 
 function removeItem(id: Product['id']) {
-    const products = document.querySelectorAll<HTMLElement>('.cart-list__product')
+    const products = document.querySelectorAll<HTMLElement>('.cart__list-product')
     products.forEach((product) => {
         if (id.toString() === product.dataset.id) {
             product.remove()
@@ -252,7 +254,7 @@ function removeItem(id: Product['id']) {
 }
 
 function clear() {
-    document.querySelectorAll('.cart-list__product').forEach((product) => product.remove())
+    document.querySelectorAll('.cart__list-product').forEach((product) => product.remove())
 }
 
 window.cart = {

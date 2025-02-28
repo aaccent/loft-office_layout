@@ -12,7 +12,7 @@
         .products-slider {
             display: none;
         }
-        .cart-list {
+        .cart__list {
             display: flex;
         }
         .cart-info {
@@ -160,12 +160,12 @@
         }
     }
 
-    &-list {
+    &__list {
         gap: 32px;
         display: none;
         flex-direction: column;
 
-        &__product {
+        &-product {
             position: relative;
             padding-bottom: 27px;
             display: flex;
@@ -301,13 +301,13 @@
                     font-family: var(--steelfish), sans-serif;
                     font-size: 2.8rem;
 
-                    &:has(.cart-list__product-price__discount) {
-                        .cart-list__product-price__total {
+                    &:has(.cart__list-product-price__discount) {
+                        .cart__list-product-price__total {
                             text-decoration: line-through;
                             opacity: 0.5;
                         }
 
-                        .cart-list__product-price__discount {
+                        .cart__list-product-price__discount {
                             order: -1;
                         }
                     }
@@ -551,10 +551,10 @@
             }
         }
 
-        &-list {
+        &__list {
             gap: 21px;
 
-            &__product {
+            &-product {
                 position: relative;
                 padding-bottom: 24px;
 
