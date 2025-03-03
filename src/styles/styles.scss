@@ -1,3 +1,8 @@
+@use 'node_modules/swiper/swiper';
+@use 'node_modules/swiper/modules/navigation';
+@use 'node_modules/swiper/modules/pagination';
+@use 'node_modules/swiper/modules/effect-fade';
+
 @use 'general/_preflight.css';
 @use 'general/reset';
 @use 'general/variables';
@@ -19,7 +24,7 @@
 @use 'ui/breadcrumbs/breadcrumbs';
 @use 'ui/text';
 @use 'ui/type-list/type-list';
-@use 'ui/content';
+@use 'ui/content/content';
 @use 'ui/input';
 
 // Page
