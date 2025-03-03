@@ -20,8 +20,15 @@
 }
 
 @mixin custom-scroll($width, $track-color, $thumb-color, $height: initial) {
-    scrollbar-width: #{$width};
-    scrollbar-color: #{$thumb-color};
+    @if $width == 0 {
+        scrollbar-width: none;
+    } @else if ($width <= 12px) {
+        scrollbar-width: thin;
+    } @else {
+        scrollbar-width: auto;
+    }
+
+    scrollbar-color: #{$thumb-color} #{$track-color};
 
     &::-webkit-scrollbar {
         width: #{$width};

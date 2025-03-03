@@ -1,0 +1,24 @@
+@use 'styles/utils';
+
+.socials {
+    display: flex;
+
+    &__item {
+        @include utils.square(40px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #fff;
+    }
+
+    &__item + &__item {
+        border-left: 0;
+    }
+}
+
+.socials--dark {
+    .socials__item {
+        filter: var(--filter-accent);
+        border-color: var(--accent);
+    }
+}

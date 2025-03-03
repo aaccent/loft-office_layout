@@ -30,7 +30,7 @@
         background-image: url('assets/icons/full-arrow.svg');
     }
 
-    &__brown {
+    &--dark {
         color: white;
         background-color: var(--accent);
 
@@ -43,7 +43,7 @@
         }
     }
 
-    &__transparent {
+    &--transparent {
         color: white;
         background-color: transparent;
         border: 1px solid white;
@@ -54,6 +54,21 @@
 
         &::after {
             filter: var(--filter-accent);
+        }
+    }
+
+    &--transparent.button--dark {
+        color: var(--accent);
+        background-color: transparent;
+        border-color: var(--accent);
+
+        &::after {
+            filter: none;
+            background-image: url('assets/icons/phone.svg');
+        }
+
+        &::before {
+            background-color: var(--accent);
         }
     }
 }

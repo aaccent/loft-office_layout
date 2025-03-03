@@ -1,3 +1,8 @@
+// Misc
+:root {
+    --header-height: 98px;
+}
+
 // Fonts
 :root {
     --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif,
@@ -14,6 +19,13 @@
     --accent-dark: #352c25;
     --green: #048513;
     --accent-light: #dbd0c6;
-    --filter-accent: brightness(0) saturate(100%) invert(27%) sepia(19%) saturate(1202%) hue-rotate(346deg)
-        brightness(101%) contrast(85%);
+}
+
+// Filters
+:root {
+    --filter-white: brightness(0) saturate(100%) invert(100%);
+    --filter-accent-dark: brightness(0) saturate(100%) invert(28%) sepia(66%) saturate(315%) hue-rotate(346deg)
+        brightness(100%) contrast(96%);
+    --filter-accent: brightness(0) saturate(100%) invert(27%) sepia(80%) saturate(276%) hue-rotate(346deg)
+        brightness(98%) contrast(94%);
 }
