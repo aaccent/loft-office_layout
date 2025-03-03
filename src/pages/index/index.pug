@@ -6,8 +6,7 @@ block append head
 
 block append main
     include components/main-hero/main-hero
-    section.section
-        button.button.button__simple(data-action='popup', data-popup='authorization') Call authorization popup
+    button.button(data-action='popup', data-popup='authorization') Call authorization popup
 
 block append scripts
     script(src=require('scripts/main-page.ts'))

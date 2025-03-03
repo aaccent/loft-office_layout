@@ -48,5 +48,8 @@ void (function () {
         }, 1000)
     })
 
-    changeTelButton.onclick = () => authorizationCode.classList.remove('_visible')
+    changeTelButton.onclick = () => {
+        codeInputs.forEach((input) => (input.value = ''))
+        authorizationCode.classList.remove('_visible')
+    }
 })()

@@ -3,6 +3,7 @@
 .authorization {
     color: var(--accent);
     &__inner {
+        height: 100%;
         display: flex;
         flex-direction: column;
     }
@@ -90,7 +91,24 @@
         }
 
         &__change-number-button {
+            gap: 10px;
             margin-bottom: 92px;
+            padding: 0;
+            width: fit-content;
+            display: flex;
+            align-items: center;
+            background-color: transparent;
+
+            &::after {
+                content: none;
+            }
+
+            &::before {
+                position: static;
+                translate: 0;
+                @include utils.bg-defaults(auto);
+                background-image: url('assets/icons/full-arrow.svg');
+            }
         }
 
         &-form {
