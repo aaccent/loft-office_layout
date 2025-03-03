@@ -1,0 +1,99 @@
+include layout/utils
+include components/products-slider/products-slider
+
+-
+    var recentlySeen = [
+        {
+            color: 'Оттавио Орех',
+            title: 'Офисное кресло Chairman 696 TW-05',
+            price: 17200,
+            image: 'assets/content/products/1.png'
+        },
+        {
+            color: 'Оттавио Орех',
+            title: 'Офисное кресло Chairman 696 TW-05',
+            price: 17200,
+            image: 'assets/content/products/2.png'
+        },
+        {
+            color: 'Оттавио Орех',
+            title: 'Офисное кресло Chairman 696 TW-05',
+            price: 17200,
+            image: 'assets/content/products/3.png'
+        },
+        {
+            color: 'Оттавио Орех',
+            title: 'Офисное кресло Chairman 696 TW-05',
+            price: 17200,
+            image: 'assets/content/products/3.png'
+        },
+        {
+            color: 'Оттавио Орех',
+            title: 'Офисное кресло Chairman 696 TW-05',
+            price: 17200,
+            image: 'assets/content/products/1.png'
+        },
+        {
+            color: 'Оттавио Орех',
+            title: 'Офисное кресло Chairman 696 TW-05',
+            price: 17200,
+            image: 'assets/content/products/2.png'
+        },
+    ]
+
++popup('cart', 'cart')
+    .cart__header
+        .section-title.cart__title корзина
+            +wrapBreak: span.cart__amount 0
+        .cart__header-buttons
+            +wrapBreak: button.cart__share(data-link='https://doka.guide/js/window-navigator/')
+                .cart__share-tooltip ссылка скопирована
+            +wrapBreak: button.cart__clear
+            +wrapBreak: button.close-btn(data-action='close-popup')
+    .cart__empty В данный момент в корзине ничего нет!
+    +products-slider({ title: 'недавно смотрели', list: recentlySeen })
+
+    // Шаблон разметки. Его нельзя удалять и вносить изменения в data атрибуты
+    .product__layout(data-id)
+        +wrapBreak: img.cart__list-product-img(data-img)
+        .cart__list-product-info
+            .cart__list-product-title(data-title)
+            .cart__list-product-characteristic
+                +wrapBreak: span.cart__list-product-size(data-size)
+                +wrapBreak: span.cart__list-product-color(data-color)
+            .cart__list-product-amount
+                +wrapBreak: button.decrease -
+                +wrapBreak: span.number(data-amount)
+                +wrapBreak: button.increase +
+            .cart__list-product-stock(data-stock)
+            .cart__list-product-preorder предзаказ
+        .cart__list-product-price
+            .cart__list-product-remove
+            .cart__list-product-price-peritem(data-pricePerItem)
+            .cart__list-product-price-container
+                .cart__list-product-price--total(data-totalPrice)
+                .cart__list-product-price--discount(data-discountPrice)
+    .cart__list
+    form.cart__promo-form(novalidate, data-handler='smth.php')
+        +wrapBreak: input.cart__promo-input(placeholder='промокод')
+        +wrapBreak: button.cart__promo-button(disabled)
+    .cart__info
+        .cart__info-divider
+        .cart__info-price итого:
+            .cart__info-price-total
+        .cart__info-delivery Доставка:
+            +wrapBreak: span уточняется при оформлении
+        .cart__info-weight вес:
+            .tooltip
+            +wrapBreak: span
+        .cart__info-trigger(data-price-for-discount='80000')
+            .cart__info-trigger-circle
+            .cart__info-trigger-text получите скидку 15%
+                .cart__info-trigger-action добавьте в корзину товары ещё на
+                    span 5 700 ₽
+        .cart__info-actions
+            +wrapBreak: button.button.button--dark(data-action='popup', data-popup='order') К оформлению
+            +wrapBreak: button.button.button--transparent.button--dark(
+                data-action='popup',
+                data-popup='preorder'
+            ) Купить в 1 клик

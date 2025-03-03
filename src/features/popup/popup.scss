@@ -2,21 +2,29 @@
 @use 'ui/buttons/close-btn';
 
 .popup {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
     position: fixed;
     z-index: 100;
     top: 0;
     left: 0;
+    padding: 15px;
     width: 100%;
     height: 100%;
     display: flex;
     overflow-x: hidden;
     overflow-y: auto;
+    color: var(--accent);
     opacity: 0;
     visibility: hidden;
     background-color: hsla(140, 100%, 2%, 0.8);
     transition: opacity, visibility;
     transition-timing-function: ease-in-out;
     transition-duration: 0.3s;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 
     &.opened {
         opacity: 1;
@@ -28,7 +36,8 @@
         margin-left: auto;
         padding: 54px 60px 60px;
         width: 790px;
-        height: 100svh;
+        height: fit-content;
+        min-height: 100svh;
         background-color: var(--main);
     }
 }
@@ -40,7 +49,8 @@
         &__inner {
             margin-top: auto;
             padding: 28px 28px 32px;
-            height: 93svh;
+            width: 100%;
+            min-height: 93svh;
         }
     }
 }

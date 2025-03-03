@@ -6,13 +6,31 @@
 
 // Popup
 @use 'features/popup/popup';
+@use 'ui/popups/video-review/video-review';
+@use 'ui/popups/text-review/text-review';
+@use 'ui/popups/send-review/send-review';
+@use 'ui/popups/cart/cart';
 
 // Ui
 @use 'ui/buttons/close-btn';
 @use 'ui/buttons/button';
 @use 'ui/text';
 @use 'ui/popups/authorization/authorization';
+@use 'ui/socials/socials';
+@use 'ui/icon';
+@use 'ui/breadcrumbs/breadcrumbs';
+@use 'ui/text';
+@use 'ui/type-list/type-list';
+@use 'ui/content';
+@use 'ui/input';
 
 // Page
-@use 'layout/header/header';
+@use 'layout/header/_header';
 @use 'layout/footer/footer';
+@use 'pages/text-reviews/reviews';
+
+// Components
+@use 'components/reviews-list/text/text-reviews';
+@use 'components/reviews-list/video/video-reviews';
+@use 'components/reviews-list/external/external';
+@use 'components/products-slider/products-slider';

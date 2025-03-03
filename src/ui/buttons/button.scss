@@ -30,7 +30,7 @@
         background-image: url('assets/icons/full-arrow.svg');
     }
 
-    &__brown {
+    &--dark {
         color: white;
         background-color: var(--accent);
 
@@ -43,7 +43,7 @@
         }
     }
 
-    &__transparent {
+    &--transparent {
         color: white;
         background-color: transparent;
         border: 1px solid white;
@@ -57,24 +57,18 @@
         }
     }
 
-    &__simple {
-        gap: 10px;
-        padding: 0;
-        display: flex;
-        align-items: center;
+    &--transparent.button--dark {
         color: var(--accent);
         background-color: transparent;
+        border-color: var(--accent);
 
-        &:after {
-            content: none;
+        &::after {
+            filter: none;
+            background-image: url('assets/icons/phone.svg');
         }
 
-        &:before {
-            position: static;
-            translate: 0 0;
-            background-image: url('assets/icons/full-arrow.svg');
-            @include utils.bg-defaults(auto);
-            @include utils.square(26px);
+        &::before {
+            background-color: var(--accent);
         }
     }
 }
@@ -87,10 +81,6 @@
         &::before,
         &::after {
             @include utils.square(20px);
-        }
-
-        &__simple {
-            padding: 0;
         }
     }
 }

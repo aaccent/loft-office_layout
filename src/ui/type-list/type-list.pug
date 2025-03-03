@@ -1,0 +1,17 @@
+include layout/utils
+
+mixin type-list(props)
+    -
+        props = Object.assign({
+            className: '',
+            items: [{
+                name: '',
+                amount: 0,
+                link: '',
+                id: ''
+            }]
+        }, props || {})
+    .type-list(class=props.className)
+        each item in props.items
+            +anchor(item.link).type-list__item(class=`${props.className}__item`, data-id=item.id)= item.name
+                +wrapBreak: span= item.amount

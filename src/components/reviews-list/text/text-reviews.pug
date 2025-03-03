@@ -1,0 +1,51 @@
+include layout/utils
+
+-
+    var textReview = '<p>Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась. Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась.</p><p>Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась.</p>'
+
+    var textReviewWithPhoto ='<p>Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась. Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась.</p><p>Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась.</p><img src="assets/content/reviews/images/1.png"><img src="assets/content/reviews/images/2.png"><img src="assets/content/reviews/images/1.png"><img src="assets/content/reviews/images/2.png"><p>Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась. Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась.</p>'
+
+    var reviews = [
+        {
+            name: 'Мария петрова',
+            image: 'assets/content/reviews/1.jpg',
+            position: 'исполнительный директор ПАО «Газпром»',
+            review: textReview,
+        }, {
+            name: 'Андрей разумовский',
+            image: 'assets/content/reviews/2.jpg',
+            position: 'помощник руководителя ПАО «магнит»',
+            review: textReviewWithPhoto,
+
+        }, {
+            name: 'Антонина Коршунова',
+            image: 'assets/content/reviews/3.jpg',
+            position: 'исполнительный директор ооо «чайка»',
+            review: textReview,
+
+        }, {
+            name: 'Егор иванов',
+            image: 'assets/content/reviews/4.jpg',
+            position: 'помощник руководителя ПАО «сибур»',
+            review: textReviewWithPhoto,
+
+        }, {
+            name: 'Наталья родина',
+            image: 'assets/content/reviews/5.jpg',
+            position: 'исполнительный директор ПАО «Газпром»',
+            review: textReviewWithPhoto,
+        }
+    ]
+
+#text.text-reviews
+    each item in reviews
+        .text-reviews__item.reviews__item(data-action='popup', data-popup='text-review')
+            .text-reviews__item-header
+                +img(require(item.image)).text-reviews__item-photo
+                .text-reviews__item-person
+                    .text-reviews__item-name= item.name
+                    .text-reviews__item-position= item.position
+                .reviews__item-button
+            .text-reviews__item-description
+                .text-reviews__item-text!= item.review
+                .text-reviews__item-media
