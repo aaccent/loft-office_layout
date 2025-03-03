@@ -1,33 +1,76 @@
 include layout/utils
 
+-
+    var delivery = [
+        {
+            title: 'Курьером',
+            description: 'Доставка по г. Казань',
+            time: 'сегодня, от 250 ₽'
+        },
+        {
+            title: 'Самовывоз',
+            description: 'г. Казань, Щёлковское шоссе, 3с1, офис 510',
+            time: 'сегодня, со склада'
+        },
+        {
+            title: 'СДЭК',
+            description: '',
+            time: '2–3 дня, от 250 ₽'
+        },
+        {
+            title: 'Деловые линии',
+            description: '',
+            time: '2–3 дня, от 250 ₽'
+        },
+        {
+            title: 'ПЭК',
+            description: '',
+            time: '2–3 дня, от 250 ₽'
+        }, {
+            title: 'Байкал-сервис',
+            description: '',
+            time: '2–3 дня, от 250 ₽'
+        },
+
+    ]
+
+    var payment = [
+        {
+            title: '',
+            description: '',
+            icon: ''
+        }
+    ]
+
 +popup('order', 'order')
     .order__header
         +img(require('assets/icons/logo.svg'))
-        button.close-btn
+        button.close-btn(type='button', data-action='close-popup')
     form.order__body(novalidate, data-handler='handler.php')
-        .order__steps
-            .order__steps-item
-                .order__steps-item__header
-                    .order__steps-item__number 1
-                    .order__steps-item__title Тип покупателя
-                    .order__autorization-btn войти в лк
-                    .order__change-btn изменить
-                ul.order__steps-item__body.user-type__list
-                    li
-                        label Юр. лицо с НДС
-                            input(type='radio', name='user-type', value='commerce-nds')
-                    li
-                        label Юр. лицо без НДС
-                            input(type='radio', name='user-type', value='commerce')
-                    li
-                        label Физическое лицо
-                            input(type='radio', name='user-type', value='private')
-            .order__steps-item
-                .order__steps-item__header
-                    .order__steps-item__number 2
-                    .order__steps-item__title Личные данные
-                    .order__change-btn изменить
-                .order__steps-item__body.user-data
+        .order-step-list
+            .order-step._opened
+                .order-step__header
+                    .order-step__number 1
+                    .order-step__title Тип покупателя
+                    button.order__autorization-button(type='button') войти в лк
+                        .icon.icon-profile
+                    button.order-step__change-button(type='button') изменить
+                ul.user-type-list.order-step__body
+                    li.user-type
+                        label.user-type__value Юр. лицо с НДС
+                            input.user-type__input(type='radio', name='user-type', value='commerce-nds')
+                    li.user-type
+                        label.user-type__value Юр. лицо без НДС
+                            input.user-type__input(type='radio', name='user-type', value='commerce')
+                    li.user-type
+                        label.user-type__value Физическое лицо
+                            input.user-type__input(type='radio', name='user-type', value='private')
+            .order-step._opened
+                .order-step__header
+                    .order-step__number 2
+                    .order-step__title Личные данные
+                    button.order-step__change-button изменить
+                .order-step__body.user-data
                     .user-data__prefix Осталось заполнить 5 обязательных полей *
                     .user-data__inputs
                         input(type='text', name='name', placeholder='имя')
@@ -35,5 +78,28 @@ include layout/utils
                         input(type='text', name='middle-name', placeholder='отчество')
                         input(type='tel', name='tel', placeholder='Телефон')
                         input(type='email', name='email', placeholder='Email')
-                    button.button.button__brown(type='button') далее
+                    button.button.button--dark.user-data__button(type='button') далее
+                    .user-data__final
+                        .user-data__final-name
+                        .user-data__final-tel(data-input-name='tel')
+                        .user-data__final-email(data-input-name='email')
+            .order-step._opened
+                .order-step__header
+                    .order-step__number 3
+                    .order-step__title способ доставки
+                    button.order-step__change-button изменить
+                    .order__location Казань
+                        .icon.icon-geo
+                ul.order-step__body.delivery-method-list
+                    each item in delivery
+                        li.delivery-method
+                            .delivery-method__title= item.title
+                            if item.description
+                                .delivery-method__description= item.description
+                            .delivery-method__time= item.time
+            .order-step._opened
+                .order-step__header
+                    .order-step__number 4
+                    .order-step__title методы оплаты
+                    button.order-step__change-button изменить
         .order__items
