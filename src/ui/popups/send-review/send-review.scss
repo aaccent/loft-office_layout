@@ -83,7 +83,7 @@
             width: 100px;
             min-width: 100px;
             height: 100px;
-            border: 1px dashed #6e4d3180;
+            border: 1px dashed var(--accent-half-opacity);
 
             &:after,
             &:before {

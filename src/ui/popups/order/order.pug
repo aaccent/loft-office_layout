@@ -36,10 +36,20 @@ include layout/utils
 
     var payment = [
         {
-            title: '',
+            title: 'картой онлайн',
+            description: 'Оплата картой: Мир, Mastercard, Visa, Maestro',
+            icon: 'assets/icons/payment_card.svg'
+        },
+        {
+            title: 'Наличными',
+            description: 'Оплата производится наличными деньгами, в момент получения заказа. Подтверждением вашей оплаты является фискальный кассовый чек, вручаемый во время оплаты заказа',
+            icon: 'assets/icons/payment_cash.svg'
+        },
+        {
+            title: 'Безналичный расчет',
             description: '',
             icon: ''
-        }
+        },
     ]
 
 +popup('order', 'order')
@@ -48,7 +58,7 @@ include layout/utils
         button.close-btn(type='button', data-action='close-popup')
     form.order__body(novalidate, data-handler='handler.php')
         .order-step-list
-            .order-step._opened
+            .order-step
                 .order-step__header
                     .order-step__number 1
                     .order-step__title Тип покупателя
@@ -56,16 +66,16 @@ include layout/utils
                         .icon.icon-profile
                     button.order-step__change-button(type='button') изменить
                 ul.user-type-list.order-step__body
-                    li.user-type
-                        label.user-type__value Юр. лицо с НДС
+                    li
+                        label.user-type Юр. лицо с НДС
                             input.user-type__input(type='radio', name='user-type', value='commerce-nds')
-                    li.user-type
-                        label.user-type__value Юр. лицо без НДС
+                    li
+                        label.user-type Юр. лицо без НДС
                             input.user-type__input(type='radio', name='user-type', value='commerce')
-                    li.user-type
-                        label.user-type__value Физическое лицо
+                    li
+                        label.user-type Физическое лицо
                             input.user-type__input(type='radio', name='user-type', value='private')
-            .order-step._opened
+            .order-step
                 .order-step__header
                     .order-step__number 2
                     .order-step__title Личные данные
@@ -73,17 +83,17 @@ include layout/utils
                 .order-step__body.user-data
                     .user-data__prefix Осталось заполнить 5 обязательных полей *
                     .user-data__inputs
-                        input(type='text', name='name', placeholder='имя')
-                        input(type='text', name='last-name', placeholder='фамилия')
-                        input(type='text', name='middle-name', placeholder='отчество')
-                        input(type='tel', name='tel', placeholder='Телефон')
-                        input(type='email', name='email', placeholder='Email')
+                        input(type='text', name='name', placeholder='имя', required)
+                        input(type='text', name='last-name', placeholder='фамилия', required)
+                        input(type='text', name='middle-name', placeholder='отчество', required)
+                        input(type='tel', name='tel', placeholder='Телефон', required)
+                        input(type='email', name='email', placeholder='Email', required)
                     button.button.button--dark.user-data__button(type='button') далее
-                    .user-data__final
-                        .user-data__final-name
-                        .user-data__final-tel(data-input-name='tel')
-                        .user-data__final-email(data-input-name='email')
-            .order-step._opened
+                .user-data__final
+                    .user-data__final-name(data-input='name')
+                    .user-data__final-tel(data-input='tel')
+                    .user-data__final-email(data-input='email')
+            .order-step
                 .order-step__header
                     .order-step__number 3
                     .order-step__title способ доставки
@@ -92,14 +102,29 @@ include layout/utils
                         .icon.icon-geo
                 ul.order-step__body.delivery-method-list
                     each item in delivery
-                        li.delivery-method
-                            .delivery-method__title= item.title
-                            if item.description
-                                .delivery-method__description= item.description
-                            .delivery-method__time= item.time
-            .order-step._opened
+                        li
+                            label.delivery-method
+                                input.delivery-method__input(type='radio', name='delivery-method')
+                                .delivery-method__title= item.title
+                                if item.description
+                                    .delivery-method__description= item.description
+                                .delivery-method__time= item.time
+            .order-step
                 .order-step__header
                     .order-step__number 4
                     .order-step__title методы оплаты
                     button.order-step__change-button изменить
+                .order-step__body
+                    ul.payment-method-list
+                        each item in payment
+                            li
+                                label.payment-method
+                                    .payment-method__title= item.title
+                                        if item.icon
+                                            +img(require(item.icon)).payment-method__icon
+                                    if item.description
+                                        .payment-method__description= item.description
+                                    input.payment-method__input(type='radio', name='payment-method')
+                    .payment-method__button.button.button--dark оплатить
+                        span 47 000 ₽
         .order__items
