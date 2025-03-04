@@ -156,3 +156,19 @@ void (function () {
         })
     })
 })()
+
+/** Шапка во время прокрутки страницы */
+void (function () {
+    const header = document.querySelector('.header')
+
+    function headerStickyHandler() {
+        if (window.scrollY >= 15 && !header.classList.contains('sticky')) {
+            header.classList.add('sticky')
+        } else if (window.scrollY < 15 && header.classList.contains('sticky')) {
+            header.classList.remove('sticky')
+        }
+    }
+
+    window.addEventListener('scroll', headerStickyHandler, { passive: true })
+    headerStickyHandler()
+})()
