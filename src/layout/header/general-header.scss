@@ -11,6 +11,7 @@ body:has(main.main .main-hero) .header {
     color: white;
     @include utils.transition((background-color, color));
 
+    &.sticky,
     &:has(:is(.catalog-menu.opened, .burger-menu.opened, .header__menu-wrapper.opened)) {
         color: var(--accent);
         background-color: var(--main);
