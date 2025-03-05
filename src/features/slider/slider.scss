@@ -77,3 +77,13 @@
         }
     }
 }
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .slider {
+        &__pagination {
+            gap: 12px;
+            bottom: 28px;
+            width: 150px;
+        }
+    }
+}
