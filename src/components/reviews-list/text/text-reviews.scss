@@ -1,6 +1,6 @@
 @use 'styles/utils';
 
-.text-reviews {
+.text-reviews-list {
     gap: 40px;
     width: 100%;
     display: flex;
@@ -74,6 +74,7 @@
 
             span {
                 display: flex;
+                align-items: center;
 
                 &:before {
                     content: '';
@@ -92,7 +93,7 @@
 }
 
 @media screen and (max-width: utils.$tablet1000) {
-    .text-reviews {
+    .text-reviews-list {
         gap: 24px;
 
         &__item {
@@ -140,6 +141,18 @@
 
                 &:before {
                     @include utils.square(16px);
+                }
+            }
+
+            &-media {
+                padding: 13px 14px;
+                font-size: 1.2rem;
+                line-height: 15.6px;
+
+                span {
+                    &::before {
+                        @include utils.square(16px);
+                    }
                 }
             }
         }
