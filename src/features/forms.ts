@@ -47,6 +47,15 @@ async function submitHandler(event: SubmitEvent) {
     form.dispatchEvent(formSent)
 }
 
+export function validateTelInput(input: HTMLInputElement) {
+    let valid = true
+    if (input.type !== 'tel') return valid
+
+    const tel = input.value.replaceAll(/\D/g, '')
+    valid = /7\d{10}/.test(tel)
+    return valid
+}
+
 /**
  * Проверяет все `required` поля в форме `form`.
  * Если есть незаполненные, то добавляет к полю класс `invalid`
@@ -60,6 +69,7 @@ function validateForm(form: HTMLFormElement): Boolean {
 
     requiredInputs.forEach((input) => {
         if (input.value !== '') return
+        if (validateTelInput(input)) return
 
         valid = false
         input.classList.add('invalid')
