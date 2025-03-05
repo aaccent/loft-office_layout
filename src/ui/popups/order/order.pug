@@ -68,12 +68,15 @@ include layout/utils
                 ul.user-type-list.order-step__body
                     li
                         label.user-type Юр. лицо с НДС
+                            .order-step__checkmark
                             input.user-type__input(type='radio', name='user-type', value='commerce-nds')
                     li
                         label.user-type Юр. лицо без НДС
+                            .order-step__checkmark
                             input.user-type__input(type='radio', name='user-type', value='commerce')
                     li
                         label.user-type Физическое лицо
+                            .order-step__checkmark
                             input.user-type__input(type='radio', name='user-type', value='private')
             .order-step
                 .order-step__header
@@ -83,11 +86,21 @@ include layout/utils
                 .order-step__body.user-data
                     .user-data__prefix Осталось заполнить 5 обязательных полей *
                     .user-data__inputs
-                        input(type='text', name='name', placeholder='имя', required)
-                        input(type='text', name='last-name', placeholder='фамилия', required)
-                        input(type='text', name='middle-name', placeholder='отчество', required)
-                        input(type='tel', name='tel', placeholder='Телефон', required)
-                        input(type='email', name='email', placeholder='Email', required)
+                        .input
+                            .input__placeholder Имя
+                            input(type='text', name='name', required)
+                        .input
+                            .input__placeholder Фамилия
+                            input(type='text', name='last-name', required)
+                        .input
+                            .input__placeholder Отчество
+                            input(type='text', name='middle-name', required)
+                        .input
+                            .input__placeholder Телефон
+                            input(type='tel', name='tel', required)
+                        .input
+                            .input__placeholder Email
+                            input(type='email', name='email', required)
                     button.button.button--dark.user-data__button(type='button') далее
                 .user-data__final
                     .user-data__final-name(data-input='name')
@@ -106,9 +119,15 @@ include layout/utils
                             label.delivery-method
                                 input.delivery-method__input(type='radio', name='delivery-method')
                                 .delivery-method__title= item.title
+                                    .order-step__checkmark
                                 if item.description
                                     .delivery-method__description= item.description
                                 .delivery-method__time= item.time
+                .delivery-method__final
+                    .delivery-method__type
+                    .delivery-method__address
+                        span
+                    button.delivery-method__change-address изменить адрес
             .order-step
                 .order-step__header
                     .order-step__number 4
@@ -120,6 +139,7 @@ include layout/utils
                             li
                                 label.payment-method
                                     .payment-method__title= item.title
+                                        .order-step__checkmark
                                         if item.icon
                                             +img(require(item.icon)).payment-method__icon
                                     if item.description
