@@ -10,7 +10,7 @@
         padding-bottom: 40px;
         display: flex;
         align-items: center;
-        border-bottom: 1px solid var(--accent-light);
+        border-bottom: 1px solid var(--accent-half-opacity);
 
         &-icon {
             @include utils.square(118px);
@@ -40,7 +40,7 @@
         &__resource {
             padding-top: 40px;
             padding-bottom: 0;
-            border-top: 1px solid var(--accent-light);
+            border-top: 1px solid var(--accent-half-opacity);
             border-bottom: none;
 
             &-icon {

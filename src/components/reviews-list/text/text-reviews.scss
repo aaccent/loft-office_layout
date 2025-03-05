@@ -8,7 +8,7 @@
 
     &__item {
         padding-bottom: 40px;
-        border-bottom: 1px solid var(--accent-light);
+        border-bottom: 1px solid var(--accent-half-opacity);
 
         &-header {
             margin-bottom: 24px;
@@ -100,7 +100,7 @@
 
             &:first-child {
                 padding-top: 24px;
-                border-top: 1px solid var(--accent-light);
+                border-top: 1px solid var(--accent-half-opacity);
             }
 
             &-header {
