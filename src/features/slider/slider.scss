@@ -11,6 +11,7 @@
         @include utils.transition(opacity);
 
         &.active {
+            z-index: 1;
             opacity: 1;
         }
     }
