@@ -1,0 +1,28 @@
+include layout/utils
+include features/popup/popup
+
++popup('authorization','authorization')
+    .authorization__title.section-title Вход / регистрация
+    .authorization__content
+        .authorization-tel
+            .authorization-tel__text.authorization__text Мы отправим на номер СМС-сообщение с кодом подтверждения
+            form#get-code.authorization-tel-form(data-handler='some-handler.php', novalidate)
+                input.authorization-tel__input(name='tel', type='tel', placeholder='Номер телефона*', required)
+                span.error Введине номер телефона
+                button.button.button--dark.authorization__submit-button(type=submit) Получить код
+        .authorization-code
+            .authorization-code__text.authorization__text Код отправлен на номер
+                span.authorization__number +7 (232) 212–32–32
+            button.authorization-code__change-number-button.button изменить номер
+            form#input-code.authorization-code-form(data-handler='some-handler.php', novalidate)
+                .authorization-code-form__content
+                    input.authorization-code__input(name='code', required, maxlength=1, tabindex=1)
+                    input.authorization-code__input(name='code', required, maxlength=1, tabindex=2)
+                    input.authorization-code__input(name='code', required, maxlength=1, tabindex=3)
+                    input.authorization-code__input(name='code', , maxlength=1, tabindex=4)
+                    input(type='hidden')
+                span.error Введеный код неверен
+                .authorization-code__timer Получить код повторно можно через
+                    span 60 сек.
+                button.authorization-code__get-code-button(form='get-code') Получить код повторно
+                button.button.button--dark.authorization__submit-button(type=submit) Далее
