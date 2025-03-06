@@ -1,20 +1,9 @@
-import Swiper from 'swiper'
-import { Navigation } from 'swiper/modules'
 import { formatPrice } from 'features/formatPrice'
 
+// TODO: Remove all scripts
 void (function () {
     const productsSlider = document.querySelector('.products-slider .swiper')
     if (!productsSlider) return
-
-    new Swiper(productsSlider, {
-        slidesPerView: 4,
-        spaceBetween: 20,
-        modules: [Navigation],
-        navigation: {
-            nextEl: '.products-slider__navigation-next',
-            prevEl: '.products-slider__navigation-prev',
-        },
-    })
 
     const prices = productsSlider.querySelectorAll('.products-slider__item-price')
     prices.forEach((price) => {
