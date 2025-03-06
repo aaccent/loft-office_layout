@@ -15,6 +15,7 @@ html {
 
 .container {
     --container-px: 40px;
+    --negative-container-px: -40px;
     margin: 0 auto;
     padding: 0 var(--container-px);
     max-width: 1920px;

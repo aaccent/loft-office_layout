@@ -92,3 +92,44 @@
         }
     }
 }
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .products-showcase {
+        &__switcher {
+            gap: 7px;
+            margin-bottom: 40px;
+        }
+
+        &__switch-button {
+            font-size: 4.8rem;
+        }
+
+        &__link {
+            display: none;
+        }
+
+        &__list {
+            gap: 16px;
+            margin: 0 var(--negative-container-px);
+            padding: 0 var(--container-px);
+            overflow-x: auto;
+            @include utils.transparent-scroll;
+        }
+
+        &__list-item,
+        &__list-item:nth-child(1),
+        &__list-item:nth-child(1n + 2) {
+            margin-top: 0;
+            width: 308px;
+
+            .product-card__top {
+                touch-action: auto;
+                height: 227px;
+            }
+
+            .slider-pagination-bullets {
+                display: none;
+            }
+        }
+    }
+}

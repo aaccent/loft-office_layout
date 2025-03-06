@@ -78,6 +78,9 @@
     &__color-info {
         display: flex;
         align-items: center;
+        font-size: 1.6rem;
+        letter-spacing: 0.01rem;
+        line-height: 1.3;
         text-transform: uppercase;
     }
 
@@ -87,7 +90,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        letter-spacing: 0.01rem;
         opacity: 0.6;
 
         &::after {
@@ -116,8 +118,6 @@
     }
 
     &__color-more {
-        letter-spacing: 0.01rem;
-        line-height: 1.3;
         opacity: 0.6;
     }
 
@@ -142,5 +142,56 @@
     &__price-discount {
         text-decoration: line-through;
         opacity: 0.6;
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .product-card {
+        &__top {
+            height: 227px;
+        }
+
+        &__attribute-item {
+            --size: 37px;
+            font-size: 1.4rem;
+        }
+
+        &__body {
+            margin-top: 24px;
+        }
+
+        &__color-info {
+            font-size: 1.2rem;
+        }
+
+        &__color {
+            gap: 10px;
+            margin-right: 10px;
+        }
+
+        &__colors-list {
+            margin-right: 6px;
+            height: 8px;
+        }
+
+        &__color-item {
+            width: 4px;
+
+            &:last-child {
+                width: 8px;
+            }
+        }
+
+        &__title {
+            margin: 10px 0 20px;
+            max-width: 180px;
+            font-size: 3rem;
+        }
+
+        &__price-info {
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: 0.02rem;
+        }
     }
 }
