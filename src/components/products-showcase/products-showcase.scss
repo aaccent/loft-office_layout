@@ -1,0 +1,135 @@
+@use 'styles/utils';
+
+.products-showcase {
+    &__switcher {
+        gap: 15px;
+        margin: 0 auto 90px;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__switch-button {
+        font-family: var(--steelfish);
+        font-size: 14rem;
+        line-height: 1.05;
+        text-transform: uppercase;
+        cursor: pointer;
+        opacity: 0.5;
+        @include utils.transition(opacity);
+
+        &-text {
+            &::after {
+                content: ' ';
+            }
+        }
+
+        &-number {
+            position: relative;
+            top: 6%;
+            font-size: 50%;
+            vertical-align: top;
+        }
+
+        &.active {
+            cursor: default;
+            opacity: 1;
+        }
+    }
+
+    &__switch-button + &__switch-button {
+        &::before {
+            content: '/ ';
+        }
+    }
+
+    &__list-wrapper {
+        position: relative;
+    }
+
+    &__link {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    &__list {
+        gap: 20px;
+        display: none;
+
+        &.active {
+            display: flex;
+        }
+    }
+
+    .product-card {
+        height: fit-content;
+    }
+
+    &__list-item {
+        --default-height: 335px;
+        --big-height: 602px;
+        width: 1px;
+        height: fit-content;
+        flex-grow: 1;
+
+        .product-card__top {
+            height: var(--default-height);
+        }
+
+        &:nth-child(1) {
+            width: 910px;
+            flex-grow: 0;
+
+            .product-card {
+                &__top {
+                    height: var(--big-height);
+                }
+            }
+        }
+
+        &:nth-child(1n + 2) {
+            margin-top: calc(var(--big-height) - var(--default-height));
+        }
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .products-showcase {
+        &__switcher {
+            gap: 7px;
+            margin-bottom: 40px;
+        }
+
+        &__switch-button {
+            font-size: 4.8rem;
+        }
+
+        &__link {
+            display: none;
+        }
+
+        &__list {
+            gap: 16px;
+            margin: 0 var(--negative-container-px);
+            padding: 0 var(--container-px);
+            overflow-x: auto;
+            @include utils.transparent-scroll;
+        }
+
+        &__list-item,
+        &__list-item:nth-child(1),
+        &__list-item:nth-child(1n + 2) {
+            margin-top: 0;
+            width: 308px;
+
+            .product-card__top {
+                touch-action: auto;
+                height: 227px;
+            }
+
+            .slider-pagination-bullets {
+                display: none;
+            }
+        }
+    }
+}

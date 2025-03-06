@@ -5,8 +5,8 @@
         gap: 40px 10px;
         margin: 0 auto;
         display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        flex-direction: column;
+        align-items: center;
     }
 
     &__item {
@@ -33,14 +33,16 @@
         }
     }
 
+    &__item-text {
+        &::after {
+            content: ' ';
+        }
+    }
+
     &__item-number {
         font-size: 50%;
         line-height: 1.3;
         vertical-align: top;
-
-        &::before {
-            content: ' ';
-        }
     }
 
     &__item-img-hover {
@@ -65,10 +67,7 @@
     .categories {
         &__list {
             gap: 22px;
-            flex-direction: column;
             flex-wrap: unset;
-            justify-content: left;
-            align-items: center;
         }
 
         &__item-group {

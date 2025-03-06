@@ -23,3 +23,6 @@ html(lang='ru')
 
         block scripts
             script(src=require('scripts/main.ts'), type='module')
+            // Желательно чтобы swiper.ts был с атрибутом type="module" для ускорения загрузки
+            // Для main.ts это необязательно
+            script(src=require('scripts/swiper.ts'), type='module')
