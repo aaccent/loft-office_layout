@@ -16,6 +16,7 @@
 @use 'ui/popups/cart/cart';
 
 // Ui
+@use 'ui/slider-pagination';
 @use 'ui/buttons/button';
 @use 'ui/buttons/close-btn';
 @use 'ui/socials/socials';
@@ -26,6 +27,7 @@
 @use 'ui/content/content';
 @use 'ui/input';
 @use 'ui/product-card/product-card';
+@use 'ui/buttons/text-button';
 
 // Page basis
 @use 'layout/header/_header';
