@@ -1,0 +1,12 @@
+// UI
+@use 'ui/popups/video-review/video-review';
+@use 'ui/popups/text-review/text-review';
+@use 'ui/popups/send-review/send-review';
+
+// Pages
+@use 'pages/text-reviews/reviews';
+
+// Components
+@use 'components/reviews-list/text/text-reviews';
+@use 'components/reviews-list/video/video-reviews';
+@use 'components/reviews-list/external/external';

@@ -3,6 +3,9 @@ include layout/utils
 include ui/breadcrumbs/breadcrumbs
 include ui/type-list/type-list
 
+block append head
+    link(href=require('styles/other.styles.scss'), rel='stylesheet')
+
 block append main
     +breadcrumbs([{ name:'отзывы', link: '' }])
     +section.reviews

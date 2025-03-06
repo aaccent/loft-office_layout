@@ -1,8 +1,10 @@
+// Libs
 @use 'node_modules/swiper/swiper';
 @use 'node_modules/swiper/modules/navigation';
 @use 'node_modules/swiper/modules/pagination';
 @use 'node_modules/swiper/modules/effect-fade';
 
+// General
 @use 'general/_preflight.css';
 @use 'general/reset';
 @use 'general/variables';
@@ -11,9 +13,6 @@
 
 // Popup
 @use 'features/popup/popup';
-@use 'ui/popups/video-review/video-review';
-@use 'ui/popups/text-review/text-review';
-@use 'ui/popups/send-review/send-review';
 @use 'ui/popups/cart/cart';
 
 // Ui
@@ -27,13 +26,9 @@
 @use 'ui/content/content';
 @use 'ui/input';
 
-// Page
+// Page basis
 @use 'layout/header/_header';
 @use 'layout/footer/footer';
-@use 'pages/text-reviews/reviews';
 
 // Components
-@use 'components/reviews-list/text/text-reviews';
-@use 'components/reviews-list/video/video-reviews';
-@use 'components/reviews-list/external/external';
 @use 'components/products-slider/products-slider';
