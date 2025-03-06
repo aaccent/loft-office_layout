@@ -33,14 +33,16 @@
         }
     }
 
+    &__item-text {
+        &::after {
+            content: ' ';
+        }
+    }
+
     &__item-number {
         font-size: 50%;
         line-height: 1.3;
         vertical-align: top;
-
-        &::before {
-            content: ' ';
-        }
     }
 
     &__item-img-hover {
