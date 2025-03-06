@@ -6,7 +6,7 @@ html {
     font-size: 62.5%;
 }
 
-section {
+.section {
     margin-bottom: 180px;
     @media screen and (max-width: utils.$tablet1000) {
         margin-bottom: 80px;
