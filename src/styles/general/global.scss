@@ -76,3 +76,17 @@ html.disable-scroll {
         }
     }
 }
+
+.dark-wrapper {
+    padding: 180px 0;
+    color: var(--white);
+    background-color: var(--accent-dark);
+
+    @media only screen and (max-width: utils.$tablet1000) {
+        padding: 80px 0;
+    }
+
+    .section:last-child {
+        margin-bottom: 0;
+    }
+}
