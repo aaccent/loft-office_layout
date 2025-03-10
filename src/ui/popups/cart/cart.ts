@@ -172,7 +172,8 @@ function init() {
     shareButton?.addEventListener('click', shareLink)
 
     const circleContainer = document.querySelector('.cart__info-trigger-circle')
-    createSVGCircle(circleContainer!)
+    if (!circleContainer) return
+    createSVGCircle(circleContainer)
 
     const promoInput = document.querySelector<HTMLInputElement>('.cart__promo-input')
     const promoButton = document.querySelector('.cart__promo-button')

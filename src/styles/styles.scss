@@ -4,13 +4,18 @@
 @use 'general/fonts';
 @use 'general/global';
 
+// Page
+@use 'layout/header/_header';
+@use 'layout/footer/footer';
+@use 'pages/text-reviews/reviews';
+@use 'pages/order/order';
+
 // Popup
 @use 'features/popup/popup';
 @use 'ui/popups/video-review/video-review';
 @use 'ui/popups/text-review/text-review';
 @use 'ui/popups/send-review/send-review';
 @use 'ui/popups/cart/cart';
-@use 'ui/popups/order/order';
 
 // Ui
 @use 'ui/buttons/button';
@@ -22,11 +27,6 @@
 @use 'ui/type-list/type-list';
 @use 'ui/content';
 @use 'ui/input/input';
-
-// Page
-@use 'layout/header/_header';
-@use 'layout/footer/footer';
-@use 'pages/text-reviews/reviews';
 
 // Components
 @use 'components/reviews-list/text/text-reviews';

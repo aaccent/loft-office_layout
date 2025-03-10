@@ -1,4 +1,3 @@
-import { disableScroll } from 'features/scroll'
 import { validateTelInput } from 'features/forms'
 
 type FinalInfo = {
@@ -15,12 +14,40 @@ interface FinalInfoElement extends HTMLElement {
 }
 
 void (function () {
-    disableScroll()
+    function setUserData(userType: string) {
+        const userDataInputs = document.querySelectorAll<HTMLInputElement>('.user-data .input')
+        userDataInputs.forEach((input) => {
+            const inputUserType = input.dataset.userType
+            if (inputUserType?.includes(userType)) {
+                input.classList.add('_active')
+            } else {
+                input.classList.remove('_active')
+            }
+        })
+    }
 
-    function openNextStep(targetEl: HTMLElement) {
-        const currentStep = targetEl.closest<HTMLElement>('.order-step')
-        console.log(currentStep)
-        if (currentStep?.querySelector('.payment-method')) return
+    /**TODO: Кнопка отправки формы должна появляться на последнем шаге - способ доставки или метод оплаты*/
+    const userTypeInputs = document.querySelectorAll<HTMLInputElement>('.user-type input')
+    userTypeInputs.forEach((input) => {
+        input.addEventListener('change', (e) => {
+            const target = e.target as HTMLInputElement
+            const activeUserType = target.value
+            setUserData(activeUserType)
+
+            const orderButton = document.querySelector<HTMLButtonElement>('.order__button')
+            console.log(orderButton)
+            if (!orderButton) return
+
+            if (activeUserType !== 'private') {
+                const deliveryMethodStep = document.querySelector('.order-step:has(.delivery-method)')
+                deliveryMethodStep?.append(orderButton)
+            }
+        })
+    })
+
+    function openNextStep(currentStepElement: HTMLElement) {
+        const currentStep = currentStepElement.closest<HTMLElement>('.order-step')
+        if (currentStep?.querySelector('.order__button')) return
 
         currentStep?.classList.remove('_opened')
         currentStep?.nextElementSibling?.classList.add('_opened')
@@ -55,9 +82,8 @@ void (function () {
     })
 
     const userDataButton = document.querySelector<HTMLButtonElement>('.order-step .user-data__button')
-
     userDataButton?.addEventListener('click', () => {
-        const userDataRequiredInputs = document.querySelectorAll<HTMLInputElement>('.user-data__inputs._active input')
+        const requireUserInputs = document.querySelectorAll<HTMLInputElement>('.user-data__inputs .input._active input')
 
         const fullName: string[] = ['']
         const finalInfo: FinalInfo = {
@@ -69,8 +95,8 @@ void (function () {
             address: '',
         }
 
-        userDataRequiredInputs.forEach((input) => {
-            if (!input.validity.valid || !validateTelInput(input)) {
+        requireUserInputs.forEach((input) => {
+            if (!input.value || !validateTelInput(input)) {
                 input.classList.add('invalid')
                 return
             }
@@ -104,36 +130,15 @@ void (function () {
         })
 
         const invalids = document.querySelectorAll('.order-step input.invalid')
-        console.log(invalids)
         if (invalids.length) return
 
         finalInfo.name = fullName.join(' ')
-        console.log(userDataButton)
         openNextStep(userDataButton)
         setFinalUserInfo(finalInfo)
     })
 
     const changeStepButtons = document.querySelectorAll<HTMLElement>('.order-step__change-button')
     changeStepButtons.forEach((button) => button.addEventListener('click', openCheckedStep))
-
-    const userTypeInputs = document.querySelectorAll<HTMLInputElement>('.user-type input')
-
-    userTypeInputs.forEach((input) => {
-        input.addEventListener('change', (e) => {
-            const target = e.target as HTMLInputElement
-
-            const activeUserData = document.querySelector<HTMLElement>(`.user-data ._active[data-user-type]`)
-            activeUserData?.classList.remove('_active')
-
-            const userData = document.querySelectorAll<HTMLElement>(`.user-data [data-user-type]`)
-
-            userData.forEach((data) => {
-                if (data.dataset.userType?.includes(target.value)) {
-                    data.classList.add('_active')
-                }
-            })
-        })
-    })
 
     const firstStep = document.querySelector<HTMLElement>('.order-step:nth-child(1)')
     firstStep?.classList.add('_opened')

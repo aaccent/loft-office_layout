@@ -1,8 +1,17 @@
 @use 'styles/utils';
 
 .order {
-    opacity: 1;
-    visibility: visible;
+    margin: 30px 0 120px;
+
+    &:has(.user-data__inputs .input[data-user-type='commerce,commerce-nds']._active) {
+        .order-step:has(.payment-method) {
+            display: none;
+        }
+
+        .order-step:has(.delivery-method) {
+            border: none;
+        }
+    }
 
     &__inner {
         padding: 30px 40px;
@@ -40,10 +49,6 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-
-        .order__button {
-            width: 50%;
-        }
     }
 
     &-step {
@@ -55,10 +60,83 @@
         border-left: 1px dashed var(--accent-half-opacity);
         transition: height 1s linear;
 
+        &._opened {
+            padding-bottom: 111px;
+
+            .order-step__header {
+                margin-bottom: 71px;
+            }
+
+            .order-step__number {
+                color: white;
+                opacity: 1;
+                background-color: var(--accent);
+                border: none;
+            }
+
+            .order-step__title {
+                opacity: 1;
+            }
+
+            .order-step__body {
+                height: fit-content;
+            }
+
+            .order__autorization-button,
+            .order__location {
+                display: flex;
+            }
+
+            &:has(.user-data._valid, input:checked) {
+                .order-step__change-button {
+                    display: none;
+                }
+            }
+        }
+
+        &:has(.user-data)._opened {
+            .order-step__header {
+                margin-bottom: 21px;
+            }
+        }
+
+        &:has(input:checked),
+        &:has(.user-data._valid) {
+            .order-step__title {
+                opacity: 1;
+            }
+
+            .order-step__number {
+                color: transparent;
+                background-color: var(--green);
+                @include utils.bg-defaults(auto);
+                background-image: url('assets/icons/checkmark.svg');
+            }
+
+            .order-step__change-button {
+                display: block;
+            }
+
+            & .order__button {
+                display: flex;
+            }
+        }
+
+        &:has(.user-data._valid):is(:not(._opened)) {
+            .user-data__final {
+                display: flex;
+            }
+        }
+
+        &:has(.payment-method) {
+            border: none;
+        }
+
         &-list {
             display: flex;
             flex-direction: column;
         }
+
         &__header {
             padding-top: 11px;
             display: flex;
@@ -120,40 +198,6 @@
             }
         }
 
-        &._opened {
-            padding-bottom: 111px;
-
-            .order-step__header {
-                margin-bottom: 71px;
-            }
-
-            .order-step__number {
-                color: white;
-                opacity: 1;
-                background-color: var(--accent);
-                border: none;
-            }
-
-            .order-step__title {
-                opacity: 1;
-            }
-
-            .order-step__body {
-                height: fit-content;
-            }
-
-            .order__autorization-button,
-            .order__location {
-                display: flex;
-            }
-
-            &:has(.user-data._valid, input:checked) {
-                .order-step__change-button {
-                    display: none;
-                }
-            }
-        }
-
         .user-type {
             padding: 24px;
             width: 258px;
@@ -204,17 +248,18 @@
                 row-gap: 40px;
                 margin-top: 60px;
                 margin-bottom: 48px;
-                display: none;
+                display: flex;
                 flex-wrap: wrap;
                 justify-content: space-between;
 
                 .input {
                     width: 49%;
                     height: 66px;
-                }
+                    display: none;
 
-                &._active {
-                    display: flex;
+                    &._active {
+                        display: block;
+                    }
                 }
             }
 
@@ -330,50 +375,6 @@
         }
     }
 
-    &-step:has(.user-data)._opened {
-        .order-step__header {
-            margin-bottom: 21px;
-        }
-    }
-
-    &-step:has(input:checked),
-    &-step:has(.user-data._valid) {
-        .order-step__title {
-            opacity: 1;
-        }
-
-        .order-step__number {
-            color: transparent;
-            background-color: var(--green);
-            @include utils.bg-defaults(auto);
-            background-image: url('assets/icons/checkmark.svg');
-        }
-
-        .order-step__change-button {
-            display: block;
-        }
-    }
-
-    &-step:has(.user-data._valid):is(:not(._opened)) {
-        .user-data__final {
-            display: flex;
-        }
-    }
-
-    &-step:has(.payment-method) {
-        border: none;
-    }
-
-    &-step-list:has(.user-data__inputs[data-user-type='commerce,commerce-nds']._active) {
-        .order-step:has(.payment-method) {
-            display: none;
-        }
-
-        .order-step:has(.delivery-method) {
-            border: none;
-        }
-    }
-
     &__autorization-button,
     &__location,
     &-step__change-button {
@@ -400,5 +401,11 @@
         width: 690px;
         height: 762px;
         background-color: white;
+    }
+
+    &__button {
+        margin-top: 48px;
+        max-width: 50%;
+        display: none;
     }
 }

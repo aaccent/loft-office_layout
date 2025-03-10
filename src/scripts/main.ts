@@ -15,4 +15,5 @@ import 'ui/input/input.js'
 import 'components/reviews-list/reviews-list.js'
 import 'components/reviews-list/text/text-reviews.js'
 import 'components/products-slider/products-slider.js'
-import 'ui/popups/order/order'
+
+import 'pages/order/order'

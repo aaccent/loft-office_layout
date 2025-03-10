@@ -2,7 +2,7 @@ const FILE_LIMIT = 4
 
 function progress() {
     const previewsAmount = document.querySelectorAll('.preview').length
-    const length = document.querySelector('.send-review__progress-bar').offsetWidth
+    const length = document.querySelector('.send-review__progress-bar')?.offsetWidth
     const segment = length / FILE_LIMIT
     const progress = document.querySelector('.send-review__progress-bar span')
 
@@ -34,6 +34,7 @@ function createFilePreview(src) {
 
 void (function () {
     const input = document.querySelector('input[type="file"]')
+    if (!input) return
 
     input.addEventListener('change', (e) => {
         const previewsLength = document.querySelectorAll('.preview').length
