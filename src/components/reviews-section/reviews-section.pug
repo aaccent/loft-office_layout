@@ -1,0 +1,12 @@
+include layout/utils
+
+section.section.reviews-section: .container
+    .reviews-section__title-container
+        h2.reviews-section__title отзывы наших клиентов
+        +anchor.button.reviews-section__popup-button добавить отзыв
+        +anchor.text-button.text-button--dark.reviews-section__link все отзывы
+    include components/reviews-list/text/text-reviews
+    +text-reviews({isMainPage: true})
+    .reviews-section__actions
+        +anchor.button.reviews-section__popup-button добавить отзыв
+        +anchor.button.button--transparent.reviews-section__link все отзывы
