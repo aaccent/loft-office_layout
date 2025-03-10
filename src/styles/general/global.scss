@@ -22,6 +22,7 @@ html {
 
     @media only screen and (max-width: utils.$tablet1000) {
         --container-px: 28px;
+        --negative-container-px: -28px;
         max-width: 1000px;
     }
 }
