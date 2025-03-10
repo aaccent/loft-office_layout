@@ -10,6 +10,19 @@
         padding-bottom: 40px;
         border-bottom: 1px solid var(--accent-light);
 
+        &--dark {
+            padding-bottom: 30px;
+            border-bottom-color: hsl(0, 0%, 100%, 0.2);
+
+            .text-reviews-list__item-media {
+                border-color: hsl(0, 0%, 100%, 0.2);
+
+                span::before {
+                    filter: var(--filter-white);
+                }
+            }
+        }
+
         &-header {
             margin-bottom: 24px;
             display: flex;

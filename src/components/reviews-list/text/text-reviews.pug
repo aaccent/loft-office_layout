@@ -37,22 +37,28 @@ include layout/utils
         }
     ]
 
-mixin text-item-container(isLink)
+mixin text-item-container(isLink, isDarkTheme)
+    -
+        className = isDarkTheme 
+                ? 'text-reviews-list__item reviews__item text-reviews-list__item--dark'
+                : 'text-reviews-list__item reviews__item'
+
     if isLink
-        +anchor.text-reviews-list__item.reviews__item: block
+        +anchor(class=className): block
     else
-        .text-reviews-list__item.reviews__item(data-action='popup', data-popup=''): block
+        div(class=className, data-action='popup', data-popup=''): block
 
 mixin text-reviews(props)
     -
         props = Object.assign({
-            isMainPage: false
+            isMainPage: false,
+            isDarkTheme: false,
         }, props || {})
 
     - reviewsList = props.isMainPage ? reviews.slice(0, 3) : reviews
     #text.text-reviews-list
         each item in reviewsList
-            +text-item-container(props.isMainPage)
+            +text-item-container(props.isMainPage, props.isDarkTheme)
                 .text-reviews-list__item-header
                     +img(require(item.image)).text-reviews-list__item-photo
                     .text-reviews-list__item-person
