@@ -1,5 +1,11 @@
 @use 'styles/utils';
 
+@media only screen and (min-width: 1200px) {
+    .measure:has(+ .dark-wrapper) {
+        margin-bottom: 0;
+    }
+}
+
 .measure {
     position: relative;
 
