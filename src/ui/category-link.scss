@@ -4,6 +4,7 @@
     position: relative;
     font-family: var(--steelfish);
     text-transform: uppercase;
+    @include utils.transition(opacity);
 
     & + .category-link {
         &::before {

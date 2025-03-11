@@ -1,0 +1,19 @@
+include layout/utils
+
+-
+    var list = [
+        { title: 'Столы', num: 23 },
+        { title: 'Тумбы', num: 23 },
+        { title: 'шкафы', num: 23 },
+        { title: 'Кресла', num: 23 },
+        { title: 'Стулья', num: 23 },
+    ]
+
+.catalog-hero.container
+    h1.page-title.catalog-hero__title Мебель для кабинета руководителя
+    p.catalog-hero__text Устанавливаем точные размеры любых строительных объектов, конструкций и отдельных элементов
+    .catalog-hero__subcategories
+        each item in list
+            +anchor.category-link
+                span.category-link__text= item.title
+                span.category-link__number= item.num
