@@ -27,12 +27,12 @@ include ui/product-card/product-card
 
 section.section.products-showcase: .container
     .products-showcase__switcher
-        h2.products-showcase__switch-button.active(data-tab='1')
-            span.products-showcase__switch-button-text новинки
-            span.products-showcase__switch-button-number 22
-        button.products-showcase__switch-button(data-tab='2')
-            span.products-showcase__switch-button-text хиты
-            span.products-showcase__switch-button-number 32
+        h2.products-showcase__switch-button.active.category-link(data-tab='1')
+            span.category-link__text новинки
+            span.category-link__number 22
+        button.products-showcase__switch-button.category-link(data-tab='2')
+            span.category-link__text хиты
+            span.category-link__number 32
     .products-showcase__list-wrapper
         +anchor.products-showcase__link.text-button смотреть все
         ul.products-showcase__list.active(data-tab='1')
