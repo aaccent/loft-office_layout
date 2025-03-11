@@ -8,7 +8,7 @@
             rotate: -90deg;
         }
 
-        .selector__list {
+        .selector__list-wrapper {
             opacity: 1;
             visibility: visible;
         }
@@ -31,16 +31,13 @@
         }
     }
 
-    &__list {
-        gap: 18px;
+    &__list-wrapper {
         position: absolute;
         z-index: 5;
         top: calc(100% + 20px);
         right: 0;
         padding: 24px;
         width: max-content;
-        display: flex;
-        flex-direction: column;
         opacity: 0;
         visibility: hidden;
         background-color: var(--white);
@@ -57,6 +54,16 @@
             border-bottom: 9px solid hsl(0, 0%, 100%);
             border-left: 6px solid transparent;
         }
+    }
+
+    &__mobile-top {
+        display: none;
+    }
+
+    &__list {
+        gap: 18px;
+        display: flex;
+        flex-direction: column;
     }
 
     &__item {
@@ -99,6 +106,59 @@
 
         &::after {
             opacity: 1;
+        }
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .selector {
+        position: static;
+
+        &::before {
+            inset: 0;
+            content: '';
+            position: fixed;
+            z-index: 11;
+            width: 100vw;
+            height: 100vh;
+            opacity: 0;
+            visibility: hidden;
+            background-color: #000;
+            @include utils.transition((visibility, opacity));
+        }
+
+        &.opened::before {
+            opacity: 0.6;
+            visibility: visible;
+        }
+
+        &__list-wrapper {
+            position: fixed;
+            z-index: 15;
+            top: unset;
+            right: unset;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+
+            &::after {
+                display: none;
+            }
+        }
+
+        &__mobile-top {
+            gap: 15px;
+            margin-bottom: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &__mobile-title {
+            font-family: var(--steelfish);
+            font-size: 3.4rem;
+            letter-spacing: -0.01rem;
+            line-height: 1.05;
         }
     }
 }

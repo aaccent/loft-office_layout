@@ -11,14 +11,18 @@ mixin selector(props)
 
     .selector
         +wrapBreak: button.selector__button
-        ul.selector__list
-            each item in props.list
-                li: label.selector__item
-                    +wrapBreak: input.selector__item-input(
-                        type='radio',
-                        name=props.name,
-                        value=item.value,
-                        data-show-value=item.shownValue
-                    )
-                    +wrapBreak: span.selector__item-circle
-                    | #{ item.title }
+        .selector__list-wrapper
+            .selector__mobile-top
+                .selector__mobile-title Сортировка
+                +wrapBreak: button.close-btn
+            ul.selector__list
+                each item in props.list
+                    li: label.selector__item
+                        +wrapBreak: input.selector__item-input(
+                            type='radio',
+                            name=props.name,
+                            value=item.value,
+                            data-show-value=item.shownValue
+                        )
+                        +wrapBreak: span.selector__item-circle
+                        | #{ item.title }
