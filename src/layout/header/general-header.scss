@@ -1,14 +1,40 @@
 @use 'styles/utils';
 
 body:has(main.main .main-hero) .header {
-    margin-bottom: -98px;
+    margin-bottom: var(--header-height, 98px);
+    color: white;
+    background-color: transparent;
+
+    &__inner {
+        border-bottom-color: hsla(0, 0%, 100%, 0.1);
+    }
+
+    &__logo {
+        filter: var(--filter-white);
+    }
+
+    &__geo-button {
+        filter: var(--filter-white);
+    }
+
+    &__menu-button {
+        &::before,
+        &::after {
+            background-color: var(--white);
+        }
+    }
+
+    &__actions-list .icon {
+        filter: var(--filter-white);
+    }
 }
 
 .header {
     position: sticky;
     z-index: 10;
     top: 0;
-    color: white;
+    color: var(--accent);
+    background-color: var(--main);
     @include utils.transition((background-color, color));
 
     &.sticky,
@@ -34,6 +60,14 @@ body:has(main.main .main-hero) .header {
         }
     }
 
+    &.sticky {
+        background-color: var(--white);
+
+        .header__inner {
+            border-bottom-color: transparent;
+        }
+    }
+
     &:has(.catalog-menu.opened) &__menu-list li > :is(a, button):not([data-action='catalog-menu']) {
         opacity: 0.5;
     }
@@ -46,11 +80,12 @@ body:has(main.main .main-hero) .header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid hsl(28, 38%, 31%, 0.2);
         @include utils.transition(border-bottom-color);
     }
 
     &__logo {
+        filter: var(--filter-accent);
         height: 37px;
         @include utils.transition(filter);
 
@@ -63,7 +98,7 @@ body:has(main.main .main-hero) .header {
 
     &__geo-button {
         gap: 10px;
-        filter: var(--filter-white);
+        filter: var(--filter-accent);
         display: flex;
         align-items: center;
         font-size: 1.4rem;
@@ -183,7 +218,7 @@ body:has(main.main .main-hero) .header {
             width: 100%;
             /* @skip-scaling */
             height: 2px;
-            background-color: white;
+            background-color: var(--accent);
             @include utils.transition(background-color);
         }
     }
@@ -216,6 +251,10 @@ body:has(main.main .main-hero) .header {
         gap: 30px;
         display: flex;
         align-items: center;
+
+        .icon {
+            filter: var(--filter-accent);
+        }
     }
 
     &__mobile-search-button {
