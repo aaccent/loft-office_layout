@@ -3,9 +3,8 @@ document.querySelectorAll('.selector').forEach((selector) => {
     const button = selector.querySelector<HTMLElement>('.selector__button')
     const closeButton = selector.querySelector('.close-btn')
 
-    if (!itemInputs.length || !button) return
+    if (!button) return
 
-    button.innerText = itemInputs[0].dataset.showValue || ''
     button.addEventListener('click', () => selector.classList.toggle('opened'))
     closeButton?.addEventListener('click', () => selector.classList.remove('opened'))
     selector.addEventListener('click', (event) => {
@@ -13,7 +12,15 @@ document.querySelectorAll('.selector').forEach((selector) => {
         selector.classList.remove('opened')
     })
 
-    itemInputs[0].checked = true
+    if (itemInputs.length) {
+        button.innerText = itemInputs[0].dataset.showValue || ''
+        itemInputs[0].checked = true
+    } else {
+        const firstItem = selector.querySelector('.selector__item')
+        if (!firstItem) return
+
+        button.innerText = firstItem.textContent || ''
+    }
 
     itemInputs.forEach((input) => {
         input.addEventListener('change', () => {
