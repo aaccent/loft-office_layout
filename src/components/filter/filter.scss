@@ -24,6 +24,19 @@
         .icon {
             @include utils.square(22px);
         }
+
+        &-number {
+            margin-left: 7px;
+            @include utils.square(22px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--white);
+            font-size: 1.4rem;
+            letter-spacing: 0.01rem;
+            line-height: 1.2;
+            background-color: var(--accent);
+        }
     }
 
     &__result-num {
