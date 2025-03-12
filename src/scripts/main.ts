@@ -2,6 +2,8 @@ import '@/features/popup/popup'
 import 'features/inputMask'
 import 'features/forms'
 
+import 'pages/order/order'
+
 import 'layout/header/header.js'
 import 'layout/footer/footer.js'
 
@@ -15,5 +17,3 @@ import 'ui/input/input.js'
 import 'components/reviews-list/reviews-list.js'
 import 'components/reviews-list/text/text-reviews.js'
 import 'components/products-slider/products-slider.js'
-
-import 'pages/order/order'

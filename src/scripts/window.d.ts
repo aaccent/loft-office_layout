@@ -1,5 +1,5 @@
 import { ScriptStatus, ScriptTypes } from '@/features/loadScript'
-import { CartInfo, Product } from '@/types'
+import { CartInfo, Product } from '@/types/types'
 
 declare global {
     interface Window {
@@ -22,7 +22,9 @@ declare global {
             /** Общее количество товаров в корзине */
             amount: number
         }
+        order: {
+            showProductsImages(): void
+            setOrderInfo(info: OrderInfo): void
+        }
     }
 }
-
-export {}

@@ -1,5 +1,6 @@
-import { CartInfo, Product } from '@/types'
+import { CartInfo, Product } from '@/types/cart'
 import { formatPrice } from 'features/formatPrice'
+import { testProducts } from '@/test-products'
 
 /** Тултип ССЫЛКА СКОПИРОВАНА */
 function shareLink(e: MouseEvent) {
@@ -191,6 +192,7 @@ function init() {
 
 function addItems(list: Product[]) {
     const cartList = document.querySelector('.cart__list')
+
     if (!cartList) return
 
     const products = cartList.querySelectorAll('.cart__list-product')
@@ -200,12 +202,16 @@ function addItems(list: Product[]) {
     }
 
     list.forEach((item) => {
-        const itemInCart = Array.from(cartList.querySelectorAll<HTMLElement>('.cart__list-product')).find(
-            (el) => el.id === item.id,
-        )
-        if (itemInCart) updateProductData(item, itemInCart, true)
-        cartList?.append(createProduct(item))
+        const itemInCart = document.querySelector<HTMLElement>(`.cart__list-product[data-id='${item.id}']`)
+
+        if (itemInCart) {
+            updateProductData(item, itemInCart, true)
+        } else {
+            cartList?.append(createProduct(item))
+        }
     })
+
+    window.order.showProductsImages()
     stickyInfo()
     updateAmount()
 }
@@ -267,3 +273,4 @@ window.cart = {
 }
 
 init()
+window.cart.setItems(testProducts)

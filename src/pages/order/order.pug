@@ -1,191 +1,193 @@
-doctype html
-html(lang='ru')
-    head
-        block head
-            title #{ title }
-            meta(name='viewport', content='width=device-width, initial-scale=1.0')
-            meta(charset='UTF-8')
+extends layout/order-page-layout
+include layout/utils
+include ui/promo-code/promo-code
 
-            link(href=require('styles/styles.scss'), rel='stylesheet')
-    body
-        include layout/utils
-        -
-            var userType = [
-                {
-                    name: 'Юр. лицо с НДС',
-                    value: 'commerce-nds'
-                },
-                {
-                    name: 'Юр. лицо без НДС',
-                    value: 'commerce'
-                },
-                {
-                    name: 'Физическое лицо',
-                    value: 'private'
-                },
-            ]
-
-            var delivery = [
-                {
-                    title: 'Курьером',
-                    description: 'Доставка по г. Казань',
-                    time: 'сегодня, от 250 ₽'
-                },
-                {
-                    title: 'Самовывоз',
-                    description: 'г. Казань, Щёлковское шоссе, 3с1, офис 510',
-                    time: 'сегодня, со склада'
-                },
-                {
-                    title: 'СДЭК',
-                    description: '',
-                    time: '2–3 дня, от 250 ₽'
-                },
-                {
-                    title: 'Деловые линии',
-                    description: '',
-                    time: '2–3 дня, от 250 ₽'
-                },
-                {
-                    title: 'ПЭК',
-                    description: '',
-                    time: '2–3 дня, от 250 ₽'
-                }, {
-                    title: 'Байкал-сервис',
-                    description: '',
-                    time: '2–3 дня, от 250 ₽'
-                },
-            ]
-
-            var payment = [
-                {
-                    title: 'картой онлайн',
-                    description: 'Оплата картой: Мир, Mastercard, Visa, Maestro',
-                    icon: 'assets/icons/payment_card.svg',
-                    value: 'card',
-                    dataUserType: 'private'
-                },
-                {
-                    title: 'Наличными',
-                    description: 'Оплата производится наличными деньгами, в момент получения заказа. Подтверждением вашей оплаты является фискальный кассовый чек, вручаемый во время оплаты заказа',
-                    icon: 'assets/icons/payment_cash.svg',
-                    dataUserType: 'private'
-                },
-            ]
-        .main-wrapper
-            main.main
-                block main
-                    +section.order
-                        .order__header
-                            +img(require('assets/icons/logo.svg'))
-                            button.close-btn(type='button', data-action='close-popup')
-                        form.order__body(novalidate, data-handler='handler.php')
-                            .order-step-list
-                                .order-step
-                                    .order-step__header
-                                        .order-step__number 1
-                                        .order-step__title Тип покупателя
-                                        button.order__autorization-button(type='button') войти в лк
-                                            .icon.icon-profile
-                                        button.order-step__change-button(type='button') изменить
-                                    ul.user-type-list.order-step__body
-                                        each type in userType
-                                            li
-                                                label.user-type= type.name
-                                                    .order-step__checkmark
-                                                    input.user-type__input(
-                                                        type='radio',
-                                                        name='user-type',
-                                                        value=type.value
-                                                    )
-                                .order-step
-                                    .order-step__header
-                                        .order-step__number 2
-                                        .order-step__title Личные данные
-                                        button.order-step__change-button изменить
-                                    .order-step__body.user-data
-                                        .user-data__prefix Осталось заполнить 5 обязательных полей *
-                                        .user-data__inputs
-                                            .input(data-user-type='private')
-                                                .input__placeholder Имя
-                                                input(type='text', name='name')
-                                            .input(data-user-type='private')
-                                                .input__placeholder Фамилия
-                                                input(type='text', name='last-name')
-                                            .input(data-user-type='private')
-                                                .input__placeholder Отчество
-                                                input(type='text', name='middle-name')
-                                            .input(data-user-type='commerce,commerce-nds')
-                                                .input__placeholder название компании
-                                                input(type='text', name='name')
-                                            .input(data-user-type='commerce,commerce-nds')
-                                                .input__placeholder ИНН
-                                                input(type='text', name='inn')
-                                            .input(data-user-type='commerce,commerce-nds')
-                                                .input__placeholder КПП
-                                                input(type='text', name='kpp')
-                                            .input(data-user-type='commerce,commerce-nds')
-                                                .input__placeholder Юр.адрес
-                                                input(type='text', name='address')
-                                            .input(data-user-type='private,commerce,commerce-nds')
-                                                .input__placeholder Телефон
-                                                input(type='tel', name='tel')
-                                            .input(data-user-type='private,commerce,commerce-nds')
-                                                .input__placeholder Email
-                                                input(type='email', name='email')
-                                        button.button.button--dark.user-data__button(type='button') далее
-                                    .user-data__final
-                                        .user-data__final-name(data-input='name')
-                                        .user-data__final-tel(data-input='tel')
-                                        .user-data__final-email(data-input='email')
-                                        .user-data__final-inn(data-input='inn')
-                                        .user-data__final-kpp(data-input='kpp')
-                                        .user-data__final-address(data-input='address')
-                                .order-step
-                                    .order-step__header
-                                        .order-step__number 3
-                                        .order-step__title способ доставки
-                                        button.order-step__change-button изменить
-                                        .order__location Казань
-                                            .icon.icon-geo
-                                    ul.order-step__body.delivery-method-list
-                                        each item in delivery
-                                            li
-                                                label.delivery-method
-                                                    input.delivery-method__input(type='radio', name='delivery-method')
-                                                    .delivery-method__title= item.title
-                                                        .order-step__checkmark
-                                                    if item.description
-                                                        .delivery-method__description= item.description
-                                                    .delivery-method__time= item.time
-                                    .delivery-method__final
-                                        .delivery-method__type
-                                        .delivery-method__address
-                                            span
-                                        button.delivery-method__change-address изменить адрес
-                                .order-step
-                                    .order-step__header
-                                        .order-step__number 4
-                                        .order-step__title методы оплаты
-                                        button.order-step__change-button изменить
-                                    .order-step__body
-                                        ul.payment-method-list
-                                            each item in payment
-                                                li
-                                                    label.payment-method(data-user-type=item.dataUserType)
-                                                        .payment-method__title= item.title
-                                                            .order-step__checkmark
-                                                            if item.icon
-                                                                +img(require(item.icon)).payment-method__icon
-                                                        if item.description
-                                                            .payment-method__description= item.description
-                                                        input.payment-method__input(
-                                                            type='radio',
-                                                            name='payment-method',
-                                                            value=item.value
-                                                        )
-                                    button.button.button--dark.order__button(type='submit') оплатить
-                                        span 47 000 ₽
-                            .order__items
-        block scripts
-            script(src=require('scripts/main.ts'), type='module')
+block append main
+    -
+        var userType = [
+            {
+                name: 'Юр. лицо с НДС',
+                value: 'commerce-nds'
+            },
+            {
+                name: 'Юр. лицо без НДС',
+                value: 'commerce'
+            },
+            {
+                name: 'Физическое лицо',
+                value: 'private'
+            },
+        ]
+        var delivery = [
+            {
+                title: 'Курьером',
+                description: 'Доставка по г. Казань',
+                time: 'сегодня, от 250 ₽'
+            },
+            {
+                title: 'Самовывоз',
+                description: 'г. Казань, Щёлковское шоссе, 3с1, офис 510',
+                time: 'сегодня, со склада'
+            },
+            {
+                title: 'СДЭК',
+                description: '',
+                time: '2–3 дня, от 250 ₽'
+            },
+            {
+                title: 'Деловые линии',
+                description: '',
+                time: '2–3 дня, от 250 ₽'
+            },
+            {
+                title: 'ПЭК',
+                description: '',
+                time: '2–3 дня, от 250 ₽'
+            }, {
+                title: 'Байкал-сервис',
+                description: '',
+                time: '2–3 дня, от 250 ₽'
+            },
+        ]
+        var payment = [
+            {
+                title: 'картой онлайн',
+                description: 'Оплата картой: Мир, Mastercard, Visa, Maestro',
+                icon: 'assets/icons/payment_card.svg',
+                value: 'card',
+                dataUserType: 'private'
+            },
+            {
+                title: 'Наличными',
+                description: 'Оплата производится наличными деньгами, в момент получения заказа. Подтверждением вашей оплаты является фискальный кассовый чек, вручаемый во время оплаты заказа',
+                icon: 'assets/icons/payment_cash.svg',
+                dataUserType: 'private'
+            },
+        ]
+    +section.order
+        .order__header
+            +img(require('assets/icons/logo.svg')).order__logo
+            button.order__close
+        form.order__body(novalidate, data-handler='handler.php')
+            .order-step-list
+                .order-step
+                    .order-step__header
+                        .order-step__number 1
+                        .order-step__title Тип покупателя
+                        button.order__autorization-button(type='button') войти в лк
+                            .icon.icon-profile
+                        .user-type__final
+                        button.order-step__change-button(type='button') изменить
+                    ul.user-type-list.order-step__body
+                        each type in userType
+                            li
+                                label.user-type= type.name
+                                    .order-step__checkmark
+                                    input.user-type__input(type='radio', name='user-type', value=type.value)
+                .order-step
+                    .order-step__header
+                        .order-step__number 2
+                        .order-step__title Личные данные
+                        button.order-step__change-button изменить
+                    .order-step__body.user-data
+                        .user-data__prefix Осталось заполнить 5 обязательных полей *
+                        .user-data__inputs
+                            .input(data-user-type='private')
+                                .input__placeholder Имя
+                                input(type='text', name='name')
+                            .input(data-user-type='private')
+                                .input__placeholder Фамилия
+                                input(type='text', name='last-name')
+                            .input(data-user-type='private')
+                                .input__placeholder Отчество
+                                input(type='text', name='middle-name')
+                            .input(data-user-type='commerce,commerce-nds')
+                                .input__placeholder название компании
+                                input(type='text', name='name')
+                            .input(data-user-type='commerce,commerce-nds')
+                                .input__placeholder ИНН
+                                input(type='text', name='inn')
+                            .input(data-user-type='commerce,commerce-nds')
+                                .input__placeholder КПП
+                                input(type='text', name='kpp')
+                            .input(data-user-type='commerce,commerce-nds')
+                                .input__placeholder Юр.адрес
+                                input(type='text', name='address')
+                            .input(data-user-type='private,commerce,commerce-nds')
+                                .input__placeholder Телефон
+                                input(type='tel', name='tel')
+                            .input(data-user-type='private,commerce,commerce-nds')
+                                .input__placeholder Email
+                                input(type='email', name='email')
+                        button.button.button--dark.user-data__button(type='button') далее
+                    .user-data__final
+                        .user-data__final-name(data-input='name')
+                        .user-data__final-tel(data-input='tel')
+                        .user-data__final-email(data-input='email')
+                        .user-data__final-address(data-input='address')
+                .order-step
+                    .order-step__header
+                        .order-step__number 3
+                        .order-step__title способ доставки
+                        button.order-step__change-button изменить
+                        .order__location Казань
+                            .icon.icon-geo
+                    ul.order-step__body.delivery-method-list
+                        each item in delivery
+                            li
+                                label.delivery-method
+                                    input.delivery-method__input(type='radio', name='delivery-method')
+                                    .delivery-method__title= item.title
+                                        .order-step__checkmark
+                                    if item.description
+                                        .delivery-method__description= item.description
+                                    .delivery-method__time= item.time
+                    button.button.button--dark.order__button(type='submit') оплатить
+                        span 47 000 ₽
+                    .delivery-method__final
+                        .delivery-method__type
+                        .delivery-method__address
+                            span
+                        button.delivery-method__change-address изменить адрес
+                .order-step
+                    .order-step__header
+                        .order-step__number 4
+                        .order-step__title методы оплаты
+                        button.order-step__change-button изменить
+                    .order-step__body
+                        ul.payment-method-list
+                            each item in payment
+                                li
+                                    label.payment-method(data-user-type=item.dataUserType)
+                                        .payment-method__title= item.title
+                                            .order-step__checkmark
+                                            if item.icon
+                                                +img(require(item.icon)).payment-method__icon
+                                        if item.description
+                                            .payment-method__description= item.description
+                                        input.payment-method__input(
+                                            type='radio',
+                                            name='payment-method',
+                                            value=item.value
+                                        )
+                                button.button.button--dark.order__button(type='submit') оплатить
+                                    span 47 000 ₽
+            .order-details
+                .order-details__header
+                    .order-details__title Ваш заказ
+                        span.order-details__amount.cart__amount
+                    button.order-details__change-button(data-action='popup', data-popup='cart', type='button') изменить
+                .order__items.swiper
+                    .swiper-wrapper
+                .order-promo
+                    +promoCode('промокод', 'smth.php')
+                .order-info
+                    .order-info__item._layout
+                        span.name
+                        span.value
+                    .order-info__item(data-info='deliveryPrice') Доставка:
+                        span
+                    .order-info__item(data-info='weight') вес:
+                        span
+                .order__total-price.order-info__item(data-info='totalPrice') Итого:
+                    span

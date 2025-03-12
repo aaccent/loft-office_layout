@@ -1,4 +1,4 @@
-import { Product } from '@/types'
+import { Product } from '@/types/cart'
 
 export const testProducts: Product[] = [
     {
@@ -49,4 +49,31 @@ export const testProducts: Product[] = [
     //     stock: 5,
     //     amount: 3,
     // },
+]
+
+export const testProducts2: Product[] = [
+    {
+        id: 3,
+        title: 'Стол для руководителя Brooklyn',
+        img: 'assets/content/products/3.png',
+        size: '120 × 80 × 174 см ',
+        color: 'Канадский Дуб',
+        totalPrice: 17200,
+        discountPrice: 18000,
+        pricePerItem: 4300,
+        stock: 5,
+        amount: 3,
+    },
+    {
+        id: 1,
+        title: 'Стол для руководителя Brooklyn',
+        img: 'assets/content/products/3.png',
+        size: '120 × 80 × 174 см ',
+        color: 'Канадский Дуб',
+        totalPrice: 17200,
+        discountPrice: 18000,
+        pricePerItem: 4300,
+        stock: 5,
+        amount: 3,
+    },
 ]
