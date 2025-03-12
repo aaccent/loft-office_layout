@@ -1,6 +1,6 @@
 @use 'styles/utils';
 
-.product-card {
+.category-card {
     display: block;
 
     &__top {
@@ -146,7 +146,7 @@
 }
 
 @media only screen and (max-width: utils.$tablet1000) {
-    .product-card {
+    .category-card {
         &__top {
             height: 227px;
         }

@@ -40,7 +40,7 @@
         }
     }
 
-    .product-card {
+    .category-card {
         height: fit-content;
     }
 
@@ -51,7 +51,7 @@
         height: fit-content;
         flex-grow: 1;
 
-        .product-card__top {
+        .category-card__top {
             height: var(--default-height);
         }
 
@@ -59,7 +59,7 @@
             width: 910px;
             flex-grow: 0;
 
-            .product-card {
+            .category-card {
                 &__top {
                     height: var(--big-height);
                 }
@@ -101,7 +101,7 @@
             margin-top: 0;
             width: 308px;
 
-            .product-card__top {
+            .category-card__top {
                 touch-action: auto;
                 height: 227px;
             }

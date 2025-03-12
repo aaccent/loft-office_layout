@@ -1,5 +1,5 @@
 include layout/utils
-include ui/product-card/product-card
+include ui/category-card/category-card
 
 -
     var list = [
@@ -37,7 +37,7 @@ section.section.products-showcase: .container
         +anchor.products-showcase__link.text-button смотреть все
         ul.products-showcase__list.active(data-tab='1')
             each card in list
-                li.products-showcase__list-item: +product-card(card)
+                li.products-showcase__list-item: +category-card(card)
         ul.products-showcase__list(data-tab='2')
             each card in list
-                li.products-showcase__list-item: +product-card(card)
+                li.products-showcase__list-item: +category-card(card)

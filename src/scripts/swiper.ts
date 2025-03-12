@@ -1,2 +1,2 @@
 import 'components/products-slider/products-swiper.js'
-import 'ui/product-card/product-card-swiper'
+import 'ui/category-card/category-card-swiper'
