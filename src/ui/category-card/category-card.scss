@@ -1,11 +1,13 @@
 @use 'styles/utils';
 
 .category-card {
+    min-width: 0;
     display: block;
 
     &__top {
         position: relative;
         height: 335px;
+        overflow: hidden;
 
         &::after {
             inset: 0;
@@ -123,7 +125,7 @@
 
     &__title {
         margin: 12px 0 28px;
-        max-width: 340px;
+        max-width: 55%;
         font-family: var(--steelfish);
         font-size: 4.6rem;
         line-height: 1.05;
@@ -156,6 +158,12 @@
             font-size: 1.4rem;
         }
 
+        .slider-pagination-bullets {
+            gap: 8px;
+            bottom: 16px;
+            width: 88px;
+        }
+
         &__body {
             margin-top: 24px;
         }
@@ -184,7 +192,6 @@
 
         &__title {
             margin: 10px 0 20px;
-            max-width: 180px;
             font-size: 3rem;
         }
 

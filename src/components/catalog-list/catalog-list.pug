@@ -1,0 +1,8 @@
+include layout/utils
+include ui/category-card/category-card
+
+.catalog-list.catalog-list--subcategories.container
+    .catalog-list__list
+        each _ in Array(8)
+            +category-card
+    +wrapBreak: button.button.button--transparent.button--dark.catalog-list__more-button ещё

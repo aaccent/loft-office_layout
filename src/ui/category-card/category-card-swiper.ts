@@ -32,7 +32,7 @@ new Swiper('.category-card .swiper', {
     modules: [Pagination, EffectFade],
     on: {
         init(swiper) {
-            if (adaptive.isDesktop) return
+            if (adaptive.isMobile) return
 
             initProductCard(swiper.el, swiper.slides, swiper)
         },
