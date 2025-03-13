@@ -55,6 +55,12 @@ class RangeSlider {
         return typeof number === 'number' ? number : fallback
     }
 
+    boundsValue(value: number) {
+        if (value < this.limit.from) value = this.limit.from
+        if (value > this.limit.to) value = this.limit.to
+        return value
+    }
+
     initTrack() {
         const track = this.el.querySelector<HTMLElement>('.range-slider__track')
         if (!track) throw new Error('У .range-slider нет .range-slider__track')
@@ -98,7 +104,7 @@ class RangeSlider {
 
         const onePercent = rightLimit * 0.01
         const offsetPercent = offset / onePercent
-        let value = ((this.limit.to - this.offset) * offsetPercent) / 100 + this.offset
+        let value = Math.trunc(((this.limit.to - this.offset) * offsetPercent) / 100 + this.offset)
 
         const key = this.draggedThumb === this.thumb.from ? 'from' : 'to'
 
@@ -133,7 +139,7 @@ class RangeSlider {
         input.addEventListener('change', () => this.setInputValue(key))
 
         this.input[key] = input
-        this.value[key] = this.numberWithFallback(parseInt(input.dataset.num), this.limit[key])
+        this.value[key] = this.boundsValue(this.numberWithFallback(parseInt(input.dataset.num), this.limit[key]))
 
         this.setInputValue(key)
     }
@@ -145,8 +151,7 @@ class RangeSlider {
 
     inputHandler(event: InputEvent, key: Key) {
         let value = parseInt((event.currentTarget as HTMLInputElement).value.replaceAll(/\D/g, ''))
-        if (value < this.limit.from) value = this.limit.from
-        if (value > this.limit.to) value = this.limit.to
+        value = this.boundsValue(value)
 
         this.value[key] = value
         this.setInputValue(key)
@@ -165,13 +170,20 @@ class RangeSlider {
     }
 
     setThumb(key: Key) {
-        const leftOffsetInPercents = (this.value[key] - this.offset) / this.onePercent
-        let leftOffsetInPixels = (this.trackWidth * leftOffsetInPercents) / 100
+        const leftOffsetInPercents = Math.trunc((this.value[key] - this.offset) / this.onePercent)
+        let leftOffsetInPixels = Math.trunc((this.trackWidth * leftOffsetInPercents) / 100)
 
+        // Если ползунок будет "прибит" к левому краю, то нужно исключить его ширину
+        if (key === 'to') {
+            leftOffsetInPixels -= this.thumb.to.offsetWidth
+        }
+
+        // Если левый ползунок будет впритык к правому, то добавляем между ними 2px
         if (key === 'from' && leftOffsetInPixels >= this.thumbOffsetPx.to) {
             leftOffsetInPixels -= this.thumb.to.offsetWidth + 2
         }
 
+        // Если правый ползунок будет впритык к левому, то добавляем между ними 2px
         if (key === 'to' && leftOffsetInPixels <= this.thumbOffsetPx.from) {
             leftOffsetInPixels += this.thumb.from.offsetWidth + 2
         }
@@ -181,6 +193,7 @@ class RangeSlider {
 
     setLine() {
         this.line.style.left = this.thumb.from.style.left
+        // 3px для надежности чтобы линия была точно под правым ползунком
         this.line.style.right = `${this.trackWidth - parseInt(this.thumb.to.style.left) - 3}px`
     }
 }

@@ -10,7 +10,7 @@ mixin range-slider(props)
         }, props || {})
 
     .range-slider(data-min=`${props.min}`, data-max=`${props.max}`, data-is-price=props.isPrice)&attributes(attributes)
-        unless props.title
+        if props.name
             .range-slider__title= props.name
         .range-slider__inputs-wrapper
             // Аттрибут name можно менять, скрипты опираются на классы.
@@ -18,14 +18,14 @@ mixin range-slider(props)
             +wrapBreak: input.range-slider__input.range-slider__input--from(
                 name='range-from',
                 value='',
-                data-num='10000',
+                data-num=props.min,
                 type='text',
                 data-mask='от %d'
             )
             +wrapBreak: input.range-slider__input.range-slider__input--to(
                 name='range-to',
                 value='',
-                data-num='250000',
+                data-num=props.max,
                 type='text',
                 data-mask='до %d'
             )
