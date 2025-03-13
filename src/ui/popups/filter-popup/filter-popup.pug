@@ -49,34 +49,38 @@ mixin dropdown-block(props)
 
 +popup("filter", "filter-popup")
     form.filter-popup__form
-        .filter-popup__header
-            .section-title.filter-popup__title
-                | фильтр
-                +wrapBreak: button.filter-popup__reset-filter-button(type='reset') сбросить
-        .filter-popup__body
-            +range-slider({ name: 'Цена', isPrice: true })
-            .filter-popup__block
-                +switch({ name: 'new', title: 'Новинка' })
-            .filter-popup__block
-                +switch({ name: 'sale', title: 'sale' })
-            +dropdown-block({ title: 'Категория' })
-                +checkbox-list({ name: 'category', list: categoryList })
-            +dropdown-block({ title: 'Ширина, см' })
-                +range-slider({ min: 20, max: 240 })
-            +dropdown-block({ title: 'Высота, см' })
-                +range-slider({ min: 20, max: 240 })
-            +dropdown-block({ title: 'Глубина, см' })
-                +range-slider({ min: 20, max: 240 })
-            +dropdown-block({ title: 'Категория' })
-                +checkbox-bg-image-list({ name: 'category', list: materialList })
-            +dropdown-block({ title: 'Материал' })
-                +checkbox-bg-image-list({ name: 'category', list: materialList })
-            +dropdown-block({ title: 'Стиль' })
-                +checkbox-list({ name: 'category', list: categoryList })
-            +dropdown-block({ title: 'Тон цвета' })
-                +checkbox-color-list({ name: 'category', list: colorList })
+        .filter-popup__form-inner
+            .filter-popup__header
+                .section-title.filter-popup__title
+                    | фильтр
+                    +wrapBreak: button.filter-popup__reset-filter-button(type='reset') сбросить
+            .filter-popup__body
+                +range-slider({ name: 'Цена', isPrice: true })
+                .filter-popup__block
+                    +switch({ name: 'new', title: 'Новинка' })
+                .filter-popup__block
+                    +switch({ name: 'sale', title: 'sale' })
+                +dropdown-block({ title: 'Категория' })
+                    +checkbox-list({ name: 'category', list: categoryList })
+                +dropdown-block({ title: 'Ширина, см' })
+                    +range-slider({ min: 20, max: 240 })
+                +dropdown-block({ title: 'Высота, см' })
+                    +range-slider({ min: 20, max: 240 })
+                +dropdown-block({ title: 'Глубина, см' })
+                    +range-slider({ min: 20, max: 240 })
+                +dropdown-block({ title: 'Категория' })
+                    +checkbox-bg-image-list({ name: 'category', list: materialList })
+                +dropdown-block({ title: 'Материал' })
+                    +checkbox-bg-image-list({ name: 'category', list: materialList })
+                +dropdown-block({ title: 'Стиль' })
+                    +checkbox-list({ name: 'category', list: categoryList })
+                +dropdown-block({ title: 'Тон цвета' })
+                    +checkbox-color-list({ name: 'category', list: colorList })
         .filter-popup__bottom
-            +wrapBreak: button.button.button--dark.filter-popup__submit-button(type='submit', data-action='close-popup')
+            +wrapBreak: button.button.button--dark.filter-popup__submit-button(
+                type='submit',
+                data-action='close-popup'
+            )
                 | показать#{ ' ' }
                 span 56#{ ' ' }
                 | товаров

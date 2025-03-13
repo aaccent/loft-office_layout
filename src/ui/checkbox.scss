@@ -50,3 +50,8 @@
         @include utils.bg-defaults;
     }
 }
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .checkbox {
+    }
+}

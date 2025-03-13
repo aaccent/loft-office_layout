@@ -33,6 +33,7 @@ class RangeSlider {
     line!: HTMLElement
     track!: HTMLElement
     trackWidth!: number
+    trackWidthOnePercent!: number
     draggedThumb: null | HTMLElement = null
 
     constructor(rangeElement: RangeElement) {
@@ -67,6 +68,7 @@ class RangeSlider {
 
         this.track = track
         this.trackWidth = track.offsetWidth
+        this.trackWidthOnePercent = track.offsetWidth * 0.01
     }
 
     initThumb(key: Key) {
@@ -102,8 +104,7 @@ class RangeSlider {
         if (offset < 0) offset = 0
         if (offset > rightLimit) offset = rightLimit
 
-        const onePercent = rightLimit * 0.01
-        const offsetPercent = offset / onePercent
+        const offsetPercent = offset / this.trackWidthOnePercent
         let value = Math.trunc(((this.limit.to - this.offset) * offsetPercent) / 100 + this.offset)
 
         const key = this.draggedThumb === this.thumb.from ? 'from' : 'to'
@@ -137,6 +138,7 @@ class RangeSlider {
         input.addEventListener('focus', () => (this.input[key].value = this.value[key].toString()))
         input.addEventListener('input', (event) => this.inputHandler(event as InputEvent, key))
         input.addEventListener('change', () => this.setInputValue(key))
+        input.addEventListener('blur', () => this.setInputValue(key))
 
         this.input[key] = input
         this.value[key] = this.boundsValue(this.numberWithFallback(parseInt(input.dataset.num), this.limit[key]))
@@ -188,13 +190,12 @@ class RangeSlider {
             leftOffsetInPixels += this.thumb.from.offsetWidth + 2
         }
 
-        this.thumb[key].style.left = `${leftOffsetInPixels}px`
+        this.thumb[key].style.left = `${leftOffsetInPixels / this.trackWidthOnePercent}%`
     }
 
     setLine() {
         this.line.style.left = this.thumb.from.style.left
-        // 3px для надежности чтобы линия была точно под правым ползунком
-        this.line.style.right = `${this.trackWidth - parseInt(this.thumb.to.style.left) - 3}px`
+        this.line.style.right = `${100 - parseInt(this.thumb.to.style.left) - 0.6}%`
     }
 }
 
