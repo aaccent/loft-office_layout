@@ -5,16 +5,26 @@ include features/popup/popup
     .send-review__title.section-title оставить отзыв
     form.send-review__form(novalidate, data-handler='some.php')
         .send-review__form-inputs
-            +wrapBreak: input.send-review__input(placeholder='Имя*', required, name='name', type='text')
-            +wrapBreak: input.send-review__input(
+            +wrapBreak: input.input.send-review__input(placeholder='Имя*', required, name='name', type='text')
+            +wrapBreak: input.input.send-review__input(
                 placeholder='фамилия*',
                 required,
                 name='surname',
                 type='text'
             )
-            +wrapBreak: input.send-review__input(placeholder='телефон*', required, name='tel', type='tel')
-            +wrapBreak: input.send-review__input(placeholder='почта', name='email', type='email')
-            +wrapBreak: textarea.send-review__input(required, placeholder='ваш отзыв*', rows=1, wrap='soft')
+            +wrapBreak: input.input.send-review__input(
+                placeholder='телефон*',
+                required,
+                name='tel',
+                type='tel'
+            )
+            +wrapBreak: input.input.send-review__input(placeholder='почта', name='email', type='email')
+            +wrapBreak: textarea.textarea.send-review__input(
+                required,
+                placeholder='ваш отзыв*',
+                rows=1,
+                wrap='soft'
+            )
         .send-review__container
             +wrapBreak: input(type='file', name='file', accept='image/*', multiple)
             .send-review__drop
