@@ -2,6 +2,7 @@ interface RangeElement extends HTMLElement {
     dataset: {
         min: string
         max: string
+        isPrice: string | undefined
     }
 }
 
@@ -20,10 +21,11 @@ class RangeSlider {
     offset: number
     onePercent: number
     value = { from: 0, to: 500000 }
+    isPrice: boolean
 
     // Input
     input = {} as { from: RangeInputElement; to: RangeInputElement }
-    formatter = new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB', maximumFractionDigits: 0 })
+    priceFormatter = new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB', maximumFractionDigits: 0 })
 
     // Track, line and thumbs
     thumb = {} as { from: HTMLElement; to: HTMLElement }
@@ -35,6 +37,7 @@ class RangeSlider {
 
     constructor(rangeElement: RangeElement) {
         this.el = rangeElement
+        this.isPrice = typeof this.el.dataset.isPrice === 'string' && this.el.dataset.isPrice !== 'false'
 
         this.limit.from = +rangeElement.dataset.min
         this.limit.to = +rangeElement.dataset.max
@@ -157,7 +160,7 @@ class RangeSlider {
         // Если поле в фокусе, то не форматировать его значение
         if (document.activeElement === this.input[key]) return
 
-        const priceFormatted = this.formatter.format(this.value[key])
+        const priceFormatted = this.isPrice ? this.priceFormatter.format(this.value[key]) : this.value[key]
         this.input[key].value = this.input[key].dataset.mask.replace('%d', priceFormatted.toString())
     }
 
