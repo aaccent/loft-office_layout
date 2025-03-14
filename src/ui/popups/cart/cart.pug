@@ -1,5 +1,6 @@
 include layout/utils
 include components/products-slider/products-slider
+include ui/product-info-card/product-info-card
 
 -
     var recentlySeen = [
@@ -53,29 +54,10 @@ include components/products-slider/products-slider
     .cart__empty В данный момент в корзине ничего нет!
     +products-slider({ title: 'недавно смотрели', list: recentlySeen })
 
-    // Шаблон разметки. Его нельзя удалять и вносить изменения в data атрибуты
-    .product__layout(data-id)
-        +wrapBreak: img.cart__list-product-img(data-img)
-        .cart__list-product-info
-            .cart__list-product-title(data-title)
-            .cart__list-product-characteristic
-                +wrapBreak: span.cart__list-product-size(data-size)
-                +wrapBreak: span.cart__list-product-color(data-color)
-            .cart__list-product-amount
-                +wrapBreak: button.decrease -
-                +wrapBreak: span.number(data-amount)
-                +wrapBreak: button.increase +
-            .cart__list-product-stock(data-stock)
-            .cart__list-product-preorder предзаказ
-        .cart__list-product-price
-            .cart__list-product-remove
-            .cart__list-product-price-peritem(data-pricePerItem)
-            .cart__list-product-price-container
-                .cart__list-product-price--total(data-totalPrice)
-                .cart__list-product-price--discount(data-discountPrice)
+    +product-info-card.cart__product-layout.cart__list-product
     .cart__list
     form.cart__promo-form(novalidate, data-handler='smth.php')
-        +wrapBreak: input.input.cart__promo-input(placeholder='промокод')
+        +wrapBreak: input.cart__promo-input(placeholder='промокод')
         +wrapBreak: button.cart__promo-button(disabled)
     .cart__info
         .cart__info-divider
