@@ -4,11 +4,11 @@ import { adaptive } from 'globals/adaptive'
 
 function initProductCard(cardTop: HTMLElement, slides: HTMLElement[], swiper: Swiper) {
     const hoverContainer = document.createElement('div')
-    hoverContainer.className = 'product-card__hover-container'
+    hoverContainer.className = 'category-card__hover-container'
 
     slides.forEach((_, index) => {
         const hoverItem = document.createElement('div')
-        hoverItem.className = 'product-card__hover-item'
+        hoverItem.className = 'category-card__hover-item'
         hoverItem.addEventListener('mouseenter', () => {
             swiper.slideTo(index)
         })
@@ -19,7 +19,7 @@ function initProductCard(cardTop: HTMLElement, slides: HTMLElement[], swiper: Sw
     cardTop.prepend(hoverContainer)
 }
 
-new Swiper('.product-card .swiper', {
+new Swiper('.category-card .swiper', {
     createElements: true,
     slidesPerView: 'auto',
     effect: 'fade',
@@ -32,7 +32,7 @@ new Swiper('.product-card .swiper', {
     modules: [Pagination, EffectFade],
     on: {
         init(swiper) {
-            if (adaptive.isDesktop) return
+            if (adaptive.isMobile) return
 
             initProductCard(swiper.el, swiper.slides, swiper)
         },

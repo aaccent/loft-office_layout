@@ -7,3 +7,4 @@ import 'layout/footer/footer.js'
 
 import 'ui/type-list/type-list.js'
 import 'ui/popups/cart/cart'
+import 'ui/selector/selector'

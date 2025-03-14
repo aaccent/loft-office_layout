@@ -10,7 +10,6 @@ void (function () {
         if (!header) return
 
         const height = `${header.offsetHeight}px`
-        header.style.marginBottom = `-${height}`
         document.documentElement.style.setProperty('--header-height', height)
     }
     setHeaderHeight()

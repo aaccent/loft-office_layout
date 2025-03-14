@@ -1,0 +1,98 @@
+@use 'styles/utils';
+
+.catalog-list {
+    margin-bottom: 180px;
+
+    &__list:has(.category-card) {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 60px 20px;
+    }
+
+    &__list:has(.product-card) {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 60px 32px;
+    }
+
+    &__list {
+        display: grid;
+
+        .category-card {
+            grid-column: span 2;
+
+            &:nth-child(5n-1),
+            &:nth-child(5n) {
+                grid-column: span 3;
+
+                .category-card__top {
+                    height: 602px;
+                }
+            }
+        }
+
+        .product-card {
+            &:nth-child(14n + 1),
+            &:nth-child(14n - 4) {
+                grid-column: span 2;
+
+                .product-card__top {
+                    height: 990px;
+                }
+            }
+        }
+    }
+
+    &__more-button {
+        margin: 100px auto 0;
+        width: 120px;
+        height: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &::before,
+        &::after {
+            display: none;
+        }
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .catalog-list {
+        margin-bottom: 80px;
+
+        &__list {
+            grid-template-columns: 1fr !important;
+            gap: 32px !important;
+
+            .category-card {
+                grid-column: span 1;
+
+                &:nth-child(5n-1),
+                &:nth-child(5n) {
+                    grid-column: span 1;
+
+                    .category-card__top {
+                        height: 227px;
+                    }
+                }
+            }
+
+            .product-card {
+                &:nth-child(14n + 1),
+                &:nth-child(14n - 4) {
+                    grid-column: span 1;
+
+                    .product-card__top {
+                        height: 364px;
+                    }
+                }
+            }
+        }
+
+        &__button {
+            margin: 40px auto 0;
+            width: 90px;
+            height: 90px;
+        }
+    }
+}

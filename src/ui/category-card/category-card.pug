@@ -1,0 +1,42 @@
+include layout/utils
+
+mixin category-card(props)
+    -
+        props = Object.assign({
+            images: [
+              require('assets/content/products/4.jpg'),
+              require('assets/content/products/5.jpg'),
+              require('assets/content/products/6.jpg'),
+            ],
+            title: 'мебель для гостиниц high-jack',
+            color: 'Оттавио Орех',
+            price: '147 000 ₽',
+            discountPrice: false,
+            new: false,
+            discount: false,
+        }, props || {})
+
+    +anchor.category-card
+        .category-card__top.swiper
+            .category-card__top-attributes
+                if props.new
+                    +wrapBreak: span.category-card__top-attribute-item new
+                if props.discount
+                    +wrapBreak: span.category-card__top-attribute-item.category-card__top-attribute-item--dark 20%
+            .category-card__images.swiper-wrapper
+                each img in props.images
+                    .category-card__image-item.swiper-slide
+                        +img(img).category-card__img
+        .category-card__body
+            .category-card__color-info
+                +wrapBreak: span.category-card__color= props.color
+                .category-card__colors-list
+                    +wrapBreak: span.category-card__color-item(style='background-color: #8c7c62')
+                    +wrapBreak: span.category-card__color-item(style='background-color: #624c34')
+                    +wrapBreak: span.category-card__color-item(style='background-color: #9fad2f')
+                +wrapBreak: span.category-card__color-more +2
+            .category-card__title= props.title
+            .category-card__price-info
+                +wrapBreak: span.category-card__price= props.price
+                if props.discountPrice
+                    +wrapBreak: span.category-card__price-discount= props.discountPrice

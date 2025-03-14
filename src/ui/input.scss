@@ -1,7 +1,7 @@
 @use 'styles/utils';
 
-input,
-textarea {
+.input,
+.textarea {
     padding-bottom: 16px;
     width: 100%;
     color: var(--accent);
@@ -20,7 +20,7 @@ textarea {
     }
 }
 
-textarea {
+.textarea {
     background-color: transparent;
     resize: none;
 }
