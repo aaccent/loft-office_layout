@@ -2,8 +2,9 @@ import { validateTelInput } from 'features/forms'
 import Swiper from 'swiper'
 import { AdditionalPriceInfo, OrderInfo } from '@/types/order'
 import { orderInfo } from '@/test-order-info'
+import { adaptive } from 'globals/adaptive'
 
-type FinalInfo = {
+type FinalUserDataInfo = {
     address: string
     name: string
     tel: string
@@ -11,7 +12,7 @@ type FinalInfo = {
 }
 
 interface FinalInfoElement extends HTMLElement {
-    dataset: { input: keyof FinalInfo }
+    dataset: { final: keyof FinalUserDataInfo }
 }
 
 type User = 'private' | 'commerce' | 'commerce-nds' | 'commerce,commerce-nds'
@@ -19,8 +20,8 @@ interface UserTypeInput extends HTMLInputElement {
     value: User
 }
 
-/** Определяет поля для шага Личные данные, которые относятся к выбранному типу пользователя */
-function setUserData(userType: User) {
+/** Определяет поля для показа в форме Личные данные */
+function setUserDataForm(userType: User) {
     const userDataInputs = document.querySelectorAll<HTMLInputElement>('.user-data .input')
     userDataInputs.forEach((input) => {
         const inputUserType = input.dataset.userType
@@ -34,135 +35,181 @@ function setUserData(userType: User) {
 
 /** @param userType если 'private', то кнопка Оплаты появляемся в шаге Методы оплаты. Если другое, то в шаге Методы доставки */
 function setSubmitButton(userType: User) {
-    const currentVisibleButton = document.querySelector('.order__button._visible')
-    currentVisibleButton?.classList.remove('_visible')
+    const submitButton = document.querySelector<HTMLElement>('.order__button')
+    if (!submitButton) return
 
-    const visibleButton =
-        userType === 'private'
-            ? document.querySelector('.order-step:has(.payment-method) .order__button')
-            : document.querySelector('.order-step:has(.delivery-method) .order__button')
+    submitButton?.classList.remove('_visible')
 
-    visibleButton?.classList.add('_visible')
+    if (userType === 'private') {
+        document.querySelector('.order-step:has(.payment-method) .order-step__body')?.append(submitButton)
+    } else {
+        document.querySelector('.order-step:has(.delivery-method) .order-step__body')?.append(submitButton)
+    }
 }
 
+/** Открытие следующего шага, если в текущем нет кнопки отправки формы */
 function openNextStep(currentStepElement: HTMLElement) {
     const currentStep = currentStepElement.closest<HTMLElement>('.order-step')
-    if (currentStep?.querySelector('.order__button._visible')) return
+    currentStep?.classList.add('_valid')
+    if (currentStep?.querySelector('.order__button')) return
 
     currentStep?.classList.remove('_opened')
     currentStep?.nextElementSibling?.classList.add('_opened')
 }
 
-function openCheckedStep(e: MouseEvent) {
-    const changeStepButton = e.target as HTMLElement
-    const step = changeStepButton.closest<HTMLElement>('.order-step')
-    const userData = step?.querySelector<HTMLElement>('.user-data')
-    const currentOpenStep = document.querySelector<HTMLElement>('.order-step._opened')
+/** Проверка валидности полей в шаге Личные данные */
+function validateUserData() {
+    let valid = true
+    const userDataStep = document.querySelector('.user-data')
+    const requireUserInputs = userDataStep?.querySelectorAll<HTMLInputElement>('.input._active input')
 
-    currentOpenStep?.classList.remove('_opened')
-    step?.classList.add('_opened')
-    if (userData) userData.classList.remove('_valid')
+    const fullName: string[] = ['']
+    const finalInfo: FinalUserDataInfo = {
+        name: '',
+        email: '',
+        tel: '',
+        address: '',
+    }
+
+    requireUserInputs?.forEach((input) => {
+        if (!input.value || !validateTelInput(input)) {
+            input.classList.add('invalid')
+            userDataStep?.classList.remove('_valid')
+            valid = false
+        }
+
+        switch (input.name) {
+            case 'name':
+                fullName[1] = input.value
+                break
+            case 'last-name':
+                fullName[0] = input.value
+                break
+            case 'middle-name':
+                fullName[2] = input.value
+                break
+            case 'tel':
+                finalInfo.tel = input.value
+                break
+            case 'email':
+                finalInfo.email = input.value
+                break
+            case 'address':
+                finalInfo.address = input.value
+                break
+        }
+    })
+
+    userDataStep?.classList.add('_valid')
+    finalInfo.name = fullName.join(' ')
+    setFinalUserData(finalInfo)
+
+    return valid
 }
 
-/** Заполняет данные для отображения в шаге Личные данные */
-function setFinalUserInfo(info: FinalInfo) {
-    const userData = document.querySelector<HTMLElement>('.user-data')
+/** Открытие/закрытие шага */
+function openCloseStep(e: MouseEvent) {
+    const target = e.target as HTMLElement
+    const targetStep = target.closest('.order-step')
+
+    const stepWithSubmitButton = !!targetStep?.querySelector('.order__button')
+    if (stepWithSubmitButton) return
+
+    const userDataStep = !!targetStep?.querySelector('.user-data')
+    if (userDataStep) validateUserData()
+
+    const checkedStep = targetStep?.classList.contains('_valid')
+    if (!checkedStep) return
+
+    targetStep?.classList.toggle('_opened')
+}
+
+/** Заполняет финальные данные ТОЛЬКО для шага Личные данные */
+function setFinalUserData(info: FinalUserDataInfo) {
     const finalInfoElements = document.querySelectorAll<FinalInfoElement>('.user-data__final div')
 
-    userData?.classList.add('_valid')
-
     finalInfoElements?.forEach((el) => {
-        const key = el.dataset.input
+        const key = el.dataset.final
         el.textContent = info[key]
     })
 }
 
+/** Действия при выботе типа покупателя */
+function setUserType(input: UserTypeInput) {
+    const activeUserType = input.value
+    setUserDataForm(activeUserType)
+    setSubmitButton(activeUserType)
+}
+
 function init() {
-    /** Определение полей в шаге Личные данные и места показа кнопки отправки формы. */
+    /** Типы покупателей */
     const userTypeInputs = document.querySelectorAll<UserTypeInput>('.user-type input')
     userTypeInputs.forEach((input) => {
-        input.addEventListener('change', () => {
-            const activeUserType = input.value
-            setUserData(activeUserType)
-            setSubmitButton(activeUserType)
-            const userTypeFinal = document.querySelector('.user-type__final')
-            const checkedUserType = input.closest('.user-type')
-            if (!userTypeFinal || !checkedUserType) return
-            userTypeFinal.textContent = checkedUserType.textContent
-        })
+        input.addEventListener('change', () => setUserType(input))
     })
 
-    /** Закрытие текущего шага и открытие следующего при выборе  */
+    /** Все инпуты с типом radio */
     const radioInputs = document.querySelectorAll<HTMLInputElement>('input[type="radio"]')
     radioInputs.forEach((input) => {
         input.addEventListener('change', () => openNextStep(input))
     })
 
-    /** Проверка валидности полей в шаге Личные данные и вывод финальных данных */
+    /** Кнопка Далее в шаге Личные данные */
     const userDataButton = document.querySelector<HTMLButtonElement>('.order-step .user-data__button')
-    userDataButton?.addEventListener('click', () => {
-        const requireUserInputs = document.querySelectorAll<HTMLInputElement>('.user-data__inputs .input._active input')
-
-        const fullName: string[] = ['']
-        const finalInfo: FinalInfo = {
-            name: '',
-            email: '',
-            tel: '',
-            address: '',
-        }
-
-        requireUserInputs.forEach((input) => {
-            if (!input.value || !validateTelInput(input)) {
-                input.classList.add('invalid')
-                return
-            }
-
-            switch (input.name) {
-                case 'name':
-                    fullName[1] = input.value
-                    break
-                case 'last-name':
-                    fullName[0] = input.value
-                    break
-                case 'middle-name':
-                    fullName[2] = input.value
-                    break
-                case 'tel':
-                    finalInfo.tel = input.value
-                    break
-                case 'email':
-                    finalInfo.email = input.value
-                    break
-                case 'address':
-                    finalInfo.address = input.value
-                    break
-            }
-        })
-
-        const invalids = document.querySelectorAll('.order-step input.invalid')
-        if (invalids.length) return
-
-        finalInfo.name = fullName.join(' ')
-        openNextStep(userDataButton)
-        setFinalUserInfo(finalInfo)
+    userDataButton?.addEventListener('click', (e) => {
+        if (!validateUserData()) return
+        const target = e.target as HTMLElement
+        openNextStep(target)
     })
 
-    /** Открытие предыдущего шага */
-    const changeStepButtons = document.querySelectorAll<HTMLElement>('.order-step__change-button')
-    changeStepButtons.forEach((button) => button.addEventListener('click', openCheckedStep))
+    /** Кнопки Изменить */
+    const changeStepButton = document.querySelectorAll<HTMLElement>('.order-step__change-button')
+    changeStepButton.forEach((button) => {
+        button.addEventListener('click', openCloseStep)
+    })
 
-    const firstStep = document.querySelector<HTMLElement>('.order-step:nth-child(1)')
-    firstStep?.classList.add('_opened')
+    /** Заголовки шагов */
+    const stepTitles = document.querySelectorAll<HTMLElement>('.order-step__title')
+    stepTitles.forEach((title) => {
+        title.addEventListener('click', openCloseStep)
+    })
 
     /** Кнопка закрыть */
     const closeButton = document.querySelector('.order__close')
     closeButton?.addEventListener('click', () => window.history.back())
+
+    const firstStep = document.querySelector<HTMLElement>('.order-step:nth-child(1)')
+    firstStep?.classList.add('_opened')
+
+    /** Изменения внешнего вида в мобильном разрешении */
+    if (adaptive.isDesktop) return
+
+    /** Кнопка Входа в ЛК */
+    void (function () {
+        const autorizationButton = document.querySelector('.order__autorization-button')
+        if (!autorizationButton) return
+
+        autorizationButton.textContent = 'уже есть акаунт? войти'
+        const stepBody = autorizationButton.closest('.order-step')?.querySelector('.order-step__body')
+        stepBody?.append(autorizationButton)
+    })()
+
+    /** Кнопки Изменить, локация  */
+    void (function () {
+        const location = document.querySelector<HTMLElement>('.order__location')
+        const elements = location ? Array.from(changeStepButton).concat(location) : changeStepButton
+
+        elements.forEach((button) => {
+            const finalBlock = button.closest('.order-step')?.querySelector('.order-step__final')
+            finalBlock?.after(button)
+        })
+    })()
 }
 
 function createProductImage(src: string) {
     const img = document.createElement('img')
     img.src = src
-    img.classList.add('order__items-img', 'swiper-slide')
+    img.classList.add('order-details__img', 'swiper-slide')
     return img
 }
 
@@ -174,8 +221,14 @@ function showProductsImages() {
         if (image.src) container.append(createProductImage(image.src))
     })
     new Swiper('.order__items', {
-        slidesPerView: 3.5,
-        spaceBetween: 12,
+        slidesPerView: 2.5,
+        spaceBetween: 8,
+        breakpoints: {
+            1000: {
+                slidesPerView: 3.5,
+                spaceBetween: 12,
+            },
+        },
     })
 }
 
@@ -193,10 +246,7 @@ function createOrderInfoItem(info: AdditionalPriceInfo) {
     addsOrderInfoItem.classList.remove('_layout')
     addsOrderInfoItem.setAttribute('data-id', `${info.id}`)
     if (info.type === 'discount') addsOrderInfoItem.classList.add('order-info__item--discount')
-    const name = addsOrderInfoItem.querySelector('.name') as HTMLElement
-    const value = addsOrderInfoItem.querySelector('.value') as HTMLElement
-    name.textContent = info.title
-    value.textContent = info.text
+    updateOrderInfoItem(addsOrderInfoItem, info)
 
     return addsOrderInfoItem
 }

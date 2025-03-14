@@ -4,7 +4,6 @@ input,
 textarea {
     width: 100%;
     color: var(--accent);
-    font-size: 1.6rem;
     letter-spacing: 0.01rem;
     text-transform: uppercase;
 
@@ -102,5 +101,12 @@ textarea {
             opacity: 1;
             visibility: visible;
         }
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .input {
+        padding-bottom: 16px;
+        font-size: 1.2rem;
     }
 }

@@ -66,3 +66,20 @@
         background-image: url('assets/icons/close.svg');
     }
 }
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .promo-code {
+        padding: 20px;
+        input {
+            font-size: 1.2rem;
+        }
+
+        &__actions {
+            width: 16px;
+        }
+
+        &__enter::before {
+            background-size: contain;
+        }
+    }
+}
