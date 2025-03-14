@@ -1,10 +1,9 @@
 import { adaptive } from 'globals/adaptive'
 import { openPopup } from 'features/popup/popup'
 
+const header = document.querySelector('.header')
 /** Высота и позиционирование шапки и его меню */
 void (function () {
-    const header = document.querySelector('.header')
-
     /** Выставляет переменную в CSS с высотой шапки для позиционирования меню */
     function setHeaderHeight() {
         if (!header) return
@@ -40,6 +39,7 @@ void (function () {
         if (catalogMenu?.classList.contains('opened')) return
 
         catalogMenu?.classList.add('opened')
+        header.classList.add('opened')
     }
 
     function deferCloseCatalogMenu() {
@@ -48,6 +48,7 @@ void (function () {
 
         timeout = setTimeout(() => {
             catalogMenu?.classList.remove('opened')
+            header.classList.remove('opened')
         }, THRESHOLD_MS_BEFORE_CLOSE)
     }
 
@@ -74,6 +75,7 @@ void (function () {
     document.querySelectorAll('[data-action="burger-menu"]').forEach((button) => {
         button.addEventListener('click', () => {
             burgerMenu.classList.toggle('opened')
+            header.classList.toggle('opened')
         })
     })
 })()
@@ -87,6 +89,8 @@ void (function () {
     document.querySelectorAll('[data-action="mobile-menu"]').forEach((button) => {
         button.addEventListener('click', () => {
             mobileMenuWrapper.classList.toggle('opened')
+            header.classList.toggle('opened')
+
             if (!mobileMenuWrapper.classList.contains('opened')) {
                 catalogMenu.classList.remove('opened')
             }
