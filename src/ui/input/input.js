@@ -3,7 +3,6 @@ const dataInputs = document.querySelectorAll('.input')
 dataInputs.forEach((container) => {
     const input = container.querySelector('input')
     if (input.value) container.classList.add('process')
-    const inputTel = container.querySelector('input[type="tel"]')
 
     const resetButton = document.createElement('button')
     resetButton.classList.add('input__reset')

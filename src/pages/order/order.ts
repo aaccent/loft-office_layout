@@ -178,7 +178,7 @@ function init() {
     const closeButton = document.querySelector('.order__close')
     closeButton?.addEventListener('click', () => window.history.back())
 
-    const firstStep = document.querySelector<HTMLElement>('.order-step:nth-child(1)')
+    const firstStep = document.querySelector<HTMLElement>('.order-step:nth-child(3)')
     firstStep?.classList.add('_opened')
 
     /** Изменения внешнего вида в мобильном разрешении */

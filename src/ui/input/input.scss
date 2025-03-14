@@ -35,6 +35,7 @@ textarea {
     input {
         position: relative;
         z-index: 10;
+        width: 95%;
     }
 
     &__placeholder {
@@ -45,8 +46,9 @@ textarea {
 
     &__reset {
         position: absolute;
+        top: 50%;
         right: 0;
-        bottom: 26px;
+        transform: translateY(-50%);
         translate: -10px;
         @include utils.square(15px);
         opacity: 0;
@@ -82,6 +84,7 @@ textarea {
     }
 
     &.process {
+        border-color: var(--accent);
         .input__placeholder {
             transform: translateY(-115%) scale(0.8);
             opacity: 0.5;
@@ -106,6 +109,7 @@ textarea {
 
 @media only screen and (max-width: utils.$tablet1000) {
     .input {
+        padding-top: 16px;
         padding-bottom: 16px;
         font-size: 1.2rem;
     }

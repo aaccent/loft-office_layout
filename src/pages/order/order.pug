@@ -22,7 +22,8 @@ block append main
             {
                 title: 'Курьером',
                 description: 'Доставка по г. Казань',
-                time: 'сегодня, от 250 ₽'
+                time: 'сегодня, от 250 ₽',
+                dataPopup: 'courier'
             },
             {
                 title: 'Самовывоз',
@@ -132,16 +133,18 @@ block append main
                         .order__location Казань
                             .icon.icon-geo
                     .order-step__final
-                    ul.order-step__body.delivery-method-list
-                        each item in delivery
-                            li
-                                label.delivery-method
-                                    input.delivery-method__input(type='radio', name='delivery-method')
-                                    .delivery-method__title= item.title
-                                        .order-step__checkmark
-                                    if item.description
-                                        .delivery-method__description= item.description
-                                    .delivery-method__time= item.time
+                    .order-step__body
+                        ul.delivery-method-list
+                            each item in delivery
+                                li
+                                    button(data-action='popup', data-popup=item.dataPopup, type='button')
+                                        label.delivery-method
+                                            input.delivery-method__input(type='radio', name='delivery-method')
+                                            .delivery-method__title= item.title
+                                                .order-step__checkmark
+                                            if item.description
+                                                .delivery-method__description= item.description
+                                            .delivery-method__time= item.time
                     .delivery-method__final
                         .delivery-method__type
                         .delivery-method__address
