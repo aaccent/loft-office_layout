@@ -71,8 +71,10 @@ include ui/product-info-card/product-info-card
             +wrapBreak: span
         .cart__info-trigger(data-price-for-discount='80000')
             .cart__info-trigger-circle
-            .cart__info-trigger-text получите скидку 15%
-                .cart__info-trigger-action добавьте в корзину товары ещё на
+            .cart__info-trigger-text
+                +wrapBreak получите скидку 15%
+                .cart__info-trigger-action
+                +wrapBreak добавьте в корзину товары ещё на
                     span 5 700 ₽
         .cart__info-actions
             +wrapBreak: button.button.button--dark(data-action='popup', data-popup='order') К оформлению
