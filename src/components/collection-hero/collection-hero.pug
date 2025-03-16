@@ -1,0 +1,76 @@
+include layout/utils
+include ui/product-info-card/product-info-card
+
+-
+    var pointData = {
+      'data-title': 'Офисное кресло Chairman 696 TW-05',
+      'data-size': '120 × 80 × 174 см ',
+      'data-color': 'Серый',
+      'data-price': '17 200 ₽',
+      'data-price-discount': '18 000 ₽',
+      'data-is-favorite': true,
+      'data-image': require('assets/content/collection/product-image.jpg'),
+      'data-stock': '',
+    }
+
+    var photos = [
+        require('assets/content/collection/collection-hero.jpg'),
+        require('assets/content/main-page/main-hero-bg.jpg'),
+        require('assets/content/collection/collection-hero.jpg'),
+        require('assets/content/main-page/main-hero-bg.jpg'),
+        require('assets/content/main-page/main-hero-bg.jpg'),
+    ]
+
+section.section.collection-hero
+    .collection-hero__main-slider.swiper
+        +product-info-card-without-amount.collection-hero__product-info-card
+        .swiper-wrapper
+            each photo in photos
+                .collection-hero__main-slide-item.swiper-slide
+                    +img(photo).collection-hero__image
+                    .collection-hero__points-list
+                        .collection-hero__point(style={ left: '31%', top: '56%' })&attributes(pointData)
+                        .collection-hero__point(style={ left: '23%', top: '70%' })&attributes(pointData)
+                        .collection-hero__point(style={ left: '49%', top: '60%' })&attributes(pointData)
+                        .collection-hero__point(style={ left: '39%', top: '48%' })&attributes(pointData)
+                        .collection-hero__point(style={ left: '51%', top: '45%' })&attributes(pointData)
+    .container
+        .collection-hero__thumb-slider-wrapper
+            +wrapBreak: button.collection-hero__thumb-slider-button.swiper-button-prev
+            .collection-hero__thumb-slider.swiper
+                .swiper-wrapper
+                    each photo in photos
+                        .collection-hero__thumb-slide-item.swiper-slide: +img(photo)
+            +wrapBreak: button.collection-hero__thumb-slider-button.swiper-button-next
+        .collection-hero__body
+            .collection-hero__title-wrapper
+                h1.collection-hero__title Кабинет руководителя Brooklyn
+                span.collection-hero__code код: 172823
+            .collection-hero__mobile-slider.swiper: .swiper-wrapper
+                each photo in photos
+                    +img(photo).collection-hero__mobile-slider-item.swiper-slide
+            .collection-hero__body-info
+                .collection-hero__body-block.collection-hero__body-block--vertical
+                    .collection-hero__body-block-title
+                        | цвет:#{ ' ' }
+                        span Оттавио Орех
+                    ul.collection-hero__colors-list
+                        li: +anchor.collection-hero__color-item.active
+                            +img(require('assets/content/collection/color-1.jpg')).collection-hero__color-image
+                        li: +anchor.collection-hero__color-item
+                            +img(require('assets/content/collection/color-2-1.jpg')).collection-hero__color-image
+                            +img(require('assets/content/collection/color-2-2.jpg')).collection-hero__color-image
+                        li: +anchor.collection-hero__color-item
+                            +img(require('assets/content/collection/color-3.jpg')).collection-hero__color-image
+                .collection-hero__body-block
+                    .collection-hero__body-block-title доставка:
+                    ul.collection-hero__delivery-list
+                        li Доставка: 2–3 дня, от 250 ₽
+                        li Самовывоз: сегодня, со склада
+                        li Гарантия: 12 месяцев
+                .collection-hero__body-block
+                    .collection-hero__body-block-title цена:
+                    .collection-hero__price-wrapper
+                        span.collection-hero__price от 147 000 ₽
+                        span.collection-hero__price-discount от 150 000 ₽
+            +popupBtn('collection').button.button--dark.collection-hero__button смотреть все товары на фото

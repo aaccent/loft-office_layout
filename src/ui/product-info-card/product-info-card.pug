@@ -4,9 +4,9 @@ mixin product-info-card
     // Шаблон разметки. Его нельзя удалять и вносить изменения в data аттрибуты
     // Если нужно поменять разметку, то правильно расставьте data аттрибуты
     .product-info-card(data-id)&attributes(attributes)
-        +wrapBreak: img.product-info-card__img(data-img)
+        +anchor.product-info-card__img-wrapper: +wrapBreak: img.product-info-card__img(data-img)
         .product-info-card__body
-            .product-info-card__title(data-title)
+            +anchor.product-info-card__title(data-title)
             .product-info-card__characteristic
                 +wrapBreak: span.product-info-card__size(data-size)
                 +wrapBreak: span.product-info-card__color(data-color)
@@ -17,8 +17,26 @@ mixin product-info-card
             .product-info-card__stock(data-stock)
             .product-info-card__preorder(data-preorder) предзаказ
         .product-info-card__price
-            .product-info-card__remove(data-remove)
+            +wrapBreak: button.product-info-card__remove(data-remove, type='button')
             .product-info-card__peritem(data-price-per-item)
+            .product-info-card__price-container
+                .product-info-card__price--total(data-total-price)
+                .product-info-card__price--discount(data-discount-price)
+
+mixin product-info-card-without-amount
+    // Шаблон разметки. Его нельзя удалять и вносить изменения в data аттрибуты
+    // Если нужно поменять разметку, то правильно расставьте data аттрибуты
+    .product-info-card(data-id)&attributes(attributes)
+        +anchor.product-info-card__img-wrapper: +wrapBreak: img.product-info-card__img(data-img)
+        .product-info-card__body
+            +anchor.product-info-card__title(data-title)
+            .product-info-card__characteristic
+                +wrapBreak: span.product-info-card__size(data-size)
+                +wrapBreak: span.product-info-card__color(data-color)
+            .product-info-card__stock(data-stock)
+            .product-info-card__preorder(data-preorder) предзаказ
+        .product-info-card__price
+            +wrapBreak: button.product-info-card__favorite-button(type='button'): span.icon.icon-favorite
             .product-info-card__price-container
                 .product-info-card__price--total(data-total-price)
                 .product-info-card__price--discount(data-discount-price)
