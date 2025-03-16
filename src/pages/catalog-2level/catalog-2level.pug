@@ -10,5 +10,8 @@ block append main
     include components/filter/filter--2level
     include components/catalog-list/catalog-list--products
 
+block append popups
+    include ui/popups/filter-popup/filter-popup
+
 block append scripts
     script(src=require('scripts/catalog.ts'))

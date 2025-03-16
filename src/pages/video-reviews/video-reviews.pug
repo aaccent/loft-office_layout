@@ -22,5 +22,9 @@ block append main
             include components/reviews-list/video/video-reviews
         +wrapBreak: button.reviews__more-button ещё
 
+block append popups
+    include ui/popups/send-review/send-review
+    include ui/popups/video-review/video-review
+
 block append scripts
     script(src=require('scripts/other.ts'))

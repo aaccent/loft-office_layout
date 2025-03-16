@@ -21,5 +21,8 @@ block append main
                 ) Оставить отзыв
             include components/reviews-list/external/external
 
+block append popups
+    include ui/popups/send-review/send-review
+
 block append scripts
     script(src=require('scripts/other.ts'))

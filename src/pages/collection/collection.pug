@@ -1,0 +1,32 @@
+extends layout/page
+
+block append head
+    link(href=require('styles/collection.styles.scss'), rel='stylesheet')
+
+block append main
+    include ui/breadcrumbs/breadcrumbs
+    +breadcrumbs(['Мебель для кабинета руководителя', 'кресла для кабинета руководителя'])
+    include components/collection-hero/collection-hero
+    include components/catalog-hero/catalog-hero
+    include components/catalog-list/catalog-list
+    .dark-wrapper
+        include components/reviews-section/reviews-section
+        include components/slider-section/slider-section
+        -
+            var card = {
+                title: 'мебель для гостиниц high-jack',
+                color: 'Оттавио Орех',
+                price: 'от 147 000 ₽',
+                new: true,
+            }
+        +slider-section('Похожие решения')
+            +category-card(card).swiper-slide
+            +category-card(card).swiper-slide
+            +category-card(card).swiper-slide
+            +category-card(card).swiper-slide
+
+block append popups
+    include ui/popups/collection/collection
+
+block append scripts
+    script(src=require('scripts/collection.ts'))

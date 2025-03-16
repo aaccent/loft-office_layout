@@ -20,7 +20,7 @@ mixin product-card(props)
                     +wrapBreak: span.product-card__top-attribute-item new
                 if props.discount
                     +wrapBreak: span.product-card__top-attribute-item.product-card__top-attribute-item--dark 20%
-                +wrapBreak: button.product-card__favorite-button: .icon.icon-favorite
+                +wrapBreak: button.product-card__favorite-button: span.icon.icon-favorite
             +anchor: +img(props.image).product-card__image
             .product-card__size-selector.selector.selector--size
                 +wrapBreak: button.selector__button

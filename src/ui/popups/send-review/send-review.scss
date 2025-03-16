@@ -147,7 +147,7 @@
                     &:after {
                         content: '';
                         @include utils.square(12px);
-                        @include utils.bg-defaults(auto);
+                        @include utils.bg-defaults;
                         filter: var(--filter-accent);
                         background-image: url('assets/icons/close.svg');
                     }
