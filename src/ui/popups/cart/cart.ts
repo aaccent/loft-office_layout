@@ -1,6 +1,10 @@
 import { CartInfo, Product } from '@/types'
 import { formatPrice } from 'features/formatPrice'
 
+function camelCaseToKebab(camelCaseString: string) {
+    return camelCaseString.replaceAll(/[A-Z]/g, (substring) => `-${substring.toLowerCase()}`)
+}
+
 /** Тултип ССЫЛКА СКОПИРОВАНА */
 function shareLink(e: MouseEvent) {
     if (e.target !== e.currentTarget) return
@@ -129,13 +133,15 @@ function updateProductData(rawProduct: Product, element: HTMLElement, rewrite: b
         : rawProduct
 
     Object.entries(product).forEach(([key, value]) => {
-        const dataEl = element.querySelector<HTMLElement>(`[data-${key}]`)
+        const dataEl = element.querySelector<HTMLElement>(`[data-${camelCaseToKebab(key)}]`)
         if (!dataEl) return
+
         if (dataEl instanceof HTMLImageElement) {
             return (dataEl.src = value)
         }
-        const priceValue = key === 'totalPrice' || key === 'discountPrice' || key === 'pricePerItem'
-        if (priceValue) {
+
+        const isPriceValue = key === 'totalPrice' || key === 'discountPrice' || key === 'pricePerItem'
+        if (isPriceValue) {
             return (dataEl.textContent = formatPrice(value))
         }
 
@@ -264,17 +270,3 @@ window.cart = {
 }
 
 init()
-
-const product = {
-    id: 123,
-    title: 'test',
-    img: 'string',
-    size: 'string',
-    color: 'string',
-    totalPrice: 2355,
-    pricePerItem: 123,
-    stock: 12,
-    amount: 1,
-}
-
-window.cart.addItems([product])
