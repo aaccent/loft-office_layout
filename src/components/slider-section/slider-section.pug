@@ -1,0 +1,10 @@
+include layout/utils
+
+mixin slider-section(title)
+    section.section.slider-section: .container
+        .slider-section__title-wrapper
+            h2.slider-section__title.section-title= title
+            +wrapBreak: button.slider-section__button.slider-section__button--prev
+            +wrapBreak: button.slider-section__button.slider-section__button--next
+        .slider-section__list-wrapper.swiper: ul.swiper-wrapper.slider-section__list
+            block

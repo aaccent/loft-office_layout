@@ -16,7 +16,7 @@ mixin category-card(props)
             discount: false,
         }, props || {})
 
-    +anchor.category-card
+    +anchor.category-card&attributes(attributes)
         .category-card__top.swiper
             .category-card__top-attributes
                 if props.new
