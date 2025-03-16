@@ -1,0 +1,12 @@
+include layout/utils
+include features/popup/popup
+
++popup('points', 'points')
+    .points__map
+    .points__info
+        .points__title пункты выдачи
+        .input.points__search
+            input(type='text', placeholder='Найти адрес пункта')
+        .points__list-wrapper
+            .points__list-container
+                ul.points__list

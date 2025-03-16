@@ -1,0 +1,125 @@
+@use 'styles/utils';
+
+.points {
+    opacity: 1;
+    visibility: visible;
+
+    &__inner {
+        padding: 0;
+        width: 100%;
+        display: flex;
+        background-color: transparent;
+    }
+
+    &__info {
+        padding: 54px 60px 0;
+        width: 100%;
+        max-width: 790px;
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+    }
+
+    &__map {
+        width: 100%;
+        background-color: #b41212;
+    }
+
+    &__title {
+        margin-bottom: 80px;
+        font: 8rem/1.2 var(--steelfish);
+        letter-spacing: -0.01rem;
+        text-transform: uppercase;
+    }
+
+    &__search.input {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font: 2.8rem/1.05 var(--steelfish);
+        text-transform: uppercase;
+
+        input::placeholder {
+            opacity: 0.5;
+        }
+
+        &::after {
+            content: '';
+            @include utils.bg-defaults(cover);
+            background-image: url('assets/icons/search.svg');
+            @include utils.square(24px);
+            filter: var(--filter-accent);
+            display: block;
+        }
+
+        &.process {
+            &::after {
+                display: none;
+            }
+        }
+    }
+
+    &__list {
+        gap: 32px;
+        display: flex;
+        flex-direction: column;
+
+        &-wrapper {
+            position: relative;
+            margin-top: 80px;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        &-container {
+            inset: 0;
+            position: absolute;
+
+            &::after {
+            }
+        }
+    }
+
+    &__item {
+        gap: 8px;
+        position: relative;
+        padding-bottom: 32px;
+        display: flex;
+        flex-direction: column;
+        font: 2rem/1.4 var(--firs-neue);
+        border-bottom: 1px solid hsl(0, 0%, 16%, 0.2);
+
+        &-price {
+            opacity: 0.5;
+        }
+
+        &-date {
+            color: var(--green);
+        }
+
+        &-button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: flex;
+            color: var(--accent);
+            font: 2.8rem/1.05 var(--steelfish);
+            letter-spacing: 0.01rem;
+            text-transform: uppercase;
+
+            &::before {
+                content: '';
+                @include utils.square(26px);
+                background-color: var(--accent);
+                @include utils.bg-defaults(contain);
+                margin-right: 10px;
+                background-image: url('assets/icons/full-arrow.svg');
+            }
+        }
+    }
+}

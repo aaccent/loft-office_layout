@@ -1,5 +1,6 @@
 import { ScriptStatus, ScriptTypes } from '@/features/loadScript'
 import { CartInfo, Product } from '@/types/types'
+import { ReceiveItem } from '@/types/delivery'
 
 declare global {
     interface Window {
@@ -25,6 +26,10 @@ declare global {
         order: {
             showProductsImages(): void
             setOrderInfo(info: OrderInfo): void
+        }
+
+        delivery: {
+            setList(list: ReceiveItem[]): void
         }
     }
 }
