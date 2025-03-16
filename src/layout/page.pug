@@ -13,13 +13,10 @@ html(lang='ru')
         .main-wrapper
             main.main
                 block main
+                block popups
 
             include footer/footer
 
-        include ui/popups/video-review/video-review
-        include ui/popups/text-review/text-review
-        include ui/popups/send-review/send-review
-        include ui/popups/filter-popup/filter-popup
         include ui/popups/cart/cart
 
         block scripts

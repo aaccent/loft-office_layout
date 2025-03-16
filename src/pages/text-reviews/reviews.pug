@@ -23,5 +23,9 @@ block append main
             +text-reviews
         +wrapBreak: button.reviews__more-button ещё
 
+block append popups
+    include ui/popups/send-review/send-review
+    include ui/popups/text-review/text-review
+
 block append scripts
     script(src=require('scripts/other.ts'))
