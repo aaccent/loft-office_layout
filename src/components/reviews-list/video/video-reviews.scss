@@ -56,7 +56,7 @@
             &:before {
                 content: '';
                 @include utils.square(13px);
-                @include utils.bg-defaults(auto);
+                @include utils.bg-defaults;
                 align-self: flex-start;
                 background-image: url('assets/icons/play.svg');
             }

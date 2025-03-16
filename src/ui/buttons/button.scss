@@ -28,7 +28,7 @@
     }
 
     &::after {
-        @include utils.bg-defaults(auto);
+        @include utils.bg-defaults;
         background-image: url('assets/icons/full-arrow.svg');
     }
 
