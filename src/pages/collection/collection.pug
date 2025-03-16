@@ -12,5 +12,8 @@ block append main
     .dark-wrapper
         include components/reviews-section/reviews-section
 
+block append popups
+    include ui/popups/collection/collection
+
 block append scripts
     script(src=require('scripts/collection.ts'))
