@@ -1,0 +1,30 @@
+include layout/utils
+
+-
+    var list = [
+        [
+          { title: 'кабинеты руководителя', amount: 26 },
+          { title: 'бары и рестораны', amount: 32 },
+        ],
+        [
+            { title: 'Офисы и конференц-залы', amount: 54 },
+            { title: 'Гостиницы и апарт-отели', amount: 19 },
+        ],
+        [
+            { title: 'Холлы и общественные зоны', amount: 16 },
+            { title: 'Фуд корты', amount: 34 },
+        ],
+        [
+            { title: 'Уличная мебель', amount: 12 },
+            { title: 'Аксессуары', amount: 41 },
+        ],
+    ]
+
+section.section.categories: .container: .categories__list
+    each group in list
+        .categories__item-group
+            each item in group
+                +anchor.categories__item.category-link
+                    span.category-link__text= item.title
+                    span.category-link__number= item.amount
+                    +img(require('assets/content/main-page/category-hover.jpg')).categories__item-img-hover

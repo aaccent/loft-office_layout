@@ -1,0 +1,21 @@
+include layout/utils
+
+-
+    var list = [
+        { title: 'ВСЕ', num: 23 },
+        { title: 'офисные', num: 23 },
+        { title: 'дизайнерские', num: 23 },
+        { title: 'конференц', num: 23 },
+        { title: 'ортопедические', num: 23 },
+        { title: 'компьютерные', num: 23 },
+    ]
+
+.catalog-hero.container
+    h1.page-title.catalog-hero__title кресла для кабинета руководителя
+    p.catalog-hero__text Устанавливаем точные размеры любых строительных объектов, конструкций и отдельных элементов
+    .catalog-hero__subcategories
+        each item, index in list
+            - className = index === 0 ? 'category-link active' : 'category-link'
+            +anchor(class=className)
+                span.category-link__text= item.title
+                span.category-link__number= item.num

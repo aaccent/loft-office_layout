@@ -1,6 +1,10 @@
 import { CartInfo, Product } from '@/types'
 import { formatPrice } from 'features/formatPrice'
 
+function camelCaseToKebab(camelCaseString: string) {
+    return camelCaseString.replaceAll(/[A-Z]/g, (substring) => `-${substring.toLowerCase()}`)
+}
+
 /** Тултип ССЫЛКА СКОПИРОВАНА */
 function shareLink(e: MouseEvent) {
     if (e.target !== e.currentTarget) return
@@ -95,7 +99,7 @@ function stickyInfo() {
         }
     }
 
-    const productsAmountInCart = document.querySelectorAll('.cart__list-product').length
+    const productsAmountInCart = document.querySelectorAll('.cart__list .cart__list-product').length
     if (productsAmountInCart < 3) {
         cartInfo?.classList.remove('sticky')
         cartPopup?.removeEventListener('scroll', setCartInfoBorder)
@@ -107,7 +111,7 @@ function stickyInfo() {
 
 /** Обновление общего счетчика товаров в корзине в заголовке*/
 function updateAmount() {
-    const amount = document.querySelectorAll('.cart__list-product').length
+    const amount = document.querySelectorAll('.cart__list .cart__list-product').length
     window.cart.amount = amount
     document.querySelector<HTMLElement>('.cart__amount')!.textContent = amount.toString()
 }
@@ -129,20 +133,22 @@ function updateProductData(rawProduct: Product, element: HTMLElement, rewrite: b
         : rawProduct
 
     Object.entries(product).forEach(([key, value]) => {
-        const dataEl = element.querySelector<HTMLElement>(`[data-${key}]`)
+        const dataEl = element.querySelector<HTMLElement>(`[data-${camelCaseToKebab(key)}]`)
         if (!dataEl) return
+
         if (dataEl instanceof HTMLImageElement) {
             return (dataEl.src = value)
         }
-        const priceValue = key === 'totalPrice' || key === 'discountPrice' || key === 'pricePerItem'
-        if (priceValue) {
+
+        const isPriceValue = key === 'totalPrice' || key === 'discountPrice' || key === 'pricePerItem'
+        if (isPriceValue) {
             return (dataEl.textContent = formatPrice(value))
         }
 
         if (key === 'stock' && value) {
             dataEl.style.display = 'block'
             dataEl.textContent = `наличие: ${value} шт`
-            element.querySelector<HTMLElement>('.cart__list-product-preorder')!.style.display = 'none'
+            element.querySelector<HTMLElement>('[data-preorder]')!.style.display = 'none'
             return
         }
 
@@ -152,14 +158,13 @@ function updateProductData(rawProduct: Product, element: HTMLElement, rewrite: b
 
 /** Создание товара */
 function createProduct(product: Product) {
-    const productLayout = document.querySelector('.product__layout')
+    const productLayout = document.querySelector('.cart__product-layout')
     if (!productLayout) return ''
 
     const productElement = productLayout.cloneNode(true) as HTMLElement
-    productElement.classList.remove('product__layout')
-    productElement.classList.add('cart__list-product')
+    productElement.classList.remove('cart__product-layout')
     productElement.dataset.id = product.id.toString()
-    const removeButton = productElement.querySelector('.cart__list-product-remove')
+    const removeButton = productElement.querySelector('[data-remove]')
     removeButton?.addEventListener('click', () => removeItem(product.id))
     updateProductData(product, productElement)
 
@@ -194,8 +199,7 @@ function addItems(list: Product[]) {
 
     const products = cartList.querySelectorAll('.cart__list-product')
     if (!products.length) {
-        const empty = document.querySelector('.cart__empty')
-        empty?.classList.add('hidden')
+        document.querySelector('.cart__empty')?.classList.add('hidden')
     }
 
     list.forEach((item) => {
@@ -242,7 +246,7 @@ function setInfo(info: CartInfo) {
 }
 
 function removeItem(id: Product['id']) {
-    const products = document.querySelectorAll<HTMLElement>('.cart__list-product')
+    const products = document.querySelectorAll<HTMLElement>('.cart__list .cart__list-product')
     products.forEach((product) => {
         if (id.toString() === product.dataset.id) {
             product.remove()
@@ -253,7 +257,7 @@ function removeItem(id: Product['id']) {
 }
 
 function clear() {
-    document.querySelectorAll('.cart__list-product').forEach((product) => product.remove())
+    document.querySelectorAll('.cart__list .cart__list-product').forEach((product) => product.remove())
 }
 
 window.cart = {

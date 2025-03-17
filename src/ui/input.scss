@@ -1,7 +1,7 @@
 @use 'styles/utils';
 
-input,
-textarea {
+.input,
+.textarea {
     padding-bottom: 16px;
     width: 100%;
     color: var(--accent);
@@ -20,7 +20,16 @@ textarea {
     }
 }
 
-textarea {
+.textarea {
     background-color: transparent;
     resize: none;
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .input,
+    .textarea {
+        font-size: 1.2rem;
+        letter-spacing: 0.01rem;
+        line-height: 1.3;
+    }
 }

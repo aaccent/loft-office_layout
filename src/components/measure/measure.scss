@@ -1,0 +1,104 @@
+@use 'styles/utils';
+
+@media only screen and (min-width: 1200px) {
+    .measure:has(+ .dark-wrapper) {
+        margin-bottom: 0;
+    }
+}
+
+.measure {
+    position: relative;
+
+    &__bg {
+        inset: 0;
+        object-position: center;
+        object-fit: cover;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    .container {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    &__body {
+        position: relative;
+        z-index: 1;
+        padding: 160px 40px;
+        width: 50%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        background-color: var(--white);
+    }
+
+    &__title {
+        margin-bottom: 40px;
+        max-width: 520px;
+        font-family: var(--steelfish);
+        font-size: 8rem;
+        letter-spacing: -0.01rem;
+        line-height: 1.1;
+        text-transform: uppercase;
+    }
+
+    &__text {
+        margin-bottom: 95px;
+        max-width: 440px;
+        font-size: 2rem;
+        line-height: 1.4;
+    }
+
+    &__teseract {
+        object-fit: contain;
+        object-position: center;
+        margin-bottom: 115px;
+        @include utils.square(148px);
+        display: block;
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .measure {
+        &__bg {
+            display: none;
+        }
+
+        .container {
+            padding-top: 0;
+            padding-bottom: 0;
+            display: block;
+        }
+
+        &__body {
+            padding: 50px 25px;
+            width: 100%;
+        }
+
+        &__title {
+            margin-bottom: 24px;
+            max-width: 230px;
+            font-size: 3.4rem;
+            line-height: 1.05;
+        }
+
+        &__text {
+            margin-bottom: 48px;
+            max-width: 230px;
+            font-size: 1.2rem;
+            letter-spacing: 0.02rem;
+            line-height: 1.5;
+        }
+
+        &__teseract {
+            --size: 74px;
+            margin-bottom: 48px;
+        }
+    }
+}

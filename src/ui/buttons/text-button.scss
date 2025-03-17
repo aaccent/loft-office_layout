@@ -1,0 +1,56 @@
+@use 'styles/utils';
+
+.text-button {
+    gap: 10px;
+    --size: 26px;
+    --arrow-size: calc(var(--size) * 0.7);
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: var(--accent);
+    font-family: var(--steelfish);
+    font-size: 2.8rem;
+    letter-spacing: 0.01rem;
+    line-height: 1.05;
+    text-transform: uppercase;
+
+    &::before {
+        content: '';
+        width: var(--size);
+        height: var(--size);
+        background-color: var(--accent);
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        left: calc(var(--size) / 2);
+        translate: -50% -50%;
+        width: var(--arrow-size);
+        height: var(--arrow-size);
+        background-image: url('assets/icons/full-arrow.svg');
+        @include utils.bg-defaults;
+    }
+
+    &--dark {
+        color: var(--white);
+
+        &::before {
+            background-color: var(--white);
+        }
+
+        &::after {
+            filter: var(--filter-accent);
+        }
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .text-button {
+        font-size: 2rem;
+        letter-spacing: 0.01rem;
+        line-height: 1.05;
+    }
+}

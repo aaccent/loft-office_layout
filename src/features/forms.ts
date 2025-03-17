@@ -62,6 +62,12 @@ function validateForm(form: HTMLFormElement): Boolean {
     const requiredInputs = form.querySelectorAll<HTMLInputElement>('[required]')
 
     requiredInputs.forEach((input) => {
+        if (input.type === 'tel' && input.value.replaceAll(/\D/g, '').length !== 11) {
+            valid = false
+            input.classList.add('invalid')
+            input.addEventListener('input', () => input.classList.remove('invalid'), { once: true })
+        }
+
         if (input.value !== '') return
 
         valid = false

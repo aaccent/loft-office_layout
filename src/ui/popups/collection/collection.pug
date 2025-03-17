@@ -1,0 +1,25 @@
+include layout/utils
+include features/popup/popup
+include ui/product-info-card/product-info-card
+
+-
+    var product = {
+        title: 'Стол для руководителя Brooklyn',
+        img: require('assets/content/products/3.png'),
+        size: '120 × 80 × 174 см ',
+        color: 'Канадский Дуб',
+        stock: 'Наличие: 8 шт',
+        totalPrice: '17 200 ₽',
+        discountPrice: '18 000 ₽',
+        template: false,
+    }
+
++popup('collection', 'collection-popup')
+    .collection-popup__title.section-title
+        +wrapBreak товары на фото
+        span 8
+    .collection-popup__list-wrapper: ul.collection-popup__list
+        +product-info-card-without-amount(product)
+        +product-info-card-without-amount(product)
+        +product-info-card-without-amount(product)
+        +product-info-card-without-amount(product)

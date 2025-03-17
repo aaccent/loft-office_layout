@@ -1,0 +1,47 @@
+@use 'styles/utils';
+
+.thanks-popup {
+    &__inner {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__title {
+        margin-bottom: 32px;
+        max-width: 360px;
+        font-family: var(--steelfish);
+        font-size: 4.6rem;
+        line-height: 1.25;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    &__text {
+        max-width: 400px;
+        font-size: 2rem;
+        line-height: 1.4;
+        text-align: center;
+        opacity: 0.5;
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .thanks-popup {
+        &__title {
+            margin-bottom: 20px;
+            max-width: 280px;
+            font-size: 3.4rem;
+            letter-spacing: -0.01rem;
+            line-height: 1.05;
+        }
+
+        &__text {
+            max-width: 250px;
+            font-size: 1.2rem;
+            letter-spacing: 0.02rem;
+            line-height: 1.5;
+        }
+    }
+}

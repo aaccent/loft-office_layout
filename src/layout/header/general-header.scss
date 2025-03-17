@@ -1,17 +1,47 @@
 @use 'styles/utils';
 
-body:has(main.main .main-hero) .header {
-    margin-bottom: -98px;
+body:has(:where(.main-hero, .collection-hero)) .header {
+    margin-bottom: calc(var(--header-height, 98px) * -1);
+}
+
+body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .sticky)) {
+    color: white;
+    background-color: transparent;
+
+    .header__inner {
+        border-bottom-color: hsla(0, 0%, 100%, 0.1);
+    }
+
+    .header__logo {
+        filter: var(--filter-white);
+    }
+
+    .header__geo-button {
+        filter: var(--filter-white);
+    }
+
+    .header__menu-button {
+        &::before,
+        &::after {
+            background-color: var(--white);
+        }
+    }
+
+    .header__actions-list .icon {
+        filter: var(--filter-white);
+    }
 }
 
 .header {
     position: sticky;
     z-index: 10;
     top: 0;
-    color: white;
+    color: var(--accent);
+    background-color: var(--main);
     @include utils.transition((background-color, color));
 
-    &:has(:is(.catalog-menu.opened, .burger-menu.opened, .header__menu-wrapper.opened)) {
+    &.sticky,
+    &.opened {
         color: var(--accent);
         background-color: var(--main);
 
@@ -33,6 +63,14 @@ body:has(main.main .main-hero) .header {
         }
     }
 
+    &.sticky {
+        background-color: var(--white);
+
+        .header__inner {
+            border-bottom-color: transparent;
+        }
+    }
+
     &:has(.catalog-menu.opened) &__menu-list li > :is(a, button):not([data-action='catalog-menu']) {
         opacity: 0.5;
     }
@@ -45,11 +83,12 @@ body:has(main.main .main-hero) .header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid hsl(28, 38%, 31%, 0.2);
         @include utils.transition(border-bottom-color);
     }
 
     &__logo {
+        filter: var(--filter-accent);
         height: 37px;
         @include utils.transition(filter);
 
@@ -62,7 +101,7 @@ body:has(main.main .main-hero) .header {
 
     &__geo-button {
         gap: 10px;
-        filter: var(--filter-white);
+        filter: var(--filter-accent);
         display: flex;
         align-items: center;
         font-size: 1.4rem;
@@ -86,6 +125,10 @@ body:has(main.main .main-hero) .header {
     &__mobile-actions,
     &__mobile-mail,
     .socials {
+        display: none;
+    }
+
+    &__mobile-menu-item {
         display: none;
     }
 
@@ -182,7 +225,7 @@ body:has(main.main .main-hero) .header {
             width: 100%;
             /* @skip-scaling */
             height: 2px;
-            background-color: white;
+            background-color: var(--accent);
             @include utils.transition(background-color);
         }
     }
@@ -215,6 +258,10 @@ body:has(main.main .main-hero) .header {
         gap: 30px;
         display: flex;
         align-items: center;
+
+        .icon {
+            filter: var(--filter-accent);
+        }
     }
 
     &__mobile-search-button {
@@ -223,6 +270,38 @@ body:has(main.main .main-hero) .header {
 }
 
 @media only screen and (max-width: utils.$tablet1000) {
+    body:has(:where(.collection-hero)) .header {
+        margin-bottom: 0;
+    }
+
+    .header,
+    body:not(:has(:where(.main-hero))) .header:not(.opened, .sticky) {
+        color: var(--accent);
+
+        .header__inner {
+            border-bottom-color: hsl(28, 38%, 31%, 0.2);
+        }
+
+        .header__logo {
+            filter: var(--filter-accent);
+        }
+
+        .header__geo-button {
+            filter: var(--filter-accent);
+        }
+
+        .header__menu-button {
+            &::before,
+            &::after {
+                background-color: var(--accent);
+            }
+        }
+
+        .header__actions-list .icon {
+            filter: var(--filter-accent);
+        }
+    }
+
     .header {
         &__inner {
             gap: 15px;
@@ -251,7 +330,7 @@ body:has(main.main .main-hero) .header {
             }
         }
 
-        &:has(:is(.burger-menu.opened, .header__menu-wrapper.opened)) &__menu-button {
+        &.opened &__menu-button {
             height: 20px;
             align-items: flex-start;
 
@@ -275,6 +354,10 @@ body:has(main.main .main-hero) .header {
         }
 
         &__mobile-search-button {
+            display: block;
+        }
+
+        &__mobile-menu-item {
             display: block;
         }
 

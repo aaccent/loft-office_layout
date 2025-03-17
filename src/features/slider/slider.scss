@@ -1,0 +1,90 @@
+@use 'styles/utils';
+
+.slider {
+    width: 100%;
+    height: 100%;
+
+    &__item {
+        inset: 0;
+        position: absolute;
+        opacity: 0;
+        @include utils.transition(opacity);
+
+        &.active {
+            z-index: 1;
+            opacity: 1;
+        }
+    }
+
+    &__media {
+        object-fit: cover;
+        object-position: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__pagination {
+        gap: 16px;
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        translate: -50%;
+        width: 360px;
+        height: 2px;
+        display: flex;
+    }
+
+    &__bullet {
+        width: 1px;
+        height: 100%;
+        flex-grow: 1;
+        opacity: 0.5;
+        background-color: var(--white);
+        @include utils.transition(opacity);
+
+        &.active {
+            opacity: 1;
+        }
+    }
+
+    &__controls {
+        position: absolute;
+        right: 40px;
+        bottom: 40px;
+        display: flex;
+    }
+
+    &__slide-button {
+        @include utils.square(64px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid var(--white);
+
+        &::after {
+            content: '';
+            @include utils.square(45%);
+            transform-origin: center;
+            background-image: url('assets/icons/arrow.svg');
+            @include utils.bg-defaults;
+        }
+
+        &--prev {
+            border-right: 0;
+
+            &::after {
+                rotate: -180deg;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .slider {
+        &__pagination {
+            gap: 12px;
+            bottom: 28px;
+            width: 150px;
+        }
+    }
+}

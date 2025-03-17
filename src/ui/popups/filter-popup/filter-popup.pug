@@ -1,0 +1,86 @@
+include layout/utils
+include features/popup/popup
+include ui/range-slider/range-slider
+include ui/switch/switch
+include ui/checkbox-list/checkbox-list
+
+-
+    var categoryList = [
+        'Стулья',
+        'Шкафы',
+        'Тумбы',
+        'Столы',
+        'Кресла',
+        'Стеллажи',
+        'Диваны',
+    ]
+
+    var materialList = [
+        { title: 'Оттавио орех', color: require('assets/content/colors/color-1.jpg') },
+        { title: 'Канадский клён', color: require('assets/content/colors/color-2.jpg') },
+        { title: 'Белёный дуб', color: require('assets/content/colors/color-3.jpg') },
+        { title: 'Ясень Шимо', color: require('assets/content/colors/color-4.jpg') },
+        { title: 'Сосна', color: require('assets/content/colors/color-5.jpg') },
+        { title: 'Бежевый', color: require('assets/content/colors/color-6.jpg') },
+        { title: 'Чёрный', color: require('assets/content/colors/color-7.jpg') },
+    ]
+
+    var colorList = [
+        { title: 'Зеленый', color: '#054703' },
+        { title: 'Красный', color: '#e61616' },
+        { title: 'Светло-Зеленый', color: '#83d689' },
+        { title: 'Желтый', color: '#e4d80d' },
+        { title: 'Фиолетовый', color: '#6717b1' },
+        { title: 'Бежевый', color: '#cdbba7' },
+        { title: 'Чёрный', color: '#000' },
+    ]
+
+mixin dropdown-block(props)
+    -
+        props = Object.assign({
+            title: '',
+        }, props || {})
+
+    .filter-popup__block.filter-popup__block--dropdown
+        .filter-popup__block-title-wrapper
+            .filter-popup__block-title= props.title
+            +wrapBreak: button.filter-popup__block-reset-button(type='button') Сбросить
+        .filter-popup__block-body: block
+
++popup("filter", "filter-popup")
+    form.filter-popup__form
+        .filter-popup__form-inner
+            .filter-popup__header
+                .section-title.filter-popup__title
+                    | фильтр
+                    +wrapBreak: button.filter-popup__reset-filter-button(type='reset') сбросить
+            .filter-popup__body
+                +range-slider({ name: 'Цена', isPrice: true })
+                .filter-popup__block
+                    +switch({ name: 'new', title: 'Новинка' })
+                .filter-popup__block
+                    +switch({ name: 'sale', title: 'sale' })
+                +dropdown-block({ title: 'Категория' })
+                    +checkbox-list({ name: 'category', list: categoryList })
+                +dropdown-block({ title: 'Ширина, см' })
+                    +range-slider({ min: 20, max: 240 })
+                +dropdown-block({ title: 'Высота, см' })
+                    +range-slider({ min: 20, max: 240 })
+                +dropdown-block({ title: 'Глубина, см' })
+                    +range-slider({ min: 20, max: 240 })
+                +dropdown-block({ title: 'Категория' })
+                    +checkbox-bg-image-list({ name: 'category', list: materialList })
+                +dropdown-block({ title: 'Материал' })
+                    +checkbox-bg-image-list({ name: 'category', list: materialList })
+                +dropdown-block({ title: 'Стиль' })
+                    +checkbox-list({ name: 'category', list: categoryList })
+                +dropdown-block({ title: 'Тон цвета' })
+                    +checkbox-color-list({ name: 'category', list: colorList })
+        .filter-popup__bottom
+            +wrapBreak: button.button.button--dark.filter-popup__submit-button(
+                type='submit',
+                data-action='close-popup'
+            )
+                | показать#{ ' ' }
+                span 56#{ ' ' }
+                | товаров

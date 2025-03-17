@@ -4,4 +4,34 @@
     .reviews__item-button {
         display: none;
     }
+
+    &__content {
+        img {
+            object-position: center;
+            object-fit: cover;
+            height: 440px;
+        }
+
+        &.content .swiper {
+            margin: 60px 0;
+        }
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .text-review {
+        .text-reviews-list__item-photo {
+            max-width: 72px;
+        }
+        &__content {
+            img {
+                height: 240px;
+            }
+
+            &.content .swiper,
+            &.content img {
+                margin: 32px 0;
+            }
+        }
+    }
 }

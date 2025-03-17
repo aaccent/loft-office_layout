@@ -1,0 +1,17 @@
+include layout/utils
+include ui/selector/selector
+
+-
+    var sortList = [
+        { title: 'Cначала популярные', value: 'popular', shownValue: 'По популярности' },
+        { title: 'По возрастанию цены', value: 'price-incr', shownValue: 'Сначала дешевые' },
+        { title: 'По убыванию цены', value: 'price-decr', shownValue: 'Сначала дорогие' },
+    ]
+
+.filter.container: .filter__inner
+    +popupBtn('filter').filter__button
+        span.icon.icon-filter
+        | фильтр
+        span.filter__button-number 2
+    span.filter__result-num 26 товаров
+    +selector({ name: 'sorting', list: sortList })

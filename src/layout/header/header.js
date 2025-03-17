@@ -1,16 +1,14 @@
 import { adaptive } from 'globals/adaptive'
 import { openPopup } from 'features/popup/popup'
 
+const header = document.querySelector('.header')
 /** Высота и позиционирование шапки и его меню */
 void (function () {
-    const header = document.querySelector('.header')
-
     /** Выставляет переменную в CSS с высотой шапки для позиционирования меню */
     function setHeaderHeight() {
         if (!header) return
 
         const height = `${header.offsetHeight}px`
-        header.style.marginBottom = `-${height}`
         document.documentElement.style.setProperty('--header-height', height)
     }
     setHeaderHeight()
@@ -41,6 +39,7 @@ void (function () {
         if (catalogMenu?.classList.contains('opened')) return
 
         catalogMenu?.classList.add('opened')
+        header.classList.add('opened')
     }
 
     function deferCloseCatalogMenu() {
@@ -49,6 +48,7 @@ void (function () {
 
         timeout = setTimeout(() => {
             catalogMenu?.classList.remove('opened')
+            header.classList.remove('opened')
         }, THRESHOLD_MS_BEFORE_CLOSE)
     }
 
@@ -75,6 +75,7 @@ void (function () {
     document.querySelectorAll('[data-action="burger-menu"]').forEach((button) => {
         button.addEventListener('click', () => {
             burgerMenu.classList.toggle('opened')
+            header.classList.toggle('opened')
         })
     })
 })()
@@ -88,6 +89,8 @@ void (function () {
     document.querySelectorAll('[data-action="mobile-menu"]').forEach((button) => {
         button.addEventListener('click', () => {
             mobileMenuWrapper.classList.toggle('opened')
+            header.classList.toggle('opened')
+
             if (!mobileMenuWrapper.classList.contains('opened')) {
                 catalogMenu.classList.remove('opened')
             }
@@ -107,6 +110,8 @@ void (function () {
 
     document.querySelectorAll('.burger-menu__list > li').forEach((item) => {
         const clone = item.cloneNode(true)
+        clone.classList.add('header__mobile-menu-item')
+
         const ul = clone.querySelector('ul')
 
         const liWithButton = document.createElement('li')
@@ -155,4 +160,20 @@ void (function () {
             item.classList.toggle('opened')
         })
     })
+})()
+
+/** Шапка во время прокрутки страницы */
+void (function () {
+    const header = document.querySelector('.header')
+
+    function headerStickyHandler() {
+        if (window.scrollY >= 15 && !header.classList.contains('sticky')) {
+            header.classList.add('sticky')
+        } else if (window.scrollY < 15 && header.classList.contains('sticky')) {
+            header.classList.remove('sticky')
+        }
+    }
+
+    window.addEventListener('scroll', headerStickyHandler, { passive: true })
+    headerStickyHandler()
 })()

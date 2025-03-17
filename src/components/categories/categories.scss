@@ -1,0 +1,75 @@
+@use 'styles/utils';
+
+.categories {
+    &__list {
+        gap: 40px 10px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__item {
+        font-size: 8rem;
+        letter-spacing: -0.01rem;
+        line-height: 1.05;
+        @include utils.transition(opacity);
+
+        &:hover {
+            z-index: 1;
+        }
+    }
+
+    &:has(&__item:hover) &__item:not(:hover) {
+        opacity: 0.5;
+    }
+
+    &__item-img-hover {
+        --top-offset: 36px;
+        position: absolute;
+        z-index: 1;
+        top: calc(100% + var(--top-offset));
+        right: -50px;
+        width: 330px;
+        height: 216px;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    &__item:hover &__item-img-hover {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .categories {
+        &__list {
+            gap: 22px;
+            flex-wrap: unset;
+        }
+
+        &__item-group {
+            gap: 22px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        &__item {
+            font-size: 3.4rem;
+
+            &::before {
+                display: none;
+            }
+        }
+
+        &:has(&__item:hover) &__item:not(:hover) {
+            opacity: 1;
+        }
+
+        &__item-img-hover {
+            display: none;
+        }
+    }
+}

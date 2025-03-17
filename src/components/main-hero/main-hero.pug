@@ -1,3 +1,33 @@
 include layout/utils
 
-section.section.main-hero: .container
+section.section.main-hero
+    .slider
+        .slider__items
+            .slider__item(
+                data-title='стулья для баров Brooklyn',
+                data-subtitle='от 24 000 ₽',
+                data-link='#',
+                data-text='Коллекция Brooklyn — это функциональность и стиль доступная каждому'
+            ): +img(require('assets/content/main-page/main-hero-bg.jpg')).slider__media
+            .slider__item(
+                data-title='стулья для баров Brooklyn2',
+                data-link='#',
+                data-text='Коллекция Brooklyn — это функциональность'
+            ): +img(require('assets/content/main-page/main-hero-bg.jpg')).slider__media
+            .slider__item(data-title='стулья для баров Brooklyn3', data-subtitle='от 30 000 ₽', data-link='#'): +img(require('assets/content/main-page/main-hero-bg.jpg')).slider__media
+            .slider__item(
+                data-title='стулья',
+                data-subtitle='от 45 000 ₽',
+                data-link='#',
+                data-text='Коллекция Brooklyn '
+            ): +img(require('assets/content/main-page/main-hero-bg.jpg')).slider__media
+        .slider__pagination
+        .slider__controls
+            +btn('slider-prev').slider__slide-button.slider__slide-button--prev
+            +btn('slider-next').slider__slide-button.slider__slide-button--next
+    .container
+        // Данные с первого слайда обязательно выводить для SEO
+        h1.main-hero__title стулья для баров Brooklyn
+        .main-hero__subtitle от 24 000 ₽
+        +anchor.button.main-hero__button смотреть
+        .main-hero__text Коллекция Brooklyn — это функциональность и стиль доступная каждому
