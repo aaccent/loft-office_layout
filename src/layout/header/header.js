@@ -110,6 +110,8 @@ void (function () {
 
     document.querySelectorAll('.burger-menu__list > li').forEach((item) => {
         const clone = item.cloneNode(true)
+        clone.classList.add('header__mobile-menu-item')
+
         const ul = clone.querySelector('ul')
 
         const liWithButton = document.createElement('li')

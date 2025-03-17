@@ -128,6 +128,10 @@ body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .stic
         display: none;
     }
 
+    &__mobile-menu-item {
+        display: none;
+    }
+
     &__menu-list {
         gap: 60px;
         display: flex;
@@ -350,6 +354,10 @@ body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .stic
         }
 
         &__mobile-search-button {
+            display: block;
+        }
+
+        &__mobile-menu-item {
             display: block;
         }
 

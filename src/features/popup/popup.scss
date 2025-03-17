@@ -34,10 +34,31 @@
         position: relative;
         margin-left: auto;
         padding: 54px 60px 60px;
-        width: 790px;
+        width: 100%;
+        max-width: 790px;
         height: fit-content;
         min-height: 100svh;
         background-color: var(--main);
+    }
+
+    &--centered &__inner {
+        margin: auto;
+        padding: 30px;
+        max-width: 760px;
+        height: fit-content;
+        min-height: 500px;
+    }
+
+    &--centered .close-btn {
+        --size: 28px;
+        top: 40px;
+        right: 40px;
+        border: 0;
+
+        &::before,
+        &::after {
+            height: 40px;
+        }
     }
 }
 
@@ -48,8 +69,23 @@
         &__inner {
             margin-top: auto;
             padding: 28px 28px 32px;
-            width: 100%;
             min-height: 93svh;
+        }
+
+        &--centered &__inner {
+            margin: auto 28px;
+            min-height: 308px;
+        }
+
+        &--centered .close-btn {
+            --size: 16px;
+            top: 24px;
+            right: 24px;
+
+            &::before,
+            &::after {
+                height: 23px;
+            }
         }
     }
 }

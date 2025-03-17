@@ -135,5 +135,9 @@
             opacity: unset;
             visibility: unset;
         }
+
+        .header__menu-item-button {
+            border-bottom: 0;
+        }
     }
 }
