@@ -1,0 +1,62 @@
+@use 'styles/utils';
+
+.call-popup {
+    &__inner {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__title {
+        margin-bottom: 40px;
+    }
+
+    &__text {
+        margin-bottom: 80px;
+        max-width: 64.5%;
+        font-size: 2rem;
+        line-height: 1.4;
+        opacity: 0.5;
+    }
+
+    &__form {
+        gap: 40px;
+        height: 1px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    &__submit-button {
+        margin-top: auto;
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .call-popup {
+        &__inner {
+            height: fit-content;
+            min-height: initial;
+        }
+
+        &__title {
+            margin-bottom: 24px;
+            font-size: 3.4rem;
+            letter-spacing: -0.01rem;
+            line-height: 1.05;
+        }
+
+        &__text {
+            margin-bottom: 32px;
+            font-size: 1.4rem;
+        }
+
+        &__form {
+            gap: 28px;
+            height: fit-content;
+        }
+
+        &__submit-button {
+            margin-top: 4px;
+        }
+    }
+}
