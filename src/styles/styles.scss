@@ -36,6 +36,7 @@
 @use 'ui/category-link';
 @use 'ui/selector/selector';
 @use 'ui/selector/selector--size';
+@use 'ui/cookie-notification/cookie-notification';
 
 // Page basis
 @use 'layout/header/_header';
