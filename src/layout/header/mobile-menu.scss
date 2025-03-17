@@ -116,7 +116,7 @@
 
                 & > :is(span, a, button:not(.btn)) {
                     width: 100%;
-                    display: block;
+                    display: flex;
                     font-family: var(--steelfish);
                     font-size: 2rem;
                     line-height: 1.05;
