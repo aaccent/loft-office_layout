@@ -7,13 +7,13 @@ include features/popup/popup
     .courier-address
         .input
             .input__placeholder Улица и дом*
-            input(type='text', name='street')
+            input(type='text', name='street', required)
             .courier-address__list-block
                 .courier-address__list-wrapper
                     ul.courier-address__list
         .input
             .input__placeholder Квартира/Офис*
-            input(type='text', name='flat')
+            input(type='text', name='flat', required)
         .input
             .input__placeholder Домофон
             input(type='text', name='intercom')
@@ -26,4 +26,4 @@ include features/popup/popup
         .input
             .input__placeholder Комментарий к заказу
             input(type='text', name='comment')
-    button.courier__button.button.button--dark(type='button') сохранить
+    button.courier__button.button.button--dark(type='button', data-action='courier') сохранить

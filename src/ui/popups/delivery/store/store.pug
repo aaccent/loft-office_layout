@@ -23,7 +23,7 @@ include features/popup/popup
         +img(require('assets/content/store-1.png')).store__image
         each item in stores
             .store__info-content(data-store-coords=item.coords, class=`${item.main ? '_visible' : ''}`)
-                .store__adress= item.address
+                .store__address= item.address
                 .store__work-hours!= item.workHours
                 +anchor.store__tel= item.tel
-        .store__button.button.button--dark выбрать этот склад
+        .store__button.button.button--dark(data-action='store') выбрать этот склад

@@ -18,5 +18,6 @@ deliveryPopups.forEach((popup) => {
 
         container.prepend(map.container.getParentElement())
         map.container.fitToViewport()
+        map.geoObjects.removeAll()
     })
 })

@@ -35,25 +35,29 @@ block append main
                 title: 'СДЭК',
                 description: '',
                 time: '2–3 дня, от 250 ₽',
-                dataPopup: 'points'
+                dataPopup: 'points',
+                dataCompany: 'sdek'
             },
             {
                 title: 'Деловые линии',
                 description: '',
                 time: '2–3 дня, от 250 ₽',
-                dataPopup: 'points'
+                dataPopup: 'points',
+                dataCompany: 'DL'
             },
             {
                 title: 'ПЭК',
                 description: '',
                 time: '2–3 дня, от 250 ₽',
-                dataPopup: 'points'
+                dataPopup: 'points',
+                dataCompany: 'PEK'
             }, {
                 title: 'Байкал-сервис',
                 description: '',
                 time: '2–3 дня, от 250 ₽',
-                dataPopup: 'points'
-            },
+                dataPopup: 'points',
+                dataCompany: 'baikal-service'
+            }
         ]
         var payment = [
             {
@@ -68,12 +72,12 @@ block append main
                 description: 'Оплата производится наличными деньгами, в момент получения заказа. Подтверждением вашей оплаты является фискальный кассовый чек, вручаемый во время оплаты заказа',
                 icon: 'assets/icons/payment_cash.svg',
                 dataUserType: 'private'
-            },
+            }
         ]
     +section.order
         .order__header
             +img(require('assets/icons/logo.svg')).order__logo
-            button.order__close
+            button.order__close(type='button')
         form.order__body(novalidate, data-handler='handler.php')
             .order-step-list
                 .order-step
@@ -82,7 +86,7 @@ block append main
                         .order-step__title Тип покупателя
                         button.order__autorization-button(type='button') войти в лк
                         button.order-step__change-button(type='button') изменить
-                    .order-step__final(data-final='user-type')
+                    .order-step__final.user-type__final(data-final='user-type')
                     ul.user-type-list.order-step__body
                         each type in userType
                             li
@@ -93,7 +97,7 @@ block append main
                     .order-step__header
                         .order-step__number 2
                         .order-step__title Личные данные
-                        button.order-step__change-button изменить
+                        button.order-step__change-button(type='button') изменить
                     .order-step__final.user-data__final
                         .user-data__final-name(data-final='name')
                         .user-data__final-tel(data-final='tel')
@@ -134,16 +138,17 @@ block append main
                     .order-step__header
                         .order-step__number 3
                         .order-step__title способ доставки
-                        button.order-step__change-button изменить
+                        button.order-step__change-button(type='button') изменить
                         .order__location Казань
                             .icon.icon-geo
-                    .order-step__final
                     .order-step__body
                         ul.delivery-method-list
                             each item in delivery
                                 li
                                     button(data-action='popup', data-popup=item.dataPopup, type='button')
-                                        label.delivery-method
+                                        label.delivery-method(
+                                            data-company=`${item.dataCompany ? item.dataCompany : ''}`
+                                        )
                                             input.delivery-method__input(type='radio', name='delivery-method')
                                             .delivery-method__title= item.title
                                                 .order-step__checkmark
@@ -151,15 +156,15 @@ block append main
                                                 .delivery-method__description= item.description
                                             .delivery-method__time= item.time
                     .delivery-method__final
-                        .delivery-method__type
-                        .delivery-method__address
-                            span
-                        button.delivery-method__change-address изменить адрес
+                        input(type='hidden', name='delivery-address')
+                        .delivery-method__final-type(data-delivery-id='type')
+                        .delivery-method__final-address(data-delivery-id='address')
+                        .delivery-method__final-extra(data-delivery-id='extra')
+                        button.delivery-method__change-address(type='button', data-delivery-popup-name) изменить адрес
                 .order-step
                     .order-step__header
                         .order-step__number 4
                         .order-step__title методы оплаты
-                        button.order-step__change-button изменить
                     .order-step__body
                         ul.payment-method-list
                             each item in payment
@@ -176,8 +181,8 @@ block append main
                                             name='payment-method',
                                             value=item.value
                                         )
-                        button.button.button--dark.order__button(type='submit') оплатить
-                            span 47 000 ₽
+                    button.button.button--dark.order__button(type='submit') оплатить
+                        span 47 000 ₽
             .order-details
                 .order-details__header
                     .order-details__title Ваш заказ

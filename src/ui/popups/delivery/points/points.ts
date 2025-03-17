@@ -1,33 +1,54 @@
-import { ReceiveItem } from '@/types/delivery'
-import { testPoints, testPoints2 } from '@/test-points'
+import { FinalDeliveryInfo, ReceiveItem } from '@/types/delivery'
+import { testPoints } from '@/test-points'
+import { adaptive } from 'globals/adaptive'
+import { setFinalDeliveryInfo } from 'pages/order/order'
+import { closeActivePopup, OpenPopupEvent } from 'features/popup/popup'
 
-async function initPickUpPointsMap(points: ReceiveItem[], container: HTMLElement) {
+async function initPickUpPointsMap(points: ReceiveItem[]) {
     const map = await window.map
     map.geoObjects.removeAll()
 
     points.forEach((point) => {
         const baloonContent = `
     <div class="points__baloon points__item" data-point-id="${point.id}">
-        <div class="points__baloon-address points__item-address ">${point.title}</div>
+        <div class="points__baloon-address points__item-address ">${point.address}</div>
         <div class="points__baloon-price points__item-price">${point.price}</div>
         <div class="points__baloon-date points__item-date">${point.date}</div>
-        <button class="points__baloon-button button button--dark">выбрать пункт</button>
+        <button class="points__baloon-button button button--dark" type="button" data-action="points">выбрать пункт</button>
     </div>`
 
-        map.geoObjects.add(
-            new ymaps.Placemark(
-                point.coords,
-                {
-                    balloonContent: baloonContent,
-                },
-                {
-                    iconLayout: 'default#image',
-                    iconImageSize: [54, 54],
-                    iconImageHref: './assets/icons/SDEK.svg',
-                    hideIconOnBalloonOpen: false,
-                },
-            ),
+        const placemark = new ymaps.Placemark(
+            point.coords,
+            {
+                balloonContent: baloonContent,
+            },
+            {
+                iconLayout: 'default#image',
+                iconImageSize: [54, 54],
+                iconImageHref: './assets/icons/SDEK.svg',
+                hideIconOnBalloonOpen: false,
+                hasBalloon: adaptive.isDesktop,
+            },
         )
+
+        placemark.events.add('click', () => {
+            Object.entries(point).forEach(([key, value]) => {
+                const baloonMobile = document.querySelector<HTMLElement>('.points__baloon--mobile')
+                const baloonContent = document.querySelector(`[data-baloon-id='${key}']`)
+                if (!baloonContent || !baloonMobile) return
+
+                baloonContent.textContent = value
+                baloonMobile.classList.add('_visible')
+                baloonMobile.dataset.pointId = point.id.toString()
+            })
+        })
+
+        map.geoObjects.add(placemark)
+    })
+
+    map.balloon.events.add('open', () => {
+        const choosePointButton = document.querySelector('.points__baloon-button')
+        choosePointButton?.addEventListener('click', onPointChooseButtonClick)
     })
 
     const bounds = map.geoObjects.getBounds() || [
@@ -35,7 +56,7 @@ async function initPickUpPointsMap(points: ReceiveItem[], container: HTMLElement
         [55.799094562644115, 49.11788124009805],
     ]
 
-    await map.setBounds(bounds)
+    await map.setBounds(bounds, { zoomMargin: [40] })
 }
 
 function showErrorMessage() {
@@ -58,12 +79,12 @@ function setList(list: ReceiveItem[]) {
     list.forEach((item) => {
         const point = document.createElement('li')
         point.classList.add('points__item')
-        point.dataset.id = item.id.toString()
+        point.dataset.pointId = item.id.toString()
         point.dataset.coords = item.coords.join(',')
 
         const address = document.createElement('div')
         address.classList.add('points__item-address')
-        address.textContent = item.title
+        address.textContent = item.address
 
         const price = document.createElement('div')
         price.classList.add('points__item-price')
@@ -75,6 +96,8 @@ function setList(list: ReceiveItem[]) {
 
         const button = document.createElement('button')
         button.classList.add('points__item-button')
+        button.type = 'button'
+        button.dataset.action = 'points'
         button.textContent = 'Выбрать'
 
         point.append(address, price, date, button)
@@ -82,9 +105,32 @@ function setList(list: ReceiveItem[]) {
     })
 
     container.append(listElement)
-    const mapParent = document.querySelector<HTMLElement>('.points__inner')
-    if (!mapParent) return
-    initPickUpPointsMap(list, mapParent)
+    initPickUpPointsMap(list).then(() => {
+        const choosePointButtons = document.querySelectorAll('[data-action="points"]')
+        choosePointButtons.forEach((button) => button.addEventListener('click', onPointChooseButtonClick))
+    })
+}
+
+export function onPointChooseButtonClick(e: Event) {
+    const target = e.target as HTMLElement
+    const point = target.closest<HTMLElement>('[data-point-id]')
+    const address = point?.querySelector('.points__item-address')
+    const date = point?.querySelector('.points__item-date')
+    const pointsCompany = document.querySelector<HTMLElement>('.popup.points')?.dataset.company
+    const companyInput = document.querySelector<HTMLInputElement>(
+        `.delivery-method[data-company='${pointsCompany}'] input`,
+    )
+
+    const info: FinalDeliveryInfo = {
+        type: 'Пункт выдачи',
+        popup: 'points',
+        address: address?.textContent || '',
+        extra: date?.textContent || '',
+    }
+
+    setFinalDeliveryInfo(info)
+    closeActivePopup()
+    if (companyInput) companyInput.checked = true
 }
 
 void (function () {
@@ -99,12 +145,23 @@ void (function () {
     closeListButton?.addEventListener('click', () => {
         list?.classList.remove('_visible')
     })
+
+    const closeBaloonButton = document.querySelector('.points__baloon--mobile .points__baloon-close')
+    closeBaloonButton?.addEventListener('click', () => {
+        closeBaloonButton.closest('.points__baloon--mobile')?.classList.remove('_visible')
+    })
 })()
 
 window.delivery = {
     setList,
 }
 
-document.querySelector('.popup.points')?.addEventListener('opened', () => {
+document.querySelector('.popup.points')?.addEventListener('opened', (e) => {
+    const popupBtn = (e as OpenPopupEvent).detail.target
+    const companyName = popupBtn?.querySelector<HTMLElement>('.delivery-method')?.dataset.company
+
+    const popup = e.currentTarget as HTMLElement
+    popup.dataset.company = companyName
+
     window.delivery.setList(testPoints)
 })

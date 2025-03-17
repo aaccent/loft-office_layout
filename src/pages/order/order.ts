@@ -3,6 +3,8 @@ import Swiper from 'swiper'
 import { AdditionalPriceInfo, OrderInfo } from '@/types/order'
 import { orderInfo } from '@/test-order-info'
 import { adaptive } from 'globals/adaptive'
+import { FinalDeliveryInfo } from '@/types/delivery'
+import { openPopup } from 'features/popup/popup'
 
 type FinalUserDataInfo = {
     address: string
@@ -22,8 +24,13 @@ interface UserTypeInput extends HTMLInputElement {
 
 /** Определяет поля для показа в форме Личные данные */
 function setUserDataForm(userType: User) {
+    const userDataStep = document.querySelector('.order-step:has(.user-data)')
+    userDataStep?.classList.remove('_valid')
+
     const userDataInputs = document.querySelectorAll<HTMLInputElement>('.user-data .input')
     userDataInputs.forEach((input) => {
+        input.querySelector('input')?.classList.remove('invalid')
+
         const inputUserType = input.dataset.userType
         if (inputUserType?.includes(userType)) {
             input.classList.add('_active')
@@ -41,20 +48,32 @@ function setSubmitButton(userType: User) {
     submitButton?.classList.remove('_visible')
 
     if (userType === 'private') {
-        document.querySelector('.order-step:has(.payment-method) .order-step__body')?.append(submitButton)
+        document.querySelector('.order-step:has(.payment-method)')?.append(submitButton)
     } else {
-        document.querySelector('.order-step:has(.delivery-method) .order-step__body')?.append(submitButton)
+        document.querySelector('.order-step:has(.delivery-method)')?.append(submitButton)
     }
 }
 
-/** Открытие следующего шага, если в текущем нет кнопки отправки формы */
-function openNextStep(currentStepElement: HTMLElement) {
-    const currentStep = currentStepElement.closest<HTMLElement>('.order-step')
-    currentStep?.classList.add('_valid')
-    if (currentStep?.querySelector('.order__button')) return
+/** Открытие следующего шага или показ кнопки отправки формы */
+function openNextStep() {
+    const currentStep = document.querySelector<HTMLElement>('.order-step._opened')
+    const nextStep = currentStep?.nextElementSibling
 
-    currentStep?.classList.remove('_opened')
-    currentStep?.nextElementSibling?.classList.add('_opened')
+    currentStep?.classList.add('_valid')
+
+    const submitButton = currentStep?.querySelector<HTMLElement>('.order__button')
+
+    if (!submitButton) {
+        currentStep?.classList.remove('_opened')
+        nextStep?.classList.add('_opened')
+        return
+    }
+
+    if (currentStep?.querySelector('.delivery-method') && submitButton) {
+        currentStep?.classList.remove('_opened')
+        submitButton?.classList.add('_visible')
+        return
+    }
 }
 
 /** Проверка валидности полей в шаге Личные данные */
@@ -112,9 +131,6 @@ function openCloseStep(e: MouseEvent) {
     const target = e.target as HTMLElement
     const targetStep = target.closest('.order-step')
 
-    const stepWithSubmitButton = !!targetStep?.querySelector('.order__button')
-    if (stepWithSubmitButton) return
-
     const userDataStep = !!targetStep?.querySelector('.user-data')
     if (userDataStep) validateUserData()
 
@@ -145,21 +161,43 @@ function init() {
     /** Типы покупателей */
     const userTypeInputs = document.querySelectorAll<UserTypeInput>('.user-type input')
     userTypeInputs.forEach((input) => {
-        input.addEventListener('change', () => setUserType(input))
+        input.addEventListener('change', () => {
+            setUserType(input)
+            openNextStep()
+            if (adaptive.isDesktop) return
+
+            const inputValueContainer = document.querySelector<HTMLElement>('.user-type__final')
+            if (!inputValueContainer) return
+            inputValueContainer.textContent = input.closest('.user-type')?.textContent || ''
+        })
     })
 
-    /** Все инпуты с типом radio */
-    const radioInputs = document.querySelectorAll<HTMLInputElement>('input[type="radio"]')
-    radioInputs.forEach((input) => {
-        input.addEventListener('change', () => openNextStep(input))
+    /** Способы доставки */
+    const deliveryTypeInputs = document.querySelectorAll<HTMLInputElement>('.delivery-method input')
+    const deliveryTypeStep = document.querySelector('.order-step:has(.delivery-method)')
+    deliveryTypeInputs.forEach((input) => {
+        input.addEventListener('click', () => {
+            input.checked = false
+            deliveryTypeStep?.classList.remove('_valid')
+            deliveryTypeStep?.nextElementSibling?.classList.remove('_opened')
+            document.querySelector('.order__button')?.classList.remove('_visible')
+        })
+    })
+
+    /** Способы оплаты */
+    const paymentMethodsInputs = document?.querySelectorAll('.payment-method input')
+    paymentMethodsInputs?.forEach((input) => {
+        input.addEventListener('change', () => {
+            const submitButton = document.querySelector<HTMLElement>('.order__button')
+            submitButton?.classList.add('_visible')
+        })
     })
 
     /** Кнопка Далее в шаге Личные данные */
     const userDataButton = document.querySelector<HTMLButtonElement>('.order-step .user-data__button')
-    userDataButton?.addEventListener('click', (e) => {
+    userDataButton?.addEventListener('click', () => {
         if (!validateUserData()) return
-        const target = e.target as HTMLElement
-        openNextStep(target)
+        openNextStep()
     })
 
     /** Кнопки Изменить */
@@ -178,7 +216,12 @@ function init() {
     const closeButton = document.querySelector('.order__close')
     closeButton?.addEventListener('click', () => window.history.back())
 
-    const firstStep = document.querySelector<HTMLElement>('.order-step:nth-child(3)')
+    const form = document.querySelector<HTMLFormElement>('form.order__body')
+    form?.addEventListener('form-sent', () => {
+        openPopup('thanks')
+    })
+
+    const firstStep = document.querySelector<HTMLElement>('.order-step:nth-child(1)')
     firstStep?.classList.add('_opened')
 
     /** Изменения внешнего вида в мобильном разрешении */
@@ -283,6 +326,29 @@ function setOrderInfo(info: OrderInfo) {
 
         valueElement.textContent = value
     })
+}
+
+const changeAddressButton = document.querySelector<HTMLElement>('.delivery-method__change-address')
+changeAddressButton?.addEventListener('click', () => {
+    const popupName = changeAddressButton.dataset.deliveryPopupName
+    if (!popupName) return
+    openPopup(popupName)
+})
+
+export function setFinalDeliveryInfo(info: FinalDeliveryInfo) {
+    Object.entries(info).forEach(([key, value]) => {
+        const keyElement = document.querySelector(`[data-delivery-id='${key}']`)
+        if (!keyElement) return
+        keyElement.textContent = value
+    })
+
+    const hiddenInput = document.querySelector<HTMLInputElement>('input[name="delivery-address"]')
+    if (hiddenInput) hiddenInput.value = info.address
+
+    openNextStep()
+    const openCurrentTypePopupButton = document.querySelector<HTMLElement>('[data-delivery-popup-name]')
+    if (!openCurrentTypePopupButton) return
+    openCurrentTypePopupButton.setAttribute('data-delivery-popup-name', info.popup)
 }
 window.order = {
     showProductsImages,

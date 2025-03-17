@@ -2,6 +2,7 @@
 
 .store {
     &__inner {
+        max-width: 100%;
         display: flex;
     }
 
@@ -45,7 +46,7 @@
         height: 41%;
     }
 
-    &__adress {
+    &__address {
         margin-bottom: 12px;
         font: 2rem/1.4 var(--firs-neue);
     }
@@ -116,7 +117,7 @@
             height: 210px;
         }
 
-        &__adress {
+        &__address {
             font-size: 1.6rem;
         }
 

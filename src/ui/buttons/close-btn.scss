@@ -3,6 +3,7 @@
 .close-btn {
     @include utils.square(64px);
     position: absolute;
+    z-index: 10;
     top: 72px;
     right: 60px;
     display: flex;

@@ -85,7 +85,7 @@ textarea {
     &.process {
         border-color: var(--accent);
         .input__placeholder {
-            transform: translateY(-115%) scale(0.8);
+            transform: translateY(-115%) translateX(-10%) scale(0.8);
             opacity: 0.5;
             transition: transform 300ms linear;
         }

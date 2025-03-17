@@ -1,9 +1,14 @@
 import { adaptive } from 'globals/adaptive'
+import { FinalDeliveryInfo } from '@/types/delivery'
+import { closeActivePopup, OpenPopupEvent } from 'features/popup/popup'
+import { setFinalDeliveryInfo } from 'pages/order/order'
 
-void (async function () {
+async function initStoreMap() {
     const map = await window.map
     map.geoObjects.removeAll()
+
     const coords = document.querySelectorAll<HTMLElement>('.store__info-content[data-store-coords]')
+
     coords.forEach((coord) => {
         const coordsValue = coord.dataset.storeCoords?.split(',').map((value) => Number(value))
         const placemark = new ymaps.Placemark(
@@ -33,4 +38,25 @@ void (async function () {
     ]
 
     await map.setBounds(bounds, { zoomMargin: [40] })
-})()
+}
+
+document.querySelector('.store')?.addEventListener('opened', (e) => {
+    initStoreMap().then(() => {
+        const chooseButton = document.querySelector('[data-action="store"]')
+        chooseButton?.addEventListener('click', () => {
+            const address = document.querySelector('.store__info-content._visible .store__address')?.textContent || ''
+            const popupButton = (e as OpenPopupEvent).detail.target
+            const storeInput = popupButton?.querySelector<HTMLInputElement>('input')
+
+            const info: FinalDeliveryInfo = {
+                type: 'Самовывоз',
+                popup: 'store',
+                address,
+            }
+
+            setFinalDeliveryInfo(info)
+            closeActivePopup()
+            if (storeInput) storeInput.checked = true
+        })
+    })
+})
