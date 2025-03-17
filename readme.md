@@ -1,113 +1,66 @@
-# Набор для верстки сайтов
+# Верстка Loft офис
 
-## Стек
+## Скрипты и стили
 
-Набор состоит из:
+Скрипты и стили разбиты на части:
 
--   Webpack
--   Pug
--   TypeScript или JavaScript
--   SCSS
--   PostCSS
--   Prettier
--   pnpm
+- Для всех страниц (`main.bundle.js` и `styles.css`)
+- Слайдеры для всех страниц (`swiper.bundle.js`)
+- Главная страница (`main-page.bundle.js` и `main-page.styles.css`)
+- Каталог (`catalog.bundle.js` и `catalog.styles.css`)
+- Страница коллекции (`collection.bundle.js` и `collection.styles.css`)
+- Страница продукта (`product.bundle.js` и `product.styles.css`)
+- Остальные (`other.bundle.js` и `other.styles.css`)
 
-## Зависимости
+## Корзина
 
-В качестве пакета используется `pnpm` вместо `npm`.
-Можно использовать и `npm`, но советую применить `pnpm`
+В глобальной области видимости есть объект `cart` с методами:
 
-## Процесс работы
+```typescript
+interface Product {
+    id: string | number
+    title: string
+    img: string
+    size: string
+    color: string
+    /* Цена после применения скидки. 
+    Нужно указать только цифры, скрипт сам форматирует для вывода ценой.*/
+    totalPrice: number
+    /* Цена до применения скидки */
+    discountPrice?: number
+    /* цена за один товар */
+    pricePerItem: number
+    /* кол-во в наличии */
+    stock?: number
+    /* кол-во в корзине */
+    amount: number
+}
 
-Во время комита код автоматически форматируется через prettier.
+interface CartInfo {
+    totalPrice?: number
+    discountPrice?: number
+    deliveryPrice?: string
+    weight?: number
+}
 
-Запуск режима разработки `pnpm run dev`
-
-### Картинки
-
-Все картинки с форматами `jpg`, `png`, `jpeg` и `webp` конвертируются в `webp` с качеством `90`.
-
-Для вставки картинок в `pug` файле необходимо использовать `require()`:
-
-```pug
-.some-class
-    img(require("assets/static/some-img.jpg"))
+interface Cart {
+    /** Добавляет элементы в корзину, если элемент с таким id уже есть, то заменяет его новыми данными */
+    addItems(list: Product[]): void
+    /** Полностью заменяет корзину */
+    setItems(list: Product[]): void
+    /** Убирает элемент из корзины по id. Если элемента с таким id нет - ничего не происходит */
+    removeItem(id: Product['id']): void
+    /** Очищает корзину */
+    clear(): void
+    /** Выставляет информацию в корзине */
+    setInfo(info: CartInfo): void
+}
 ```
 
-### Скрипты
+Обратиться к методам можно через глобальный объект `window.cart`, либо напрямую `cart`. Главное чтобы скрипт, который обращается к объекту был после его инициализации.
 
-Для импорта `js` скриптов нужно добавлять `.js` в конце. Для импорта `ts` не нужно ничего добавлять.
+Методы изменяют цифру у кнопки корзины. При добавлении элемента продукта, разметка элемента корзины копируется из `.cart__product-layout`.
 
-### Pug
+На кнопки изменения количества в корзине и добавления в корзину обработчиков нет. Подразумевается, что сборщик сам реализует с помощью этих методов как ему необходимо.
 
-#### Шаблон страницы
-
-Присутствует шаблон страницы по пути `src/layout/page` с блоками:
-
--   `block head` - для вставки кода в `head` тэг
--   `block scripts` - для вставки кода в конец `body`
--   `block main` - для вставки кода в страницу
-
-Шаблон можно использовать по короткой ссылке:
-
-```pug
-extends layout/page
-
-block append main
-    div
-```
-
-## Билд
-
-Запуск компиляции и сборки - `pnpm run build`
-После сборки результат будет расположен в папке `build`
-
-### Скрипты и стили
-
-Имеется главные файлы скриптов и стилей по путям:
-
--   Скрипты - `src/scripts/main.ts`
--   Стили - `src/styles/styles.scss`
-
-Они всегда входят в результат сборки как `main.bundle.js` и `styles.css`
-
-Скрипты и стили которые импортированы в `pug` файлы страниц компилируются в отдельные файлы со скриптами и стилями.
-
-```pug
-// src/pages/index/index.pug
-
-extends layout/page
-
-block append head
-    link(href=require('./styles.scss'), rel='stylesheet')
-
-block append main
-    section.section
-
-block append scripts
-    script(src=require('./main.ts'))
-```
-
-На выводе получится структура
-
-```
-build/
-├── css/
-│   ├── index.styles.css
-│   └── styles.css
-├── js/
-│   ├── index.bundle.js
-│   └── main.bundle.js
-└── index.html
-```
-
-Если блоки со скриптами убрать, то получится
-
-```
-build/
-├── css/
-│   └── styles.css
-├── js/
-│   └── main.bundle.js
-└── index.html
-```
+На кнопки удаления продукта и очистки корзины стоят обработчики, которые вызывают `cart.removeItem()` и `cart.clear()` соответственно.
