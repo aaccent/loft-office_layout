@@ -4,6 +4,10 @@
     opacity: 1;
     visibility: visible;
 
+    &__show-list-button {
+        display: none;
+    }
+
     &__inner {
         padding: 0;
         width: 100%;
@@ -18,11 +22,14 @@
         display: flex;
         flex-direction: column;
         background-color: white;
+
+        &-close {
+            display: none;
+        }
     }
 
     &__map {
         width: 100%;
-        background-color: #b41212;
     }
 
     &__title {
@@ -59,6 +66,11 @@
         }
     }
 
+    &__error-message {
+        width: 335px;
+        font: 2rem/1.4 var(--firs-neue);
+    }
+
     &__list {
         gap: 32px;
         display: flex;
@@ -79,6 +91,7 @@
         &-container {
             inset: 0;
             position: absolute;
+            background-color: white;
 
             &::after {
             }
@@ -120,6 +133,137 @@
                 margin-right: 10px;
                 background-image: url('assets/icons/full-arrow.svg');
             }
+        }
+    }
+
+    &__baloon {
+        margin: 0 32px;
+        padding: 32px 0;
+
+        font: 1.6rem/1.4 var(--firs-neue);
+        border: none;
+
+        &-button {
+            margin-top: 32px;
+            min-width: 339px;
+        }
+    }
+
+    .ymaps-2-1-79-balloon__close + .ymaps-2-1-79-balloon__content {
+        margin: 0;
+    }
+
+    .ymaps-2-1-79-ground-pane {
+        filter: brightness(0.3) grayscale(100%);
+    }
+
+    .ymaps-2-1-79-balloon__content {
+        padding: 0;
+    }
+
+    .ymaps-2-1-79-balloon__close-button {
+        margin-top: 24px;
+        margin-right: 21px;
+        width: 20px;
+        height: 20px;
+        opacity: 1;
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .points {
+        &__inner {
+            min-height: 100svh;
+
+            .close-btn {
+                z-index: 10;
+                width: 40px;
+                height: 40px;
+                background-color: #ffffff33;
+                border-radius: 100%;
+                border: none;
+                &::before,
+                &::after {
+                    background-color: white;
+                }
+            }
+        }
+
+        &__map {
+            inset: 0;
+            position: absolute;
+        }
+
+        &__info {
+            position: absolute;
+            z-index: 10;
+            top: 47px;
+            bottom: 0;
+            padding: 28px;
+            display: none;
+            &._visible {
+                display: flex;
+            }
+
+            &-close {
+                aspect-ratio: 1;
+                width: 32px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 1px solid var(--accent);
+                @include utils.bg-defaults(auto);
+                filter: var(--filter-accent);
+                position: absolute;
+                top: 28px;
+                right: 28px;
+                background-image: url('assets/icons/close.svg');
+            }
+        }
+
+        &__title {
+            margin-bottom: 40px;
+            font-size: 3.4rem;
+        }
+
+        &__search.input {
+            padding-top: 0;
+            font-size: 2rem;
+        }
+
+        &__list {
+            gap: 18px;
+            &-wrapper {
+                margin-top: 40px;
+            }
+        }
+
+        &__error-message {
+            font-size: 1.4rem;
+        }
+
+        &__item {
+            padding-bottom: 18px;
+            font-size: 1.4rem;
+            &-button {
+                font-size: 2rem;
+
+                &::before {
+                    @include utils.square(20px);
+                }
+            }
+        }
+
+        &__show-list-button.button {
+            position: absolute;
+            z-index: 10;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 334px;
+            display: block;
+            background-color: #ffffff33;
+            border: none;
         }
     }
 }

@@ -1,12 +1,56 @@
 import { disableScroll } from 'features/scroll'
 import { ReceiveItem } from '@/types/delivery'
 import { testPoints } from '@/test-points'
+import { createYMap } from 'features/maps/createYMap'
 
 disableScroll()
 
+async function initPickUpPointsMap(points: ReceiveItem[]) {
+    const map = await createYMap('.points__map', { setPlacemark: false, ui: false })
+
+    points.forEach((point) => {
+        const baloonContent = `
+<div class="points__baloon points__item" data-point-id="${point.id}">
+    <div class="points__baloon-address points__item-address ">${point.title}</div>
+    <div class="points__baloon-price points__item-price">${point.price}</div>
+    <div class="points__baloon-date points__item-date">${point.date}</div>
+    <button class="points__baloon-button button button--dark">выбрать пункт</button>
+</div>`
+
+        map.geoObjects.add(
+            new ymaps.Placemark(
+                point.coords,
+                {
+                    balloonContent: baloonContent,
+                },
+                {
+                    iconLayout: 'default#image',
+                    iconImageSize: [54, 54],
+                    iconImageHref: './assets/icons/SDEK.svg',
+                },
+            ),
+        )
+    })
+
+    const bounds = map.geoObjects.getBounds() || [
+        [55.790766971638845, 49.09699866947489],
+        [55.799094562644115, 49.11788124009805],
+    ]
+
+    await map.setBounds(bounds)
+}
+
+function showErrorMessage() {
+    const wrapper = document.querySelector('.points__list-wrapper')
+    if (!wrapper) return
+    wrapper.innerHTML = '<div class="points__error-message">Пункт выдачи не найден, попробуйте изменить запрос!</div>'
+}
+
 function setList(list: ReceiveItem[]) {
+    if (!list.length) {
+        return showErrorMessage()
+    }
     const container = document.querySelector('.points__list-wrapper')
-    console.log(container)
     if (!container) return
 
     const newListContainer = document.createElement('div')
@@ -43,6 +87,8 @@ function setList(list: ReceiveItem[]) {
 
     newListContainer.append(listElement)
     container.append(newListContainer)
+
+    initPickUpPointsMap(list)
 }
 
 window.delivery = {
@@ -50,3 +96,17 @@ window.delivery = {
 }
 
 window.delivery.setList(testPoints)
+
+void (function () {
+    const list = document.querySelector('.points__info')
+
+    const showListButton = document.querySelector('.points__show-list-button')
+    showListButton?.addEventListener('click', () => {
+        list?.classList.add('_visible')
+    })
+
+    const closeListButton = document.querySelector('.points__info-close')
+    closeListButton?.addEventListener('click', () => {
+        list?.classList.remove('_visible')
+    })
+})()
