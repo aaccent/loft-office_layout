@@ -5,7 +5,7 @@ body:has(:where(.main-hero, .collection-hero)) .header {
 }
 
 body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .sticky)) {
-    color: white;
+    color: var(--white);
     background-color: transparent;
 
     .header__inner {
@@ -190,7 +190,7 @@ body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .stic
                 text-transform: uppercase;
                 opacity: 0;
                 visibility: hidden;
-                background-color: white;
+                background-color: var(--white);
                 @include utils.transition((opacity, visibility));
 
                 &::before {
@@ -439,7 +439,7 @@ body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .stic
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            background: white;
+            background: var(--white);
 
             .icon {
                 position: relative;
