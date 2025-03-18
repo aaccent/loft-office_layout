@@ -1,0 +1,12 @@
+extends layout/page
+
+block append head
+    link(href=require('product.scss'), rel='stylesheet')
+
+block append main
+    include ui/breadcrumbs/breadcrumbs
+    +breadcrumbs(['Мебель для кабинета руководителя', 'кресла для кабинета руководителя'])
+    include components/product-hero/product-hero
+
+block append scripts
+    script(src=require('./product.ts'))
