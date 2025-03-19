@@ -1,5 +1,6 @@
 import { adaptive } from 'globals/adaptive'
 import { openPopup } from 'features/popup/popup'
+import { createMutationObserver } from 'features/mutationObserver'
 
 const header = document.querySelector('.header')
 /** Высота и позиционирование шапки и его меню */
@@ -176,4 +177,21 @@ void (function () {
 
     window.addEventListener('scroll', headerStickyHandler, { passive: true })
     headerStickyHandler()
+})()
+
+void (function () {
+    const favoriteButton = document.querySelector('.header__favorite-button-wrapper')
+    if (!favoriteButton) return
+
+    function checkFavoriteCounter() {
+        const count = parseInt(favoriteButton.dataset.count || '0')
+        favoriteButton.classList.toggle('header__with-counter--hidden', count <= 0)
+    }
+    checkFavoriteCounter()
+
+    createMutationObserver(favoriteButton, checkFavoriteCounter, {
+        attributes: true,
+        subtree: false,
+        childList: false,
+    })
 })()

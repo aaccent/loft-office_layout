@@ -18,6 +18,10 @@
 
     &-favorite {
         background-image: url('assets/icons/heart.svg');
+
+        &.active {
+            background-image: url('assets/icons/heart-filled.svg');
+        }
     }
 
     &-cart {

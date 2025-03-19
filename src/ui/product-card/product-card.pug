@@ -11,9 +11,10 @@ mixin product-card(props)
             new: true,
             discount: true,
             preorder: false,
+            isFavorite: false,
         }, props || {})
 
-    .product-card&attributes(attributes)
+    div(class={ 'product-card': true, _favorite: props.isFavorite })&attributes(attributes)
         .product-card__top
             .product-card__top-attributes
                 if props.new

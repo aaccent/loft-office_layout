@@ -120,7 +120,7 @@ function updateAmount() {
     if (!cartButton) return
 
     cartButton.dataset.count = amount.toString()
-    if (amount <= 0) cartButton.classList.add('header__cart-button--hidden-counter')
+    cartButton.classList.toggle('header__with-counter--hidden', amount <= 0)
 }
 
 /** Записывает или обновляет данные о товаре в корзине

@@ -93,9 +93,12 @@ header.header
             +btn('search').icon.icon-search(title='Поиск')
             // Если пользователь авторизован, то заменить на ссылку <a class="icon icon-profile"></a>
             +popupBtn('auth').icon.icon-profile(title='Личный кабинет')
-            +anchor('/favorite').icon.icon-favorite(title='Избранное')
+            div.header__favorite-button-wrapper.header__with-counter(data-count='0')
+                +anchor('/favorite').icon.icon-favorite(title='Избранное')
             .header__cart-button-wrapper
-                .header__cart-button(data-count='0'): +popupBtn('cart').icon.icon-cart(title='Корзина')
+                .header__cart-button.header__with-counter(data-count='0'): +popupBtn('cart').icon.icon-cart(
+                    title='Корзина'
+                )
                 include ui/cart-notification/cart-notification
     aside.catalog-menu.container: .catalog-menu__inner
         .catalog-menu__title Категории

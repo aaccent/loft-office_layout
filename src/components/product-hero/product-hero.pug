@@ -18,10 +18,14 @@ section.section.product-hero: .container: .product-hero__inner
                     each img in images
                         .swiper-slide.product-hero__thumb-slider-item: +img(img).product-hero__thumb-slider-item-img
             +wrapBreak: button.product-hero__thumb-slider-button.product-hero__thumb-slider-button--next
-    // Нужно добавить класс `_in-cart` для появления кнопок управления корзиной
+    // Нужно добавить класс `_in-cart` на `.product-hero__body` для появления кнопок управления корзиной
     .product-hero__body
         .product-hero__code-wrapper
             +wrapBreak: span.product-hero__code код: 172823
+            // Чтобы сделать избранным нужно выполнить любое одно из условий:
+            // - Добавить класс `_favorite` на `.product-hero`
+            // - Добавить класс `_favorite` на `.product-hero__body`
+            // - Добавить класс `active` на `.icon-favorite`
             +wrapBreak: button.product-hero__favorite-button.icon.icon-favorite(type='button')
         h1.product-hero__title Стол для руководителя Brooklyn
         .product-hero__main-slider.swiper: .swiper-wrapper
