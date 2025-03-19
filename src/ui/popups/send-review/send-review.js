@@ -32,20 +32,16 @@ function createFilePreview(src) {
     previewsList.append(preview)
 }
 
-void (function () {
-    const input = document.querySelector('input[type="file"]')
+document.querySelector('input[type="file"]')?.addEventListener('change', (e) => {
+    const previewsLength = document.querySelectorAll('.preview').length
+    const files = [...e.target.files].slice(0, FILE_LIMIT - previewsLength)
 
-    input.addEventListener('change', (e) => {
-        const previewsLength = document.querySelectorAll('.preview').length
-        const files = [...e.target.files].slice(0, FILE_LIMIT - previewsLength)
-
-        files.forEach((file) => {
-            const reader = new FileReader()
-            reader.readAsDataURL(file)
-            reader.onload = (event) => {
-                createFilePreview(event.target.result)
-                progress()
-            }
-        })
+    files.forEach((file) => {
+        const reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = (event) => {
+            createFilePreview(event.target.result)
+            progress()
+        }
     })
-})()
+})
