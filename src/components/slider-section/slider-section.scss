@@ -1,5 +1,15 @@
 @use 'styles/utils';
 
+.dark-wrapper .slider-section {
+    &__button {
+        border-color: var(--white);
+
+        &::after {
+            filter: var(--filter-white);
+        }
+    }
+}
+
 .slider-section {
     &__title-wrapper {
         margin-bottom: 40px;
@@ -15,10 +25,11 @@
         flex-shrink: 0;
         justify-content: center;
         align-items: center;
-        border: 1px solid var(--white);
+        border: 1px solid var(--accent);
 
         &::after {
             aspect-ratio: 1;
+            filter: var(--filter-accent);
             content: '';
             width: 50%;
             background-image: url('assets/icons/arrow.svg');
@@ -27,12 +38,17 @@
 
         &:first-of-type {
             margin-left: auto;
+            border-right: 0;
         }
 
         &--prev {
             &::after {
                 rotate: -180deg;
             }
+        }
+
+        &.swiper-button-disabled {
+            opacity: 0.5;
         }
     }
 }

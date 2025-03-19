@@ -13,7 +13,7 @@ mixin product-card(props)
             preorder: false,
         }, props || {})
 
-    .product-card
+    .product-card&attributes(attributes)
         .product-card__top
             .product-card__top-attributes
                 if props.new
