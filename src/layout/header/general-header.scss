@@ -122,8 +122,34 @@ body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .stic
         }
     }
 
-    &__favorite-button-wrapper {
+    &__cart-button-wrapper {
         position: relative;
+    }
+
+    &__cart-button {
+        position: relative;
+
+        &::after {
+            aspect-ratio: 1;
+            content: attr(data-count);
+            position: absolute;
+            z-index: 1;
+            top: -1%;
+            right: -10%;
+            padding: 3px;
+            width: 20px;
+            color: var(--white);
+            font-family: var(--steelfish);
+            font-size: 1.4rem;
+            letter-spacing: 0.01rem;
+            line-height: 1;
+            text-align: center;
+            background-color: var(--accent);
+        }
+
+        &--hidden-counter::after {
+            display: none;
+        }
     }
 
     &__mobile-actions,
@@ -357,8 +383,15 @@ body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .stic
             display: none;
         }
 
-        &__favorite-button-wrapper {
+        &__cart-button-wrapper {
             position: static;
+        }
+
+        &__cart-button {
+            &::after {
+                width: 16px;
+                font-size: 1.2rem;
+            }
         }
 
         &__mobile-search-button {

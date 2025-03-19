@@ -113,7 +113,14 @@ function stickyInfo() {
 function updateAmount() {
     const amount = document.querySelectorAll('.cart__list .cart__list-product').length
     window.cart.amount = amount
+
     document.querySelector<HTMLElement>('.cart__amount')!.textContent = amount.toString()
+
+    const cartButton = document.querySelector<HTMLElement>('.header__cart-button')
+    if (!cartButton) return
+
+    cartButton.dataset.count = amount.toString()
+    if (amount <= 0) cartButton.classList.add('header__cart-button--hidden-counter')
 }
 
 /** Записывает или обновляет данные о товаре в корзине
@@ -298,3 +305,4 @@ window.cart = {
 }
 
 init()
+updateAmount()
