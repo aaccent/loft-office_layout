@@ -93,7 +93,8 @@ header.header
             +btn('search').icon.icon-search(title='Поиск')
             // Если пользователь авторизован, то заменить на ссылку <a class="icon icon-profile"></a>
             +popupBtn('auth').icon.icon-profile(title='Личный кабинет')
-            div.header__favorite-button-wrapper.header__with-counter(data-count='0')
+            // Для обновления счётчика необходимо менять значение в `data-count` аттрибуте
+            .header__favorite-button-wrapper.header__with-counter(data-count='0')
                 +anchor('/favorite').icon.icon-favorite(title='Избранное')
             .header__cart-button-wrapper
                 .header__cart-button.header__with-counter(data-count='0'): +popupBtn('cart').icon.icon-cart(
