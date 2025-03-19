@@ -94,7 +94,9 @@ header.header
             // Если пользователь авторизован, то заменить на ссылку <a class="icon icon-profile"></a>
             +popupBtn('auth').icon.icon-profile(title='Личный кабинет')
             +anchor('/favorite').icon.icon-favorite(title='Избранное')
-            +popupBtn('cart').icon.icon-cart(title='Корзина')
+            .header__cart-button-wrapper
+                .header__cart-button(data-count='0'): +popupBtn('cart').icon.icon-cart(title='Корзина')
+                include ui/cart-notification/cart-notification
     aside.catalog-menu.container: .catalog-menu__inner
         .catalog-menu__title Категории
         +wrapBreak: +btn("catalog-menu").catalog-menu__mobile-title Каталог

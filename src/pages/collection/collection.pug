@@ -1,7 +1,7 @@
 extends layout/page
 
 block append head
-    link(href=require('styles/collection.styles.scss'), rel='stylesheet')
+    link(href=require('./collection.styles.scss'), rel='stylesheet')
 
 block append main
     include ui/breadcrumbs/breadcrumbs
@@ -29,4 +29,4 @@ block append popups
     include ui/popups/collection/collection
 
 block append scripts
-    script(src=require('scripts/collection.ts'))
+    script(src=require('./collection.ts'))

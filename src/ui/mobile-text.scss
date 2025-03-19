@@ -1,0 +1,12 @@
+@use 'styles/utils';
+
+@media only screen and (max-width: utils.$tablet1000) {
+    [data-mobile-text] {
+        font-size: 0;
+        line-height: 0;
+
+        &::after {
+            content: attr(data-mobile-text);
+        }
+    }
+}

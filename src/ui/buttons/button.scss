@@ -14,7 +14,13 @@
     letter-spacing: 0.01rem;
     line-height: 105%;
     text-transform: uppercase;
-    background-color: white;
+    background-color: var(--white);
+
+    [data-mobile-text]::after {
+        font-size: 2.8rem;
+        letter-spacing: 0.01rem;
+        line-height: 105%;
+    }
 
     &::before,
     &::after {
@@ -23,6 +29,7 @@
     }
 
     &::after {
+        margin-left: auto;
         background-color: var(--accent);
     }
 
@@ -37,11 +44,11 @@
     }
 
     &--dark {
-        color: white;
+        color: var(--white);
         background-color: var(--accent);
 
         &::after {
-            background-color: white;
+            background-color: var(--white);
         }
 
         &::before {
@@ -50,12 +57,12 @@
     }
 
     &--transparent {
-        color: white;
+        color: var(--white);
         background-color: transparent;
-        border: 1px solid white;
+        border: 1px solid var(--white);
 
         &::after {
-            background-color: white;
+            background-color: var(--white);
         }
 
         &::before {
@@ -96,6 +103,10 @@
     .button {
         padding: 21px;
         font-size: 2rem;
+
+        [data-mobile-text]::after {
+            font-size: 2rem;
+        }
 
         &::before,
         &::after {

@@ -54,6 +54,8 @@ interface Cart {
     clear(): void
     /** Выставляет информацию в корзине */
     setInfo(info: CartInfo): void
+    /** Показывает уведомление добавления в корзину */
+    showNotification(props: CartNotification)
 }
 ```
 

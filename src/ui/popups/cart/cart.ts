@@ -113,7 +113,14 @@ function stickyInfo() {
 function updateAmount() {
     const amount = document.querySelectorAll('.cart__list .cart__list-product').length
     window.cart.amount = amount
+
     document.querySelector<HTMLElement>('.cart__amount')!.textContent = amount.toString()
+
+    const cartButton = document.querySelector<HTMLElement>('.header__cart-button')
+    if (!cartButton) return
+
+    cartButton.dataset.count = amount.toString()
+    if (amount <= 0) cartButton.classList.add('header__cart-button--hidden-counter')
 }
 
 /** Записывает или обновляет данные о товаре в корзине
@@ -260,6 +267,33 @@ function clear() {
     document.querySelectorAll('.cart__list .cart__list-product').forEach((product) => product.remove())
 }
 
+export interface CartNotification {
+    image: string
+    name: string
+}
+
+const notificationEl = {
+    _: document.querySelector<HTMLElement>('.cart-notification'),
+    img: document.querySelector<HTMLImageElement>('img.cart-notification__image'),
+    text: document.querySelector<HTMLElement>('.cart-notification__text'),
+}
+
+notificationEl._?.addEventListener('click', () => notificationEl._?.classList.remove('active'))
+
+function showNotification(props: CartNotification) {
+    if (!notificationEl._ || !notificationEl.img || !notificationEl.text) {
+        throw new Error(
+            'Document do not have `.cart-notification`, `img.cart-notification__image` or `.cart-notification__text`',
+        )
+    }
+
+    notificationEl.img.src = props.image
+    notificationEl.text.innerText = props.name
+
+    notificationEl._.classList.add('active')
+    setTimeout(() => notificationEl._?.classList.remove('active'), 2000)
+}
+
 window.cart = {
     addItems,
     setItems,
@@ -267,6 +301,8 @@ window.cart = {
     removeItem,
     clear,
     amount: 0,
+    showNotification,
 }
 
 init()
+updateAmount()

@@ -37,6 +37,8 @@
 @use 'ui/selector/selector';
 @use 'ui/selector/selector--size';
 @use 'ui/cookie-notification/cookie-notification';
+@use 'ui/mobile-text';
+@use 'ui/cart-notification/cart-notification';
 
 // Page basis
 @use 'layout/header/_header';

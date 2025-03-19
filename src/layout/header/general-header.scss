@@ -5,7 +5,7 @@ body:has(:where(.main-hero, .collection-hero)) .header {
 }
 
 body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .sticky)) {
-    color: white;
+    color: var(--white);
     background-color: transparent;
 
     .header__inner {
@@ -122,6 +122,36 @@ body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .stic
         }
     }
 
+    &__cart-button-wrapper {
+        position: relative;
+    }
+
+    &__cart-button {
+        position: relative;
+
+        &::after {
+            aspect-ratio: 1;
+            content: attr(data-count);
+            position: absolute;
+            z-index: 1;
+            top: -1%;
+            right: -10%;
+            padding: 3px;
+            width: 20px;
+            color: var(--white);
+            font-family: var(--steelfish);
+            font-size: 1.4rem;
+            letter-spacing: 0.01rem;
+            line-height: 1;
+            text-align: center;
+            background-color: var(--accent);
+        }
+
+        &--hidden-counter::after {
+            display: none;
+        }
+    }
+
     &__mobile-actions,
     &__mobile-mail,
     .socials {
@@ -190,7 +220,7 @@ body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .stic
                 text-transform: uppercase;
                 opacity: 0;
                 visibility: hidden;
-                background-color: white;
+                background-color: var(--white);
                 @include utils.transition((opacity, visibility));
 
                 &::before {
@@ -201,7 +231,7 @@ body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .stic
                     width: 0;
                     height: 0;
                     border-right: 6px solid transparent;
-                    border-bottom: 9px solid #ffffff;
+                    border-bottom: 9px solid var(--white);
                     border-left: 6px solid transparent;
                 }
             }
@@ -353,6 +383,17 @@ body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .stic
             display: none;
         }
 
+        &__cart-button-wrapper {
+            position: static;
+        }
+
+        &__cart-button {
+            &::after {
+                width: 16px;
+                font-size: 1.2rem;
+            }
+        }
+
         &__mobile-search-button {
             display: block;
         }
@@ -382,6 +423,7 @@ body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .stic
 
         &__menu-wrapper {
             position: absolute;
+            z-index: 1;
             top: 100%;
             left: 0;
             width: 100%;
@@ -439,7 +481,7 @@ body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .stic
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            background: white;
+            background: var(--white);
 
             .icon {
                 position: relative;
