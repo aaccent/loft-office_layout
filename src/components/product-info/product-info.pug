@@ -1,0 +1,31 @@
+include layout/utils
+
+-
+    var props = [
+          { title: 'размер(Ш х Г х В), см', value: '120 × 80 × 174 см' },
+          { title: 'Цвет', value: 'Оттавио Орех' },
+          { title: 'Материал столешницы', value: 'Шпонированный МДФ' },
+          { title: 'Тон цвета', value: 'Тёмный' },
+          { title: 'Материал опоры', value: 'ЛДСП' },
+          { title: 'Стиль', value: 'Минимализм' },
+          { title: 'Форма столешницы', value: 'Прямоугольная' },
+          { title: 'Бренд', value: 'Brooklyn' },
+          { title: 'Вес', value: '120 кг' },
+          { title: 'Страна производства', value: 'Беларусь' },
+          { title: 'Регулировка по высоте', value: 'Есть' },
+    ]
+
+section.section.product-info: .container
+    .product-info__title-wrapper
+        h2.product-info__title-button.active(data-tab='props') характеристики
+        +wrapBreak: button.product-info__title-button(data-tab='description') описание
+    .product-info__body-wrapper
+        .product-info__body.active(data-tab-body='props')
+            ul.product-info__prop-list
+                each prop in props
+                    li.product-info__prop-list-item
+                        span.product-info__prop-title= prop.title
+                        span.product-info__prop-value= prop.value
+            +wrapBreak: button.product-info__prop-more-button.text-button(type='button') ВСЕ ХАРАКТЕРИСТИКИ
+        .product-info__body.product-info__description.content(data-tab-body='description')
+            p К гидрофильному маслу у нас требования серьёзные: во‑первых, оно не должно щипать глаза. Во‑вторых, должно удалять любую косметику, даже самую стойкую. В‑третьих, должно приятно пахнуть — без агрессивных отдушек, но и без желания смыть как можно скорее. Все это нашло воплощение в нашем масле. Бонус — на 100% веганский продукт с классной упаковкой, которой хочется любоваться.
