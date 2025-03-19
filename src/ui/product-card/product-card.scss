@@ -60,6 +60,11 @@
         }
     }
 
+    &__favorite-button.active .icon-favorite,
+    &._favorite &__favorite-button .icon-favorite {
+        background-image: url('assets/icons/heart-filled.svg');
+    }
+
     &__size-selector {
         margin-top: auto;
     }

@@ -126,7 +126,7 @@ body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .stic
         position: relative;
     }
 
-    &__cart-button {
+    &__with-counter {
         position: relative;
 
         &::after {
@@ -147,7 +147,7 @@ body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .stic
             background-color: var(--accent);
         }
 
-        &--hidden-counter::after {
+        &--hidden::after {
             display: none;
         }
     }
@@ -387,7 +387,7 @@ body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .stic
             position: static;
         }
 
-        &__cart-button {
+        &__with-counter {
             &::after {
                 width: 16px;
                 font-size: 1.2rem;

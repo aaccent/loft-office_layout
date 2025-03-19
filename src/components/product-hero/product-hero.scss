@@ -396,6 +396,12 @@
             display: none;
         }
 
+        &__favorite-button.active,
+        &._favorite &__favorite-button,
+        &__body._favorite &__favorite-button {
+            background-image: url('assets/icons/heart-filled.svg');
+        }
+
         &__main-slider {
             position: static;
             margin-bottom: 48px;
