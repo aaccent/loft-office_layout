@@ -13,6 +13,7 @@
     visibility: hidden;
     background-color: var(--main);
     @include utils.transition((opacity, visibility));
+    z-index: 1;
 
     &.opened {
         opacity: 1;

@@ -1,5 +1,6 @@
 import { ScriptStatus, ScriptTypes } from '@/features/loadScript'
 import { CartInfo, Product } from '@/types'
+import { CartNotification } from 'ui/popups/cart/cart'
 
 declare global {
     interface Window {
@@ -21,6 +22,8 @@ declare global {
             setInfo(info: CartInfo): void
             /** Общее количество товаров в корзине */
             amount: number
+            /** Показывает уведомление добавления в корзину */
+            showNotification(props: CartNotification)
         }
     }
 }

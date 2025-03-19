@@ -122,6 +122,10 @@ body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .stic
         }
     }
 
+    &__favorite-button-wrapper {
+        position: relative;
+    }
+
     &__mobile-actions,
     &__mobile-mail,
     .socials {
@@ -201,7 +205,7 @@ body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .stic
                     width: 0;
                     height: 0;
                     border-right: 6px solid transparent;
-                    border-bottom: 9px solid #ffffff;
+                    border-bottom: 9px solid var(--white);
                     border-left: 6px solid transparent;
                 }
             }
@@ -353,6 +357,10 @@ body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .stic
             display: none;
         }
 
+        &__favorite-button-wrapper {
+            position: static;
+        }
+
         &__mobile-search-button {
             display: block;
         }
@@ -382,6 +390,7 @@ body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .stic
 
         &__menu-wrapper {
             position: absolute;
+            z-index: 1;
             top: 100%;
             left: 0;
             width: 100%;
