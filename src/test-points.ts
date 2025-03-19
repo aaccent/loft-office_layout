@@ -114,3 +114,27 @@ export const testPoints: ReceiveItem[] = [
         coords: [55.84805364495418, 49.122283031310594],
     },
 ]
+
+export const testPoints2: ReceiveItem[] = [
+    {
+        id: 10,
+        title: 'title2',
+        price: 12,
+        date: 'date2',
+        coords: [55.73788167502376, 49.19442549073942],
+    },
+    {
+        id: 21,
+        title: 'title1',
+        price: 11,
+        date: 'date1',
+        coords: [55.72558252652765, 49.15257660246114],
+    },
+    {
+        id: 32,
+        title: 'title2',
+        price: 12,
+        date: 'date2',
+        coords: [55.75431280562258, 49.234232969833386],
+    },
+]

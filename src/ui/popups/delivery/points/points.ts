@@ -1,21 +1,18 @@
-import { disableScroll } from 'features/scroll'
 import { ReceiveItem } from '@/types/delivery'
-import { testPoints } from '@/test-points'
-import { createYMap } from 'features/maps/createYMap'
+import { testPoints, testPoints2 } from '@/test-points'
 
-disableScroll()
-
-async function initPickUpPointsMap(points: ReceiveItem[]) {
-    const map = await createYMap('.points__map', { setPlacemark: false, ui: false })
+async function initPickUpPointsMap(points: ReceiveItem[], container: HTMLElement) {
+    const map = await window.map
+    map.geoObjects.removeAll()
 
     points.forEach((point) => {
         const baloonContent = `
-<div class="points__baloon points__item" data-point-id="${point.id}">
-    <div class="points__baloon-address points__item-address ">${point.title}</div>
-    <div class="points__baloon-price points__item-price">${point.price}</div>
-    <div class="points__baloon-date points__item-date">${point.date}</div>
-    <button class="points__baloon-button button button--dark">выбрать пункт</button>
-</div>`
+    <div class="points__baloon points__item" data-point-id="${point.id}">
+        <div class="points__baloon-address points__item-address ">${point.title}</div>
+        <div class="points__baloon-price points__item-price">${point.price}</div>
+        <div class="points__baloon-date points__item-date">${point.date}</div>
+        <button class="points__baloon-button button button--dark">выбрать пункт</button>
+    </div>`
 
         map.geoObjects.add(
             new ymaps.Placemark(
@@ -47,6 +44,7 @@ function showErrorMessage() {
 }
 
 function setList(list: ReceiveItem[]) {
+    debugger
     if (!list.length) {
         return showErrorMessage()
     }
@@ -87,15 +85,10 @@ function setList(list: ReceiveItem[]) {
 
     newListContainer.append(listElement)
     container.append(newListContainer)
-
-    initPickUpPointsMap(list)
+    const mapParent = document.querySelector<HTMLElement>('.points__inner')
+    if (!mapParent) return
+    initPickUpPointsMap(list, mapParent)
 }
-
-window.delivery = {
-    setList,
-}
-
-window.delivery.setList(testPoints)
 
 void (function () {
     const list = document.querySelector('.points__info')
@@ -110,3 +103,12 @@ void (function () {
         list?.classList.remove('_visible')
     })
 })()
+
+window.delivery = {
+    setList,
+}
+
+document.querySelector('.points')?.addEventListener('opened', () => {
+    window.delivery.setList(testPoints)
+    //setTimeout(() => window.delivery.setList(testPoints2), 5000)
+})

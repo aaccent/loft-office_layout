@@ -1,6 +1,7 @@
 import '@/features/popup/popup'
 import 'features/inputMask'
 import 'features/forms'
+import 'features/createDeliveryMap'
 
 import '@/methods/getAddressList'
 
@@ -19,6 +20,7 @@ import 'ui/popups/cart/cart'
 
 import 'ui/popups/delivery/courier/courier'
 import 'ui/popups/delivery/points/points'
+import 'ui/popups/delivery/store/store'
 
 import 'components/reviews-list/reviews-list.js'
 import 'components/reviews-list/text/text-reviews.js'

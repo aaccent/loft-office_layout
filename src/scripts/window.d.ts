@@ -31,5 +31,7 @@ declare global {
         delivery: {
             setList(list: ReceiveItem[]): void
         }
+
+        map: Promise<ymaps.Map>
     }
 }
