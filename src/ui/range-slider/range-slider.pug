@@ -13,8 +13,9 @@ mixin range-slider(props)
         if props.name
             .range-slider__title= props.name
         .range-slider__inputs-wrapper
-            // Аттрибут name можно менять, скрипты опираются на классы.
-            // В value вмешиваться нельзя, в data-num при инициализации можно
+            +wrapBreak:  //
+                Аттрибут name можно менять, скрипты опираются на классы.
+                В value вмешиваться нельзя, в data-num при инициализации можно
             +wrapBreak: input.range-slider__input.range-slider__input--from(
                 name='range-from',
                 value='',

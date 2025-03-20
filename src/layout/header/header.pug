@@ -75,7 +75,7 @@ header.header
                         li: a(href='#') Блог
                 li: a(href='#') Контакты
             .header__mobile-actions
-                // Если пользователь авторизован, то заменить на ссылку <a class="icon icon-profile"></a>
+                +wrapBreak:  // Если пользователь авторизован, то заменить на ссылку <a class="icon icon-profile"></a>
                 +popupBtn('auth').header__mobile-action-item
                     span.icon.icon-profile
                     span.header__mobile-action-item-text Войти в ЛК
@@ -91,9 +91,9 @@ header.header
             +btn('search').header__mobile-search-button.icon.icon-search(title='Поиск')
         .header__actions-list.header__desktop-actions-list
             +btn('search').icon.icon-search(title='Поиск')
-            // Если пользователь авторизован, то заменить на ссылку <a class="icon icon-profile"></a>
+            +wrapBreak:  // Если пользователь авторизован, то заменить на ссылку <a class="icon icon-profile"></a>
             +popupBtn('auth').icon.icon-profile(title='Личный кабинет')
-            // Для обновления счётчика необходимо менять значение в `data-count` аттрибуте
+            +wrapBreak:  // Для обновления счётчика необходимо менять значение в `data-count` аттрибуте
             .header__favorite-button-wrapper.header__with-counter(data-count='0')
                 +anchor('/favorite').icon.icon-favorite(title='Избранное')
             .header__cart-button-wrapper

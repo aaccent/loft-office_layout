@@ -1,8 +1,9 @@
 include layout/utils
 
 mixin product-info-card
-    // Шаблон разметки. Его нельзя удалять и вносить изменения в data аттрибуты
-    // Если нужно поменять разметку, то правильно расставьте data аттрибуты
+    +wrapBreak:  //
+        Шаблон разметки. Его нельзя удалять и вносить изменения в data аттрибуты
+        Если нужно поменять разметку, то правильно расставьте data аттрибуты
     .product-info-card(data-id)&attributes(attributes)
         +anchor.product-info-card__img-wrapper: +wrapBreak: img.product-info-card__img(data-img)
         .product-info-card__body
@@ -37,8 +38,9 @@ mixin product-info-card-without-amount(props)
         }, props || {})
 
     if props.template
-        // Шаблон разметки. Его нельзя удалять и вносить изменения в data аттрибуты
-        // Если нужно поменять разметку, то правильно расставьте data аттрибуты
+        +wrapBreak:  //
+            Шаблон разметки. Его нельзя удалять и вносить изменения в data аттрибуты
+            Если нужно поменять разметку, то правильно расставьте data аттрибуты
     .product-info-card&attributes(attributes)
         +anchor.product-info-card__img-wrapper: +wrapBreak: img.product-info-card__img(src=props.img, data-img)
         .product-info-card__body
