@@ -55,6 +55,11 @@ interface CartInfo {
     weight?: number
 }
 
+export interface CartNotification {
+    image: string
+    name: string
+}
+
 interface Cart {
     /** Добавляет элементы в корзину, если элемент с таким id уже есть, то заменяет его новыми данными */
     addItems(list: Product[]): void
