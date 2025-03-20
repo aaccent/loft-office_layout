@@ -26,7 +26,7 @@ closePopupBtns.forEach((btn) => {
     btn.addEventListener('click', closeActivePopup)
 })
 
-const openedPopupEvent = new CustomEvent('opened')
+export const openedPopupEvent = new CustomEvent('opened')
 const closedPopupEvent = new CustomEvent('closed')
 
 function popupBtnHandler(e: MouseEvent) {

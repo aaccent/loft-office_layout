@@ -24,6 +24,7 @@ async function initPickUpPointsMap(points: ReceiveItem[], container: HTMLElement
                     iconLayout: 'default#image',
                     iconImageSize: [54, 54],
                     iconImageHref: './assets/icons/SDEK.svg',
+                    hideIconOnBalloonOpen: false,
                 },
             ),
         )
@@ -44,16 +45,13 @@ function showErrorMessage() {
 }
 
 function setList(list: ReceiveItem[]) {
-    debugger
     if (!list.length) {
         return showErrorMessage()
     }
-    const container = document.querySelector('.points__list-wrapper')
+    const container = document.querySelector('.points__list-container')
     if (!container) return
 
-    const newListContainer = document.createElement('div')
-    newListContainer.classList.add('points__list-container')
-
+    container.innerHTML = ''
     const listElement = document.createElement('ul')
     listElement.classList.add('points__list')
 
@@ -83,8 +81,7 @@ function setList(list: ReceiveItem[]) {
         listElement.append(point)
     })
 
-    newListContainer.append(listElement)
-    container.append(newListContainer)
+    container.append(listElement)
     const mapParent = document.querySelector<HTMLElement>('.points__inner')
     if (!mapParent) return
     initPickUpPointsMap(list, mapParent)
@@ -108,7 +105,6 @@ window.delivery = {
     setList,
 }
 
-document.querySelector('.points')?.addEventListener('opened', () => {
+document.querySelector('.popup.points')?.addEventListener('opened', () => {
     window.delivery.setList(testPoints)
-    //setTimeout(() => window.delivery.setList(testPoints2), 5000)
 })

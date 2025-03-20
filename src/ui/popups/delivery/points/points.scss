@@ -77,7 +77,7 @@
         display: flex;
         flex-direction: column;
 
-        &-wrapper {
+        &-container {
             position: relative;
             margin-top: 80px;
             width: 100%;
@@ -86,15 +86,6 @@
 
             &::-webkit-scrollbar {
                 display: none;
-            }
-        }
-
-        &-container {
-            inset: 0;
-            position: absolute;
-            background-color: white;
-
-            &::after {
             }
         }
     }
@@ -149,26 +140,6 @@
             min-width: 339px;
         }
     }
-
-    .ymaps-2-1-79-balloon__close + .ymaps-2-1-79-balloon__content {
-        margin: 0;
-    }
-
-    .ymaps-2-1-79-ground-pane {
-        filter: brightness(0.3) grayscale(100%);
-    }
-
-    .ymaps-2-1-79-balloon__content {
-        padding: 0;
-    }
-
-    .ymaps-2-1-79-balloon__close-button {
-        margin-top: 24px;
-        margin-right: 21px;
-        width: 20px;
-        height: 20px;
-        opacity: 1;
-    }
 }
 
 @media only screen and (max-width: utils.$tablet1000) {
@@ -180,7 +151,7 @@
                 z-index: 10;
                 width: 40px;
                 height: 40px;
-                background-color: #ffffff33;
+                background-color: #5d5c5b;
                 border-radius: 100%;
                 border: none;
                 &::before,
@@ -263,7 +234,7 @@
             transform: translateX(-50%);
             max-width: 334px;
             display: block;
-            background-color: #ffffff33;
+            background-color: #5d5c5b;
             border: none;
         }
     }

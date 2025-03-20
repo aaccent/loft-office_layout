@@ -12,7 +12,7 @@ const deliveryPopups = document.querySelectorAll('.points, .store')
 deliveryPopups.forEach((popup) => {
     popup.addEventListener('opened', async () => {
         const map = await window.map
-        map.geoObjects.removeAll()
+
         const container = popup.querySelector('.popup__inner')
         if (!container) return
 
