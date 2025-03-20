@@ -1,5 +1,5 @@
 import { ScriptStatus, ScriptTypes } from '@/features/loadScript'
-import { CartInfo, Product } from '@/types'
+import { CartInfo, PreorderInfo, Product } from '@/types'
 import { CartNotification } from 'ui/popups/cart/cart'
 
 declare global {
@@ -25,6 +25,7 @@ declare global {
             /** Показывает уведомление добавления в корзину */
             showNotification(props: CartNotification)
         }
+        preorderInfo: PreorderInfo | null
     }
 }
 

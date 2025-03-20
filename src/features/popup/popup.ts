@@ -26,7 +26,14 @@ closePopupBtns.forEach((btn) => {
     btn.addEventListener('click', closeActivePopup)
 })
 
-const openedPopupEvent = new CustomEvent('opened')
+interface PopupOpenedDetail {
+    trigger: HTMLElement | null
+}
+
+export interface PopupOpenedCustomEvent extends CustomEvent {
+    detail: PopupOpenedDetail
+}
+
 const closedPopupEvent = new CustomEvent('closed')
 
 function popupBtnHandler(e: MouseEvent) {
@@ -35,7 +42,7 @@ function popupBtnHandler(e: MouseEvent) {
 
     if (!popupName) throw new Error('button with data-action="popup" doesnt have data-popup')
 
-    openPopup(popupName)
+    openPopup(popupName, target)
 }
 
 function escKeyHandler(e: KeyboardEvent) {
@@ -51,11 +58,13 @@ function escKeyHandler(e: KeyboardEvent) {
  *
  * Если есть открытый попап, то закрывает его.
  * */
-export function openPopup(name: string) {
+export function openPopup(name: string, trigger: HTMLElement | null = null) {
     const activeHeader = document.querySelector('.header.active')
     const targetPopup = document.querySelector<HTMLDivElement>(`.popup[data-popup="${name}"]`)
 
     if (!targetPopup) throw new Error(`Cant find .popup with data-popup="${name}"`)
+
+    const openedPopupEvent = new CustomEvent<PopupOpenedDetail>('opened', { detail: { trigger } })
 
     // process нужен для того, чтобы при закрытии и
     // открытии попапа пользователь не мог лишний раз скролить
