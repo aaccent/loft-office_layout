@@ -1,5 +1,17 @@
 # Верстка Loft офис
 
+## Страницы
+
+- [Главная](https://aaccent.github.io/loft-office_layout//index.html)
+- [Каталог 1 уровня](https://aaccent.github.io/loft-office_layout//catalog.html)
+- [Каталог 2 уровня](https://aaccent.github.io/loft-office_layout//catalog-2level.html)
+- [Коллекция](https://aaccent.github.io/loft-office_layout//collection.html)
+- [Продукт](https://aaccent.github.io/loft-office_layout//product.html)
+- [Избранное](https://aaccent.github.io/loft-office_layout//favorites.html)
+- [Отзывы текстовые](https://aaccent.github.io/loft-office_layout//text-reviews.html)
+- [Отзывы видео](https://aaccent.github.io/loft-office_layout//video-reviews.html)
+- [Отзывы внешние](https://aaccent.github.io/loft-office_layout//external-reviews.html)
+
 ## Скрипты и стили
 
 Скрипты и стили разбиты на части:
@@ -59,10 +71,46 @@ interface Cart {
 }
 ```
 
-Обратиться к методам можно через глобальный объект `window.cart`, либо напрямую `cart`. Главное чтобы скрипт, который обращается к объекту был после его инициализации.
+Обратиться к методам можно через глобальный объект `window.cart`, либо напрямую `cart`.
+Главное чтобы скрипт, который обращается к объекту был после его инициализации.
 
-Методы изменяют цифру у кнопки корзины. При добавлении элемента продукта, разметка элемента корзины копируется из `.cart__product-layout`.
+Методы изменяют цифру у кнопки корзины.
+При добавлении элемента продукта, разметка элемента корзины копируется из `.cart__product-layout`.
 
-На кнопки изменения количества в корзине и добавления в корзину обработчиков нет. Подразумевается, что сборщик сам реализует с помощью этих методов как ему необходимо.
+На кнопки изменения количества в корзине и добавления в корзину обработчиков нет.
+Подразумевается, что сборщик сам реализует с помощью этих методов как ему необходимо.
 
 На кнопки удаления продукта и очистки корзины стоят обработчики, которые вызывают `cart.removeItem()` и `cart.clear()` соответственно.
+
+## Предзаказ
+
+Чтобы в попапе предзаказа корректно отображался продукт, нужно карточку товара или элемент в данными о товаре обернуть в класс `.preorder-bounds`.
+
+Элементам с заголовком, размером, цветом, картинкой и идентификатором добавить `data-field` аттрибуты:
+
+- id – `data-field="id"`
+- Заголовок – `data-field="title"`
+- Размер – `data-field="size"`
+- Цвет – `data-field="color"`
+- Картинка – `data-field="image"`
+
+Тогда при нажатии на открытие попапа `preorder`, скрипт найдёт свои рамки элемента относительно кнопки, найдёт элементы с данными и вставит куда необходимо.
+
+В верстке карточек товара и на детальной товара всё верно расставлено.
+Один из примеров правильно расставленных аттрибутов и классов:
+
+```html
+<!--Добавляем `preorder-bounds`-->
+<div class="some-product preorder-bounds">
+    <!-- Для id нужно указать `data-id` аттрибут.
+         Необязательно отдельный элемент, это может быть любой элемент внутри `preorder-bounds`.
+         Главное указать верные data-* аттрибуты -->
+    <div class="some-product__id" data-field="id" data-id="5" style="hidden"></div>
+    <div class="some-product__title" data-field="title">Title</div>
+    <img class="some-product__image" data-field="image" src="image.jpg" alt="" />
+    <div class="some-product__size" data-field="size">192 x 149 x 21</div>
+    <div class="some-product__color" data-field="color">Red</div>
+    <!-- `preorder-bounds` нужно ставить на родителе полей и кнопки вызова попапа -->
+    <button data-action="popup" data-popup="preorder">Предзаказ</button>
+</div>
+```

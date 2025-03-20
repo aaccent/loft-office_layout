@@ -1,4 +1,4 @@
-interface Product {
+export interface Product {
     id: string | number
     title: string
     img: string
@@ -11,14 +11,14 @@ interface Product {
     amount: number
 }
 
-interface CartInfo {
+export interface CartInfo {
     totalPrice?: number
     discountPrice?: number
     deliveryPrice?: string
     weight?: number
 }
 
-interface Cart {
+export interface Cart {
     /** Добавляет элементы в корзину, если элемент с таким id уже есть, то заменяет его новыми данными */
     addItems(list: Product[]): void
     /** Убирает элемент из корзины по id. Если элемента с таким id нет - ничего не происходит */
@@ -29,4 +29,10 @@ interface Cart {
     setInfo(info: CartInfo): void
 }
 
-export { Product, CartInfo, Cart }
+export interface PreorderInfo {
+    id: string
+    image?: string
+    title: string
+    color: string
+    size: string
+}

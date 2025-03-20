@@ -287,7 +287,7 @@
         opacity: 0.5;
     }
 
-    &__body._in-cart &__actions {
+    &__body:where(._in-cart, ._preorder) &__actions {
         display: none;
     }
 
@@ -365,6 +365,14 @@
                 margin: 0;
             }
         }
+    }
+
+    &__body._preorder &__preorder {
+        display: block;
+    }
+
+    &__preorder {
+        display: none;
     }
 }
 

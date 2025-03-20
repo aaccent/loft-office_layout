@@ -17,6 +17,7 @@ html(lang='ru')
 
             include footer/footer
 
+        include ui/popups/preorder/preorder
         include ui/cookie-notification/cookie-notification
         include ui/popups/call-popup/call-popup
         include ui/popups/thanks/thanks
@@ -25,6 +26,7 @@ html(lang='ru')
 
         block scripts
             script(src=require('scripts/main.ts'), type='module')
-            // Желательно чтобы swiper.ts был с атрибутом type="module" для ускорения загрузки
-            // Для main.ts это необязательно
+            +wrapBreak:  //
+                Желательно чтобы swiper.ts был с атрибутом type="module" для ускорения загрузки
+                Для main.ts это необязательно
             script(src=require('scripts/swiper.ts'), type='module')
