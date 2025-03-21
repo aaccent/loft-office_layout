@@ -47,16 +47,6 @@
 
     &__more-button {
         margin: 100px auto 0;
-        width: 120px;
-        height: 120px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        &::before,
-        &::after {
-            display: none;
-        }
     }
 }
 
@@ -97,10 +87,8 @@
             }
         }
 
-        &__button {
+        &__more-button {
             margin: 40px auto 0;
-            width: 90px;
-            height: 90px;
         }
     }
 }
