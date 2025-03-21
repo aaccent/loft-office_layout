@@ -6,10 +6,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    @include utils.transition((background-color, color));
 
     &::before,
     &::after {
         display: none;
+    }
+
+    &:hover {
+        color: var(--white);
+        background-color: var(--accent);
     }
 }
 

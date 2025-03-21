@@ -1,0 +1,48 @@
+@use 'styles/utils';
+
+.blog {
+    &__title {
+        margin-bottom: 60px;
+        text-align: center;
+    }
+
+    &__links {
+        margin-bottom: 100px;
+    }
+
+    &__articles-list {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 60px 33px;
+        width: 100%;
+        display: grid;
+    }
+
+    &__more-button {
+        margin: 100px auto 0;
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .blog {
+        &__title {
+            margin-bottom: 36px;
+            font-size: 6rem;
+        }
+
+        &__links {
+            margin-bottom: 0;
+        }
+
+        &__articles-list {
+            gap: 32px;
+            grid-template-columns: 1fr;
+            margin-top: 24px;
+            padding-top: 32px;
+            border-top: 1px solid #dbd0c6;
+        }
+
+        &__more-button {
+            margin: 40px auto 0;
+        }
+    }
+}

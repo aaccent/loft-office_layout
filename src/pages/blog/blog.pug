@@ -1,0 +1,57 @@
+extends layout/page
+
+block append head
+    link(href=require('styles/other.styles.scss'), rel='stylesheet')
+
+block append main
+    include ui/type-list/type-list
+    include ui/article-card/article-card
+    -
+        var typeList = [
+            { name: 'Все статьи', amount: 23, active: true },
+            { name: 'Тумбы', amount: 23 },
+            { name: 'Шкафы', amount: 23 },
+            { name: 'Кресла', amount: 23 },
+            { name: 'Стулья', amount: 23 },
+        ]
+
+        var list = [
+            {
+              title: 'пять примеров сочетания тумб в интерьере',
+              img: require('assets/content/blog/image-2.jpg'),
+              tag: '#Тумбы',
+              date: '24 Октября',
+              time: '4 мин',
+            },
+            {
+              title: 'Как выбрать идеальный стол для офиса?',
+              img: require('assets/content/blog/image.jpg'),
+              tag: '#столы',
+              date: '30 Октября',
+              time: '3 мин',
+            },
+            {
+              title: 'офисная мебель в стиле минимализм',
+              img: require('assets/content/blog/image-1.jpg'),
+              tag: '#стулья',
+              date: '28 Октября',
+              time: '5 мин',
+            },
+        ]
+
+    include ui/breadcrumbs/breadcrumbs
+    +breadcrumbs(['Блог'])
+    section.section.blog: .container
+        h1.blog__title.page-title
+            | Блог
+            span 223
+        +type-list({ items: typeList }).blog__links
+        .blog__articles-list
+            each item in list.concat(list, list)
+                +article-card(item)
+        +wrapBreak: button.button.button--transparent.button--dark.catalog-list__more-button.more-button ещё
+
+block append popups
+
+block append scripts
+    script(src=require('scripts/other.ts'))
