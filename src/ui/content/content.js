@@ -2,52 +2,72 @@ import Swiper from 'swiper'
 import { EffectFade, Navigation, Pagination } from 'swiper/modules'
 
 export function createContentSwiper() {
-    const content = document.querySelector('.content')
-
-    const imageGroup = content.querySelectorAll('div:has(img+img)')
+    const imageGroup = document.querySelectorAll('.content div:has(img+img)')
     imageGroup.forEach((group) => {
-        group.classList.add('swiper')
-
-        const swiperWrapper = document.createElement('div')
-        swiperWrapper.classList.add('swiper-wrapper')
-
-        group.querySelectorAll('img').forEach((img) => {
-            img.classList.add('swiper-slide')
-            swiperWrapper.append(img)
-        })
-        group.append(swiperWrapper)
-
-        const navigation = document.createElement('div')
-        navigation.classList.add('navigation')
-
-        const prev = document.createElement('button')
-        const next = document.createElement('button')
-        prev.classList.add('navigation--prev')
-        next.classList.add('navigation--next')
-
-        navigation.append(prev, next)
-
-        const pagination = document.createElement('div')
-        pagination.classList.add('pagination')
-
-        group.append(navigation, pagination)
+        group.querySelectorAll('img').forEach((img) => img.classList.add('swiper-slide'))
 
         new Swiper(group, {
             modules: [EffectFade, Pagination, Navigation],
             effect: 'fade',
+            createElements: true,
             fadeEffect: { crossFade: true },
             slidesPerView: 1,
             pagination: {
-                el: '.swiper .pagination',
+                enabled: true,
             },
             breakpoints: {
                 1000: {
+                    pagination: {
+                        enabled: false,
+                    },
                     navigation: {
-                        nextEl: '.swiper .navigation--next',
-                        prevEl: '.swiper .navigation--prev',
+                        enabled: true,
                     },
                 },
             },
         })
     })
 }
+
+void (function () {
+    if (!document.querySelector('.article')) return
+
+    createContentSwiper()
+})()
+
+document.querySelectorAll('dl').forEach((list) => {
+    list.querySelectorAll('dt').forEach((title) => {
+        title.addEventListener('click', () => {
+            list.querySelector('dt.active')?.classList.remove('active')
+            title.classList.toggle('active')
+        })
+    })
+})
+
+function getCoords(element) {
+    const rect = element.getBoundingClientRect()
+    return { x: rect.left + window.scrollX, y: rect.top + window.scrollY }
+}
+
+void (function () {
+    const tocList = document.querySelector('.article__toc-list')
+    const PERCENT_15_WINDOW = window.innerWidth * 0.1
+
+    if (!tocList) return
+
+    const headings = document.querySelectorAll('.article__content h2')
+    headings.forEach((header) => {
+        const coords = getCoords(header)
+        const scrollToCoords = { left: 0, top: coords.y - PERCENT_15_WINDOW }
+
+        const listItem = document.createElement('li')
+        listItem.className = 'article__toc-list-item'
+
+        const button = document.createElement('button')
+        button.innerText = header.innerText
+        button.onclick = () => window.scrollTo(scrollToCoords)
+        listItem.append(button)
+
+        tocList.append(listItem)
+    })
+})()
