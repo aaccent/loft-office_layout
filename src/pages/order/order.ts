@@ -1,7 +1,6 @@
 import { validateTelInput } from 'features/forms'
 import Swiper from 'swiper'
 import { AdditionalPriceInfo, OrderInfo } from '@/types/order'
-import { orderInfo } from '@/test-order-info'
 import { adaptive } from 'globals/adaptive'
 import { FinalDeliveryInfo } from '@/types/delivery'
 import { openPopup } from 'features/popup/popup'
@@ -383,4 +382,3 @@ window.order = {
 }
 
 init()
-window.order.setOrderInfo(orderInfo)
