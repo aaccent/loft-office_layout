@@ -1,5 +1,4 @@
 import { FinalDeliveryInfo, ReceiveItem } from '@/types/delivery'
-import { testPoints } from '@/test-points'
 import { adaptive } from 'globals/adaptive'
 import { setFinalDeliveryInfo } from 'pages/order/order'
 import { closeActivePopup, OpenPopupEvent } from 'features/popup/popup'
@@ -162,6 +161,4 @@ document.querySelector('.popup.points')?.addEventListener('opened', (e) => {
 
     const popup = e.currentTarget as HTMLElement
     popup.dataset.company = companyName
-
-    window.delivery.setList(testPoints)
 })
