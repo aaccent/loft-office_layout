@@ -253,12 +253,12 @@ function init() {
 
     /** Кнопка Входа в ЛК */
     void (function () {
-        const autorizationButton = document.querySelector('.order__autorization-button')
-        if (!autorizationButton) return
+        const authorizationButton = document.querySelector('.order__authorization-button')
+        if (!authorizationButton) return
 
-        autorizationButton.textContent = 'уже есть акаунт? войти'
-        const stepBody = autorizationButton.closest('.order-step')?.querySelector('.order-step__body')
-        stepBody?.append(autorizationButton)
+        authorizationButton.textContent = 'уже есть акаунт? войти'
+        const stepBody = authorizationButton.closest('.order-step')?.querySelector('.order-step__body')
+        stepBody?.append(authorizationButton)
     })()
 
     /** Кнопки Изменить, локация  */
