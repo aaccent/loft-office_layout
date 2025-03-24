@@ -283,10 +283,12 @@ function createProductImage(src: string) {
 function showProductsImages() {
     const container = document.querySelector('.order__items .swiper-wrapper')
     if (!container) return
+
     const productsImages = document.querySelectorAll<HTMLImageElement>('.cart__list-product-img ')
     productsImages.forEach((image) => {
         if (image.src) container.append(createProductImage(image.src))
     })
+
     new Swiper('.order__items', {
         slidesPerView: 2.5,
         spaceBetween: 8,
@@ -374,6 +376,7 @@ export function setFinalDeliveryInfo(info: FinalDeliveryInfo) {
     if (!openCurrentTypePopupButton) return
     openCurrentTypePopupButton.setAttribute('data-delivery-popup-name', info.popup)
 }
+
 window.order = {
     showProductsImages,
     setOrderInfo,
