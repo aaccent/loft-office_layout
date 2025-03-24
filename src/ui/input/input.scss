@@ -22,20 +22,19 @@ textarea {
 }
 
 .input {
+    gap: 7px;
     position: relative;
     padding-top: 22px;
     padding-bottom: 16px;
     width: 100%;
+    display: flex;
+    align-items: center;
     font-size: 1.6rem;
     letter-spacing: 0.01rem;
     text-transform: uppercase;
     border-bottom: 1px solid #6e4d3133;
 
     input {
-        position: relative;
-        z-index: 10;
-        width: 95%;
-
         &::placeholder {
             font-size: 0;
         }
@@ -48,12 +47,9 @@ textarea {
     }
 
     &__reset {
-        position: absolute;
-        top: 50%;
-        right: 0;
-        transform: translateY(-50%);
-        translate: -10px;
+        position: relative;
         @include utils.square(15px);
+        z-index: 1;
         opacity: 0;
         visibility: hidden;
 
@@ -86,7 +82,7 @@ textarea {
         visibility: hidden;
     }
 
-    &.process {
+    &:has(input:where(:not(:placeholder-shown), :focus)) {
         border-color: var(--accent);
         .input__placeholder {
             transform: translateY(-115%) translateX(-10%) scale(0.8);

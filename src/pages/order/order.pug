@@ -92,6 +92,7 @@ block append main
                             li
                                 label.user-type(name='userT')= type.name
                                     .order-step__checkmark
+                                    // commerce, private - это занятые ключевые слова, их нельзя менять на другие
                                     input.user-type__input(type='radio', name='user-type', value=type.value)
                 .order-step
                     .order-step__header
@@ -106,33 +107,34 @@ block append main
                     .order-step__body.user-data
                         .user-data__prefix Осталось заполнить 5 обязательных полей *
                         .user-data__inputs
+                            // Некоторые скрипты завязаны на name аттрибуте этих полей, поэтому нельзя заменять их имена
                             .input(data-user-type='private')
                                 .input__placeholder Имя
-                                input(type='text', name='name')
+                                input(type='text', name='name', placeholder='Имя')
                             .input(data-user-type='private')
                                 .input__placeholder Фамилия
-                                input(type='text', name='last-name')
+                                input(type='text', name='last-name', placeholder='Фамилия')
                             .input(data-user-type='private')
                                 .input__placeholder Отчество
-                                input(type='text', name='middle-name')
+                                input(type='text', name='middle-name', placeholder='Отчество')
                             .input(data-user-type='commerce,commerce-nds')
                                 .input__placeholder название компании
-                                input(type='text', name='name')
+                                input(type='text', name='name', placeholder='название компании')
                             .input(data-user-type='commerce,commerce-nds')
                                 .input__placeholder ИНН
-                                input(type='text', name='inn')
+                                input(type='text', name='inn', placeholder='ИНН')
                             .input(data-user-type='commerce,commerce-nds')
                                 .input__placeholder КПП
-                                input(type='text', name='kpp')
+                                input(type='text', name='kpp', placeholder='КПП')
                             .input(data-user-type='commerce,commerce-nds')
                                 .input__placeholder Юр.адрес
-                                input(type='text', name='address')
+                                input(type='text', name='address', placeholder='Юр.адрес')
                             .input(data-user-type='private,commerce,commerce-nds')
                                 .input__placeholder Телефон
-                                input(type='tel', name='tel')
+                                input(type='tel', name='tel', placeholder='Телефон')
                             .input(data-user-type='private,commerce,commerce-nds')
                                 .input__placeholder Email
-                                input(type='email', name='email')
+                                input(type='email', name='email', placeholder='Email')
                         button.button.button--dark.user-data__button(type='button') далее
                 .order-step
                     .order-step__header
