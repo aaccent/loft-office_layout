@@ -13,7 +13,7 @@ codeInputs.forEach((input) => {
     IMask(input, { mask: Number })
 })
 
-const numberInputs = document.querySelectorAll<HTMLElement>('input[name="inn"], input[name="kpp"]')
+const numberInputs = document.querySelectorAll<HTMLElement>('input[data-format="inn"], input[data-format="kpp"]')
 
 const maskNumberOptions = {
     mask: Number,
