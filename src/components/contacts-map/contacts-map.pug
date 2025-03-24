@@ -1,0 +1,39 @@
+include layout/utils
+
+-
+    var contacts = [
+        {
+            address: 'r.Казань, ул. Пушкина, 22, стр. 1, оф. 204',
+            workHours: 'Пн-Пт: с 09:00 до 20:00<br>Сб-Вск: выходной',
+            tel: '+7 921 560-15-16',
+            mail: 'mail@loftcontact.ru',
+            image: 'assets/content/contacts/office-1.png',
+            name: 'центральный офис',
+            coords: '55.78483551310201, 49.127320892829296',
+            isMain: true,
+        },
+        {
+            address: 'адрес',
+            workHours: 'режим работы',
+            tel: 'телефон',
+            mail: 'эл.почта',
+            image: 'assets/content/contacts/office-2.png',
+            name: 'не центральный офис',
+            coords: '55.771657543573895, 49.12972415184225'
+        },
+    ]
+
+
++section.contacts
+    .page-title.contacts__title контакты
+    .contacts__map-wrapper
+        .contacts__map(data-key='123asd123')
+        each contact in contacts
+            .contacts__info(data-coords=contact.coords, class=`${contact.isMain ? '_visible' : ''}`)
+                .contacts__info-name= contact.name
+                +img(require(contact.image)).contacts__info-image
+                .contacts__info-address= contact.address
+                .contacts__info-work-hours!= contact.workHours
+                .contacts__info-tel= contact.tel
+                .contacts__info-mail= contact.mail
+                button.button.button--dark.contacts__info-button(data-action='popup', data-popup='call-popup') связаться

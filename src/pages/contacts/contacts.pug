@@ -1,0 +1,7 @@
+extends layout/page
+include layout/utils
+
+block append main
+    include ui/breadcrumbs/breadcrumbs
+    +breadcrumbs(['контакты'])
+    include components/contacts-map/contacts-map

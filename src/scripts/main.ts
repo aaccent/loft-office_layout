@@ -12,3 +12,5 @@ import 'ui/popups/call-popup/call-popup'
 import 'ui/selector/selector'
 import 'ui/popups/authorization/authorization.js'
 import 'ui/cookie-notification/cookie-notification'
+
+import 'components/contacts-map/contacts-map'
