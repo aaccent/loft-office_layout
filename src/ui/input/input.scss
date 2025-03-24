@@ -76,7 +76,7 @@ textarea {
 
     &__error {
         position: absolute;
-        translate: 0 100%;
+        top: calc(100% + 5px);
         color: #b41212;
         opacity: 0;
         visibility: hidden;
