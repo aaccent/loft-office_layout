@@ -17,13 +17,31 @@ interface FinalInfoElement extends HTMLElement {
     dataset: { final: keyof FinalUserDataInfo }
 }
 
-type User = 'private' | 'commerce' | 'commerce-nds' | 'commerce,commerce-nds'
+type User = 'private' | 'commerce' | 'commerce-nds'
 interface UserTypeInput extends HTMLInputElement {
     value: User
 }
 
+function parseUserTypesString(userType: string): User[] {
+    if (!userType) return []
+    return userType
+        .trim()
+        .split(',')
+        .map((i) => i.trim()) as User[]
+}
+
+/**
+ * Проверяет, входит ли одно из значений `checkUserType` в список `listUserType`
+ * @param checkList - Массив типов пользователей, которые нужно проверить
+ * @param allowedList - Массив разрешенных типов пользователей
+ * @return `true` если хотя бы один из элементов `checkList` входит в `allowedList`
+ */
+function isUserTypeIncludesList(checkList: User[], allowedList: User[]): boolean {
+    return checkList.some((type) => allowedList.includes(type))
+}
+
 /** Определяет поля для показа в форме Личные данные */
-function setUserDataForm(userType: User) {
+function setUserDataForm(userType: User[]) {
     const userDataStep = document.querySelector('.order-step:has(.user-data)')
     userDataStep?.classList.remove('_valid')
 
@@ -31,8 +49,8 @@ function setUserDataForm(userType: User) {
     userDataInputs.forEach((input) => {
         input.querySelector('input')?.classList.remove('invalid')
 
-        const inputUserType = input.dataset.userType
-        if (inputUserType?.includes(userType)) {
+        const inputUserType = parseUserTypesString(input.dataset.userType || '')
+        if (isUserTypeIncludesList(userType, inputUserType)) {
             input.classList.add('_active')
         } else {
             input.classList.remove('_active')
@@ -41,13 +59,13 @@ function setUserDataForm(userType: User) {
 }
 
 /** @param userType если 'private', то кнопка Оплаты появляемся в шаге Методы оплаты. Если другое, то в шаге Методы доставки */
-function setSubmitButton(userType: User) {
+function setSubmitButton(userType: User[]) {
     const submitButton = document.querySelector<HTMLElement>('.order__button')
     if (!submitButton) return
 
     submitButton?.classList.remove('_visible')
 
-    if (userType === 'private') {
+    if (userType.includes('private')) {
         document.querySelector('.order-step:has(.payment-method)')?.append(submitButton)
     } else {
         document.querySelector('.order-step:has(.delivery-method)')?.append(submitButton)
@@ -152,7 +170,8 @@ function setFinalUserData(info: FinalUserDataInfo) {
 
 /** Действия при выботе типа покупателя */
 function setUserType(input: UserTypeInput) {
-    const activeUserType = input.value
+    const activeUserType = parseUserTypesString(input.value || '')
+
     setUserDataForm(activeUserType)
     setSubmitButton(activeUserType)
 }
