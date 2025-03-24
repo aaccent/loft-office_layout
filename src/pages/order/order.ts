@@ -176,19 +176,21 @@ function setUserType(input: UserTypeInput) {
     setSubmitButton(activeUserType)
 }
 
+function userTypeChangeHandler(input: UserTypeInput) {
+    setUserType(input)
+    openNextStep()
+    if (adaptive.isDesktop) return
+
+    const inputValueContainer = document.querySelector<HTMLElement>('.user-type__final')
+    if (!inputValueContainer) return
+    inputValueContainer.textContent = input.closest('.user-type')?.textContent || ''
+}
+
 function init() {
     /** Типы покупателей */
     const userTypeInputs = document.querySelectorAll<UserTypeInput>('.user-type input')
     userTypeInputs.forEach((input) => {
-        input.addEventListener('change', () => {
-            setUserType(input)
-            openNextStep()
-            if (adaptive.isDesktop) return
-
-            const inputValueContainer = document.querySelector<HTMLElement>('.user-type__final')
-            if (!inputValueContainer) return
-            inputValueContainer.textContent = input.closest('.user-type')?.textContent || ''
-        })
+        input.addEventListener('change', () => userTypeChangeHandler(input))
     })
 
     /** Способы доставки */
@@ -242,6 +244,9 @@ function init() {
 
     const firstStep = document.querySelector<HTMLElement>('.order-step:nth-child(1)')
     firstStep?.classList.add('_opened')
+
+    const checkedInput = document.querySelector<UserTypeInput>('.user-type input:checked')
+    if (checkedInput) userTypeChangeHandler(checkedInput)
 
     /** Изменения внешнего вида в мобильном разрешении */
     if (adaptive.isDesktop) return
