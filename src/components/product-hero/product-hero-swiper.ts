@@ -10,6 +10,9 @@ const thumb = new Swiper('.product-hero__thumb-slider', {
 new Swiper('.product-hero__main-slider', {
     slidesPerView: 1,
     effect: 'fade',
+    thumbs: {
+        swiper: thumb,
+    },
     createElements: true,
     pagination: {
         enabled: true,
@@ -17,7 +20,7 @@ new Swiper('.product-hero__main-slider', {
         bulletClass: 'slider-pagination-bullet',
         bulletActiveClass: 'slider-pagination-bullet-active',
     },
-    modules: [EffectFade, Pagination],
+    modules: [EffectFade, Thumbs, Navigation, Pagination],
     breakpoints: {
         1000: {
             pagination: false,
@@ -26,10 +29,6 @@ new Swiper('.product-hero__main-slider', {
                 prevEl: '.product-hero__thumb-slider-button--prev',
                 nextEl: '.product-hero__thumb-slider-button--next',
             },
-            thumbs: {
-                swiper: thumb,
-            },
-            modules: [EffectFade, Thumbs, Navigation],
         },
     },
 })

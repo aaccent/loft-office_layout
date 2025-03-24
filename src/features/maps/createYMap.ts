@@ -104,10 +104,15 @@ export async function createYMap(container: string | HTMLElement, props?: YMapCo
 
     await loadYMap(mapEl.dataset.key)
 
-    const map = new ymaps.Map(mapEl, {
-        center: mapCenter,
-        zoom: config.zoom,
-    })
+    const map = new ymaps.Map(
+        mapEl,
+        {
+            center: mapCenter,
+            zoom: config.zoom,
+            controls: [],
+        },
+        { suppressMapOpenBlock: true },
+    )
 
     if (!config.zoomByWheel) map.behaviors.disable('scrollZoom')
 

@@ -1,0 +1,144 @@
+@use 'styles/utils';
+
+.courier {
+    &__inner {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__title {
+        margin-bottom: 60px;
+        font: 8rem/1.2 var(--steelfish);
+        letter-spacing: -0.01rem;
+        text-transform: uppercase;
+    }
+
+    &__location {
+        margin-bottom: 50px;
+        display: flex;
+        align-items: center;
+        font: 2.8rem/1.05 var(--steelfish);
+        letter-spacing: 0.01rem;
+        text-transform: uppercase;
+        opacity: 0.5;
+
+        &::before {
+            content: '';
+            @include utils.square(40px);
+            @include utils.bg-defaults(contain);
+            filter: var(--filter-accent);
+            background-image: url('assets/icons/geo.svg');
+        }
+    }
+
+    &-address {
+        row-gap: 18px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        .input:has([name='flat']),
+        .input:has([name='intercom']),
+        .input:has([name='entrance']),
+        .input:has([name='floor']) {
+            width: 49%;
+        }
+
+        &__list {
+            gap: 10px;
+            display: flex;
+            flex-direction: column;
+            font: 1.4rem/1.3 var(--firs-neue);
+            text-transform: none;
+
+            &-wrapper {
+                width: 100%;
+                height: 100%;
+                overflow-y: auto;
+
+                &::-webkit-scrollbar {
+                    width: 2px;
+                    background-color: hsl(7, 15%, 34%, 0.2);
+                    &-thumb {
+                        background-color: hsl(7, 15%, 34%);
+                    }
+                }
+            }
+
+            &-block {
+                position: absolute;
+                z-index: 20;
+                top: 89px;
+                padding: 20px;
+                width: 100%;
+                height: 114px;
+                display: none;
+                background-color: white;
+
+                &::after {
+                    content: '';
+                    @include utils.square(20px);
+                    position: absolute;
+                    top: 0;
+                    transform: translateY(-50%);
+                    rotate: 45deg;
+                    display: block;
+                    background-color: white;
+                }
+
+                &._visible {
+                    display: block;
+                }
+            }
+        }
+
+        &__item {
+            cursor: pointer;
+        }
+    }
+
+    &__button {
+        margin-top: auto;
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .courier {
+        &__title {
+            margin-bottom: 32px;
+            font-size: 3.4rem;
+            line-height: 1.05;
+        }
+
+        &__location {
+            margin-bottom: 30px;
+            font-size: 2rem;
+            line-height: 1.05;
+
+            &::before {
+                @include utils.square(30px);
+            }
+        }
+
+        &-address {
+            row-gap: 6px;
+
+            .input:has([name='flat']),
+            .input:has([name='intercom']),
+            .input:has([name='entrance']),
+            .input:has([name='floor']) {
+                width: 100%;
+            }
+
+            &__list-block {
+                top: 73px;
+            }
+        }
+
+        &-address__list-wrapper {
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+    }
+}

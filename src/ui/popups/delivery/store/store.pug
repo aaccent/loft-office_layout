@@ -1,0 +1,29 @@
+include layout/utils
+include features/popup/popup
+-
+    var stores = [
+        {
+        address: 'ул. Пушкина, 22, стр. 1, оф. 204',
+        workHours: 'Пн-Пт: с 09:00 до 20:00<br>Сб-Вск: выходной',
+        tel: '+7 921 560-15-16',
+            coords: '55.82956120027084, 49.05405964521275',
+            main: true,
+    }, {
+            address: 'address',
+            workHours: 'workHours',
+            tel: 'tel',
+            coords: '55.82878987470423, 49.09963573802245',
+            main: false
+        }
+    ]
+
++popup('store','store')
+    .store__info
+        .store__title самовывоз
+        +img(require('assets/content/store-1.png')).store__image
+        each item in stores
+            .store__info-content(data-store-coords=item.coords, class=`${item.main ? '_visible' : ''}`)
+                .store__address= item.address
+                .store__work-hours!= item.workHours
+                +anchor.store__tel= item.tel
+        .store__button.button.button--dark(data-action='store') выбрать этот склад

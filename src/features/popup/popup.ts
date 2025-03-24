@@ -20,7 +20,13 @@ popupBtns.forEach((btn) => {
         }
     })
 })
+export interface OpenPopupEventDetail {
+    target: HTMLElement | null
+}
 
+export interface OpenPopupEvent extends CustomEvent {
+    detail: OpenPopupEventDetail
+}
 const closePopupBtns = document.querySelectorAll('button[data-action="close-popup"]')
 closePopupBtns.forEach((btn) => {
     btn.addEventListener('click', closeActivePopup)

@@ -1,0 +1,6 @@
+include layout/utils
+
+mixin input
+    .input
+        .input__placeholder= attributes.placeholder
+        +wrapBreak: input&attributes(attributes)

@@ -1,0 +1,85 @@
+@use 'styles/utils';
+
+.promo-code {
+    padding: 24px 24px 24px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px dashed var(--accent-light);
+
+    &__wrapper {
+        position: relative;
+    }
+
+    input {
+        width: 80%;
+        font-size: 1.4rem;
+    }
+
+    &__success,
+    &__error {
+        position: absolute;
+        bottom: -16px;
+        transform: translateY(100%);
+        font-size: 1.2rem;
+        text-transform: uppercase;
+    }
+
+    &__success {
+        color: #b41212;
+    }
+
+    &__error {
+        color: var(--green);
+    }
+
+    &__actions {
+        aspect-ratio: 1;
+        position: relative;
+        width: 100%;
+        max-width: 32px;
+    }
+
+    &__enter {
+        inset: 0;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--accent-light);
+
+        &::before {
+            content: '';
+            @include utils.bg-defaults(auto);
+            @include utils.square(100%);
+            rotate: 45deg;
+            background-image: url('assets/icons/full-arrow.svg');
+        }
+    }
+
+    &__clean {
+        inset: 0;
+        position: absolute;
+        @include utils.bg-defaults(auto);
+        filter: var(--filter-accent-dark);
+        display: none;
+        background-image: url('assets/icons/close.svg');
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .promo-code {
+        padding: 20px;
+        input {
+            font-size: 1.2rem;
+        }
+
+        &__actions {
+            width: 16px;
+        }
+
+        &__enter::before {
+            background-size: contain;
+        }
+    }
+}

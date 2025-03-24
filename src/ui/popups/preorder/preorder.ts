@@ -1,5 +1,5 @@
-import { PreorderInfo } from '@/types'
 import { PopupOpenedCustomEvent } from 'features/popup/popup'
+import { PreorderInfo } from '@/types/preorder'
 
 const preorderPopup = document.querySelector('.preorder-popup')
 

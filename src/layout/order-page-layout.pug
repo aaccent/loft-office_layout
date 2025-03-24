@@ -1,0 +1,24 @@
+doctype html
+html(lang='ru')
+    head
+        block head
+            title #{ title }
+            meta(name='viewport', content='width=device-width, initial-scale=1.0')
+            meta(charset='UTF-8')
+
+            link(href=require('styles/styles.scss'), rel='stylesheet')
+            link(href=require('styles/other.styles.scss'), rel='stylesheet')
+    body
+        .main-wrapper
+            main.main
+                block main
+
+        include ui/popups/cart/cart
+        include ui/popups/delivery/courier/courier
+        include ui/popups/delivery/points/points
+        include ui/popups/delivery/store/store
+        include ui/popups/thanks/thanks
+
+        block scripts
+            script(src=require('scripts/main.ts'), type='module')
+            script(src=require('scripts/other.ts'), type='module')
