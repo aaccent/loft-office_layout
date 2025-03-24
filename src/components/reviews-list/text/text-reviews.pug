@@ -3,7 +3,7 @@ include layout/utils
 -
     var textReview = '<p>Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась. Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась.</p><p>Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась.</p>'
 
-    var textReviewWithPhoto ='<p>Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась. Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась.</p><p>Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась.</p><img src="assets/content/reviews/images/1.png"><img src="assets/content/reviews/images/2.png"><img src="assets/content/reviews/images/1.png"><img src="assets/content/reviews/images/2.png"><p>Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась. Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась.</p>'
+    var textReviewWithPhoto ='<p>Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась. Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась.</p><p>Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась.</p><div><img src="assets/content/reviews/images/1.png"><img src="assets/content/reviews/images/2.png"><img src="assets/content/reviews/images/1.png"><img src="assets/content/reviews/images/2.png"></div><p>Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась. Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась.</p><img src="assets/content/reviews/images/1.png"><p>Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась. Всё понравилось. Делали мебель на заказ. Быстро приехал замерщик, составили эскиз. Произвели расчёт. Указанная в договоре сумма не менялась.</p><div><img src="assets/content/reviews/images/1.png"><img src="assets/content/reviews/images/2.png"></div><p>Всё понравилось. Делали мебель на заказ.</p>'
 
     var reviews = [
         {
@@ -37,15 +37,34 @@ include layout/utils
         }
     ]
 
-#text.text-reviews
-    each item in reviews
-        .text-reviews__item.reviews__item(data-action='popup', data-popup='text-review')
-            .text-reviews__item-header
-                +img(require(item.image)).text-reviews__item-photo
-                .text-reviews__item-person
-                    .text-reviews__item-name= item.name
-                    .text-reviews__item-position= item.position
-                .reviews__item-button
-            .text-reviews__item-description
-                .text-reviews__item-text!= item.review
-                .text-reviews__item-media
+mixin text-item-container(isLink, isDarkTheme)
+    -
+        className = isDarkTheme 
+                ? 'text-reviews-list__item reviews__item text-reviews-list__item--dark'
+                : 'text-reviews-list__item reviews__item'
+
+    if isLink
+        +anchor(class=className): block
+    else
+        div(class=className, data-action='popup', data-popup=''): block
+
+mixin text-reviews(props)
+    -
+        props = Object.assign({
+            isMainPage: false,
+            isDarkTheme: false,
+        }, props || {})
+
+    - reviewsList = props.isMainPage ? reviews.slice(0, 3) : reviews
+    #text.text-reviews-list
+        each item in reviewsList
+            +text-item-container(props.isMainPage, props.isDarkTheme)
+                .text-reviews-list__item-header
+                    +img(require(item.image)).text-reviews-list__item-photo
+                    .text-reviews-list__item-person
+                        .text-reviews-list__item-name= item.name
+                        .text-reviews-list__item-position= item.position
+                    .reviews__item-button
+                .text-reviews-list__item-description
+                    .text-reviews-list__item-text!= item.review
+                    .text-reviews-list__item-media

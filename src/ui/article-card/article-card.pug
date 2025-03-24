@@ -1,0 +1,20 @@
+include layout/utils
+
+mixin article-card(props)
+    -
+        var props = Object.assign({
+            title: '',
+            img: '',
+            tag: '',
+            date: '',
+            time: '',
+        }, props || {})
+
+    +anchor.article-card&attributes(attributes)
+        .article-card__image-wrapper
+            +img(props.img).article-card__image
+            .article-card__tag= props.tag
+        .article-card__title= props.title
+        .article-card__bottom
+            .article-card__date= props.date
+            .article-card__time= props.time

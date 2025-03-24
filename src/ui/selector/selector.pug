@@ -1,0 +1,28 @@
+include layout/utils
+
+mixin selector(props)
+    -
+        list = Object.assign({
+            name: '',
+            list: [
+                { title: '', value: '', shownValue: '' }
+            ]
+        })
+
+    .selector
+        +wrapBreak: button.selector__button
+        .selector__list-wrapper
+            .selector__mobile-top
+                .selector__mobile-title Сортировка
+                +wrapBreak: button.close-btn
+            ul.selector__list
+                each item in props.list
+                    li: label.selector__item
+                        +wrapBreak: input.selector__item-input(
+                            type='radio',
+                            name=props.name,
+                            value=item.value,
+                            data-show-value=item.shownValue
+                        )
+                        +wrapBreak: span.selector__item-circle
+                        | #{ item.title }

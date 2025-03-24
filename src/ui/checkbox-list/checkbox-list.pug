@@ -1,0 +1,42 @@
+include layout/utils
+
+mixin checkbox-list(props)
+    -
+        props = Object.assign({
+            name: '',
+            list: [''],
+        }, props || {})
+
+    ul.checkbox-list
+        each item in props.list
+            li: label.checkbox-list__item-label.checkbox
+                input.checkbox-list__item-input.checkbox__input(type='checkbox', name='name')
+                | #{ item }
+
+mixin checkbox-bg-image-list(props)
+    -
+        props = Object.assign({
+            name: '',
+            list: [{ title: '', color: '' }],
+        }, props || {})
+
+    ul.checkbox-list
+        each item in props.list
+            li: label.checkbox-list__item-label.checkbox
+                input.checkbox-list__item-input.checkbox__input(type='checkbox', name='name')
+                | #{ item.title }
+                span.checkbox__color(style=`background-image:url(${item.color})`)
+
+mixin checkbox-color-list(props)
+    -
+        props = Object.assign({
+            name: '',
+            list: [{ title: '', color: '' }],
+        }, props || {})
+
+    ul.checkbox-list
+        each item in props.list
+            li: label.checkbox-list__item-label.checkbox
+                input.checkbox-list__item-input.checkbox__input(type='checkbox', name='name')
+                | #{ item.title }
+                span.checkbox__color(style=`background-color:${item.color}`)

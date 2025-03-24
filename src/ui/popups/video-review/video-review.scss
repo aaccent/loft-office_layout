@@ -15,11 +15,11 @@
         .close-btn {
             position: static;
             align-self: end;
-            border-color: white;
+            border-color: var(--white);
 
             &:before,
             &:after {
-                background-color: white;
+                background-color: var(--white);
             }
 
             &:hover {

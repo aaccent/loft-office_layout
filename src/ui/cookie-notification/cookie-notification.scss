@@ -1,0 +1,53 @@
+@use 'styles/utils';
+
+.cookie-notification {
+    gap: 100px;
+    position: fixed;
+    z-index: 5;
+    right: 32px;
+    bottom: 32px;
+    padding: 34px;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    background-color: var(--white);
+    @include utils.transition((opacity, visibility));
+
+    &.opened {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &__text {
+        max-width: 520px;
+        font-size: 1.4rem;
+        line-height: 1.3;
+    }
+
+    &__button {
+        width: fit-content;
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .cookie-notification {
+        gap: 24px;
+        right: initial;
+        bottom: 0;
+        left: 0;
+        padding: 28px 28px 32px;
+        width: 100%;
+        flex-direction: column;
+
+        &__text {
+            font-size: 1.2rem;
+            letter-spacing: 0.02rem;
+            line-height: 1.5;
+        }
+
+        &__button {
+            width: 100%;
+        }
+    }
+}

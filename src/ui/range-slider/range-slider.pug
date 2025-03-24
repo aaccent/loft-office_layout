@@ -1,0 +1,36 @@
+include layout/utils
+
+mixin range-slider(props)
+    -
+        props = Object.assign({
+            name: '',
+            min: 10000,
+            max: 500000,
+            isPrice: false
+        }, props || {})
+
+    .range-slider(data-min=`${props.min}`, data-max=`${props.max}`, data-is-price=props.isPrice)&attributes(attributes)
+        if props.name
+            .range-slider__title= props.name
+        .range-slider__inputs-wrapper
+            +wrapBreak:  //
+                Аттрибут name можно менять, скрипты опираются на классы.
+                В value вмешиваться нельзя, в data-num при инициализации можно
+            +wrapBreak: input.range-slider__input.range-slider__input--from(
+                name='range-from',
+                value='',
+                data-num=props.min,
+                type='text',
+                data-mask='от %d'
+            )
+            +wrapBreak: input.range-slider__input.range-slider__input--to(
+                name='range-to',
+                value='',
+                data-num=props.max,
+                type='text',
+                data-mask='до %d'
+            )
+        .range-slider__track
+            .range-slider__thumb.range-slider__thumb--from
+            .range-slider__line
+            .range-slider__thumb.range-slider__thumb--to

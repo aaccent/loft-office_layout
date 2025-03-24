@@ -1,0 +1,141 @@
+@use 'styles/utils';
+
+.preorder-popup {
+    &__inner {
+        display: flex;
+    }
+
+    &__content {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        @include utils.transparent-scroll;
+    }
+
+    &__title {
+        margin-bottom: 40px;
+    }
+
+    &__text {
+        margin-bottom: 60px;
+        max-width: 80%;
+        font-size: 2rem;
+        line-height: 1.4;
+        opacity: 0.5;
+    }
+
+    &__product {
+        gap: 16px;
+        margin-bottom: 60px;
+        display: flex;
+    }
+
+    &__product-image-wrapper {
+        padding: 8px;
+        width: 90px;
+        height: 109px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #e8e0d5;
+    }
+
+    &__product-image {
+        object-position: center;
+        object-fit: contain;
+        mix-blend-mode: multiply;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__product-body {
+        gap: 12px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__product-title {
+        max-width: 230px;
+        font-family: var(--steelfish);
+        font-size: 2.8rem;
+        letter-spacing: 0.01rem;
+        line-height: 1.05;
+        text-transform: uppercase;
+    }
+
+    &__product-info {
+        font-size: 1.4rem;
+        letter-spacing: 0.01rem;
+        line-height: 1.2;
+        opacity: 0.5;
+    }
+
+    &__product-size {
+        &::after {
+            content: ' ';
+        }
+    }
+
+    &__product-color {
+        &::before {
+            content: '/ ';
+        }
+    }
+
+    &__form {
+        gap: 18px;
+        height: 1px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    &__submit-button {
+        margin-top: auto;
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .preorder-popup {
+        &__inner {
+            padding-bottom: 0;
+        }
+
+        &__title.section-title {
+            margin-bottom: 24px;
+            font-size: 3.4rem;
+        }
+
+        &__text {
+            margin-bottom: 32px;
+            font-size: 1.4rem;
+        }
+
+        &__product {
+            margin-bottom: 32px;
+        }
+
+        &__product-image-wrapper {
+            padding: 12px;
+            width: 80px;
+            height: 90px;
+        }
+
+        &__product-title {
+            font-size: 2.8rem;
+        }
+
+        &__product-info {
+            font-size: 1rem;
+        }
+
+        &__form {
+            gap: 12px;
+        }
+
+        &__submit-button {
+            margin-bottom: 32px;
+        }
+    }
+}

@@ -13,13 +13,20 @@ html(lang='ru')
         .main-wrapper
             main.main
                 block main
+                block popups
 
             include footer/footer
 
-        include ui/popups/video-review/video-review
-        include ui/popups/text-review/text-review
-        include ui/popups/send-review/send-review
+        include ui/popups/preorder/preorder
+        include ui/cookie-notification/cookie-notification
+        include ui/popups/call-popup/call-popup
+        include ui/popups/thanks/thanks
         include ui/popups/cart/cart
+        include ui/popups/authorization/authorization
 
         block scripts
             script(src=require('scripts/main.ts'), type='module')
+            +wrapBreak:  //
+                Желательно чтобы swiper.ts был с атрибутом type="module" для ускорения загрузки
+                Для main.ts это необязательно
+            script(src=require('scripts/swiper.ts'), type='module')

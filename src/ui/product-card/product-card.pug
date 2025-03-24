@@ -1,0 +1,53 @@
+include layout/utils
+
+mixin product-card(props)
+    -
+        props = Object.assign({
+            image: require('assets/content/catalog/product.jpg'),
+            title: 'Офисное кресло Chairman 696 TW-05',
+            color: 'Оттавио Орех',
+            price: '6 832 ₽',
+            discountPrice: '7200₽',
+            new: true,
+            discount: true,
+            preorder: false,
+            isFavorite: false,
+        }, props || {})
+
+    div(class={ 'preorder-bounds': true, 'product-card': true, _favorite: props.isFavorite })&attributes(attributes)
+        .product-card__top
+            .product-card__top-attributes
+                if props.new
+                    +wrapBreak: span.product-card__top-attribute-item new
+                if props.discount
+                    +wrapBreak: span.product-card__top-attribute-item.product-card__top-attribute-item--dark 20%
+                +wrapBreak: button.product-card__favorite-button: span.icon.icon-favorite
+            +anchor: +img(props.image).product-card__image(data-field='image')
+            .product-card__size-selector.selector.selector--size
+                +wrapBreak: button.selector__button(data-field='size')
+                .selector__list-wrapper
+                    .selector__mobile-top
+                        .selector__mobile-title Размер
+                        +wrapBreak: button.close-btn
+                    ul.selector__list
+                        each item in Array(3)
+                            li: +anchor.selector__item
+                                +wrapBreak: span.selector__item-circle
+                                | 40 × 60 × 120 см
+        .product-card__body(data-field='id', data-id='5')
+            .product-card__color-info
+                +wrapBreak: span.product-card__color(data-field='color')= props.color
+                .product-card__colors-list
+                    +wrapBreak: span.product-card__color-item(style='background-color: #8c7c62')
+                    +wrapBreak: span.product-card__color-item(style='background-color: #624c34')
+                    +wrapBreak: span.product-card__color-item(style='background-color: #9fad2f')
+                +wrapBreak: span.product-card__color-more +2
+                if props.preorder
+                    +popupBtn('preorder').product-card__amount.product-card__amount--preorder предзаказ
+                else
+                    +wrapBreak: span.product-card__amount наличие: 8 шт
+            +anchor: .product-card__title(data-field='title')= props.title
+            +anchor: .product-card__price-info
+                +wrapBreak: span.product-card__price= props.price
+                if props.discountPrice
+                    +wrapBreak: span.product-card__price-discount= props.discountPrice

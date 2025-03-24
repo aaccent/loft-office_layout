@@ -1,0 +1,222 @@
+@use 'styles/utils';
+
+.authorization {
+    color: var(--accent);
+    &__inner {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    &__title {
+        margin-bottom: 40px;
+    }
+
+    &__content {
+        position: relative;
+        height: 100%;
+    }
+
+    &:has(.authorization-code._visible) {
+        .authorization-tel {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+
+    &-tel,
+    &-code {
+        inset: 0;
+        position: absolute;
+        transition: visibility 300ms ease-in-out;
+    }
+
+    &__submit-button {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+
+    & form:has(input.invalid) {
+        .error {
+            display: block;
+        }
+    }
+
+    .error {
+        margin-top: 10px;
+        display: none;
+        color: #b41212;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+    }
+
+    &__text {
+        width: 100%;
+        max-width: 432px;
+        font-size: 2rem;
+        opacity: 0.5;
+    }
+
+    &-tel {
+        &__text {
+            margin-bottom: 80px;
+        }
+
+        &__input {
+            padding-bottom: 16px;
+            width: 100%;
+            color: var(--accent);
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--accent);
+
+            &::placeholder {
+                color: var(--accent);
+                opacity: 1;
+            }
+        }
+    }
+
+    &-code {
+        opacity: 0;
+        visibility: hidden;
+
+        &._visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        &__text {
+            margin-bottom: 24px;
+        }
+
+        &__change-number-button {
+            gap: 10px;
+            margin-bottom: 92px;
+            padding: 0;
+            width: fit-content;
+            display: flex;
+            align-items: center;
+            background-color: transparent;
+
+            &::after {
+                content: none;
+            }
+
+            &::before {
+                position: static;
+                translate: 0;
+                @include utils.bg-defaults(auto);
+                background-image: url('assets/icons/full-arrow.svg');
+            }
+        }
+
+        &-form {
+            &__content {
+                gap: 18px;
+                display: flex;
+                justify-content: center;
+            }
+        }
+
+        &__input {
+            @include utils.square(154px);
+            font-family: var(--steelfish), sans-serif;
+            font-size: 8rem;
+            text-align: center;
+            opacity: 0.2;
+            border: 1px solid var(--accent);
+
+            &:focus,
+            &._code {
+                opacity: 1;
+            }
+
+            &.invalid {
+                color: var(--error);
+                border-color: var(--error);
+            }
+        }
+
+        &:has(.authorization-code__get-code-button._visible) {
+            .authorization-code__timer {
+                display: none;
+            }
+        }
+
+        &__timer,
+        &__get-code-button {
+            margin-top: 40px;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            opacity: 0.5;
+            &._visible {
+                display: block;
+                opacity: 1;
+            }
+        }
+
+        &__get-code-button {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: utils.$tablet1000) {
+    .authorization {
+        &__title {
+            margin-bottom: 24px;
+            font-size: 3.4rem;
+            line-height: 105%;
+        }
+
+        &-tel {
+            &__text {
+                margin-bottom: 40px;
+                width: 100%;
+                max-width: 244px;
+                font-size: 1.2rem;
+            }
+        }
+
+        &-tel {
+            &__input {
+                font-size: 1.2rem;
+            }
+        }
+
+        &__submit-button {
+            position: relative;
+            margin-top: 40px;
+        }
+
+        &-code {
+            &__text {
+                margin-bottom: 16px;
+                max-width: 100%;
+                font-size: 1.2rem;
+            }
+
+            &__change-number-button {
+                margin-bottom: 56px;
+            }
+
+            &-form {
+                &__content {
+                    gap: 0;
+                    justify-content: space-between;
+                }
+            }
+
+            &__input {
+                --size: 76px;
+                font-size: 4.8rem;
+            }
+
+            &__timer {
+                margin-top: 24px;
+                font-size: 1.2rem;
+            }
+        }
+    }
+}

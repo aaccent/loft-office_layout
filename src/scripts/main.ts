@@ -1,26 +1,19 @@
 import '@/features/popup/popup'
 import 'features/inputMask'
 import 'features/forms'
-import 'features/createDeliveryMap'
-
-import '@/methods/getAddressList'
-
-import 'pages/order/order'
 
 import 'layout/header/header.js'
 import 'layout/footer/footer.js'
 
+import 'ui/cookie-notification/cookie-notification'
 import 'ui/type-list/type-list.js'
+import 'ui/selector/selector'
 import 'ui/input/input.js'
 
-import 'ui/popups/video-review/video-review.js'
-import 'ui/popups/text-review/text-review.js'
-import 'ui/popups/send-review/send-review.js'
+import 'ui/popups/authorization/authorization.js'
+import 'ui/popups/call-popup/call-popup'
+import 'ui/popups/preorder/preorder'
 import 'ui/popups/cart/cart'
-
-import 'ui/popups/delivery/courier/courier'
-import 'ui/popups/delivery/points/points'
-import 'ui/popups/delivery/store/store'
 
 import 'components/reviews-list/reviews-list.js'
 import 'components/reviews-list/text/text-reviews.js'

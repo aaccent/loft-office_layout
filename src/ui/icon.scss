@@ -5,6 +5,7 @@
     @include utils.square(24px);
     @include utils.bg-defaults(contain);
     @include utils.transition(filter);
+    display: block;
     flex-shrink: 0;
 
     &-profile {
@@ -17,6 +18,10 @@
 
     &-favorite {
         background-image: url('assets/icons/heart.svg');
+
+        &.active {
+            background-image: url('assets/icons/heart-filled.svg');
+        }
     }
 
     &-cart {
@@ -25,6 +30,10 @@
 
     &-geo {
         background-image: url('assets/icons/geo.svg');
+    }
+
+    &-filter {
+        background-image: url('assets/icons/filter.svg');
     }
 }
 

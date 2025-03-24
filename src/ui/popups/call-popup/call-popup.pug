@@ -1,4 +1,12 @@
 include layout/utils
 include features/popup/popup
+include ui/input/input
 
 +popup("call", "call-popup")
+    .call-popup__title.section-title Связаться
+    p.call-popup__text Наш менеджер свяжется с вами в течение рабочего времени!
+    form.call-popup__form(novalidate, data-handler='form.php')
+        +input(type='text', name='name', required, placeholder='Имя*')
+        +input(type='tel', name='tel', required, placeholder='Телефон*')
+        +input(type='text', name='comment', required, placeholder='Комментарий')
+        +wrapBreak: button.button.button--dark.call-popup__submit-button(type='submit') отправить заявку

@@ -1,0 +1,35 @@
+include layout/utils
+include ui/article-card/article-card
+
+-
+    var list = [
+        {
+            title: 'пять примеров сочетания тумб в интерьере',
+            img: require('assets/content/blog/image-2.jpg'),
+            tag: '#Тумбы',
+            date: '24 Октября',
+            time: '4 мин',
+        },
+        {
+            title: 'Как выбрать идеальный стол для офиса?',
+            img: require('assets/content/blog/image.jpg'),
+            tag: '#столы',
+            date: '30 Октября',
+            time: '3 мин',
+        },
+        {
+            title: 'офисная мебель в стиле минимализм',
+            img: require('assets/content/blog/image-1.jpg'),
+            tag: '#стулья',
+            date: '28 Октября',
+            time: '5 мин',
+        },
+    ]
+
+section.section.blog-section: .container
+    .blog-section__title-wrapper
+        h2.blog-section__title полезные статьи
+        +anchor.text-button.text-button--dark.blog-section__link смотреть все
+    ul.blog-section__list
+        each item in list
+            +article-card(item).blog-section__item

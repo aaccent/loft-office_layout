@@ -1,0 +1,17 @@
+extends layout/page
+
+block append head
+    link(href=require('pages/catalog/catalog.styles.scss'), rel='stylesheet')
+
+block append main
+    include ui/breadcrumbs/breadcrumbs
+    +breadcrumbs(['Мебель для кабинета руководителя', 'кресла для кабинета руководителя'])
+    include components/catalog-hero/catalog-hero--2level
+    include components/filter/filter--2level
+    include components/catalog-list/catalog-list--products
+
+block append popups
+    include ui/popups/filter-popup/filter-popup
+
+block append scripts
+    script(src=require('pages/catalog/catalog.ts'))

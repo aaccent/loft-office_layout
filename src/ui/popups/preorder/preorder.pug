@@ -1,0 +1,20 @@
+include layout/utils
+include features/popup/popup
+include ui/input/input
+
++popup('preorder', 'preorder-popup'): .preorder-popup__content
+    .preorder-popup__title.section-title предзаказ
+    .preorder-popup__text Наш менеджер свяжется с вами в течение рабочего времени!
+    .preorder-popup__product
+        .preorder-popup__product-image-wrapper: +img.preorder-popup__product-image(data-field='image')
+        .preorder-popup__product-body
+            .preorder-popup__product-title(data-field='title')
+            .preorder-popup__product-info
+                +wrapBreak: span.preorder-popup__product-size(data-field='size')
+                +wrapBreak: span.preorder-popup__product-color(data-field='color')
+    form.preorder-popup__form(novalidate, data-handler='form.php')
+        input(type='hidden', name='product-id', data-field='id')
+        +input(type='text', name='name', required, placeholder='Имя*')
+        +input(type='tel', name='tel', required, placeholder='Телефон*')
+        +input(type='text', name='comment', required, placeholder='Комментарий')
+        +wrapBreak: button.button.button--dark.preorder-popup__submit-button(type='submit') отправить заявку

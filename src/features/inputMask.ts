@@ -8,6 +8,11 @@ const maskOptions: FactoryArg = {
 }
 telInputs.forEach((input) => IMask(input, maskOptions))
 
+const codeInputs = document.querySelectorAll<HTMLElement>('input[name="code"]')
+codeInputs.forEach((input) => {
+    IMask(input, { mask: Number })
+})
+
 const numberInputs = document.querySelectorAll<HTMLElement>('input[name="inn"], input[name="kpp"]')
 
 const maskNumberOptions = {

@@ -1,4 +1,5 @@
 @use 'styles/utils';
+@use 'ui/product-info-card/product-info-card';
 
 .cart {
     &:has(&__empty.hidden) {
@@ -53,7 +54,7 @@
         margin-top: auto;
     }
 
-    .product__layout {
+    .cart__product-layout {
         display: none;
     }
 
@@ -114,7 +115,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            color: white;
+            color: var(--white);
             font-family: var(--steelfish), sans-serif;
             font-size: 2.8rem;
             text-transform: uppercase;
@@ -136,7 +137,7 @@
 
             &::after {
                 content: '';
-                @include utils.bg-defaults(auto);
+                @include utils.bg-defaults;
                 @include utils.square(26px);
                 background-image: url('assets/icons/close.svg');
             }
@@ -262,58 +263,7 @@
 
     &__list-product-stock {
         display: none;
-        color: var(--green);
-        font-size: 1.4rem;
-        letter-spacing: 0.01rem;
-        text-transform: uppercase;
-    }
-
-    &__list-product-preorder {
-        gap: 33px;
-        display: flex;
-        align-items: center;
-        font-size: 1.4rem;
-        letter-spacing: 0.01rem;
-        text-decoration: underline;
-        text-transform: uppercase;
-
-        &::after {
-            content: '';
-            @include utils.square(12px);
-            @include utils.bg-defaults(auto);
-            background-image: url('assets/icons/tooltip.svg');
-        }
-    }
-
-    &__list-product-price {
-        margin-left: auto;
-        display: flex;
         flex-direction: column;
-
-        &-peritem {
-            font-size: 1.4rem;
-            text-align: end;
-            opacity: 0.5;
-        }
-
-        &-container {
-            gap: 8px;
-            display: flex;
-            align-items: center;
-            font-family: var(--steelfish), sans-serif;
-            font-size: 2.8rem;
-
-            &:has(.cart__list-product-price--discount) {
-                .cart__list-product-price--total {
-                    text-decoration: line-through;
-                    opacity: 0.5;
-                }
-
-                .cart__list-product-price--discount {
-                    order: -1;
-                }
-            }
-        }
     }
 
     &__promo {
@@ -328,6 +278,11 @@
 
         &-input {
             padding-bottom: 0;
+            color: var(--accent);
+            font-size: 1.4rem;
+            letter-spacing: 0.01rem;
+            line-height: 1.3;
+            text-transform: uppercase;
             border-bottom: none;
         }
 
@@ -437,7 +392,7 @@
             margin-top: 13px;
             .tooltip {
                 @include utils.square(12px);
-                @include utils.bg-defaults(auto);
+                @include utils.bg-defaults;
                 margin-left: 8px;
                 background-image: url('assets/icons/tooltip.svg');
             }
@@ -484,7 +439,7 @@
                 &::after {
                     content: '';
                     position: absolute;
-                    @include utils.bg-defaults(auto);
+                    @include utils.bg-defaults;
                     @include utils.square(25px);
                     top: 50%;
                     left: 50%;
@@ -541,58 +496,6 @@
 
         &__list {
             gap: 21px;
-
-            &-product {
-                position: relative;
-                padding-bottom: 24px;
-
-                &-img {
-                    margin-right: 12px;
-                    width: 90px;
-                    height: 130px;
-                }
-
-                &-title {
-                    margin-bottom: 10px;
-                    width: 180px;
-                    overflow: hidden;
-                    font-size: 2rem;
-                    text-wrap: nowrap;
-                    text-overflow: ellipsis;
-                }
-
-                &-characteristic {
-                    margin-bottom: 16px;
-                    font-size: 1rem;
-                }
-
-                &-amount {
-                    margin-bottom: 39px;
-                    font-size: 1.4rem;
-                }
-
-                &-stock,
-                &-preorder {
-                    font-size: 1.2rem;
-                }
-
-                &-preorder::after {
-                    content: none;
-                }
-
-                &-price {
-                    position: absolute;
-                    right: 0;
-                    bottom: 24px;
-                    &-peritem {
-                        font-size: 1rem;
-                    }
-
-                    &-container {
-                        font-size: 2rem;
-                    }
-                }
-            }
         }
         &__promo {
             &-form {

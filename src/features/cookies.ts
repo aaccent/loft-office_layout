@@ -30,6 +30,7 @@ interface CookieOptions {
 }
 
 export const ONE_MONTH_IN_SECONDS = 30 * 24 * 60 * 60
+export const ONE_YEAR_IN_SECONDS = 60 * 60 * 24 * 365
 
 export function setCookie(name: CookieName | string, value: string, options?: CookieOptions) {
     const _options = Object.assign(

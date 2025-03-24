@@ -1,9 +1,11 @@
+import { createContentSwiper } from 'ui/content/content.js'
+
 function showTextReviewPopup(preview) {
     const popup = document.querySelector('.text-review.popup')
     const popupInner = popup.querySelector('.text-review__inner')
 
-    const reviewItemHeader = preview.querySelector('.text-reviews__item-header').cloneNode(true)
-    const reviewContent = preview.querySelector('.text-reviews__item-text').innerHTML
+    const reviewItemHeader = preview.querySelector('.text-reviews-list__item-header').cloneNode(true)
+    const reviewContent = preview.querySelector('.text-reviews-list__item-text').innerHTML
 
     const container = document.querySelector('.text-review__container')
     container.append(reviewItemHeader)
@@ -14,6 +16,7 @@ function showTextReviewPopup(preview) {
 
     container.append(content)
     popupInner.append(container)
+    createContentSwiper()
 
     const closeButton = popupInner.querySelector('.close-btn')
     closeButton.addEventListener('click', () => (container.innerHTML = ''), { once: true })
@@ -30,6 +33,6 @@ function showTextReviewPopup(preview) {
 
 document.addEventListener('review-call', (e) => {
     const reviewPreview = e.target
-    if (!reviewPreview.classList.contains('text-reviews__item')) return
+    if (!reviewPreview.classList.contains('text-reviews-list__item')) return
     showTextReviewPopup(reviewPreview)
 })

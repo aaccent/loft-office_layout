@@ -17,3 +17,8 @@ export interface CartInfo {
     deliveryPrice?: string
     weight?: number
 }
+
+export interface CartNotification {
+    image: string
+    name: string
+}

@@ -5,6 +5,7 @@ dataInputs.forEach((container) => {
     if (input.value) container.classList.add('process')
 
     const resetButton = document.createElement('button')
+    resetButton.type = 'button'
     resetButton.classList.add('input__reset')
     resetButton.addEventListener('click', () => {
         input.value = ''

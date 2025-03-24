@@ -1,6 +1,7 @@
 import { ScriptStatus, ScriptTypes } from '@/features/loadScript'
 import { CartInfo, Product } from '@/types/types'
 import { ReceiveItem } from '@/types/delivery'
+import { CartNotification } from '@/types/cart'
 
 declare global {
     interface Window {
@@ -22,12 +23,14 @@ declare global {
             setInfo(info: CartInfo): void
             /** Общее количество товаров в корзине */
             amount: number
+            /** Показывает уведомление добавления в корзину */
+            showNotification(props: CartNotification)
         }
+        preorderInfo: PreorderInfo | null
         order: {
             showProductsImages(): void
             setOrderInfo(info: OrderInfo): void
         }
-
         delivery: {
             setList(list: ReceiveItem[]): void
         }
@@ -35,3 +38,5 @@ declare global {
         map: Promise<ymaps.Map>
     }
 }
+
+export {}

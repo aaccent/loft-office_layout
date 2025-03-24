@@ -1,0 +1,14 @@
+include layout/utils
+
+mixin switch(props)
+    -
+        props = Object.assign({
+            name: '',
+            title: '',
+        }, props || {})
+
+    .switch
+        .switch__title= props.title
+        label.switch__label
+            +wrapBreak: input.switch__input(type='checkbox', name=props.name, value=props.title)
+            .switch__switcher

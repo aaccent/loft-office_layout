@@ -35,6 +35,10 @@ textarea {
         position: relative;
         z-index: 10;
         width: 95%;
+
+        &::placeholder {
+            font-size: 0;
+        }
     }
 
     &__placeholder {

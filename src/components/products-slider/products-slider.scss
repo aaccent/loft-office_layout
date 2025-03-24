@@ -63,7 +63,7 @@
 
         &-prev,
         &-next {
-            @include utils.bg-defaults(auto);
+            @include utils.bg-defaults;
             filter: var(--filter-accent);
             @include utils.square(45px);
             background-image: url('assets/icons/arrow.svg');

@@ -1,0 +1,118 @@
+@use 'styles/utils';
+
+.quick-about {
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__photo {
+        object-position: top;
+        object-fit: cover;
+        margin-bottom: 32px;
+        @include utils.square(290px);
+    }
+
+    &__name {
+        margin-bottom: 16px;
+        font-family: var(--steelfish);
+        font-size: 4.6rem;
+        line-height: 1.05;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    &__position {
+        letter-spacing: 0.01rem;
+        line-height: 1.3;
+        text-align: center;
+        text-transform: uppercase;
+        opacity: 0.5;
+    }
+
+    &__line {
+        margin-top: 57px;
+        padding: 14px 0;
+        width: 360px;
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+
+        span {
+            width: 120px;
+            height: 1px;
+            display: block;
+            background-color: var(--white);
+        }
+    }
+
+    &__blockquote {
+        margin-bottom: 90px;
+        max-width: 1025px;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        font-family: var(--steelfish);
+        font-size: 8rem;
+        letter-spacing: -0.01rem;
+        line-height: 1.2;
+        text-align: center;
+        text-transform: uppercase;
+
+        &::before {
+            content: '«';
+            font-size: 11.4rem;
+            letter-spacing: 0;
+            line-height: 0.6;
+        }
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .quick-about {
+        &__photo {
+            --size: 200px;
+        }
+
+        &__name {
+            margin-bottom: 12px;
+            font-size: 3rem;
+        }
+
+        &__position {
+            font-size: 1.2rem;
+        }
+
+        &__line {
+            gap: 23px;
+            margin-top: 40px;
+            width: 240px;
+
+            span {
+                width: 80px;
+            }
+
+            span:last-child {
+                order: 1;
+            }
+
+            &::after {
+                content: '“';
+                font-family: var(--steelfish);
+                font-size: 8rem;
+                line-height: 0.55;
+            }
+        }
+
+        &__blockquote {
+            margin-bottom: 40px;
+            font-size: 3.4rem;
+            line-height: 1.3;
+
+            &::before {
+                display: none;
+            }
+        }
+    }
+}

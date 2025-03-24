@@ -1,20 +1,21 @@
 include layout/utils
 include features/popup/popup
+include ui/input/input
 
 +popup('send-review', 'send-review')
     .send-review__title.section-title оставить отзыв
     form.send-review__form(novalidate, data-handler='some.php')
         .send-review__form-inputs
-            +wrapBreak: input.send-review__input(placeholder='Имя*', required, name='name', type='text')
-            +wrapBreak: input.send-review__input(
-                placeholder='фамилия*',
+            +input.send-review__input(placeholder='Имя*', required, name='name', type='text')
+            +input.send-review__input(placeholder='фамилия*', required, name='surname', type='text')
+            +input.send-review__input(placeholder='телефон*', required, name='tel', type='tel')
+            +input.send-review__input(placeholder='почта', name='email', type='email')
+            +wrapBreak: textarea.textarea.send-review__input(
                 required,
-                name='surname',
-                type='text'
+                placeholder='ваш отзыв*',
+                rows=1,
+                wrap='soft'
             )
-            +wrapBreak: input.send-review__input(placeholder='телефон*', required, name='tel', type='tel')
-            +wrapBreak: input.send-review__input(placeholder='почта', name='email', type='email')
-            +wrapBreak: textarea.send-review__input(required, placeholder='ваш отзыв*', rows=1, wrap='soft')
         .send-review__container
             +wrapBreak: input(type='file', name='file', accept='image/*', multiple)
             .send-review__drop

@@ -1,6 +1,6 @@
 @use 'styles/utils';
 
-.text-reviews {
+.text-reviews-list {
     gap: 40px;
     width: 100%;
     display: flex;
@@ -9,6 +9,19 @@
     &__item {
         padding-bottom: 40px;
         border-bottom: 1px solid var(--accent-half-opacity);
+
+        &--dark {
+            padding-bottom: 30px;
+            border-bottom-color: hsl(0, 0%, 100%, 0.2);
+
+            .text-reviews-list__item-media {
+                border-color: hsl(0, 0%, 100%, 0.2);
+
+                span::before {
+                    filter: var(--filter-white);
+                }
+            }
+        }
 
         &-header {
             margin-bottom: 24px;
@@ -74,6 +87,7 @@
 
             span {
                 display: flex;
+                align-items: center;
 
                 &:before {
                     content: '';
@@ -92,7 +106,7 @@
 }
 
 @media screen and (max-width: utils.$tablet1000) {
-    .text-reviews {
+    .text-reviews-list {
         gap: 24px;
 
         &__item {
@@ -140,6 +154,18 @@
 
                 &:before {
                     @include utils.square(16px);
+                }
+            }
+
+            &-media {
+                padding: 13px 14px;
+                font-size: 1.2rem;
+                line-height: 15.6px;
+
+                span {
+                    &::before {
+                        @include utils.square(16px);
+                    }
                 }
             }
         }

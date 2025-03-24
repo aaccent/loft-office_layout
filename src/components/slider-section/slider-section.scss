@@ -1,0 +1,76 @@
+@use 'styles/utils';
+
+.dark-wrapper .slider-section {
+    &__button {
+        border-color: var(--white);
+
+        &::after {
+            filter: var(--filter-white);
+        }
+    }
+}
+
+.slider-section {
+    &__title-wrapper {
+        margin-bottom: 40px;
+        display: flex;
+        align-items: center;
+    }
+
+    &__button {
+        aspect-ratio: 1;
+        width: 64px;
+        height: 64px;
+        display: flex;
+        flex-shrink: 0;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid var(--accent);
+
+        &::after {
+            aspect-ratio: 1;
+            filter: var(--filter-accent);
+            content: '';
+            width: 50%;
+            background-image: url('assets/icons/arrow.svg');
+            @include utils.bg-defaults;
+        }
+
+        &:first-of-type {
+            margin-left: auto;
+            border-right: 0;
+        }
+
+        &--prev {
+            &::after {
+                rotate: -180deg;
+            }
+        }
+
+        &.swiper-button-disabled {
+            opacity: 0.5;
+        }
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .slider-section {
+        &__title-wrapper {
+            margin-bottom: 32px;
+        }
+
+        &__title {
+            font-size: 3.4rem;
+            line-height: 1.3;
+        }
+
+        &__button {
+            display: none;
+        }
+
+        &__list-wrapper {
+            margin: 0 var(--negative-container-px);
+            padding: 0 var(--container-px);
+        }
+    }
+}

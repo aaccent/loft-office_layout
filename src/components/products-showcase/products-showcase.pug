@@ -1,0 +1,43 @@
+include layout/utils
+include ui/category-card/category-card
+
+-
+    var list = [
+        { 
+            title: 'мебель для гостиниц high-jack',
+            color: 'Оттавио Орех',
+            price: 'от 147 000 ₽',
+            new: true,
+        },
+        { 
+            title: 'мебель для офиса virginna',
+            color: 'Дуб кальяри',
+            price: 'от 58 000 ₽',
+            discountPrice: 'от 72 000 ₽',
+            new: true,
+            discount: true,
+        },
+        { 
+            title: 'кабинет руководителя toronto',
+            color: 'канадский клён',
+            price: 'от 58 000 ₽',
+            new: true,
+        },
+    ]
+
+section.section.products-showcase: .container
+    .products-showcase__switcher
+        h2.products-showcase__switch-button.active.category-link(data-tab='1')
+            span.category-link__text новинки
+            span.category-link__number 22
+        button.products-showcase__switch-button.category-link(data-tab='2')
+            span.category-link__text хиты
+            span.category-link__number 32
+    .products-showcase__list-wrapper
+        +anchor.products-showcase__link.text-button смотреть все
+        ul.products-showcase__list.active(data-tab='1')
+            each card in list
+                li.products-showcase__list-item: +category-card(card)
+        ul.products-showcase__list(data-tab='2')
+            each card in list
+                li.products-showcase__list-item: +category-card(card)

@@ -1,0 +1,78 @@
+include layout/utils
+
+-
+    var images = [
+      require('assets/content/product-detail/image-1.jpg'),
+      require('assets/content/product-detail/image-2.jpg'),
+      require('assets/content/product-detail/image-3.jpg'),
+      require('assets/content/product-detail/image-4.jpg'),
+    ]
+
+section.section.product-hero: .container: .product-hero__inner.preorder-bounds
+    .product-hero__images-wrapper
+        .product-hero__main-slider-placeholder
+        .product-hero__thumb-slider-wrapper
+            +wrapBreak: button.product-hero__thumb-slider-button.product-hero__thumb-slider-button--prev
+            .product-hero__thumb-slider.swiper
+                .swiper-wrapper
+                    each img in images
+                        .swiper-slide.product-hero__thumb-slider-item: +img(img).product-hero__thumb-slider-item-img
+            +wrapBreak: button.product-hero__thumb-slider-button.product-hero__thumb-slider-button--next
+    +wrapBreak:  //
+        Нужно добавить класс `_in-cart` на `.product-hero__body` для появления кнопок управления корзиной
+        Нужно добавить класс `_preorder` на `.product-hero__body` если продукта нет в наличии
+    .product-hero__body(data-field='id', data-id='5')
+        .product-hero__code-wrapper
+            +wrapBreak: span.product-hero__code код: 172823
+            +wrapBreak:  //
+                Чтобы сделать избранным нужно выполнить любое одно из условий:
+                - Добавить класс `_favorite` на `.product-hero`
+                - Добавить класс `_favorite` на `.product-hero__body`
+                - Добавить класс `active` на `.icon-favorite`
+            +wrapBreak: button.product-hero__favorite-button.icon.icon-favorite(type='button')
+        h1.product-hero__title(data-field='title') Стол для руководителя Brooklyn
+        .product-hero__main-slider.swiper: .swiper-wrapper
+            each img in images
+                .swiper-slide.product-hero__main-slider-item: +img(img).product-hero__main-slider-item-img(
+                    data-field='image'
+                )
+        .product-hero__color-list-wrapper
+            .product-hero__color-list-title
+                | цвет:#{ ' ' }
+                span(data-field='color') Оттавио Орех
+            .product-hero__color-list
+                +anchor.product-hero__color-item.active
+                    +img(require('assets/content/collection/color-1.jpg')).product-hero__color-image
+                +anchor.product-hero__color-item
+                    +img(require('assets/content/collection/color-2-1.jpg')).product-hero__color-image
+                    +img(require('assets/content/collection/color-2-2.jpg')).product-hero__color-image
+                +anchor.product-hero__color-item
+                    +img(require('assets/content/collection/color-3.jpg')).product-hero__color-image
+        .product-hero__size-wrapper
+            .product-hero__size-title
+                .product-hero__size размер (Ш х Г х В), см:
+                .product-hero__stock наличие: 16 шт
+            .product-hero__size-list
+                +anchor.product-hero__size-list-item.active(data-field='size') 120 × 80 × 174
+                +anchor.product-hero__size-list-item 140 × 70 × 174
+                +anchor.product-hero__size-list-item 140 × 70 × 174
+        ul.product-hero__delivery-list
+            li.product-hero__delivery-item Доставка: 2–3 дня, от 250 ₽
+            li.product-hero__delivery-item Самовывоз: сегодня, со склада
+            li.product-hero__delivery-item Гарантия: 12 месяцев
+        .product-hero__price-wrapper
+            .product-hero__price-title цена:
+            .product-hero__price-list
+                +wrapBreak: span.product-hero__price 47 000 ₽
+                +wrapBreak: span.product-hero__discount-price 50 000 ₽
+        .product-hero__actions
+            +wrapBreak: button.product-hero__action-item.product-hero__cart-button.button.button--dark(type='button') В корзину
+            +popupBtn('preorder').product-hero__action-item.product-hero__call-button.button.button--transparent.button--dark: span(
+                data-mobile-text='в 1 клик'
+            ) Купить в 1 клик
+        .product-hero__cart-control
+            +wrapBreak: button.product-hero__cart-control-button.product-hero__cart-control-button--decrease
+            +wrapBreak: input.product-hero__cart-control-count(type='number', name='count', value='1')
+            +wrapBreak: button.product-hero__cart-control-button.product-hero__cart-control-button--increase
+        .product-hero__preorder
+            +wrapBreak: +popupBtn('preorder').product-hero__action-item.button.button--dark оставить заявку
