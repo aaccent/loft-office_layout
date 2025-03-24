@@ -1,3 +1,6 @@
+// Features
+import 'features/createDeliveryMap'
+
 // Other
 import '@/methods/getAddressList'
 
@@ -19,6 +22,3 @@ import 'ui/popups/filter-popup/filter-popup'
 import 'components/reviews-list/reviews-list.js'
 import 'components/reviews-list/text/text-reviews.js'
 import 'components/products-slider/products-slider.js'
-
-// Features
-import 'features/createDeliveryMap'
