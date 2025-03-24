@@ -283,10 +283,14 @@ function showProductsImages() {
     const container = document.querySelector('.order__items .swiper-wrapper')
     if (!container) return
 
-    const productsImages = document.querySelectorAll<HTMLImageElement>('.cart__list-product-img ')
+    container.innerHTML = ''
+
+    const productsImages = document.querySelectorAll<HTMLImageElement>('[data-img]')
     productsImages.forEach((image) => {
         if (image.src) container.append(createProductImage(image.src))
     })
+
+    if (document.querySelector('.order__items.swiper-initialized')) return
 
     new Swiper('.order__items', {
         slidesPerView: 2.5,
