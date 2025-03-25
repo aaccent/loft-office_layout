@@ -1,0 +1,53 @@
+extends layout/page
+include layout/utils
+
+block append main
+    include ui/breadcrumbs/breadcrumbs
+    +breadcrumbs(['контакты'])
+    include components/contacts-map/contacts-map
+    +section.contacts__details
+        -
+            var details = [
+                {
+                    name: 'Юр.адрес:',
+                    value: '420059, Татарстан, г. Казань, ул. Павлюхина, д. 106'},
+                {
+                    name: 'Банк:',
+                    value: 'ОТДЕЛЕНИЕ «БАНК ТАТАРСТАН» N8610 ПАО Сбербанк Г.КАЗАНЬ'
+                },
+                {
+                    name: 'Почт.адрес:',
+                    value: '420059, Татарстан, г. Казань, ул. Павлюхина, д. 106'
+                },
+                {
+                    name: 'Кор.счёт:',
+                    value: '30101810600000000603'
+                },
+                {
+                    name: 'ИНН/КПП:',
+                    value: '1659073676/165901001'
+                },
+                {
+                    name: 'БИК:',
+                    value: '049205603'
+                },
+                {
+                    name: 'ОГРН:',
+                    value: '1071690037055'
+                },
+                {
+                    name: 'Генеральный директор:',
+                    value: 'Емельянов Юрий Иванович'
+                },
+                {
+                    name: 'Расчётный счёт:',
+                    value: '40702810362000022503'
+                },
+            ]
+
+        .section-title.contacts__details-title Реквизиты
+        ul.contacts__details-list
+            each item in details
+                li.contacts__details-item
+                    .contacts__details-name= item.name
+                    .contacts__details-value= item.value

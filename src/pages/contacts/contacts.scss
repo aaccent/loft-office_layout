@@ -1,0 +1,53 @@
+@use 'styles/utils';
+
+.contacts {
+    &__details {
+        &-list {
+            grid-template-rows: repeat(5, 1fr);
+            grid-template-columns: repeat(auto-fill, 49%);
+            margin-top: 80px;
+            display: grid;
+            justify-content: space-between;
+        }
+
+        &-item {
+            padding: 16px 0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.4rem;
+            letter-spacing: 0.01rem;
+            text-transform: uppercase;
+            border-top: 1px solid hsl(0, 0%, 16%, 0.2);
+
+            &:last-child,
+            &:nth-last-child(2) {
+                border-bottom: 1px solid hsl(0, 0%, 16%, 0.2);
+            }
+        }
+
+        &-name {
+            opacity: 0.5;
+        }
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .contacts {
+        &__details {
+            &-list {
+                grid-template-columns: repeat(1, 1fr);
+                grid-template-rows: none;
+                margin-top: 40px;
+            }
+
+            &-item {
+                gap: 10px;
+                padding: 20px 0;
+                flex-direction: column;
+                justify-content: start;
+                font-size: 1.2rem;
+                line-height: 140%;
+            }
+        }
+    }
+}

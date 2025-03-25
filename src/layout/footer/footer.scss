@@ -4,7 +4,7 @@
     position: relative;
     padding-top: 40px;
     padding-bottom: 30px;
-    height: calc(100svh - var(--header-height));
+    min-height: calc(100svh - var(--header-height));
     /* @skip-scaling */
     max-height: 1080px;
     display: flex;

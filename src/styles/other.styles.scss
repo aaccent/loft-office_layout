@@ -13,6 +13,8 @@
 
 // Pages
 @use 'pages/text-reviews/reviews';
+@use 'pages/blog/blog';
+@use 'pages/article/article';
 @use 'pages/order/order';
 
 // Components
@@ -22,3 +24,4 @@
 @use 'components/catalog-hero/catalog-hero';
 @use 'components/filter/filter';
 @use 'components/catalog-list/catalog-list';
+@use 'components/slider-section/slider-section';
