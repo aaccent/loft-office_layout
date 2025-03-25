@@ -25,7 +25,15 @@
         font-size: 5rem;
     }
 
-    ul {
+    h5 {
+        font-size: 3.5rem;
+    }
+
+    h6 {
+        font-size: 2.5rem;
+    }
+
+    ul.benefits {
         gap: 24px;
         margin: 40px 0;
         display: flex;
@@ -168,53 +176,49 @@
         margin: 40px 0;
     }
 
-    .swiper {
+    .swiper,
+    .swiper-fade {
+        --button-size: 64px;
+        --button-offset: 32px;
+        position: relative;
         margin: 40px 0;
 
         img {
             margin: 0;
         }
 
-        .pagination,
-        .navigation {
-            position: absolute;
-        }
-
         .pagination {
+            position: absolute;
             display: none;
         }
 
-        .navigation {
-            z-index: 10;
-            right: 24px;
-            bottom: 24px;
-            width: 127px;
-            height: 64px;
-            display: flex;
+        .swiper-button-next,
+        .swiper-button-prev {
+            top: initial;
+            width: var(--button-size);
+            height: var(--button-size);
             border: 1px solid var(--white);
 
-            &::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                left: 50%;
-                translate: -50%;
-                width: 1px;
-                background-color: var(--white);
+            &::after {
+                filter: var(--filter-white);
+                --swiper-navigation-size: 20px;
             }
+        }
 
-            &--prev,
-            &--next {
-                width: 100%;
-                height: 100%;
-                @include utils.bg-defaults;
-                background-image: url('assets/icons/arrow.svg');
-            }
+        .swiper-button-next {
+            right: var(--button-offset);
+            bottom: var(--button-offset);
+        }
 
-            &--prev {
-                rotate: 180deg;
-            }
+        .swiper-button-prev {
+            right: calc(var(--button-offset) + var(--button-size));
+            bottom: var(--button-offset);
+            left: initial;
+            border-right: 0;
+        }
+
+        .swiper-button-disabled {
+            opacity: 1;
         }
     }
 }
@@ -229,13 +233,90 @@
             }
         }
 
-        .swiper {
-            .navigation {
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 80px 0 30px;
+            font-size: 4.8rem;
+            letter-spacing: 0;
+        }
+
+        h3 {
+            margin: 60px 0 20px;
+            font-size: 3.8rem;
+        }
+
+        h4 {
+            margin: 45px 0 20px;
+            font-size: 3rem;
+        }
+
+        h5 {
+            margin: 35px 0 20px;
+            font-size: 2.6rem;
+        }
+
+        h6 {
+            margin: 30px 0 15px;
+            font-size: 2rem;
+        }
+
+        ul.benefits {
+            font-size: 2rem;
+
+            li {
+                gap: 12px;
+
+                &::before {
+                    top: 8px;
+                    width: 6px;
+                }
+            }
+        }
+
+        ol {
+            gap: 10px;
+            font-size: 1.6rem;
+        }
+
+        img {
+            height: 256px;
+        }
+
+        dl {
+            dt {
+                gap: 30%;
+                font-size: 1.2rem;
+
+                &.active + dd {
+                    padding-top: 16px;
+                    font-size: 1.2rem;
+                }
+            }
+
+            dd {
+                padding-right: 0;
+            }
+        }
+
+        blockquote {
+            max-width: 100%;
+            font-size: 3rem;
+            letter-spacing: 0;
+        }
+
+        .swiper,
+        .swiper-fade {
+            .swiper-button-prev,
+            .swiper-button-next {
                 display: none;
             }
 
-            .pagination {
+            .swiper-pagination {
                 z-index: 10;
+                bottom: 18px;
                 display: flex;
                 justify-content: center;
 

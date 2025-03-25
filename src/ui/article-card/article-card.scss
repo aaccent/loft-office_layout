@@ -23,7 +23,9 @@
         object-position: left;
         width: 100%;
         height: auto;
+        min-height: 350px;
         max-height: 680px;
+        background-color: var(--white);
     }
 
     &__tag {
@@ -91,6 +93,7 @@
         &__image {
             object-fit: cover;
             height: 227px;
+            min-height: initial;
         }
 
         &__title {

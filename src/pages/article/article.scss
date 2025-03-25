@@ -72,8 +72,6 @@
     }
 
     &__image {
-        width: 100%;
-
         img {
             object-fit: cover;
             object-position: center;
@@ -90,61 +88,64 @@
         justify-content: space-between;
     }
 
-    &__toc {
-        position: sticky;
-        top: calc(var(--header-height) + 20px);
-        padding: 30px;
-        width: 280px;
-        height: fit-content;
-        background-color: var(--white);
-
-        &-title {
-            margin-bottom: 25px;
-            font-family: var(--steelfish);
-            font-size: 2.8rem;
-            letter-spacing: 0.01rem;
-            line-height: 1.05;
-            text-transform: uppercase;
-        }
-
-        &-list {
-            gap: 15px;
-            display: flex;
-            flex-direction: column;
-
-            * {
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-            }
-        }
-
-        &-list-item {
-            gap: 10px;
-            display: flex;
-            align-items: center;
-            opacity: 0.5;
-            @include utils.transition(opacity);
-
-            &::before {
-                aspect-ratio: 1;
-                content: '';
-                width: 7px;
-                display: none;
-                background-color: var(--accent);
-            }
-
-            &.active {
-                opacity: 1;
-
-                &::before {
-                    display: block;
-                }
-            }
-        }
-    }
-
     &__content {
         max-width: 59.3%;
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .article {
+        &__top {
+            margin-bottom: 32px;
+        }
+
+        &__title {
+            margin-bottom: 24px;
+            max-width: 100%;
+            font-size: 6rem;
+        }
+
+        &__info {
+            font-size: 1.2rem;
+            letter-spacing: 0.02rem;
+
+            &-tag {
+                margin-right: 20px;
+                padding: 9px 16px;
+                font-size: 1.4rem;
+                letter-spacing: 0;
+            }
+
+            &-date {
+                gap: 8px;
+                margin-right: 8px;
+            }
+        }
+
+        &__socials {
+            position: static;
+            margin-top: 32px;
+        }
+
+        &__image {
+            img {
+                margin-bottom: 32px;
+                height: 256px;
+            }
+        }
+
+        &__content-wrapper {
+            gap: 80px;
+            padding-right: 0;
+            flex-direction: column;
+        }
+
+        &__content {
+            max-width: 100%;
+
+            p {
+                font-size: 1.6rem;
+            }
+        }
     }
 }

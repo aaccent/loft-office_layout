@@ -25,14 +25,12 @@ block append main
             +wrapBreak: source(srcset=require('assets/content/article/article-image.jpg'))
             +img(require("assets/content/article/article-image.jpg"))
         .article__content-wrapper
-            .article__toc
-                .article__toc-title Содержание
-                ul.article__toc-list
-            .article__content.content
+            include ui/content-toc/content-toc
+            .article__content.content.content-with-toc
                 h2 Размер: как понять, какие параметры оптимальные
                 p Маленькие столы можно разделить на две категории. Совсем узкие, шириной до 80 см, как правило, позиционируются как предназначенные для ноутбуков и обычно бывают мобильными (на колёсах) или складными.
                 h3 Подзаголовок
-                ul
+                ul.benefits
                     li Преимущество 1
                     li Преимущество 2
                     li Преимущество 3
@@ -58,6 +56,13 @@ block append main
                 blockquote Форма столов, как и размер, влияет на расстановку рабочих мест в офисе.
                 h2 Заключение
                 p Маленькие столы можно разделить на две категории. Совсем узкие, шириной до 80 см, как правило, позиционируются как предназначенные для ноутбуков и обычно бывают мобильными (на колёсах) или складными.
+    include components/slider-section/slider-section
+    include ui/article-card/article-card
+    +slider-section('Похожие статьи')
+        +article-card.swiper-slide
+        +article-card.swiper-slide
+        +article-card.swiper-slide
+        +article-card.swiper-slide
 
 block append popups
 

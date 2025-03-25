@@ -3,6 +3,7 @@ import 'ui/popups/text-review/text-review.js'
 import 'ui/popups/send-review/send-review.js'
 import 'ui/popups/filter-popup/filter-popup'
 import 'ui/content/content.js'
+import 'ui/content-toc/content-toc'
 import 'ui/range-slider/range-slider'
 import 'ui/popups/filter-popup/filter-popup'
 
