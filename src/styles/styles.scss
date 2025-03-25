@@ -47,5 +47,9 @@
 @use 'layout/header/_header';
 @use 'layout/footer/footer';
 
+// Page
+@use 'pages/contacts/contacts';
+
 // Components
 @use 'components/products-slider/products-slider';
+@use 'components/contacts-map/contacts-map';
