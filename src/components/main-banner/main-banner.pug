@@ -1,0 +1,22 @@
+include layout/utils
+include ui/breadcrumbs/breadcrumbs
+
+mixin mainBanner(props)
+    -
+        props = Object.assign({
+            title: '',
+            buttonText: '',
+            description: '',
+            image: '',
+            breadcrumbs: ['']
+        }, props || {})
+
+    section.section.main-banner
+        +breadcrumbs(props.breadcrumbs)
+        +img(props.image).main-banner__image
+        .main-banner__content.container
+            h1.page-title.main-banner__title= props.title
+            if props.buttonText
+                .main-banner__button.button= props.buttonText
+            .main-banner__description= props.description
+            button.main-banner__scroll-button
