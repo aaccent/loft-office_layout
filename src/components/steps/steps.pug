@@ -1,0 +1,16 @@
+include layout/utils
+
++section.steps
+    .section-title.steps__title!= 'Как происходит <br>сотрудничество с нами'
+    .steps__list
+        each item, index in Array(4)
+            -
+                var title = index === 0 ? 'ВЫ ОБРАЩАЕТЕСЬ К НАМ' : index === 1 ? 'обсуждаем РЕШЕНИЯ' : index === 2 ? 'сОГЛАСОВЫВАЕМ ПРАВКИ' : 'финальный результат'
+            .steps__item
+                .steps__item-title= title
+                    .steps__item-number= index + 1
+                .steps__item-description Лофт Офис — работает с 2002 года и являемся надёжными поставщиками в РТ являемся
+                .steps__item-links
+                    +anchor брифинг
+                    +anchor брифинг
+                    +anchor обсуждение проекта
