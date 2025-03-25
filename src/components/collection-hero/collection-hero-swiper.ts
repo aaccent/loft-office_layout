@@ -6,7 +6,6 @@ const thumbSlider = new Swiper('.collection-hero__thumb-slider', {
     slidesPerGroup: 4,
     slidesPerView: 4,
     slideToClickedSlide: true,
-    modules: [Navigation],
 })
 
 new Swiper('.collection-hero__main-slider', {

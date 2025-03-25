@@ -7,11 +7,12 @@ mixin type-list(props)
             items: [{
                 name: '',
                 amount: 0,
-                link: '',
-                id: ''
+                link: '#',
+                active: false,
             }]
         }, props || {})
-    .type-list(class=props.className)
+    .type-list(class=props.className)&attributes(attributes)
         each item in props.items
-            +anchor(item.link).type-list__item(class=`${props.className}__item`, data-id=item.id)= item.name
+            - className = { [`${props.className}__item`]: Boolean(props.className), active: item.active }
+            +anchor(item.link).type-list__item(class=className)= item.name
                 +wrapBreak: span= item.amount

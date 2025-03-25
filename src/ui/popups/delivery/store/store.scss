@@ -1,0 +1,136 @@
+@use 'styles/utils';
+
+.store {
+    &__inner {
+        max-width: 100%;
+        display: flex;
+    }
+
+    &__inner {
+        padding: 0;
+        width: 100%;
+        display: flex;
+        background-color: transparent;
+    }
+
+    &__info {
+        position: relative;
+        padding: 54px 60px 60px;
+        width: 100%;
+        max-width: 790px;
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+
+        &-content {
+            position: absolute;
+            bottom: 20%;
+            display: none;
+
+            &._visible {
+                display: block;
+            }
+        }
+    }
+
+    &__title {
+        margin-bottom: 56px;
+        font: 8rem/1.2 var(--steelfish);
+        letter-spacing: -0.01rem;
+        text-transform: uppercase;
+    }
+
+    &__image {
+        object-position: center;
+        object-fit: cover;
+        height: 41%;
+    }
+
+    &__address {
+        margin-bottom: 12px;
+        font: 2rem/1.4 var(--firs-neue);
+    }
+
+    &__work-hours {
+        margin-bottom: 32px;
+        font-size: 1.4rem;
+        text-transform: uppercase;
+        opacity: 0.5;
+    }
+
+    &__tel {
+        gap: 12px;
+        display: flex;
+        align-items: center;
+        font: 2rem/1.4 var(--firs-neue);
+
+        &::before {
+            content: '';
+            @include utils.square(32px);
+            border: 1px solid var(--accent);
+            @include utils.bg-defaults(auto);
+            filter: var(--filter-accent);
+            background-image: url('assets/icons/phone.svg');
+        }
+    }
+
+    &__button {
+        margin-top: auto;
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .store {
+        &__inner {
+            height: 100svh;
+            min-height: 844px;
+            flex-direction: column;
+
+            .close-btn {
+                background-color: #5d5c5b;
+                border-radius: 100%;
+                border: none;
+
+                &::after,
+                &::before {
+                    background-color: white;
+                }
+            }
+        }
+
+        .delivery-map {
+            height: 30%;
+        }
+
+        &__info {
+            padding: 28px;
+            height: 100%;
+            max-height: 586px;
+        }
+
+        &__title {
+            margin-bottom: 24px;
+            font-size: 3.4rem;
+        }
+
+        &__image {
+            height: 210px;
+        }
+
+        &__address {
+            font-size: 1.6rem;
+        }
+
+        &__work-hours {
+            font-size: 1.2rem;
+        }
+
+        &__tel {
+            font-size: 1.6rem;
+        }
+
+        .ymaps-2-1-79-image {
+            transform: scale(0.5);
+        }
+    }
+}

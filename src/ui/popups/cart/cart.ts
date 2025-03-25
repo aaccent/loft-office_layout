@@ -1,4 +1,4 @@
-import { CartInfo, Product } from '@/types'
+import { CartInfo, CartNotification, Product } from '@/types/cart'
 import { formatPrice } from 'features/formatPrice'
 
 function camelCaseToKebab(camelCaseString: string) {
@@ -184,7 +184,8 @@ function init() {
     shareButton?.addEventListener('click', shareLink)
 
     const circleContainer = document.querySelector('.cart__info-trigger-circle')
-    createSVGCircle(circleContainer!)
+    if (!circleContainer) return
+    createSVGCircle(circleContainer)
 
     const promoInput = document.querySelector<HTMLInputElement>('.cart__promo-input')
     const promoButton = document.querySelector('.cart__promo-button')
@@ -202,6 +203,7 @@ function init() {
 
 function addItems(list: Product[]) {
     const cartList = document.querySelector('.cart__list')
+
     if (!cartList) return
 
     const products = cartList.querySelectorAll('.cart__list-product')
@@ -210,12 +212,16 @@ function addItems(list: Product[]) {
     }
 
     list.forEach((item) => {
-        const itemInCart = Array.from(cartList.querySelectorAll<HTMLElement>('.cart__list-product')).find(
-            (el) => el.id === item.id,
-        )
-        if (itemInCart) updateProductData(item, itemInCart, true)
-        cartList?.append(createProduct(item))
+        const itemInCart = document.querySelector<HTMLElement>(`.cart__list-product[data-id='${item.id}']`)
+
+        if (itemInCart) {
+            updateProductData(item, itemInCart, true)
+        } else {
+            cartList?.append(createProduct(item))
+        }
     })
+
+    window.order.showProductsImages()
     stickyInfo()
     updateAmount()
 }
@@ -265,11 +271,6 @@ function removeItem(id: Product['id']) {
 
 function clear() {
     document.querySelectorAll('.cart__list .cart__list-product').forEach((product) => product.remove())
-}
-
-export interface CartNotification {
-    image: string
-    name: string
 }
 
 const notificationEl = {

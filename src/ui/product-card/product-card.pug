@@ -34,7 +34,7 @@ mixin product-card(props)
                             li: +anchor.selector__item
                                 +wrapBreak: span.selector__item-circle
                                 | 40 × 60 × 120 см
-        div.product-card__body(data-field='id', data-id='5')
+        .product-card__body(data-field='id', data-id='5')
             .product-card__color-info
                 +wrapBreak: span.product-card__color(data-field='color')= props.color
                 .product-card__colors-list
@@ -46,7 +46,7 @@ mixin product-card(props)
                     +popupBtn('preorder').product-card__amount.product-card__amount--preorder предзаказ
                 else
                     +wrapBreak: span.product-card__amount наличие: 8 шт
-            +anchor: div.product-card__title(data-field='title')= props.title
+            +anchor: .product-card__title(data-field='title')= props.title
             +anchor: .product-card__price-info
                 +wrapBreak: span.product-card__price= props.price
                 if props.discountPrice

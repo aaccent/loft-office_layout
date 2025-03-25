@@ -1,5 +1,15 @@
 @use 'styles/utils';
 
+.dark-wrapper .article-card {
+    &__date::after {
+        background-color: var(--white);
+    }
+
+    &__time::before {
+        filter: var(--filter-white);
+    }
+}
+
 .article-card {
     width: 100%;
 
@@ -13,7 +23,9 @@
         object-position: left;
         width: 100%;
         height: auto;
+        min-height: 350px;
         max-height: 680px;
+        background-color: var(--white);
     }
 
     &__tag {
@@ -56,7 +68,7 @@
             content: '';
             /* @skip-scaling */
             @include utils.square(3px);
-            background-color: var(--white);
+            background-color: var(--accent);
         }
     }
 
@@ -69,6 +81,7 @@
         &::before {
             content: '';
             @include utils.square(18px);
+            filter: var(--filter-accent);
             background-image: url('assets/icons/time.svg');
             @include utils.bg-defaults;
         }
@@ -80,6 +93,7 @@
         &__image {
             object-fit: cover;
             height: 227px;
+            min-height: initial;
         }
 
         &__title {

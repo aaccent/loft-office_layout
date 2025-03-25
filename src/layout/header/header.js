@@ -168,6 +168,8 @@ void (function () {
     const header = document.querySelector('.header')
 
     function headerStickyHandler() {
+        if (!header) return
+
         if (window.scrollY >= 15 && !header.classList.contains('sticky')) {
             header.classList.add('sticky')
         } else if (window.scrollY < 15 && header.classList.contains('sticky')) {

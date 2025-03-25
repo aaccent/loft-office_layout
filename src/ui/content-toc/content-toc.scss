@@ -1,0 +1,81 @@
+@use 'styles/utils';
+
+.content-toc {
+    position: sticky;
+    top: calc(var(--header-height) + 20px);
+    padding: 30px;
+    width: 280px;
+    height: fit-content;
+    background-color: var(--white);
+
+    &__title {
+        margin-bottom: 25px;
+        font-family: var(--steelfish);
+        font-size: 2.8rem;
+        letter-spacing: 0.01rem;
+        line-height: 1.05;
+        text-transform: uppercase;
+    }
+
+    &__list {
+        gap: 15px;
+        display: flex;
+        flex-direction: column;
+
+        * {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
+
+    &__list-item {
+        gap: 10px;
+        display: flex;
+        align-items: center;
+        opacity: 0.5;
+        @include utils.transition(opacity);
+
+        &::before {
+            aspect-ratio: 1;
+            content: '';
+            width: 7px;
+            display: none;
+            flex-shrink: 0;
+            background-color: var(--accent);
+        }
+
+        &.active {
+            opacity: 1;
+
+            &::before {
+                display: block;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .content-toc {
+        position: static;
+        width: 100%;
+
+        &__title {
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        &__list {
+            gap: 12px;
+            font-size: 1.2rem;
+        }
+
+        &__list-item {
+            opacity: 1;
+
+            &::before {
+                display: none;
+            }
+        }
+    }
+}

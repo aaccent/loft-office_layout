@@ -1,0 +1,27 @@
+@use 'styles/utils';
+
+.more-button {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include utils.transition((background-color, color));
+
+    &::before,
+    &::after {
+        display: none;
+    }
+
+    &:hover {
+        color: var(--white);
+        background-color: var(--accent);
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .more-button {
+        width: 90px;
+        height: 90px;
+    }
+}

@@ -14,10 +14,10 @@
 // Popup
 @use 'features/popup/popup';
 @use 'ui/popups/cart/cart';
-@use 'ui/popups/call-popup/call-popup';
 @use 'ui/popups/thanks/thanks';
-@use 'ui/popups/authorization/authorization';
 @use 'ui/popups/preorder/preorder';
+@use 'ui/popups/call-popup/call-popup';
+@use 'ui/popups/authorization/authorization';
 
 // Ui
 @use 'ui/slider-pagination';
@@ -29,7 +29,7 @@
 @use 'ui/text';
 @use 'ui/type-list/type-list';
 @use 'ui/content/content';
-@use 'ui/input';
+@use 'ui/content-toc/content-toc';
 @use 'ui/category-card/category-card';
 @use 'ui/product-card/product-card';
 @use 'ui/buttons/text-button';
@@ -40,6 +40,8 @@
 @use 'ui/cookie-notification/cookie-notification';
 @use 'ui/mobile-text';
 @use 'ui/cart-notification/cart-notification';
+@use 'ui/input/input';
+@use 'ui/more-button';
 
 // Page basis
 @use 'layout/header/_header';
