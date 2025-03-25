@@ -1,0 +1,9 @@
+include layout/utils
+
++section.advantages
+    each item, index in Array(3)
+        .advantages__item
+            .advantages__item-number= `00${index + 1}`
+            +img(require('assets/icons/advantages.svg')).advantages__item-icon
+            .advantages__item-title Лидер рынка
+                .advantages__item-description Лофт Офис — работает с 2002 года и являемся надёжными поставщиками в РТ являемся надёжными
