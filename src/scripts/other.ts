@@ -15,6 +15,7 @@ import 'ui/popups/filter-popup/filter-popup'
 
 // UI
 import 'ui/content/content.js'
+import 'ui/content-toc/content-toc'
 import 'ui/range-slider/range-slider'
 import 'ui/popups/filter-popup/filter-popup'
 
