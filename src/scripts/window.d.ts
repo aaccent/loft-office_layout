@@ -1,6 +1,7 @@
 import { ScriptStatus, ScriptTypes } from '@/features/loadScript'
-import { CartInfo, PreorderInfo, Product } from '@/types'
-import { CartNotification } from 'ui/popups/cart/cart'
+import { CartInfo, Product } from '@/types/types'
+import { ReceiveItem } from '@/types/delivery'
+import { CartNotification } from '@/types/cart'
 
 declare global {
     interface Window {
@@ -26,6 +27,15 @@ declare global {
             showNotification(props: CartNotification)
         }
         preorderInfo: PreorderInfo | null
+        order: {
+            showProductsImages(): void
+            setOrderInfo(info: OrderInfo): void
+        }
+        delivery: {
+            setList(list: ReceiveItem[]): void
+        }
+
+        map: Promise<ymaps.Map>
     }
 }
 

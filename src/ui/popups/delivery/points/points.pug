@@ -1,0 +1,17 @@
+include layout/utils
+include features/popup/popup
+
++popup('points', 'points')
+    button.points__show-list-button.button.button--transparent смотреть списком
+    .points__info
+        button.points__info-close(type='button')
+        .points__title пункты выдачи
+        .input.points__search
+            input(type='text', placeholder='Найти адрес пункта')
+        .points__list-container
+    .points__baloon--mobile
+        .points__baloon-close
+        .points__baloon-address.points__item-address(data-baloon-id='address')
+        .points__baloon-price.points__item-price(data-baloon-id='price')
+        .points__baloon-date.points__item-date(data-baloon-id='date')
+        button.points__baloon-button.button.button--dark(data-action='points', type='button') выбрать пункт

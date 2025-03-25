@@ -1,8 +1,13 @@
-// UI
+// Popups
 @use 'ui/popups/video-review/video-review';
 @use 'ui/popups/text-review/text-review';
 @use 'ui/popups/send-review/send-review';
 @use 'ui/popups/filter-popup/filter-popup';
+@use 'ui/popups/delivery/points/points';
+@use 'ui/popups/delivery/store/store';
+@use 'ui/popups/delivery/courier/courier';
+
+// UI
 @use 'ui/range-slider/range-slider';
 @use 'ui/switch/switch';
 
@@ -10,6 +15,7 @@
 @use 'pages/text-reviews/reviews';
 @use 'pages/blog/blog';
 @use 'pages/article/article';
+@use 'pages/order/order';
 
 // Components
 @use 'components/reviews-list/text/text-reviews';

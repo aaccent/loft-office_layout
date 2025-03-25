@@ -1,0 +1,269 @@
+@use 'styles/utils';
+
+.points {
+    height: 100svh;
+    &__show-list-button {
+        display: none;
+    }
+
+    &__inner {
+        padding: 0;
+        max-width: 100%;
+        height: 100svh;
+        display: flex;
+        background-color: transparent;
+    }
+
+    &__info {
+        padding: 54px 60px 0;
+        width: 100%;
+        max-width: 790px;
+        height: 100svh;
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        background-color: white;
+
+        &-close {
+            display: none;
+        }
+    }
+
+    &__map {
+        width: 100%;
+    }
+
+    &__title {
+        margin-bottom: 80px;
+        font: 8rem/1.2 var(--steelfish);
+        letter-spacing: -0.01rem;
+        text-transform: uppercase;
+    }
+
+    &__search.input {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font: 2.8rem/1.05 var(--steelfish);
+        text-transform: uppercase;
+
+        input::placeholder {
+            opacity: 0.5;
+        }
+
+        &::after {
+            content: '';
+            @include utils.bg-defaults(cover);
+            background-image: url('assets/icons/search.svg');
+            @include utils.square(24px);
+            filter: var(--filter-accent);
+            display: block;
+        }
+
+        &.process {
+            &::after {
+                display: none;
+            }
+        }
+    }
+
+    &__error-message {
+        width: 335px;
+        font: 2rem/1.4 var(--firs-neue);
+    }
+
+    &__list {
+        gap: 32px;
+        display: flex;
+        flex-direction: column;
+
+        &-container {
+            position: relative;
+            margin-top: 80px;
+            width: 100%;
+            height: 60%;
+            overflow-y: auto;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+    }
+
+    &__item {
+        gap: 8px;
+        position: relative;
+        padding-bottom: 32px;
+        display: flex;
+        flex-direction: column;
+        font: 2rem/1.4 var(--firs-neue);
+        border-bottom: 1px solid hsl(0, 0%, 16%, 0.2);
+
+        &-price {
+            opacity: 0.5;
+        }
+
+        &-date {
+            color: var(--green);
+        }
+
+        &-button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: flex;
+            color: var(--accent);
+            font: 2.8rem/1.05 var(--steelfish);
+            letter-spacing: 0.01rem;
+            text-transform: uppercase;
+
+            &::before {
+                content: '';
+                @include utils.square(26px);
+                background-color: var(--accent);
+                @include utils.bg-defaults(contain);
+                margin-right: 10px;
+                background-image: url('assets/icons/full-arrow.svg');
+            }
+        }
+    }
+
+    &__baloon {
+        margin: 0 32px;
+        padding: 32px 0;
+
+        font: 1.6rem/1.4 var(--firs-neue);
+        border: none;
+
+        &-button {
+            margin-top: 32px;
+            min-width: 339px;
+        }
+
+        &--mobile {
+            display: none;
+        }
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .points {
+        &__inner {
+            min-height: 100svh;
+
+            .close-btn {
+                z-index: 10;
+                width: 40px;
+                height: 40px;
+                background-color: #5d5c5b;
+                border-radius: 100%;
+                border: none;
+                &::before,
+                &::after {
+                    background-color: white;
+                }
+            }
+        }
+
+        &__map {
+            inset: 0;
+            position: absolute;
+        }
+
+        &__info {
+            position: absolute;
+            z-index: 10;
+            top: 47px;
+            bottom: 0;
+            padding: 28px;
+            display: none;
+            &._visible {
+                display: flex;
+            }
+
+            &-close {
+                aspect-ratio: 1;
+                width: 32px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 1px solid var(--accent);
+                @include utils.bg-defaults(auto);
+                filter: var(--filter-accent);
+                position: absolute;
+                top: 28px;
+                right: 28px;
+                background-image: url('assets/icons/close.svg');
+            }
+        }
+
+        &__title {
+            margin-bottom: 40px;
+            font-size: 3.4rem;
+        }
+
+        &__search.input {
+            padding-top: 0;
+            font-size: 2rem;
+        }
+
+        &__list {
+            gap: 18px;
+            &-wrapper {
+                margin-top: 40px;
+            }
+        }
+
+        &__error-message {
+            font-size: 1.4rem;
+        }
+
+        &__item {
+            padding-bottom: 18px;
+            font-size: 1.4rem;
+            &-button {
+                font-size: 2rem;
+
+                &::before {
+                    @include utils.square(20px);
+                }
+            }
+        }
+
+        &__show-list-button.button {
+            position: absolute;
+            z-index: 10;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 334px;
+            display: block;
+            background-color: #5d5c5b;
+            border: none;
+        }
+
+        &__baloon--mobile {
+            position: absolute;
+            z-index: 20;
+            bottom: 0;
+            padding: 28px;
+            width: 100%;
+            flex-direction: column;
+            background-color: white;
+
+            &._visible {
+                display: flex;
+            }
+        }
+
+        &__baloon-close {
+            position: absolute;
+            top: 28px;
+            right: 28px;
+            @include utils.square(24px);
+            @include utils.bg-defaults(cover);
+            filter: var(--filter-accent);
+            background-image: url('assets/icons/close.svg');
+        }
+    }
+}
