@@ -1,0 +1,92 @@
+@use 'styles/utils';
+
+.main-banner {
+    position: relative;
+    padding-top: var(--header-height);
+    height: 100svh;
+    max-height: 1080px;
+    color: white;
+
+    &__image {
+        object-position: center;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100svh;
+        max-height: 1080px;
+    }
+
+    &__content {
+        position: absolute;
+        z-index: 1;
+        top: 159px;
+        right: 0;
+        bottom: 32px;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .breadcrumbs {
+        position: relative;
+        z-index: 10;
+        color: white;
+    }
+
+    &__title {
+        margin-bottom: 60px;
+        width: 100%;
+        max-width: 900px;
+    }
+
+    &__button {
+        max-width: 445px;
+    }
+
+    &__description {
+        margin-top: auto;
+        width: 100%;
+        max-width: 530px;
+        font: 2rem/1.4 var(--firs-neue);
+    }
+
+    &__scroll-button {
+        @include utils.square(64px);
+        @include utils.bg-defaults(20px);
+        position: absolute;
+        right: 40px;
+        bottom: 0;
+        rotate: 90deg;
+        background-image: url('assets/icons/arrow.svg');
+        border: 1px solid white;
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .main-banner {
+        &__content {
+            top: 116px;
+        }
+
+        &__title {
+            margin-bottom: 0;
+        }
+
+        &__description {
+            margin-top: 20px;
+            order: 2;
+            font: 1.2rem/1.5 var(--firs-neue);
+        }
+
+        &__button {
+            margin-top: auto;
+            max-width: 100%;
+            order: 3;
+        }
+
+        &__scroll-button {
+            display: none;
+        }
+    }
+}
