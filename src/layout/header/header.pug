@@ -128,3 +128,22 @@ header.header
         +popupBtn('call').burger-menu__call-button
             span связаться
             .burger-menu__plus
+    aside.search: .container
+        form.search__form
+            label.search__field-wrapper
+                +wrapBreak: input.search__field(placeholder='найти товар, категорию', name='search')
+                span.search__input-container
+                span.search__main-suggestion
+            +wrapBreak: button.search__action-button(type='button')
+        .search__body
+            .search__products-result
+                each item in Array(15)
+                    include ui/small-product-card/small-product-card
+            .search__categories-result
+                .search__categories-result-title популярные запросы
+                .search__categories-result-body
+                    +anchor.search__categories-result-list-item Стулья
+                    +anchor.search__categories-result-list-item Мебель для кабинета руководителя
+                    +anchor.search__categories-result-list-item Столы для офиса
+                    +anchor.search__categories-result-list-item Мебель для баров и ресторанов
+                    +anchor.search__categories-result-list-item Уличная мебель

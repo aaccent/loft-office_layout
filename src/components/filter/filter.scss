@@ -39,6 +39,15 @@
         }
     }
 
+    .selector__button {
+        margin-left: auto;
+    }
+
+    &__button,
+    .selector {
+        width: 20%;
+    }
+
     &__result-num {
         text-transform: uppercase;
         opacity: 0.5;

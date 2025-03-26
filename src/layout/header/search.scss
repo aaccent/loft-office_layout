@@ -1,0 +1,203 @@
+@use 'styles/utils';
+@use 'ui/small-product-card/small-product-card';
+
+.search {
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    padding-top: 100px;
+    width: 100%;
+    height: calc(100svh - 100%);
+    color: var(--accent);
+    opacity: 0;
+    visibility: hidden;
+    background-color: var(--main);
+    @include utils.transition((opacity, visibility));
+
+    &.opened {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__form {
+        position: relative;
+        margin: 0 auto 100px;
+        width: fit-content;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__field-wrapper {
+        position: relative;
+        width: fit-content;
+        font-family: var(--steelfish);
+        font-size: 14rem;
+        line-height: 1.05;
+        text-transform: uppercase;
+    }
+
+    &__field {
+        inset: 0;
+        caret-color: var(--accent);
+        position: absolute;
+        width: fit-content;
+        color: transparent;
+        letter-spacing: 0;
+        text-align: left;
+
+        &::placeholder {
+            font-size: 0;
+        }
+    }
+
+    &__main-suggestion {
+        pointer-events: none;
+        opacity: 0.3;
+    }
+
+    &__input-container {
+        &._placeholder {
+            color: hsl(0, 0%, 16%, 0.3);
+        }
+    }
+
+    &__action-button {
+        aspect-ratio: 1;
+        filter: var(--filter-accent);
+        --offset: 60px;
+        position: absolute;
+        top: 50%;
+        left: calc(100% + var(--offset));
+        translate: 0 -50%;
+        height: 80%;
+        opacity: 0.3;
+        background-image: url('assets/icons/big-arrow.svg');
+        @include utils.bg-defaults;
+    }
+
+    &__field-wrapper:has(:where(input:not(:placeholder-shown, :focus))) + :where(&__action-button) {
+        --offset: 30px;
+        height: 100%;
+        opacity: 1;
+        background-image: url('assets/icons/close.svg');
+    }
+
+    &__field-wrapper:has(:where(input:not(:placeholder-shown))) + :where(&__action-button) {
+        opacity: 1;
+    }
+
+    &__body {
+        gap: 100px;
+        height: 1px;
+        display: flex;
+        flex-grow: 1;
+    }
+
+    &__products-result {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 40px 20px;
+        padding-bottom: 30px;
+        max-width: 830px;
+        height: 100%;
+        display: grid;
+        overflow-y: auto;
+        @include utils.transparent-scroll;
+    }
+
+    &__categories-result {
+        gap: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__categories-result-title {
+        font-size: 1.6rem;
+        letter-spacing: 0.01rem;
+        line-height: 1.3;
+        text-transform: uppercase;
+        opacity: 0.6;
+    }
+
+    &__categories-result-body {
+        gap: 12px;
+        display: flex;
+        flex-direction: column;
+        font-size: 2rem;
+        line-height: 1.4;
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .search {
+        padding-top: 40px;
+
+        &__form {
+            margin: 0 0 28px;
+            max-width: 80.9%;
+            justify-content: flex-start;
+        }
+
+        &__field-wrapper {
+            width: 100%;
+            font-size: 4.8rem;
+        }
+
+        &__input-container {
+            display: none;
+        }
+
+        &__field {
+            position: static;
+            max-width: 100%;
+            color: var(--accent);
+
+            &::placeholder {
+                font-size: inherit;
+                opacity: 0.3;
+            }
+        }
+
+        &__main-suggestion {
+            display: none;
+        }
+
+        &__action-button {
+            --offset: 10px;
+            background-image: url('assets/icons/close.svg');
+        }
+
+        &__body {
+            gap: 56px;
+            padding-top: 28px;
+            flex-direction: column-reverse;
+            overflow-y: auto;
+        }
+
+        &__products-result {
+            grid-template-columns: 1fr 1fr;
+            gap: 24px 10px;
+            height: fit-content;
+            overflow-y: initial;
+        }
+
+        &__categories-result {
+            gap: 16px;
+        }
+
+        &__categories-result-title {
+            font-size: 1.2rem;
+        }
+
+        &__categories-result-body {
+            gap: 10px;
+            font-size: 1.4rem;
+        }
+    }
+}
