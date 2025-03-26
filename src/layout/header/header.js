@@ -1,8 +1,44 @@
 import { adaptive } from 'globals/adaptive'
 import { openPopup } from 'features/popup/popup'
 import { createMutationObserver } from 'features/mutationObserver'
+import { Input } from 'postcss'
 
 const header = document.querySelector('.header')
+const search = document.querySelector('.search')
+const burgerMenu = document.querySelector('.burger-menu')
+const catalogMenu = document.querySelector('.catalog-menu')
+const mobileMenuWrapper = document.querySelector('.header__menu-wrapper')
+
+/**
+ * Закрывает все меню кроме `menuInstead`
+ * @param {'catalog' | 'burger' | 'search' | 'mobile'} menuForExclude
+ */
+function closeAllMenusExclude(menuForExclude) {
+    if (menuForExclude !== 'catalog') {
+        catalogMenu?.classList.remove('opened')
+    }
+
+    if (menuForExclude !== 'burger') {
+        burgerMenu?.classList.remove('opened')
+    }
+
+    if (menuForExclude !== 'search') {
+        search?.classList.remove('opened')
+    }
+
+    if (menuForExclude !== 'mobile') {
+        mobileMenuWrapper?.classList.remove('opened')
+    }
+}
+
+function isAnyMenuOpenedExcludeCatalog() {
+    return (
+        search.classList.contains('opened') ||
+        burgerMenu.classList.contains('opened') ||
+        mobileMenuWrapper.classList.contains('opened')
+    )
+}
+
 /** Высота и позиционирование шапки и его меню */
 void (function () {
     /** Выставляет переменную в CSS с высотой шапки для позиционирования меню */
@@ -19,7 +55,6 @@ void (function () {
 
 /** Открытие и закрытие меню каталога */
 void (function () {
-    const catalogMenu = document.querySelector('.catalog-menu')
     if (!catalogMenu) return
 
     /** @type {number | null} */
@@ -39,6 +74,7 @@ void (function () {
         clearCatalogTimeout()
         if (catalogMenu?.classList.contains('opened')) return
 
+        closeAllMenusExclude('catalog')
         catalogMenu?.classList.add('opened')
         header.classList.add('opened')
     }
@@ -49,6 +85,7 @@ void (function () {
 
         timeout = setTimeout(() => {
             catalogMenu?.classList.remove('opened')
+            if (isAnyMenuOpenedExcludeCatalog()) return
             header.classList.remove('opened')
         }, THRESHOLD_MS_BEFORE_CLOSE)
     }
@@ -69,31 +106,30 @@ void (function () {
 
 /** Бургер меню */
 void (function () {
-    const burgerMenu = document.querySelector('.burger-menu')
-
     if (!burgerMenu) return
 
     document.querySelectorAll('[data-action="burger-menu"]').forEach((button) => {
         button.addEventListener('click', () => {
+            closeAllMenusExclude('burger')
             burgerMenu.classList.toggle('opened')
-            header.classList.toggle('opened')
+            header.classList.toggle('opened', burgerMenu.classList.contains('opened'))
         })
     })
 })()
 
 /** Мобильное меню */
 void (function () {
-    const mobileMenuWrapper = document.querySelector('.header__menu-wrapper')
     const mobileMenuList = document.querySelector('.header__menu-list')
-    const catalogMenu = document.querySelector('.catalog-menu')
 
     document.querySelectorAll('[data-action="mobile-menu"]').forEach((button) => {
         button.addEventListener('click', () => {
             mobileMenuWrapper.classList.toggle('opened')
-            header.classList.toggle('opened')
+            header.classList.toggle('opened', mobileMenuWrapper.classList.contains('opened'))
 
             if (!mobileMenuWrapper.classList.contains('opened')) {
                 catalogMenu.classList.remove('opened')
+            } else {
+                closeAllMenusExclude('mobile')
             }
 
             document.querySelectorAll('.header li.opened').forEach((li) => {
@@ -197,3 +233,20 @@ void (function () {
         childList: false,
     })
 })()
+
+// Попап поиска
+void (function () {
+    const search = document.querySelector('.search')
+
+    document.querySelectorAll('[data-action="search"]').forEach((button) => {
+        button.addEventListener('click', () => {
+            if (!search || !header) return
+
+            closeAllMenusExclude('search')
+            search.classList.toggle('opened')
+            header.classList.toggle('opened', search.classList.contains('opened'))
+        })
+    })
+})()
+
+import './search.ts'

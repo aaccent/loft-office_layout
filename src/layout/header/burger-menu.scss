@@ -3,6 +3,7 @@
 .burger-menu {
     gap: 20px;
     position: absolute;
+    z-index: 1;
     top: 100%;
     width: 100%;
     display: flex;
@@ -10,7 +11,6 @@
     visibility: hidden;
     background-color: var(--main);
     @include utils.transition((visibility, opacity));
-    z-index: 1;
 
     &.opened {
         opacity: 1;

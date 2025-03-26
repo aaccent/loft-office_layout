@@ -2,6 +2,7 @@ import { ScriptStatus, ScriptTypes } from '@/features/loadScript'
 import { CartInfo, Product } from '@/types/types'
 import { ReceiveItem } from '@/types/delivery'
 import { CartNotification } from '@/types/cart'
+import { SearchResultItem, SearchResultProduct } from '@/types/search'
 
 declare global {
     interface Window {
@@ -34,7 +35,10 @@ declare global {
         delivery: {
             setList(list: ReceiveItem[]): void
         }
-
+        search: {
+            setSearchResultCategories(list: SearchResultItem[]): void
+            setSearchResultProducts(list: SearchResultProduct[]): void
+        }
         map: Promise<ymaps.Map>
     }
 }

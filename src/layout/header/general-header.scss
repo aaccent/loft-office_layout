@@ -264,7 +264,7 @@ body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .stic
         display: none;
     }
 
-    &:has(:is(.burger-menu.opened, .header__menu-wrapper.opened)) &__menu-button {
+    &:has(:where(.burger-menu.opened, .header__menu-wrapper.opened)) &__menu-button {
         position: relative;
         height: calc(17px + 7px * 2);
         justify-content: center;
@@ -292,6 +292,10 @@ body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .stic
         .icon {
             filter: var(--filter-accent);
         }
+    }
+
+    &:has(:where(.search.opened)) .header__actions-list :where(.icon-search) {
+        background-image: url('assets/icons/close.svg');
     }
 
     &__mobile-search-button {
@@ -360,7 +364,7 @@ body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .stic
             }
         }
 
-        &.opened &__menu-button {
+        &:has(:where(.burger-menu.opened, .header__menu-wrapper.opened)) &__menu-button {
             height: 20px;
             align-items: flex-start;
 
