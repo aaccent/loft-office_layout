@@ -39,6 +39,7 @@ const longHandProps = [
     '--negative-container-px',
     '--button-size',
     '--button-offset',
+    '--offset',
 ]
 
 const targetProps = [...shorthandProps, ...longHandProps, 'font', 'font-size']
