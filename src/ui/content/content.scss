@@ -1,6 +1,18 @@
 @use 'styles/utils';
 
 .content {
+    *:last-child {
+        margin-bottom: 0;
+    }
+
+    h1 {
+        margin-bottom: 40px;
+        font-family: var(--steelfish);
+        font-size: 14rem;
+        line-height: 1.05;
+        text-transform: uppercase;
+    }
+
     h2,
     h3,
     h4 {
@@ -142,9 +154,14 @@
             & > * {
                 font-size: inherit;
             }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
         }
     }
 
+    ul,
     ol {
         gap: 15px;
         margin: 40px 0;
@@ -152,19 +169,36 @@
         flex-direction: column;
         font-size: 2rem;
         line-height: 1.4;
+    }
 
-        li {
-            gap: 5px;
-            display: flex;
-            counter-increment: ol;
+    ol li {
+        gap: 5px;
+        display: flex;
+        counter-increment: ol;
 
-            &::before {
-                content: counter(ol) '.';
-            }
+        &::before {
+            content: counter(ol) '.';
+        }
+    }
+
+    ul li {
+        gap: 10px;
+        display: flex;
+
+        &::before {
+            content: '';
+            position: relative;
+            top: 12px;
+            width: 3px;
+            height: 3px;
+            flex-shrink: 0;
+            background-color: var(--accent);
+            border-radius: 50%;
         }
     }
 
     p {
+        max-width: 750px;
         font-size: 2rem;
 
         & + p {
@@ -233,6 +267,11 @@
             }
         }
 
+        h1 {
+            margin-bottom: 32px;
+            font-size: 6rem;
+        }
+
         h2,
         h3,
         h4,
@@ -276,7 +315,8 @@
             }
         }
 
-        ol {
+        ol,
+        ul {
             gap: 10px;
             font-size: 1.6rem;
         }
