@@ -18,6 +18,7 @@
 @use 'pages/order/order';
 
 // Components
+@use 'components/contacts-map/contacts-map';
 @use 'components/reviews-list/text/text-reviews';
 @use 'components/reviews-list/video/video-reviews';
 @use 'components/reviews-list/external/external';
@@ -25,3 +26,7 @@
 @use 'components/filter/filter';
 @use 'components/catalog-list/catalog-list';
 @use 'components/slider-section/slider-section';
+@use 'components/digits/digits';
+@use 'components/main-banner/main-banner';
+@use 'components/advantages/advantages';
+@use 'components/about-video/about-video';
