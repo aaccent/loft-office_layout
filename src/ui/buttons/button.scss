@@ -30,6 +30,7 @@
 
     &::after {
         margin-left: auto;
+        flex-shrink: 0;
         background-color: var(--accent);
     }
 

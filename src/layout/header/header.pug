@@ -59,7 +59,14 @@ include layout/utils
 header.header
     .container: .header__inner
         +anchor('/').header__logo: +img(require('assets/static/logo.svg'))
-        +popupBtn('geo').header__geo-button краснодар
+        .header__geo-button-wrapper
+            +popupBtn('geo').header__geo-button краснодар
+            .geo-notification
+                .geo-notification__title Ваш город — #[span Краснодар]?
+                +wrapBreak: button.geo-notification__button.button.button--dark.button--small(
+                    data-action='close-geo'
+                ) Да, верно
+                +wrapBreak: +popupBtn('geo').geo-notification__button Нет, другой
         .header__menu-wrapper: nav.header__menu
             ul.header__menu-list
                 li: button(type='button', data-action='catalog-menu')

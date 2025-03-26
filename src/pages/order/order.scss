@@ -292,7 +292,7 @@
             height: 260px;
             display: flex;
             flex-direction: column;
-            border: 1px solid hsla(28, 38%, 31%, 0.2);
+            border: 1px solid var(--accent-light);
 
             &__title {
                 margin-bottom: 24px;

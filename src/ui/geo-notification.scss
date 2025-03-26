@@ -1,0 +1,82 @@
+@use 'styles/utils';
+
+.geo-notification {
+    grid-template-columns: 1fr 1fr;
+    position: absolute;
+    top: calc(100% + 13px);
+    left: 0;
+    padding: 32px;
+    min-width: 340px;
+    display: grid;
+    opacity: 0;
+    visibility: hidden;
+    background-color: var(--white);
+    @include utils.transition((opacity, visibility));
+
+    &.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: -8px;
+        left: 10px;
+        width: 0;
+        height: 0;
+        border-right: 6px solid transparent;
+        border-bottom: 9px solid var(--white);
+        border-left: 6px solid transparent;
+    }
+
+    &__title {
+        grid-column: span 2;
+        margin-bottom: 24px;
+        font-family: var(--steelfish);
+        font-size: 2.8rem;
+        letter-spacing: 0.01rem;
+        line-height: 1.05;
+        text-transform: uppercase;
+    }
+
+    &__button {
+        font-family: var(--steelfish);
+        font-size: 1.8rem;
+        letter-spacing: 0.01rem;
+        line-height: 1.05;
+        text-transform: uppercase;
+
+        &:nth-of-type(2) {
+            margin-left: 20px;
+        }
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .geo-notification {
+        position: fixed;
+        top: initial;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        &::before {
+            display: none;
+        }
+
+        &__title {
+            margin-bottom: 32px;
+            font-size: 3.4rem;
+            letter-spacing: -0.01rem;
+        }
+
+        &__button {
+            font-size: 2rem;
+
+            &:nth-of-type(2) {
+                margin-left: 32px;
+            }
+        }
+    }
+}
