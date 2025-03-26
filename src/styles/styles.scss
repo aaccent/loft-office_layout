@@ -38,9 +38,10 @@
 @use 'ui/category-link';
 @use 'ui/selector/selector';
 @use 'ui/selector/selector--size';
-@use 'ui/cookie-notification/cookie-notification';
 @use 'ui/mobile-text';
 @use 'ui/cart-notification/cart-notification';
+@use 'ui/cookie-notification/cookie-notification';
+@use 'ui/geo-notification';
 @use 'ui/input/input';
 @use 'ui/more-button';
 

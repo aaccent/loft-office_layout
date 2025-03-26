@@ -28,10 +28,6 @@ function setSearchResult(list: GeoItem[], handler?: (event: MouseEvent) => void)
     }
 }
 
-window.geo = {
-    setSearchResult,
-}
-
 function showPopularCities() {
     if (!geoInput || !title || !resultBody) return
 
@@ -54,3 +50,32 @@ document.querySelector('.geo-popup__clear-input-button')?.addEventListener('clic
     geoInput.value = ''
     showPopularCities()
 })
+
+const geoNotification = document.querySelector('.geo-notification')
+const geoNotificationCityName = document.querySelector<HTMLElement>('.geo-notification__title span')
+const geoButton = document.querySelector<HTMLElement>('.header__geo-button')
+const mobileGeoButton = document.querySelector<HTMLElement>(
+    '.header__mobile-geo-button .header__mobile-action-item-text',
+)
+
+function openGeoNotification() {
+    geoNotification?.classList.add('active')
+}
+
+document.querySelectorAll('.geo-notification__button').forEach((button) => {
+    button.addEventListener('click', () => geoNotification?.classList.remove('active'))
+})
+
+function setCity(text: string) {
+    if (!mobileGeoButton || !geoButton || !geoNotificationCityName) return
+
+    geoNotificationCityName.innerText = text
+    geoButton.innerText = text
+    mobileGeoButton.innerText = text
+}
+
+window.geo = {
+    setSearchResult,
+    openGeoNotification,
+    setCity,
+}

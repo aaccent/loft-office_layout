@@ -99,6 +99,10 @@ body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .stic
         }
     }
 
+    &__geo-button-wrapper {
+        position: relative;
+    }
+
     &__geo-button {
         gap: 10px;
         filter: var(--filter-accent);
@@ -377,6 +381,10 @@ body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .stic
             &::after {
                 rotate: 45deg;
             }
+        }
+
+        &__geo-button-wrapper {
+            position: static;
         }
 
         &__geo-button {

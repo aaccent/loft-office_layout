@@ -37,6 +37,8 @@ declare global {
         }
         geo: {
             setSearchResult(list: GeoItem[], handler?: (event: MouseEvent) => void): void
+            openGeoNotification(): void
+            setCity(text: string): void
         }
         map: Promise<ymaps.Map>
     }
