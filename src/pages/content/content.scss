@@ -1,0 +1,63 @@
+@use 'styles/utils';
+
+.content-section {
+    margin-top: 55px;
+
+    &__inner {
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__toc-wrapper {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    .content-toc {
+        padding: 0;
+        background: transparent;
+
+        &__title {
+            display: none;
+        }
+    }
+
+    &__body {
+        position: relative;
+        margin-left: 16vw;
+        max-width: 905px;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -190px;
+            /* @skip-scaling */
+            width: 1px;
+            height: 100%;
+            background-color: var(--accent-light);
+        }
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .content-section {
+        margin-top: 32px;
+
+        &__inner {
+            display: block;
+        }
+
+        &__toc-wrapper {
+            display: none;
+        }
+
+        &__body {
+            margin-left: 0;
+            max-width: initial;
+        }
+    }
+}
