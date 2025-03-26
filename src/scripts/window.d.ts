@@ -2,6 +2,7 @@ import { ScriptStatus, ScriptTypes } from '@/features/loadScript'
 import { CartInfo, Product } from '@/types/types'
 import { ReceiveItem } from '@/types/delivery'
 import { CartNotification } from '@/types/cart'
+import { GeoItem } from '@/types/geo'
 
 declare global {
     interface Window {
@@ -34,7 +35,9 @@ declare global {
         delivery: {
             setList(list: ReceiveItem[]): void
         }
-
+        geo: {
+            setSearchResult(list: GeoItem[], handler?: (event: MouseEvent) => void): void
+        }
         map: Promise<ymaps.Map>
     }
 }

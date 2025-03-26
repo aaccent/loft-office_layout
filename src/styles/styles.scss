@@ -12,6 +12,7 @@
 @use 'general/global';
 
 // Popup
+@use 'ui/popups/geo/geo';
 @use 'features/popup/popup';
 @use 'ui/popups/cart/cart';
 @use 'ui/popups/thanks/thanks';
