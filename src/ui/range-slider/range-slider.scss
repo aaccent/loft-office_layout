@@ -46,7 +46,7 @@
         width: 100%;
         /* @skip-scaling */
         height: 2px;
-        background-color: hsl(28, 38%, 31%, 0.2);
+        background-color: var(--accent-light);
     }
 
     &__line {
