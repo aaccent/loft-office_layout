@@ -1,0 +1,24 @@
+include layout/utils
+
+-
+    var digits = [
+        {
+            value: '>1000',
+            description :'Объектов успешно оборудованы и уже оснащены нашей мебелью'
+        },{
+            value: '>25',
+            description :'Дилеров по всей территории РФ и стран ближнего зарубежья'
+        },{
+            value: '>22',
+            description :'Лет занимаем лидирующие позиции на рынке'
+        },
+    ]
+
+
++section.digits
+    h2.section-title.digits__title наша компания в цифрах
+    .digits__list
+        each item in digits
+            .digits__item
+                .digits__item-value= item.value
+                .digits__item-description= item.description
