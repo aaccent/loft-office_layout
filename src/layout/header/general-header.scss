@@ -83,7 +83,7 @@ body:has(:where(.main-hero, .collection-hero, .main-banner)) .header:where(:not(
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 1px solid hsl(28, 38%, 31%, 0.2);
+        border-bottom: 1px solid var(--accent-light);
         @include utils.transition(border-bottom-color);
     }
 
@@ -97,6 +97,10 @@ body:has(:where(.main-hero, .collection-hero, .main-banner)) .header:where(:not(
             object-position: left;
             height: 100%;
         }
+    }
+
+    &__geo-button-wrapper {
+        position: relative;
     }
 
     &__geo-button {
@@ -264,7 +268,7 @@ body:has(:where(.main-hero, .collection-hero, .main-banner)) .header:where(:not(
         display: none;
     }
 
-    &:has(:is(.burger-menu.opened, .header__menu-wrapper.opened)) &__menu-button {
+    &:has(:where(.burger-menu.opened, .header__menu-wrapper.opened)) &__menu-button {
         position: relative;
         height: calc(17px + 7px * 2);
         justify-content: center;
@@ -294,6 +298,10 @@ body:has(:where(.main-hero, .collection-hero, .main-banner)) .header:where(:not(
         }
     }
 
+    &:has(:where(.search.opened)) .header__actions-list :where(.icon-search) {
+        background-image: url('assets/icons/close.svg');
+    }
+
     &__mobile-search-button {
         display: none;
     }
@@ -309,7 +317,7 @@ body:has(:where(.main-hero, .collection-hero, .main-banner)) .header:where(:not(
         color: var(--accent);
 
         .header__inner {
-            border-bottom-color: hsl(28, 38%, 31%, 0.2);
+            border-bottom-color: var(--accent-light);
         }
 
         .header__logo {
@@ -360,7 +368,7 @@ body:has(:where(.main-hero, .collection-hero, .main-banner)) .header:where(:not(
             }
         }
 
-        &.opened &__menu-button {
+        &:has(:where(.burger-menu.opened, .header__menu-wrapper.opened)) &__menu-button {
             height: 20px;
             align-items: flex-start;
 
@@ -377,6 +385,10 @@ body:has(:where(.main-hero, .collection-hero, .main-banner)) .header:where(:not(
             &::after {
                 rotate: 45deg;
             }
+        }
+
+        &__geo-button-wrapper {
+            position: static;
         }
 
         &__geo-button {

@@ -1,0 +1,20 @@
+include layout/utils
+include features/popup/popup
+
++popup('geo', 'geo-popup')
+    .section-title.geo-popup__title выбор города
+    form.geo-popup__form
+        .geo-popup__input-wrapper
+            +wrapBreak: input.geo-popup__input(placeholder='Найти город', name='city')
+            +wrapBreak: button.geo-popup__clear-input-button(type='button')
+    .geo-popup__result
+        .geo-popup__result-title популярные города
+        .geo-popup__result-body
+            +anchor.geo-popup__result-item Екатеринбург
+            +anchor.geo-popup__result-item Москва
+            +anchor.geo-popup__result-item Санкт-Петербург
+            +anchor.geo-popup__result-item Пермь
+            +anchor.geo-popup__result-item Челябинск
+            +anchor.geo-popup__result-item Омск
+            +anchor.geo-popup__result-item Оренбург
+            +anchor.geo-popup__result-item Нижний Новгород

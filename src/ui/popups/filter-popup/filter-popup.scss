@@ -60,10 +60,10 @@
 
     &__block {
         padding: 24px 0;
-        border-bottom: 1px solid hsl(28, 38%, 31%, 0.14);
+        border-bottom: 1px solid hsla(0, 0%, 16%, 0.14);
 
         &:first-child {
-            border-top: 1px solid hsl(28, 38%, 31%, 0.14);
+            border-top: 1px solid hsla(0, 0%, 16%, 0.14);
         }
     }
 

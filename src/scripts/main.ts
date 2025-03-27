@@ -14,6 +14,7 @@ import 'ui/popups/authorization/authorization.js'
 import 'ui/popups/call-popup/call-popup'
 import 'ui/popups/preorder/preorder'
 import 'ui/popups/cart/cart'
+import 'ui/popups/geo/geo'
 
 import 'components/reviews-list/reviews-list.js'
 import 'components/reviews-list/text/text-reviews.js'

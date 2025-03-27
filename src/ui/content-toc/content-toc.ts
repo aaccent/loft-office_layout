@@ -10,8 +10,6 @@ interface HeadingTocElement extends HTMLHeadingElement {
 
 const intersectionObserver = new IntersectionObserver(
     (entries) => {
-        console.log(entries)
-
         const entry = entries.at(-1)
         if (!entry) return
 
@@ -38,7 +36,7 @@ void (function () {
 
     if (!tocList) return
 
-    const headings = document.querySelectorAll<HeadingTocElement>('.content-with-toc h2')
+    const headings = document.querySelectorAll<HeadingTocElement>('.content-with-toc :is(h1, h2)')
     headings.forEach((headingItem, index) => {
         intersectionObserver.observe(headingItem)
 
@@ -57,4 +55,6 @@ void (function () {
 
         tocList.append(listItem)
     })
+
+    headings[0]?.tocListItem.classList.add('active')
 })()
