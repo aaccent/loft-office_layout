@@ -16,11 +16,16 @@ include layout/utils
 
 section.section.years
     +img(require('assets/content/store-2.png')).years__image
-    .years__slider.swiper
-        .swiper-wrapper
-            each item in years
-                .years__item.swiper-slide
-                    .years__item-value= item.value
-                    .years__item-description= item.description
-                    +img(item.image).years__item-image
-                    +img(require('assets/icons/years-decor.svg')).years__item-decor
+    .years__container
+        .years-slider.swiper
+            .swiper-wrapper
+                each item in years
+                    .years__item.swiper-slide
+                        .years__item-value= item.value
+                        .years__item-description= item.description
+                        +img(item.image).years__item-image
+                        +img(require('assets/icons/years-decor.svg')).years__item-decor
+            .years-slider__navigation
+                .years-slider__navigation-prev
+                .years-slider__navigation-next
+            .years-slider__pagination
