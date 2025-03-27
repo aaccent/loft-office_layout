@@ -517,6 +517,11 @@
             display: flex;
             justify-content: space-between;
 
+            &[data-info='weight'] span,
+            &[data-info='deliveryPrice'] span {
+                opacity: 0.5;
+            }
+
             &--discount {
                 .value {
                     color: #b41212;

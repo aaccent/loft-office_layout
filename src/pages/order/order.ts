@@ -324,8 +324,10 @@ function createOrderInfoItem(info: AdditionalPriceInfo) {
 }
 
 function setAdditionalInfo(info: AdditionalPriceInfo[] | undefined, container: HTMLElement) {
-    if (!info || info.length === 0) {
-        const adds = document.querySelectorAll('.order-info-item[data-id]')
+    if (!info) return
+
+    if (!info.length) {
+        const adds = document.querySelectorAll('.order-info__item[data-id]')
         adds.forEach((element) => element.remove())
         return
     }

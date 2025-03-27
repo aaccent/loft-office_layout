@@ -7,9 +7,9 @@ export interface AdditionalPriceInfo {
 }
 
 export interface OrderInfo {
-    weight?: number
-    deliveryPrice?: number
-    totalPrice?: number
+    weight?: string
+    deliveryPrice?: string
+    totalPrice?: string
     /**
      * Если массив пустой, то убирает все элементы.
      * Поле нужно для добавления дополнительных скидок.

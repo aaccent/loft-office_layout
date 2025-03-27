@@ -1,4 +1,4 @@
-import { PopupOpenedCustomEvent } from 'features/popup/popup'
+import { OpenPopupEvent } from 'features/popup/popup'
 import { PreorderInfo } from '@/types/preorder'
 
 const preorderPopup = document.querySelector('.preorder-popup')
@@ -17,7 +17,7 @@ interface PreorderFieldElement extends HTMLElement {
 type PopupField = HTMLElement | HTMLImageElement | HTMLInputElement
 
 preorderPopup?.addEventListener('opened', (event) => {
-    const button = (event as PopupOpenedCustomEvent).detail.trigger
+    const button = (event as OpenPopupEvent).detail.target
     const bounds = button?.closest('.preorder-bounds')
 
     if (!bounds) return

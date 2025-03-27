@@ -2,15 +2,20 @@
 
 ## Страницы
 
-- [Главная](https://aaccent.github.io/loft-office_layout//index.html)
-- [Каталог 1 уровня](https://aaccent.github.io/loft-office_layout//catalog.html)
-- [Каталог 2 уровня](https://aaccent.github.io/loft-office_layout//catalog-2level.html)
-- [Коллекция](https://aaccent.github.io/loft-office_layout//collection.html)
-- [Продукт](https://aaccent.github.io/loft-office_layout//product.html)
-- [Избранное](https://aaccent.github.io/loft-office_layout//favorites.html)
-- [Отзывы текстовые](https://aaccent.github.io/loft-office_layout//text-reviews.html)
-- [Отзывы видео](https://aaccent.github.io/loft-office_layout//video-reviews.html)
-- [Отзывы внешние](https://aaccent.github.io/loft-office_layout//external-reviews.html)
+- [Главная](https://aaccent.github.io/loft-office_layout/index.html)
+- [Каталог 1 уровня](https://aaccent.github.io/loft-office_layout/catalog.html)
+- [Каталог 2 уровня](https://aaccent.github.io/loft-office_layout/catalog-2level.html)
+- [Коллекция](https://aaccent.github.io/loft-office_layout/collection.html)
+- [Продукт](https://aaccent.github.io/loft-office_layout/product.html)
+- [Избранное](https://aaccent.github.io/loft-office_layout/favorites.html)
+- [Оформление](https://aaccent.github.io/loft-office_layout/order.html)
+- [Отзывы текстовые](https://aaccent.github.io/loft-office_layout/text-reviews.html)
+- [Отзывы видео](https://aaccent.github.io/loft-office_layout/video-reviews.html)
+- [Отзывы внешние](https://aaccent.github.io/loft-office_layout/external-reviews.html)
+- [Блог](https://aaccent.github.io/loft-office_layout/blog.html)
+- [Статья](https://aaccent.github.io/loft-office_layout/article.html)
+- [Результат поиска](https://aaccent.github.io/loft-office_layout/search-result.html)
+- [Типовая](https://aaccent.github.io/loft-office_layout/content.html)
 
 ## Скрипты и стили
 
@@ -119,3 +124,240 @@ interface Cart {
     <button data-action="popup" data-popup="preorder">Предзаказ</button>
 </div>
 ```
+
+## Поиск
+
+В `window` есть объект `search` с методами
+
+```typescript
+interface SearchResultItem {
+    title: string
+    link: string
+}
+
+interface SearchResultProduct {
+    title: string
+    image: string
+    color: string
+    price: string
+    link: string
+}
+
+interface SearchObject {
+    /** Выводит результат поиска в правую колонку с категориями */
+    setSearchResultCategories(list: SearchResultItem[]): void
+    /** Выводит результат поиска в левую колонку с продуктами */
+    setSearchResultProducts(list: SearchResultProduct[]): void
+}
+```
+
+Изначальный список популярных категорий и продуктов сохраняется в переменную.
+Если пользователь очищает поле поиска, то выводятся сохраненные списки.
+
+При вызове `search.setSearchResultCategories()` если список в аргументе будет пустым,
+то выводит сообщение, что ничего не нашлось.
+
+При вызове `search.setSearchResultProducts()` если список в аргументе будет пустым,
+то список который был выведен в изначальной верстке.
+
+## Гео
+
+В `window` есть объект `geo` с методами
+
+```typescript
+interface GeoItem {
+    title: string
+    link: string
+}
+
+interface GeoObject {
+    /**
+     * Выводит результат поиска в список под полем
+     * @param list - Выводимый список
+     * @param handler - Обработчик нажатия на город из выводимого списка
+     * */
+    setSearchResult(list: GeoItem[], handler?: (event: MouseEvent) => void): void
+    /** Открывает уведомление с уточением города */
+    openGeoNotification(): void
+    /** Выставляет город во все контейнеры в шапке на сайте с названием города. */
+    setCity(text: string): void
+}
+```
+
+Изначальный список популярных городов сохраняется в переменную.
+Если пользователь очищает поле поиска, то выводится сохраненный список городов.
+
+При вызове `geo.setSearchResult()` если список в аргументе будет пустым,
+то выводит сообщение, что ничего не нашлось.
+
+`geo.setCity()` выставляет город в:
+
+- Кнопке города в шапке десктоп и мобильной версии
+- Уведомлении с уточнением города
+
+Задуманный сценарий использования:
+
+1. Проверка на бэке города
+2. Если пользователь ранее не уточнял город, то вызов уведомления через `geo.openGeoNotification()`
+3. Пользователь уточняет город и вызывается `geo.setCity()`
+
+## Оформление
+
+На странице оформления нет шапки, если это проблема, то можем дописать сокрытие шапки через стили.
+
+В `window` есть объект `order` с методами
+
+```typescript
+interface AdditionalPriceInfo {
+    id: number | string
+    title: string
+    text: string
+    /** По умолчанию 'discount' */
+    type?: 'discount' | 'info'
+}
+
+interface OrderInfo {
+    weight?: string
+    deliveryPrice?: string
+    totalPrice?: string
+    /**
+     * Если массив пустой, то убирает все элементы.
+     * Поле нужно для добавления дополнительных скидок.
+     * Если с таким `id` уже существует, то заменяет его данные.
+     * Если `type` будет `discount`, то `text` будет выводиться красным
+     * */
+    additional?: AdditionalPriceInfo[]
+}
+
+interface OrderObject {
+    /** Выставляет цену, вес, скидки и прочую информацию о цене */
+    setOrderInfo(info: OrderInfo): void
+}
+```
+
+Если пользователь пытается изменить корзину со страницы оформления,
+то изменения в списке с фотками автоматически отображаются, это не нужно регулировать.
+
+Но что нужно регулировать - это цены и информацию о заказе через метод `order.setOrderInfo()`
+
+Например, я хочу выставить, что в корзине:
+
+- Вес `15кг`,
+- Общая стоимость заказа `4500₽`
+- Скидка 15%, что вычитает `— 1250 ₽`
+
+Для этого мне нужно вызвать метод с аргументами:
+
+```typescript
+setOrderInfo({
+    weight: '15 кг',
+    totalPrice: '5000 ₽',
+    additional: [
+        {
+            id: 'discount',
+            title: 'Скидка 15%',
+            text: '— 1250 ₽',
+            type: 'discount',
+        },
+    ],
+})
+```
+
+Выбранную доставку можно отслеживать по изменению полей<br>
+`input.delivery-method__input`
+
+Выбранные пункт выдачи или адресс можно отслеживать по изменению скрытого поля<br>
+`.delivery-method__final input[name="delivery-address"]`
+
+Когда пользователь выберет вариант доставки и пункт выдачи, то нужно отобразить это в цене:
+
+- Стоимость доставки `500₽`
+- Общая стоимость заказа станет `5000₽`
+
+```typescript
+setOrderInfo({
+    totalPrice: '5000 ₽',
+    deliveryPrice: '500 ₽',
+})
+```
+
+И после ввода промокода нужно изменить так-же цену:
+
+- Промокод делает скидку в `500₽`
+- Общая стоимость заказа станет `4500₽`
+
+```typescript
+setOrderInfo({
+    totalPrice: '4500 ₽',
+    additional: [
+        {
+            id: 'promocode',
+            title: 'Промокод',
+            text: '— 500 ₽',
+            type: 'discount',
+        },
+    ],
+})
+```
+
+Если с применением промокода скидка не должна применяться, то можно удалить все допы через:
+
+```typescript
+setOrderInfo({
+    additional: [],
+})
+```
+
+И снова указать промокод
+
+```typescript
+setOrderInfo({
+    additional: [
+        {
+            id: 'promocode',
+            title: 'Промокод',
+            text: '— 500 ₽',
+            type: 'discount',
+        },
+    ],
+})
+```
+
+## Пункты выдачи
+
+По умолчанию список пунктов выдачи пустой, его нужно заполнять через метод `window.delivery.setList()`:
+
+```typescript
+interface ReceiveItem {
+    id: number | string
+    address: string
+    price: number
+    date: string
+    coords: [number, number]
+}
+
+interface DeliveryObject {
+    /** Выставляет список пунктов выдачи в попапе доставок */
+    setList(list: ReceiveItem[]): void
+}
+```
+
+Попап пунктов выдачи один на странице, а вариантов доставки с пунктами много.
+Для решения можно отслеживать открытие попапа `.points` через пользовательское событие `opened`:
+
+```typescript
+export interface OpenPopupEvent extends CustomEvent {
+    detail: {
+        /** Кнопка которая открыла попап. Если `null`, то попап открылся через код */
+        target: HTMLElement | null
+    }
+}
+
+document.querySelector('.points')?.addEventListener('opened', (event: OpenPopupEvent) => {
+    // Код для выявления какой способ доставки выбран...
+    // Для выявления можно использовать input'ы способа доставки
+})
+```
+
+В обработчике можно уже узнать какой пункт выдачи выбран через `input:checked` селектор.
+Далее вызывать `delivery.setList()` с нужными пунктами
