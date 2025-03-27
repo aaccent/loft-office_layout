@@ -28,7 +28,7 @@ void (function () {
             }
 
             list.forEach((address) => {
-                const li = document.createElement('li')
+                const li = document.createElement('span')
                 li.classList.add('courier-address__item')
                 li.textContent = address.value
                 addressList?.append(li)

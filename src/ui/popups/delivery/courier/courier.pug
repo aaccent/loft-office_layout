@@ -5,25 +5,25 @@ include features/popup/popup
     .courier__title Адрес доставки
     .courier__location Казань, респ. татарстан
     .courier-address
-        .input
-            .input__placeholder Улица и дом*
+        label.input
+            span.input__placeholder Улица и дом*
             input(type='text', name='street', required, placeholder='Улица и дом*')
-            .courier-address__list-block
-                .courier-address__list-wrapper
-                    ul.courier-address__list
-        .input
-            .input__placeholder Квартира/Офис*
+            span.courier-address__list-block
+                span.courier-address__list-wrapper
+                    span.courier-address__list
+        label.input
+            span.input__placeholder Квартира/Офис*
             input(type='text', name='flat', required, placeholder='Квартира/Офис*')
-        .input
-            .input__placeholder Домофон
+        label.input
+            span.input__placeholder Домофон
             input(type='text', name='intercom', placeholder='Домофон')
-        .input
-            .input__placeholder Подъезд
+        label.input
+            span.input__placeholder Подъезд
             input(type='text', name='entrance', placeholder='Подъезд')
-        .input
-            .input__placeholder Подъезд
-            input(type='text', name='floor', placeholder='Подъезд')
-        .input
-            .input__placeholder Комментарий к заказу
+        label.input
+            span.input__placeholder Этаж
+            input(type='text', name='floor', placeholder='Этаж')
+        label.input
+            span.input__placeholder Комментарий к заказу
             input(type='text', name='comment', placeholder='Комментарий к заказу')
     button.courier__button.button.button--dark(type='button', data-action='courier') сохранить
