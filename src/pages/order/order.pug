@@ -141,7 +141,7 @@ block append main
                         .order-step__number 3
                         .order-step__title способ доставки
                         button.order-step__change-button(type='button') изменить
-                        .order__location Казань
+                        +popupBtn('geo').order__location(data-is-geo) Казань
                             .icon.icon-geo
                     .order-step__body
                         ul.delivery-method-list

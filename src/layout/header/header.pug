@@ -60,9 +60,9 @@ header.header
     .container: .header__inner
         +anchor('/').header__logo: +img(require('assets/static/logo.svg'))
         .header__geo-button-wrapper
-            +popupBtn('geo').header__geo-button краснодар
+            +popupBtn('geo').header__geo-button(data-is-geo) краснодар
             .geo-notification
-                .geo-notification__title Ваш город — #[span Краснодар]?
+                .geo-notification__title Ваш город — #[span(data-is-geo) Краснодар]?
                 +wrapBreak: button.geo-notification__button.button.button--dark.button--small(
                     data-action='close-geo'
                 ) Да, верно
@@ -88,7 +88,7 @@ header.header
                     span.header__mobile-action-item-text Войти в ЛК
                 +popupBtn('geo').header__mobile-action-item.header__mobile-geo-button
                     span.icon.icon-geo
-                    span.header__mobile-action-item-text Краснодар
+                    span.header__mobile-action-item-text(data-is-geo) Краснодар
             +anchor('mailto:mail@loftoffice.ru').header__mobile-mail mail@loftoffice.ru
             include ui/socials/socials
             +socials.socials--dark
