@@ -1,0 +1,8 @@
+include layout/utils
+
+section.section.partners
+    .partners__container
+        .partners__list
+            each item, index in Array(10)
+                .partners__item
+                    +img(require(`assets/content/partners/${index+1}.png`)).partners__item-icon

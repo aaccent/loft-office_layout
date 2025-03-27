@@ -1,0 +1,13 @@
+include layout/utils
+
++section.certificates
+    h2.certificates__title.section-title!= 'наши Сертификаты<br> и лицензии'
+    .certificates__list
+        each item, index in Array(6)
+            +anchor('assets/content/certificate.png').certificates__item(download, target='_blank')
+                .certificates__item-name= `лицензия/ сертификат № ${index + 1}`
+                .certificates__item-year 2024
+                .certificates__item-button
+                    .icon-download
+                +img(require('assets/content/certificate.png')).certificates__item-image
+        button.certificates__more-button.button.button--transparent показать ещё

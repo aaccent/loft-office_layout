@@ -15,6 +15,8 @@
 - [Блог](https://aaccent.github.io/loft-office_layout/blog.html)
 - [Статья](https://aaccent.github.io/loft-office_layout/article.html)
 - [Результат поиска](https://aaccent.github.io/loft-office_layout/search-result.html)
+- [О нас](https://aaccent.github.io/loft-office_layout/about.html)
+- [Сотрудничество](https://aaccent.github.io/loft-office_layout/cooperation.html)
 - [Типовая](https://aaccent.github.io/loft-office_layout/content.html)
 
 ## Скрипты и стили

@@ -1,0 +1,118 @@
+@use 'styles/utils';
+
+.digits {
+    .container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__title {
+        width: 360px;
+    }
+
+    &__list {
+        grid-template-columns: repeat(2, 1fr);
+        width: 909px;
+        display: grid;
+    }
+
+    &__item {
+        gap: 160px;
+        position: relative;
+        padding: 0 55px 30px 30px;
+        display: flex;
+        flex-direction: column;
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            display: block;
+            background-color: hsl(0, 0%, 16%, 0.2);
+        }
+
+        &::before {
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 335px;
+        }
+
+        &::after {
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 404px;
+            height: 1px;
+        }
+
+        &:nth-child(odd):is(:nth-last-child(2))::after,
+        &:last-child:after {
+            display: none;
+        }
+
+        &:last-child:is(:nth-child(odd)):after {
+            bottom: 50%;
+            left: 100%;
+            transform: translateY(50%);
+            width: 1px;
+            height: 335px;
+            display: block;
+        }
+
+        &-value {
+            font: 14rem/1.05 var(--steelfish);
+            text-transform: uppercase;
+        }
+
+        &-description {
+            font: 2rem/1.4 var(--firs-neue);
+            opacity: 0.5;
+        }
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .digits {
+        .container {
+            gap: 0;
+            flex-direction: column;
+        }
+
+        &__title {
+            margin-bottom: 40px;
+            width: 216px;
+        }
+
+        &__list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        &__item {
+            gap: 48px;
+            padding: 24px 0;
+            border-top: 1px solid hsl(0, 0%, 16%, 0.2);
+
+            &-value {
+                font-size: 6rem;
+            }
+
+            &-description {
+                width: 235px;
+                font-size: 1.2rem;
+            }
+
+            &::before,
+            &::after {
+                content: none;
+            }
+
+            &:last-child {
+                border-bottom: 1px solid hsl(0, 0%, 16%, 0.2);
+            }
+        }
+    }
+}

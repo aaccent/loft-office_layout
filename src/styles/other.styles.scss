@@ -19,6 +19,7 @@
 @use 'pages/content/content';
 
 // Components
+@use 'components/contacts-map/contacts-map';
 @use 'components/reviews-list/text/text-reviews';
 @use 'components/reviews-list/video/video-reviews';
 @use 'components/reviews-list/external/external';
@@ -31,4 +32,9 @@
 @use 'components/steps/steps';
 @use 'components/projects/projects';
 @use 'components/faq/faq';
-@use 'components/contacts-map/contacts-map';
+@use 'components/digits/digits';
+@use 'components/about-video/about-video';
+@use 'components/years/years';
+@use 'components/reviews-section/reviews-section';
+@use 'components/certificates/certificates';
+@use 'components/partners/partners';

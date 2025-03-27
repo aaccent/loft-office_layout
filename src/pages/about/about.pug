@@ -1,0 +1,28 @@
+extends layout/page
+include components/main-banner/main-banner
+
+block append head
+    link(href=require('styles/other.styles.scss'), rel='stylesheet')
+
+block append main
+    -
+        var mainBanner = {
+            title: 'МЫ лидерЫ рынка в ТатарстанЕ',
+            description: 'У нас вы с лёгкостью можете подобрать мебель для обстановки офиса, домашнего кабинета или помещения специального назначения',
+            image: require('assets/content/about-banner.png'),
+            breadcrumbs: ['О компании'],
+        }
+    +mainBanner(mainBanner)
+    include components/advantages/advantages
+    include components/about-video/about-video
+    include components/digits/digits
+    include components/years/years
+    .dark-wrapper
+        include components/reviews-section/reviews-section
+        include components/certificates/certificates
+        include components/partners/partners
+
+block append popups
+
+block append scripts
+    script(src=require('scripts/other.ts'))

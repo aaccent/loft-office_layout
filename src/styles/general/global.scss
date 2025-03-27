@@ -90,6 +90,10 @@ html.disable-scroll {
     .section:last-child {
         margin-bottom: 0;
     }
+
+    &:has(.partners) {
+        padding-bottom: 0;
+    }
 }
 
 .popup .delivery-map {

@@ -2,6 +2,13 @@
 @use 'components/reviews-list/text/text-reviews';
 
 .reviews-section {
+    &:has(+ section:is(.certificates)) {
+        margin-bottom: 40px;
+
+        .text-reviews-list__item:last-child {
+            border-bottom: none;
+        }
+    }
     .container {
         gap: 30px;
         display: flex;

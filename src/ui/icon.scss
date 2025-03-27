@@ -35,6 +35,10 @@
     &-filter {
         background-image: url('assets/icons/filter.svg');
     }
+
+    &-download {
+        background-image: url('assets/icons/download.svg');
+    }
 }
 
 @media only screen and (max-width: utils.$tablet1000) {
