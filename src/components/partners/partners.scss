@@ -1,0 +1,59 @@
+@use 'styles/utils';
+
+.partners {
+    padding: 40px 0;
+    border-top: 1px solid hsl(0, 0%, 100%, 0.2);
+    &__container {
+        display: flex;
+    }
+
+    &__list {
+        gap: 24px;
+        width: fit-content;
+        display: flex;
+        &._scroll {
+            animation: scroll 15s linear infinite;
+        }
+    }
+
+    &__item {
+        min-width: 272px;
+        height: 74px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &-image {
+            object-fit: contain;
+            object-position: center;
+        }
+    }
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(calc(-100% - 20px));
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .partners {
+        padding: 20px 0;
+
+        &__list {
+            gap: 4px;
+        }
+
+        &__item {
+            min-width: 124px;
+            height: 34px;
+
+            &-icon {
+                max-width: 104px;
+            }
+        }
+    }
+}
