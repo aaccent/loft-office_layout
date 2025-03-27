@@ -1,10 +1,10 @@
 @use 'styles/utils';
 
-body:has(:where(.main-hero, .collection-hero)) .header {
+body:has(:where(.main-hero, .collection-hero, .main-banner)) .header {
     margin-bottom: calc(var(--header-height, 98px) * -1);
 }
 
-body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .sticky)) {
+body:has(:where(.main-hero, .collection-hero, .main-banner)) .header:where(:not(.opened, .sticky)) {
     color: var(--white);
     background-color: transparent;
 
@@ -313,7 +313,7 @@ body:has(:where(.main-hero, .collection-hero)) .header:where(:not(.opened, .stic
     }
 
     .header,
-    body:not(:has(:where(.main-hero))) .header:not(.opened, .sticky) {
+    body:not(:has(:where(.main-hero, .main-banner))) .header:not(.opened, .sticky) {
         color: var(--accent);
 
         .header__inner {
