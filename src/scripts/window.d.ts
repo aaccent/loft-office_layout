@@ -4,6 +4,7 @@ import { ReceiveItem } from '@/types/delivery'
 import { CartNotification } from '@/types/cart'
 import { SearchResultItem, SearchResultProduct } from '@/types/search'
 import { GeoItem } from '@/types/geo'
+import { OrderInfo } from '@/types/order'
 
 declare global {
     interface Window {
@@ -37,12 +38,21 @@ declare global {
             setList(list: ReceiveItem[]): void
         }
         search: {
+            /** Выводит результат поиска в правую колонку с категориями */
             setSearchResultCategories(list: SearchResultItem[]): void
+            /** Выводит результат поиска в левую колонку с продуктами */
             setSearchResultProducts(list: SearchResultProduct[]): void
         }
         geo: {
+            /**
+             * Выводит результат поиска в список под полем
+             * @param list - Выводимый список
+             * @param handler - Обработчик нажатия на город из выводимого списка
+             * */
             setSearchResult(list: GeoItem[], handler?: (event: MouseEvent) => void): void
+            /** Открывает уведомление с уточением города */
             openGeoNotification(): void
+            /** Выставляет город во все контейнеры в шапке на сайте с названием города. */
             setCity(text: string): void
         }
         map: Promise<ymaps.Map>
