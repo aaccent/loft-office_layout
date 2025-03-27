@@ -2,7 +2,7 @@ include layout/utils
 
 mixin promoCode(placeholder, handler)
     .promo-code__wrapper
-        .promo-code(data-handler=handler)
+        form.promo-code
             input(type='text', placeholder=placeholder)
             .promo-code__actions
                 .promo-code__enter
