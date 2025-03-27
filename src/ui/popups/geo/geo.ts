@@ -52,11 +52,6 @@ document.querySelector('.geo-popup__clear-input-button')?.addEventListener('clic
 })
 
 const geoNotification = document.querySelector('.geo-notification')
-const geoNotificationCityName = document.querySelector<HTMLElement>('.geo-notification__title span')
-const geoButton = document.querySelector<HTMLElement>('.header__geo-button')
-const mobileGeoButton = document.querySelector<HTMLElement>(
-    '.header__mobile-geo-button .header__mobile-action-item-text',
-)
 
 function openGeoNotification() {
     geoNotification?.classList.add('active')
@@ -67,11 +62,9 @@ document.querySelectorAll('.geo-notification__button').forEach((button) => {
 })
 
 function setCity(text: string) {
-    if (!mobileGeoButton || !geoButton || !geoNotificationCityName) return
-
-    geoNotificationCityName.innerText = text
-    geoButton.innerText = text
-    mobileGeoButton.innerText = text
+    document.querySelectorAll<HTMLElement>('[data-is-geo]').forEach((geo) => {
+        geo.innerText = text
+    })
 }
 
 window.geo = {

@@ -3,7 +3,7 @@ include features/popup/popup
 
 +popup('courier', 'courier')
     .courier__title Адрес доставки
-    .courier__location Казань, респ. татарстан
+    +popupBtn('geo').courier__location(data-is-geo) Казань
     .courier-address
         label.input
             span.input__placeholder Улица и дом*
