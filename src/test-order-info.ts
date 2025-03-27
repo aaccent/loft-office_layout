@@ -24,8 +24,8 @@ const additionalPriceInfo: AdditionalPriceInfo[] = [
 ]
 
 export const orderInfo: OrderInfo = {
-    weight: 213,
-    deliveryPrice: 250,
-    totalPrice: 42000,
+    weight: '213кг',
+    deliveryPrice: '250 ₽',
+    totalPrice: '42 000 ₽',
     additional: additionalPriceInfo,
 }
