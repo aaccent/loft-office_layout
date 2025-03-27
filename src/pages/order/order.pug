@@ -91,7 +91,7 @@ block append main
                         each type in userType
                             li
                                 label.user-type(name='userT')= type.name
-                                    .order-step__checkmark
+                                    span.order-step__checkmark
                                     // commerce, private - это занятые ключевые слова, их нельзя менять на другие
                                     input.user-type__input(type='radio', name='user-type', value=type.value)
                 .order-step
@@ -108,32 +108,32 @@ block append main
                         .user-data__prefix Осталось заполнить 5 обязательных полей *
                         .user-data__inputs
                             // Некоторые скрипты завязаны на name аттрибуте этих полей, поэтому нельзя заменять их имена
-                            .input(data-user-type='private')
-                                .input__placeholder Имя
+                            label.input(data-user-type='private')
+                                span.input__placeholder Имя
                                 input(type='text', name='name', placeholder='Имя')
-                            .input(data-user-type='private')
-                                .input__placeholder Фамилия
+                            label.input(data-user-type='private')
+                                span.input__placeholder Фамилия
                                 input(type='text', name='last-name', placeholder='Фамилия')
-                            .input(data-user-type='private')
-                                .input__placeholder Отчество
+                            label.input(data-user-type='private')
+                                span.input__placeholder Отчество
                                 input(type='text', name='middle-name', placeholder='Отчество')
-                            .input(data-user-type='commerce,commerce-nds')
-                                .input__placeholder название компании
+                            label.input(data-user-type='commerce,commerce-nds')
+                                span.input__placeholder название компании
                                 input(type='text', name='name', placeholder='название компании')
-                            .input(data-user-type='commerce,commerce-nds')
-                                .input__placeholder ИНН
+                            label.input(data-user-type='commerce,commerce-nds')
+                                span.input__placeholder ИНН
                                 input(type='text', name='inn', placeholder='ИНН', data-format='inn')
-                            .input(data-user-type='commerce,commerce-nds')
-                                .input__placeholder КПП
+                            label.input(data-user-type='commerce,commerce-nds')
+                                span.input__placeholder КПП
                                 input(type='text', name='kpp', placeholder='КПП', data-format='kpp')
-                            .input(data-user-type='commerce,commerce-nds')
-                                .input__placeholder Юр.адрес
+                            label.input(data-user-type='commerce,commerce-nds')
+                                span.input__placeholder Юр.адрес
                                 input(type='text', name='address', placeholder='Юр.адрес')
-                            .input(data-user-type='private,commerce,commerce-nds')
-                                .input__placeholder Телефон
+                            label.input(data-user-type='private,commerce,commerce-nds')
+                                span.input__placeholder Телефон
                                 input(type='tel', name='tel', placeholder='Телефон')
-                            .input(data-user-type='private,commerce,commerce-nds')
-                                .input__placeholder Email
+                            label.input(data-user-type='private,commerce,commerce-nds')
+                                span.input__placeholder Email
                                 input(type='email', name='email', placeholder='Email')
                         button.button.button--dark.user-data__button(type='button') далее
                 .order-step
@@ -152,11 +152,11 @@ block append main
                                             data-company=`${item.dataCompany ? item.dataCompany : ''}`
                                         )
                                             input.delivery-method__input(type='radio', name='delivery-method')
-                                            .delivery-method__title= item.title
-                                                .order-step__checkmark
+                                            span.delivery-method__title= item.title
+                                                span.order-step__checkmark
                                             if item.description
-                                                .delivery-method__description= item.description
-                                            .delivery-method__time= item.time
+                                                span.delivery-method__description= item.description
+                                            span.delivery-method__time= item.time
                     .delivery-method__final
                         input(type='hidden', name='delivery-address')
                         .delivery-method__final-type(data-delivery-id='type')
@@ -172,12 +172,12 @@ block append main
                             each item in payment
                                 li
                                     label.payment-method(data-user-type=item.dataUserType)
-                                        .payment-method__title= item.title
-                                            .order-step__checkmark
+                                        span.payment-method__title= item.title
+                                            span.order-step__checkmark
                                             if item.icon
                                                 +img(require(item.icon)).payment-method__icon
                                         if item.description
-                                            .payment-method__description= item.description
+                                            span.payment-method__description= item.description
                                         input.payment-method__input(
                                             type='radio',
                                             name='payment-method',

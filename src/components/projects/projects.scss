@@ -1,0 +1,138 @@
+@use 'styles/utils';
+
+.projects {
+    position: relative;
+    height: calc(100svh - var(--header-height));
+    max-height: 1080px;
+
+    &__title {
+        position: relative;
+        z-index: 2;
+        top: 40px;
+        left: 40px;
+        color: white;
+    }
+
+    &-slider {
+        inset: 0;
+        position: absolute;
+
+        &__navigation {
+            position: absolute;
+            z-index: 2;
+            right: 40px;
+            bottom: 40px;
+            display: flex;
+
+            &-prev,
+            &-next {
+                @include utils.square(64px);
+                border: 1px solid white;
+                @include utils.bg-defaults(20px);
+                background-image: url('assets/icons/arrow.svg');
+            }
+
+            &-prev {
+                rotate: 180deg;
+            }
+        }
+
+        &__pagination {
+            display: none;
+        }
+    }
+
+    &__item {
+        &-image {
+            object-fit: cover;
+            object-position: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .container {
+            inset: 0;
+            position: absolute;
+            padding-bottom: 40px;
+            display: flex;
+            align-items: end;
+            background-image: linear-gradient(345deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
+        }
+
+        &-info {
+            padding: 30px 67px 30px 32px;
+            width: 512px;
+            background-color: white;
+        }
+
+        &-name {
+            margin-bottom: 16px;
+            font: 4.6rem/1.05 var(--steelfish);
+            text-transform: uppercase;
+        }
+
+        &-description {
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            display: -webkit-box;
+            overflow: hidden;
+            font: 1.6rem/1.4 var(--firs-neue);
+            text-overflow: clip;
+            opacity: 0.5;
+        }
+    }
+}
+
+@media only screen and (max-width: utils.$tablet1000) {
+    .projects {
+        &__title {
+            top: 20px;
+            left: 20px;
+        }
+
+        .container {
+            padding: 0;
+        }
+
+        &-slider {
+            &__navigation {
+                display: none;
+            }
+            &__pagination {
+                position: absolute;
+                z-index: 2;
+                bottom: 130px !important;
+                display: flex;
+                justify-content: center;
+
+                .swiper-pagination-bullet {
+                    width: 24px;
+                    height: 1px;
+                    opacity: 0.5;
+                    background-color: white;
+
+                    &-active {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+
+        &__item {
+            &-info {
+                padding: 20px;
+            }
+
+            &-name {
+                margin-bottom: 10px;
+                font-size: 2.2rem;
+                letter-spacing: 0.01rem;
+            }
+
+            &-description {
+                font: 1.2rem/1.5 var(--firs-neue);
+                letter-spacing: 0.02rem;
+            }
+        }
+    }
+}
