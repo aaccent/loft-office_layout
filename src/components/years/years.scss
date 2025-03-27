@@ -2,6 +2,7 @@
 
 .years {
     position: relative;
+    margin-bottom: 0;
     height: calc(100svh - var(--header-height));
     max-height: 1080px;
 
