@@ -1,5 +1,6 @@
 import { CartInfo, CartNotification, Product } from '@/types/cart'
 import { formatPrice } from 'features/formatPrice'
+import { testProducts } from '@/test-products'
 
 function camelCaseToKebab(camelCaseString: string) {
     return camelCaseString.replaceAll(/[A-Z]/g, (substring) => `-${substring.toLowerCase()}`)
@@ -221,7 +222,7 @@ function addItems(list: Product[]) {
         }
     })
 
-    window.order.showProductsImages()
+    //window.order.showProductsImages()
     stickyInfo()
     updateAmount()
 }
@@ -307,3 +308,11 @@ window.cart = {
 
 init()
 updateAmount()
+
+window.cart.setItems(testProducts)
+window.cart.setInfo({
+    totalPrice: 89898,
+    discountPrice: 12121,
+    deliveryPrice: '500',
+    weight: 1,
+})
