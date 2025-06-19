@@ -46,7 +46,7 @@ mixin text-item-container(isLink, isDarkTheme)
     if isLink
         +anchor(class=className): block
     else
-        div(class=className, data-action='popup', data-popup=''): block
+        div(class=className, data-action='popup', data-popup='text-review'): block
 
 mixin text-reviews(props)
     -

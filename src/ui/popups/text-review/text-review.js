@@ -1,6 +1,7 @@
 import { createContentSwiper } from 'ui/content/content.js'
 
 function showTextReviewPopup(preview) {
+    //debugger
     const popup = document.querySelector('.text-review.popup')
     const popupInner = popup.querySelector('.text-review__inner')
 
