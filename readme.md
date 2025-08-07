@@ -18,6 +18,7 @@
 - [О нас](https://aaccent.github.io/loft-office_layout/about.html)
 - [Сотрудничество](https://aaccent.github.io/loft-office_layout/cooperation.html)
 - [Типовая](https://aaccent.github.io/loft-office_layout/content.html)
+- [Контакты](https://aaccent.github.io/loft-office_layout/contacts.html)
 
 ## Скрипты и стили
 
