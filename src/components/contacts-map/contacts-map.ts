@@ -3,6 +3,7 @@ import { adaptive } from 'globals/adaptive'
 
 void (async function () {
     const contactsMap = document.querySelector<HTMLElement>('.contacts__map')
+    console.log(contactsMap)
 
     if (!contactsMap) return
 
